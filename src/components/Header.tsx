@@ -80,7 +80,15 @@ const Header: React.FC = () => {
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 text-gray-300 hover:text-white"
             >
-              {menuOpen ? "✕" : null}
+              {menuOpen ? (
+                <span className="text-xl font-bold">✕</span>
+              ) : (
+                <div className="space-y-1.5">
+                  <span className="block w-6 h-0.5 bg-white rounded-full"></span>
+                  <span className="block w-6 h-0.5 bg-white rounded-full"></span>
+                  <span className="block w-6 h-0.5 bg-white rounded-full"></span>
+                </div>
+              )}
             </button>
           </div>
         </div>

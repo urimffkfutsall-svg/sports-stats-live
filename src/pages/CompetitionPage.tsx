@@ -120,6 +120,24 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
   const [activeTab, setActiveTab] = useState<'ndeshjet' | 'tabela' | 'golashenuesit'>('ndeshjet');
   const [statusFilter, setStatusFilter] = useState<string>('all');
+
+  // When "Ardhshme" is selected, jump to next week with planned matches
+  const handleStatusFilter = (value: string) => {
+    setStatusFilter(value);
+    if (value === 'planned') {
+      // Find first week that has planned matches
+      const plannedWeeks = [...new Set(
+        compMatches.filter(m => m.status === 'planned').map(m => m.week)
+      )].sort((a, b) => a - b);
+      if (plannedWeeks.length > 0) setSelectedWeek(plannedWeeks[0]);
+    } else if (value === 'finished') {
+      // Jump to last week with finished matches
+      const finishedWeeks = [...new Set(
+        compMatches.filter(m => m.status === 'finished').map(m => m.week)
+      )].sort((a, b) => a - b);
+      if (finishedWeeks.length > 0) setSelectedWeek(finishedWeeks[finishedWeeks.length - 1]);
+    }
+  };
   const [selectedScorer, setSelectedScorer] = useState<ScorerData | null>(null);
 
   const comp = useMemo(() =>
@@ -242,7 +260,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                 </div>
                 <div className="flex gap-2 mb-6">
                   {[{ value: 'all', label: 'Te gjitha' }, { value: 'finished', label: 'Perfunduara' }, { value: 'planned', label: 'Ardhshme' }, { value: 'live', label: 'Live' }].map(f => (
-                    <button key={f.value} onClick={() => setStatusFilter(f.value)} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${statusFilter === f.value ? 'bg-[#0A1E3C] text-white shadow-sm' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{f.label}</button>
+                    <button key={f.value} onClick={() => handleStatusFilter(f.value)} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${statusFilter === f.value ? 'bg-[#0A1E3C] text-white shadow-sm' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{f.label}</button>
                   ))}
                 </div>
                 {weekMatches.length === 0 ? <p className="text-gray-400 text-center py-8 bg-white rounded-2xl border border-gray-100">Nuk ka ndeshje per kete jave.</p> : (
