@@ -126,7 +126,7 @@ const TeamProfilePage: React.FC = () => {
 
   if (!team) {
     return (
-      <div style={Object.assign({}, { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0A1E3C 0%, #1a3a5c 100%)' })}>
+    <div style= overflowX: "hidden" as const  style={Object.assign({}, { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0A1E3C 0%, #1a3a5c 100%)' })}>
         <div style={Object.assign({}, { textAlign: 'center' as const, color: '#FFFFFF' })}>
           <p style={Object.assign({}, { fontSize: '18px', marginBottom: '16px' })}>Skuadra nuk u gjet.</p>
           <button onClick={() => navigate(-1)} style={Object.assign({}, { color: '#60A5FA', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' })}>← Kthehu</button>
@@ -141,7 +141,7 @@ const TeamProfilePage: React.FC = () => {
     <div style={Object.assign({}, { minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
 
       {/* Hero Header */}
-      <div style={Object.assign({}, { background: 'linear-gradient(135deg, #0A1E3C 0%, #1E3A5F 50%, #1E6FF2 100%)', padding: '32px 32px 40px', position: 'relative' as const, overflow: 'hidden' })}>
+      <div style={Object.assign({}, { background: 'linear-gradient(135deg, #0A1E3C 0%, #1E3A5F 50%, #1E6FF2 100%)', padding: '20px 16px 32px', position: 'relative' as const, overflow: 'hidden' })}>
         <div style={Object.assign({}, { position: 'absolute' as const, top: 0, right: 0, width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)', borderRadius: '50%' })}></div>
 
         <div style={Object.assign({}, { display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative' as const, zIndex: 1 })}>
@@ -188,7 +188,7 @@ const TeamProfilePage: React.FC = () => {
         </div>
 
         {/* Quick stats in header */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '12px', marginTop: '28px', position: 'relative' as const, zIndex: 1 })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(100px, 1fr))', gap: '10px', marginTop: '28px', position: 'relative' as const, zIndex: 1 })}>
           {[
             { label: 'Ndeshje', value: stats.played, icon: null },
             { label: 'Fitore', value: stats.wins, icon: null },
@@ -209,7 +209,7 @@ const TeamProfilePage: React.FC = () => {
       <div style={Object.assign({}, { padding: '24px 32px' })}>
 
         {/* Row 1: Area chart + Results donut + Results analytics */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '5fr 3fr', gap: '20px', marginBottom: '20px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '1fr', gap: '16px', marginBottom: '20px' })}>
           {/* Area Chart */}
           <div style={card()}>
             <div style={Object.assign({}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' })}>
@@ -300,7 +300,7 @@ const TeamProfilePage: React.FC = () => {
         </div>
 
         {/* Row 2: Home/Away + Positions + Progress stats */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '20px', marginBottom: '20px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '16px', marginBottom: '20px' })}>
           {/* Home vs Away */}
           <div style={card()}>
             <h3 style={Object.assign({}, { fontSize: '14px', fontWeight: 700, color: '#0F172A', margin: '0 0 16px 0' })}>
@@ -376,7 +376,7 @@ const TeamProfilePage: React.FC = () => {
         </div>
 
         {/* Row 3: Recent matches + Players */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '2fr 3fr', gap: '20px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '1fr', gap: '16px' })}>
           {/* Recent matches */}
           <div style={card()}>
             <h3 style={Object.assign({}, { fontSize: '14px', fontWeight: 700, color: '#0F172A', margin: '0 0 16px 0' })}>

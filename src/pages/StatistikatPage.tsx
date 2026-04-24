@@ -123,12 +123,12 @@ const StatistikatPage: React.FC = () => {
   const card = (extra?: any) => Object.assign({}, { background: '#FFFFFF', borderRadius: '20px', padding: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)' }, extra || {});
 
   return (
-    <div style={Object.assign({}, { minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
+    <div style= overflowX: 'hidden' as const  style={Object.assign({}, { minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
       <Header />
       <div style={Object.assign({}, { maxWidth: '1280px', margin: '0 auto', padding: '32px 24px' })}>
 
         {/* Title section */}
-        <div style={Object.assign({}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px' })}>
+        <div style={Object.assign({}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '28px', flexWrap: 'wrap' as const, gap: '12px' })}>
           <div>
             <h1 style={Object.assign({}, { fontSize: '28px', fontWeight: 800, color: '#0F172A', margin: 0, letterSpacing: '-0.5px' })}>Statistikat</h1>
             <p style={Object.assign({}, { fontSize: '13px', color: '#94A3B8', margin: '4px 0 0 0' })}>Pasqyre e detajuar e te dhenave te sezonit</p>
@@ -164,7 +164,7 @@ const StatistikatPage: React.FC = () => {
         </div>
 
         {/* Scorecard row - 6 cards */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: 'repeat(6, 1fr)', gap: '14px', marginBottom: '24px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(140px, 1fr))', gap: '10px', marginBottom: '24px' })}>
           {[
             { label: 'Ndeshje', value: finishedMatches.length, icon: null, color: '#6366F1', bg: 'linear-gradient(135deg, #EEF2FF, #E0E7FF)', trend: liveMatches.length > 0 ? liveMatches.length + ' LIVE' : null, trendColor: '#22C55E' },
             { label: 'Gola Totale', value: totalGoals, icon: null, color: '#F59E0B', bg: 'linear-gradient(135deg, #FFFBEB, #FEF3C7)', trend: null },
@@ -189,7 +189,7 @@ const StatistikatPage: React.FC = () => {
         </div>
 
         {/* Row 2: Area chart + Results */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '5fr 3fr', gap: '20px', marginBottom: '20px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '1fr', gap: '16px', marginBottom: '20px' })}>
           {/* Area chart - Goals per week */}
           <div style={card()}>
             <div style={Object.assign({}, { display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '20px' })}>
@@ -287,7 +287,7 @@ const StatistikatPage: React.FC = () => {
         </div>
 
         {/* Row 3: Top scorers + Top teams + Weekly results */}
-        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '2fr 1.5fr 1.5fr', gap: '20px', marginBottom: '20px' })}>
+        <div style={Object.assign({}, { display: 'grid', gridTemplateColumns: '1fr', gap: '16px', marginBottom: '20px' })}>
           {/* Top scorers horizontal bar */}
           <div style={card()}>
             <h3 style={Object.assign({}, { fontSize: '14px', fontWeight: 700, color: '#0F172A', margin: '0 0 16px 0' })}>
@@ -382,7 +382,7 @@ const StatistikatPage: React.FC = () => {
             return (
               <div key={comp.id} style={card()}>
                 <h3 style={Object.assign({}, { fontSize: "14px", fontWeight: 700, color: "#0F172A", margin: "0 0 12px 0" })}>{comp.name}</h3>
-                <div style={Object.assign({}, { display: "grid", gridTemplateColumns: "1fr 1fr", gap: "12px" })}>
+                <div style={Object.assign({}, { display: "grid", gridTemplateColumns: '1fr', gap: '10px' })}>
                   <div style={Object.assign({}, { padding: "12px", background: "linear-gradient(135deg, #FEF3C7, #FDE68A)", borderRadius: "12px" })}>
                     <p style={Object.assign({}, { fontSize: "10px", color: "#92400E", textTransform: "uppercase" as const, letterSpacing: "0.5px", fontWeight: 700, margin: 0 })}>Sulmi me i mire</p>
                     {bestAtk ? (<><p style={Object.assign({}, { fontSize: "13px", fontWeight: 700, color: "#0F172A", margin: "6px 0 2px 0" })}>{bestAtk.name}</p><p style={Object.assign({}, { fontSize: "18px", fontWeight: 800, color: "#D97706", margin: 0 })}>{bestAtk.gf} <span style={Object.assign({}, { fontSize: "10px", fontWeight: 500, color: "#92400E" })}>gola</span></p></>) : <p style={Object.assign({}, { fontSize: "12px", color: "#92400E", margin: "6px 0 0 0" })}>Ska te dhena</p>}

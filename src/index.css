@@ -130,3 +130,11 @@
 .markdown-preview ol {
   @apply my-4 ml-6;
 }
+
+/* Stats page mobile responsive */
+@media (max-width: 640px) {
+  .stats-responsive {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+  }
+}
