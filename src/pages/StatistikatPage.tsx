@@ -123,7 +123,7 @@ const StatistikatPage: React.FC = () => {
   const card = (extra?: any) => Object.assign({}, { background: '#FFFFFF', borderRadius: '20px', padding: '24px', boxShadow: '0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06)' }, extra || {});
 
   return (
-    <div style= overflowX: 'hidden' as const  style={Object.assign({}, { minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
+    <div style={Object.assign({}, { overflowX: 'hidden' as const, minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
       <Header />
       <div style={Object.assign({}, { maxWidth: '1280px', margin: '0 auto', padding: '32px 24px' })}>
 

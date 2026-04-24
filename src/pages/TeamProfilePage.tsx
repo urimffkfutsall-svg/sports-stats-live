@@ -126,7 +126,7 @@ const TeamProfilePage: React.FC = () => {
 
   if (!team) {
     return (
-    <div style= overflowX: "hidden" as const  style={Object.assign({}, { minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0A1E3C 0%, #1a3a5c 100%)' })}>
+    <div style={Object.assign({}, { overflowX: "hidden" as const, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0A1E3C 0%, #1a3a5c 100%)' })}>
         <div style={Object.assign({}, { textAlign: 'center' as const, color: '#FFFFFF' })}>
           <p style={Object.assign({}, { fontSize: '18px', marginBottom: '16px' })}>Skuadra nuk u gjet.</p>
           <button onClick={() => navigate(-1)} style={Object.assign({}, { color: '#60A5FA', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' })}>← Kthehu</button>
