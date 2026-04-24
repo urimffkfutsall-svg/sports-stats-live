@@ -1,0 +1,231 @@
+﻿export interface Season {
+  id: string;
+  name: string;
+  startDate: string;
+  endDate: string;
+  isActive: boolean;
+}
+
+export type CompetitionType = 'superliga' | 'liga_pare' | 'kupa';
+
+export interface Competition {
+  id: string;
+  name: string;
+  type: CompetitionType;
+  seasonId: string;
+  isActiveLanding: boolean;
+}
+
+export interface Team {
+  id: string;
+  name: string;
+  logo: string;
+  competitionId: string;
+  seasonId: string;
+  foundedYear?: string;
+  stadium?: string;
+
+  city?: string;}
+
+export interface Player {
+  id: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  birthDate?: string;
+  position?: string;
+  teamId: string;
+  seasonId: string;
+}
+
+export type MatchStatus = 'planned' | 'live' | 'finished' | 'cancelled';
+
+export interface Match {
+  id: string;
+  competitionId: string;
+  seasonId: string;
+  week: number;
+  date?: string;
+  time?: string;
+  venue?: string;
+  homeTeamId: string;
+  awayTeamId: string;
+  homeScore?: number;
+  awayScore?: number;
+  status: MatchStatus;
+  isFeaturedLanding: boolean;
+  referee1?: string;
+  referee2?: string;
+  referee3?: string;
+  delegate?: string;
+  dayOfWeek?: string;
+  possession_home?: number;
+  possession_away?: number;
+  shots_home?: number;
+  shots_away?: number;
+  fouls_home?: number;
+  fouls_away?: number;
+}
+
+export interface Goal {
+  id: string;
+  matchId: string;
+  playerId: string;
+  teamId: string;
+  minute: number;
+  isOwnGoal: boolean;
+}
+
+export interface Scorer {
+  id: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  teamId: string;
+  competitionId: string;
+  seasonId: string;
+  goals: number;
+  isManual: boolean;
+  matchId?: string;
+}
+
+export interface PlayerOfWeek {
+  id: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  teamId: string;
+  week: number;
+  seasonId: string;
+  isScorer: boolean;
+  goalsCount: number;
+}
+
+export interface User {
+  id: string;
+  username: string;
+  password: string;
+  role: 'admin' | 'editor';
+}
+
+export interface StandingsRow {
+  teamId: string;
+  teamName: string;
+  teamLogo: string;
+  played: number;
+  won: number;
+  drawn: number;
+  lost: number;
+  goalsFor: number;
+  goalsAgainst: number;
+  goalDifference: number;
+  points: number;
+  form: string[];
+}
+
+export interface CupRound {
+  id: string;
+  name: string;
+  order: number;
+  competitionId: string;
+  seasonId: string;
+}
+
+export interface AppSettings {
+  appName: string;
+  logo: string;
+  contact: string;
+}
+
+export interface Decision {
+  id: string;
+  title: string;
+  description: string;
+  week: number;
+  seasonId: string;
+  isFeatured: boolean;
+}
+
+export interface Editor {
+  id: string;
+  firstName: string;
+  lastName: string;
+  username: string;
+  password: string;
+  phone: string;
+  email: string;
+  teamId: string;
+  status: 'pending' | 'approved' | 'rejected';
+  seasonId: string;
+}
+
+export interface Official {
+  id: string;
+  firstName: string;
+  lastName: string;
+  position: string;
+  photo: string;
+  teamId: string;
+  seasonId: string;
+  addedByEditorId: string;
+}
+
+export interface PlayerStats {
+  id: string;
+  playerId: string;
+  teamId: string;
+  competitionId: string;
+  seasonId: string;
+  week: number;
+  yellowCards: number;
+  redCards: number;
+  extraNotes: string;
+}
+
+export interface NationalPlayer {
+  id: string;
+  firstName: string;
+  lastName: string;
+  photo: string;
+  position: string;
+  number?: number;
+  birthDate?: string;
+  club?: string;
+  caps?: number;
+  goals?: number;
+}
+
+export interface NationalMatch {
+  id: string;
+  opponent: string;
+  opponentLogo: string;
+  date?: string;
+  time?: string;
+  venue?: string;
+  competition: string;
+  homeScore?: number;
+  awayScore?: number;
+  isHome: boolean;
+  status: 'planned' | 'live' | 'finished';
+  liveUrl?: string;
+}
+
+
+export interface Video {
+  id: string;
+  title: string;
+  description: string;
+  url: string;
+  isFeaturedLanding: boolean;
+  createdAt?: string;
+}
+
+export interface News {
+  id: string;
+  title: string;
+  description: string;
+  content: string;
+  photo: string;
+  isFeaturedLanding: boolean;
+  createdAt?: string;
+}

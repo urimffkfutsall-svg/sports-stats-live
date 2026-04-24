@@ -1,0 +1,22 @@
+{
+  "name": "FFK Futsal Kosovo",
+  "short_name": "FFK Futsal",
+  "description": "Federata e Futbollit e Kosoves - Futsal",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1E3C",
+  "theme_color": "#0A1E3C",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/ffk-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ffk-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

@@ -1,0 +1,288 @@
+﻿import React from 'react';
+import { Match } from '@/types';
+import { useData } from '@/context/DataContext';
+import { X, MapPin, Calendar, Clock, Shield, CircleDot, Crosshair, AlertTriangle } from 'lucide-react';
+
+interface Props {
+  match: Match | null;
+  onClose: () => void;
+}
+
+const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
+  const { getTeamById, getGoalsByMatch, players, competitions } = useData();
+
+  if (!match) return null;
+
+  const homeTeam = getTeamById(match.homeTeamId);
+  const awayTeam = getTeamById(match.awayTeamId);
+  const goals = getGoalsByMatch(match.id);
+  const comp = competitions.find(c => c.id === match.competitionId);
+
+  const homeGoals = goals.filter(g => g.teamId === match.homeTeamId);
+  const awayGoals = goals.filter(g => g.teamId === match.awayTeamId);
+
+  const getPlayerName = (playerId: string) => {
+    const p = players.find(pl => pl.id === playerId);
+    return p ? `${p.firstName} ${p.lastName}` : 'I panjohur';
+  };
+
+  const isFinished = match.status === 'finished';
+  const isLive = match.status === 'live';
+  const isPlanned = match.status === 'planned';
+
+  const hasStats = match.possession_home != null || match.shots_home != null || match.fouls_home != null;
+  const hasOfficials = match.referee1 || match.referee2 || match.referee3 || match.delegate;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4" onClick={onClose}>
+      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div
+        className="relative bg-white rounded-3xl shadow-2xl max-w-lg w-full max-h-[90vh] overflow-hidden" onClick={function(e) { e.stopPropagation(); }}
+      >
+        {/* Hero Header */}
+        <div className="relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2]" />
+          <div className="absolute inset-0">
+            <div className="absolute top-0 right-0 w-40 h-40 bg-[#1E6FF2]/20 rounded-full blur-3xl" />
+            <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#0066CC]/20 rounded-full blur-3xl" />
+          </div>
+
+          {/* Close Button */}
+          <button
+            onClick={onClose}
+            className="absolute top-4 right-4 z-20 w-9 h-9 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center hover:bg-black/60 transition-colors cursor-pointer"
+          >
+            <X className="w-4 h-4 text-white" />
+          </button>
+
+          <div className="relative z-10 px-6 pt-6 pb-8">
+            {/* Competition Badge */}
+            {comp && (
+              <div className="flex justify-center mb-5">
+                <span className="px-4 py-1.5 bg-white/10 backdrop-blur-sm rounded-full text-[11px] font-semibold text-white/90 uppercase tracking-wider">
+                  {comp.name} - Java {match.week}
+                </span>
+              </div>
+            )}
+
+            {/* Teams & Score */}
+            <div className="flex items-center justify-between">
+              {/* Home Team */}
+              <div className="flex flex-col items-center flex-1 gap-3">
+                <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center overflow-hidden shadow-lg">
+                  {homeTeam?.logo ? (
+                    <img src={homeTeam.logo} alt={homeTeam.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-white/50 text-2xl font-bold">{homeTeam?.name?.charAt(0) || '?'}</span>
+                  )}
+                </div>
+                <span className="text-sm font-semibold text-white text-center leading-tight max-w-[120px]">{homeTeam?.name || 'TBD'}</span>
+              </div>
+
+              {/* Score Center */}
+              <div className="flex flex-col items-center px-4">
+                {isLive && (
+                  <div className="flex items-center gap-1.5 mb-2 px-3 py-1 bg-red-500/20 backdrop-blur-sm rounded-full">
+                    <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                    <span className="text-[11px] font-bold text-red-400 uppercase tracking-wider">Live</span>
+                  </div>
+                )}
+                {isFinished && (
+                  <span className="text-[10px] font-semibold text-emerald-400 uppercase tracking-wider mb-2">Perfunduar</span>
+                )}
+                {isPlanned && (
+                  <span className="text-[10px] font-semibold text-white/50 uppercase tracking-wider mb-2">E Ardhshme</span>
+                )}
+                <div className="flex items-center gap-3">
+                  <span className="text-5xl font-black text-white tabular-nums">{isPlanned ? '-' : (match.homeScore ?? 0)}</span>
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-white/30" />
+                  </div>
+                  <span className="text-5xl font-black text-white tabular-nums">{isPlanned ? '-' : (match.awayScore ?? 0)}</span>
+                </div>
+              </div>
+
+              {/* Away Team */}
+              <div className="flex flex-col items-center flex-1 gap-3">
+                <div className="w-20 h-20 rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 flex items-center justify-center overflow-hidden shadow-lg">
+                  {awayTeam?.logo ? (
+                    <img src={awayTeam.logo} alt={awayTeam.name} className="w-full h-full object-cover" />
+                  ) : (
+                    <span className="text-white/50 text-2xl font-bold">{awayTeam?.name?.charAt(0) || '?'}</span>
+                  )}
+                </div>
+                <span className="text-sm font-semibold text-white text-center leading-tight max-w-[120px]">{awayTeam?.name || 'TBD'}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Content Body - scrollable */}
+        <div className="overflow-y-auto max-h-[calc(90vh-280px)]">
+          {/* Match Info Pills */}
+          <div className="flex flex-wrap gap-2 justify-center px-6 py-4 border-b border-gray-100">
+            {match.date && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 rounded-lg text-xs font-medium text-gray-600">
+                <Calendar className="w-3.5 h-3.5 text-[#1E6FF2]" />{match.date}
+              </span>
+            )}
+            {match.time && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 rounded-lg text-xs font-medium text-gray-600">
+                <Clock className="w-3.5 h-3.5 text-[#1E6FF2]" />{match.time}
+              </span>
+            )}
+            {match.venue && (
+              <span className="inline-flex items-center gap-1.5 px-3 py-1.5 bg-gray-50 rounded-lg text-xs font-medium text-gray-600">
+                <MapPin className="w-3.5 h-3.5 text-[#1E6FF2]" />{match.venue}
+              </span>
+            )}
+          </div>
+
+          <div className="px-6 py-5 space-y-6">
+            {/* Goals Timeline */}
+            {goals.length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <CircleDot className="w-4 h-4 text-[#1E6FF2]" />
+                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Golat</h3>
+                </div>
+                <div className="space-y-0">
+                  {goals
+                    .sort((a, b) => (a.minute || 0) - (b.minute || 0))
+                    .map(g => {
+                      const isHome = g.teamId === match.homeTeamId;
+                      return (
+                        <div key={g.id} className={`flex items-center gap-3 py-2.5 border-b border-gray-50 last:border-0 ${isHome ? '' : 'flex-row-reverse'}`}>
+                          <div className={`flex items-center gap-2.5 flex-1 min-w-0 ${isHome ? '' : 'flex-row-reverse'}`}>
+                            <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 ${g.isOwnGoal ? 'bg-red-100 text-red-500' : 'bg-[#1E6FF2]/10 text-[#1E6FF2]'}`}>
+                              <span className="text-[10px] font-bold">{g.minute}'</span>
+                            </div>
+                            <span className={`text-sm font-medium text-gray-800 truncate ${isHome ? '' : 'text-right'}`}>
+                              {getPlayerName(g.playerId)}
+                            </span>
+                            {g.isOwnGoal && (
+                              <span className="px-1.5 py-0.5 bg-red-50 text-red-500 text-[10px] font-bold rounded flex-shrink-0">AG</span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
+                </div>
+              </div>
+            )}
+
+            {/* Match Stats */}
+            {hasStats && (
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Crosshair className="w-4 h-4 text-[#1E6FF2]" />
+                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Statistikat</h3>
+                </div>
+                <div className="space-y-4">
+                  {match.possession_home != null && (
+                    <StatBar label="Posedimi" home={match.possession_home} away={match.possession_away ?? 0} suffix="%" />
+                  )}
+                  {match.shots_home != null && (
+                    <StatBar label="Goditjet" home={match.shots_home} away={match.shots_away ?? 0} />
+                  )}
+                  {match.fouls_home != null && (
+                    <StatBar label="Faull-et" home={match.fouls_home} away={match.fouls_away ?? 0} />
+                  )}
+                </div>
+              </div>
+            )}
+
+            {/* Officials */}
+            {hasOfficials && (
+              <div>
+                <div className="flex items-center gap-2 mb-4">
+                  <Shield className="w-4 h-4 text-[#1E6FF2]" />
+                  <h3 className="text-sm font-bold text-gray-900 uppercase tracking-wider">Zyrtaret</h3>
+                </div>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+                  {match.referee1 && (
+                    <div className="flex items-center gap-2.5 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-8 h-8 rounded-full bg-[#0A1E3C] flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-[10px] font-bold">G1</span>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-400 font-medium uppercase">Gjyqtari 1</p>
+                        <p className="text-sm font-semibold text-gray-800">{match.referee1}</p>
+                      </div>
+                    </div>
+                  )}
+                  {match.referee2 && (
+                    <div className="flex items-center gap-2.5 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-8 h-8 rounded-full bg-[#0A1E3C] flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-[10px] font-bold">G2</span>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-400 font-medium uppercase">Gjyqtari 2</p>
+                        <p className="text-sm font-semibold text-gray-800">{match.referee2}</p>
+                      </div>
+                    </div>
+                  )}
+                  {match.referee3 && (
+                    <div className="flex items-center gap-2.5 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-8 h-8 rounded-full bg-[#0A1E3C] flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-[10px] font-bold">G3</span>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-400 font-medium uppercase">Gjyqtari 3</p>
+                        <p className="text-sm font-semibold text-gray-800">{match.referee3}</p>
+                      </div>
+                    </div>
+                  )}
+                  {match.delegate && (
+                    <div className="flex items-center gap-2.5 p-3 bg-gray-50 rounded-xl">
+                      <div className="w-8 h-8 rounded-full bg-[#1E6FF2] flex items-center justify-center flex-shrink-0">
+                        <span className="text-white text-[10px] font-bold">D</span>
+                      </div>
+                      <div>
+                        <p className="text-[10px] text-gray-400 font-medium uppercase">Delegati</p>
+                        <p className="text-sm font-semibold text-gray-800">{match.delegate}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const StatBar: React.FC<{ label: string; home: number; away: number; suffix?: string }> = ({ label, home, away, suffix }) => {
+  const total = home + away || 1;
+  const homePercent = Math.round((home / total) * 100);
+  const awayPercent = 100 - homePercent;
+
+  return (
+    <div>
+      <div className="flex items-center justify-between mb-1.5">
+        <span className="text-sm font-bold text-gray-800">{home}{suffix}</span>
+        <span className="text-[11px] font-semibold text-gray-400 uppercase tracking-wider">{label}</span>
+        <span className="text-sm font-bold text-gray-800">{away}{suffix}</span>
+      </div>
+      <div className="flex gap-1 h-2">
+        <div className="flex-1 bg-gray-100 rounded-full overflow-hidden flex justify-end">
+          <div
+            className="bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6] rounded-full transition-all duration-500"
+            style={Object.assign({}, { width: `${homePercent}%` })}
+          />
+        </div>
+        <div className="flex-1 bg-gray-100 rounded-full overflow-hidden">
+          <div
+            className="bg-gradient-to-r from-[#F97316] to-[#FB923C] rounded-full transition-all duration-500"
+            style={Object.assign({}, { width: `${awayPercent}%` })}
+          />
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default MatchDetailModal;
