@@ -425,11 +425,11 @@ const mapVideoFromRow = (r: any) => ({
 export const dbVideos = {
   async getAll() {
     const { data } = await supabase.from('videos').select('*').order('created_at', { ascending: false });
-    return (data || []).map(toCamel) as any[];
+    return (data || []).map(mapVideoFromRow) as any[];
   },
   async upsert(item: any) {
-    const row = toSnake(item);
-    const { data, error } = await supabase.from('videos').upsert(mapVideoToRow(row)).select().single();
+    const row = mapVideoToRow(item);
+    const { data, error } = await supabase.from('videos').upsert(row).select().single();
     if (error) throw error;
     return toCamel(data);
   },
