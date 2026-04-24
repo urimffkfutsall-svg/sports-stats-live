@@ -35,6 +35,11 @@ const AdminPage: React.FC = () => {
     }
   }, [currentUser]);
 
+  const [visitorStats, setVisitorStats] = useState<any>(null);
+  useEffect(() => {
+    dbVisitors.getStats().then(setVisitorStats).catch(() => {});
+  }, []);
+
   if (!isAuthenticated) return <Navigate to="/login" replace />;
 
   const activeSeason = getActiveSeason();
@@ -42,6 +47,13 @@ const AdminPage: React.FC = () => {
   const liveMatches = activeMatches.filter(m => m.status === 'live');
   const finishedMatches = activeMatches.filter(m => m.status === 'finished');
   const activeTeams = teams.filter(t => activeSeason ? t.seasonId === activeSeason.id : true);
+
+  const DashCard: React.FC<{ label: string; value: number; color: string }> = ({ label, value, color }) => (
+    <div className={`rounded-xl p-4 ${color}`}>
+      <p className="text-xs font-medium opacity-70 uppercase tracking-wider">{label}</p>
+      <p className="text-3xl font-bold mt-1">{value}</p>
+    </div>
+  );
 
   const tabs = [
     { key: 'myteam', label: 'Skuadra Ime', icon: null, editorAccess: true },
@@ -246,18 +258,4 @@ const AdminPage: React.FC = () => {
   );
 };
 
-const [visitorStats, setVisitorStats] = useState<any>(null);
-  
-  useEffect(() => {
-    dbVisitors.getStats().then(setVisitorStats);
-  }, []);
-
-  const DashCard: React.FC<{ label: string; value: number; color: string }> = ({ label, value, color }) => (
-  <div className={`rounded-xl p-4 ${color}`}>
-    <p className="text-xs font-medium opacity-70 uppercase tracking-wider">{label}</p>
-    <p className="text-3xl font-bold mt-1">{value}</p>
-  </div>
-);
-
 export default AdminPage;
-

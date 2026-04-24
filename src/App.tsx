@@ -1,6 +1,4 @@
-import React from 'react';
-﻿import { dbVisitors } from '@/lib/supabase-db';
-import { Toaster } from "@/components/ui/toaster";
+﻿import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -18,7 +16,6 @@ import TeamProfilePage from "./pages/TeamProfilePage";
 import HeadToHeadPage from "./pages/HeadToHeadPage";
 import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
-import KomisioniPage from "./pages/KomisioniPage";
 import SkuadratPage from "./pages/SkuadratPage";
 import KombetarjaPage from "./pages/KombetarjaPage";
 import NewsDetailPage from './pages/NewsDetailPage';
@@ -45,9 +42,7 @@ const App = () => (
                 <Route path="/skuadra/:id" element={<TeamProfilePage />} />
                 <Route path="/head-to-head" element={<HeadToHeadPage />} />
                 <Route path="/login" element={<LoginPage />} />
-                <Route path="/komisioni" element={<KomisioniPage />} />
                 <Route path="/skuadrat" element={<SkuadratPage />} />
-                <Route path="/kombetarja" element={<KombetarjaPage />} />
                 <Route path="/lajme/:id" element={<NewsDetailPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="*" element={<NotFound />} />

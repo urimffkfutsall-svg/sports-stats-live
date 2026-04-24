@@ -5,6 +5,7 @@ import {
   fetchAllData,
   dbSeasons, dbCompetitions, dbTeams, dbPlayers, dbMatches, dbGoals, dbScorers, dbPlayerOfWeek, dbUsers, dbSettings, dbDecisions,
   subscribeToMatches, subscribeToGoals, subscribeToTable,
+  dbVisitors,
 } from '@/lib/supabase-db';
 import { dbVideos, dbNews
 } from '@/lib/supabase-db';
@@ -240,6 +241,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     loadData();
   }, [loadData]);
+
+  // Track visitor once per session
+  useEffect(() => {
+    try {
+      const tracked = sessionStorage.getItem('visitor_tracked');
+      if (!tracked) {
+        dbVisitors.track().catch(() => {});
+        sessionStorage.setItem('visitor_tracked', '1');
+      }
+    } catch {}
+  }, []);
 
   // ============ REAL-TIME SUBSCRIPTIONS ============
   useEffect(() => {
