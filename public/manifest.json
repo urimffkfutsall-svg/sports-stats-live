@@ -1,7 +1,7 @@
 {
-  "name": "FFK Futsal Kosovo",
-  "short_name": "FFK Futsal",
-  "description": "Federata e Futbollit e Kosoves - Futsal",
+  "name": "FFK FUTSALL",
+  "short_name": "FFK FUTSALL",
+  "description": "FFK FUTSALL - Platforma zyrtare e statistikave te futsallit ne Kosove",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0A1E3C",
