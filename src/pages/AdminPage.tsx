@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
+import { dbVisitors } from '@/lib/supabase-db';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
 import AdminTeams from './admin/AdminTeams';
@@ -125,6 +126,49 @@ const AdminPage: React.FC = () => {
               <DashCard label="LIVE" value={liveMatches.length} color="bg-red-50 text-red-600" />
             </div>
 
+            {/* Visitor Stats */}
+            {visitorStats && (
+              <div className="mb-6">
+                <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
+                  <DashCard label="Vizita Totale" value={visitorStats.total} color="bg-indigo-50 text-indigo-600" />
+                  <DashCard label="IP Unike" value={visitorStats.unique} color="bg-cyan-50 text-cyan-600" />
+                  <DashCard label="Vizita Sot" value={visitorStats.today} color="bg-amber-50 text-amber-600" />
+                  <DashCard label="Unike Sot" value={visitorStats.uniqueToday} color="bg-rose-50 text-rose-600" />
+                </div>
+
+                <div className="bg-white rounded-xl border border-gray-100 p-4">
+                  <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
+                    <span className="w-2 h-2 bg-indigo-500 rounded-full"></span>
+                    Vizitoret e Fundit
+                  </h3>
+                  <div className="overflow-x-auto max-h-[400px] overflow-y-auto">
+                    <table className="w-full text-sm">
+                      <thead className="bg-gray-50 sticky top-0">
+                        <tr>
+                          <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500">#</th>
+                          <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500">IP</th>
+                          <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500">Qyteti</th>
+                          <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500">Shteti</th>
+                          <th className="text-left px-3 py-2 text-xs font-semibold text-gray-500">Koha</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {visitorStats.recent.map((v: any, i: number) => (
+                          <tr key={i} className="border-t border-gray-50 hover:bg-gray-50">
+                            <td className="px-3 py-2 text-gray-400">{i + 1}</td>
+                            <td className="px-3 py-2 font-mono text-xs">{v.ip}</td>
+                            <td className="px-3 py-2">{v.city}{v.region ? ', ' + v.region : ''}</td>
+                            <td className="px-3 py-2">{v.country}</td>
+                            <td className="px-3 py-2 text-gray-400 text-xs">{v.visited_at ? new Date(v.visited_at).toLocaleString('sq-AL') : '-'}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            )}
+
             {liveMatches.length > 0 && (
               <div className="mb-6">
                 <h3 className="font-semibold text-gray-800 mb-3 flex items-center gap-2">
@@ -202,7 +246,13 @@ const AdminPage: React.FC = () => {
   );
 };
 
-const DashCard: React.FC<{ label: string; value: number; color: string }> = ({ label, value, color }) => (
+const [visitorStats, setVisitorStats] = useState<any>(null);
+  
+  useEffect(() => {
+    dbVisitors.getStats().then(setVisitorStats);
+  }, []);
+
+  const DashCard: React.FC<{ label: string; value: number; color: string }> = ({ label, value, color }) => (
   <div className={`rounded-xl p-4 ${color}`}>
     <p className="text-xs font-medium opacity-70 uppercase tracking-wider">{label}</p>
     <p className="text-3xl font-bold mt-1">{value}</p>

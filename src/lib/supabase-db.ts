@@ -456,3 +456,45 @@ export const dbNews = {
     await supabase.from('news').delete().eq('id', id);
   }
 };
+
+
+// ============ VISITORS ============
+export const dbVisitors = {
+  async track() {
+    try {
+      // Get IP and city from free API
+      const res = await fetch('https://ipapi.co/json/');
+      const geo = await res.json();
+      const visitor = {
+        ip: geo.ip || 'unknown',
+        city: geo.city || 'unknown',
+        region: geo.region || '',
+        country: geo.country_name || '',
+        visited_at: new Date().toISOString(),
+        user_agent: navigator.userAgent.substring(0, 200),
+      };
+      await supabase.from('visitors').insert(visitor);
+    } catch (e) {
+      console.error('Visitor tracking failed:', e);
+    }
+  },
+  async getAll() {
+    const { data } = await supabase.from('visitors').select('*').order('visited_at', { ascending: false }).limit(200);
+    return data || [];
+  },
+  async getStats() {
+    const { data } = await supabase.from('visitors').select('*');
+    const all = data || [];
+    const today = new Date().toISOString().split('T')[0];
+    const todayVisitors = all.filter((v: any) => v.visited_at?.startsWith(today));
+    const uniqueIPs = new Set(all.map((v: any) => v.ip));
+    const uniqueToday = new Set(todayVisitors.map((v: any) => v.ip));
+    return {
+      total: all.length,
+      unique: uniqueIPs.size,
+      today: todayVisitors.length,
+      uniqueToday: uniqueToday.size,
+      recent: all.slice(0, 50),
+    };
+  }
+};
