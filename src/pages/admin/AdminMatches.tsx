@@ -68,6 +68,28 @@ const AdminMatches: React.FC = () => {
 
   const compTeams = (compId: string) => activeTeams.filter(t => t.competitionId === compId);
 
+  // Date format helpers: internal=YYYY-MM-DD, display=DD/MM/YYYY
+  const toDisplay = (isoDate: string) => {
+    if (!isoDate) return '';
+    const parts = isoDate.split('-');
+    if (parts.length !== 3) return isoDate;
+    return parts[2] + '/' + parts[1] + '/' + parts[0];
+  };
+  const toISO = (displayDate: string) => {
+    if (!displayDate) return '';
+    const parts = displayDate.split('/');
+    if (parts.length !== 3) return displayDate;
+    return parts[2] + '-' + parts[1] + '-' + parts[0];
+  };
+  const handleDateInput = (val: string, setter: (v: string) => void) => {
+    // Auto-add slashes
+    let clean = val.replace(/[^0-9/]/g, '');
+    if (clean.length === 2 && !clean.includes('/')) clean += '/';
+    if (clean.length === 5 && clean.split('/').length === 2) clean += '/';
+    if (clean.length > 10) clean = clean.substring(0, 10);
+    setter(clean);
+  };
+
   const resetForm = () => {
     setForm(emptyForm); setEditId(null); setShowForm(false);
     setCupLegs({
@@ -267,7 +289,7 @@ const AdminMatches: React.FC = () => {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Data</label>
-                <input type="date" value={form.date} onChange={e => setForm(p => ({ ...p, date: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
+                <input type="text" placeholder="dd/mm/yyyy" value={toDisplay(form.date)} onChange={e => handleDateInput(e.target.value, (v) => setForm(p => ({ ...p, date: toISO(v) })))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
               </div>
               <div>
                 <label className="block text-xs font-medium text-gray-600 mb-1">Ora</label>
@@ -325,8 +347,8 @@ const AdminMatches: React.FC = () => {
                           </div>
                           <div>
                             <label className="block text-[10px] text-gray-500 mb-0.5">Data</label>
-                            <input type="date" value={data.date}
-                              onChange={e => setCupLegs(prev => ({ ...prev, [leg.key]: { ...prev[leg.key as keyof typeof prev], date: e.target.value } }))}
+                            <input type="text" placeholder="dd/mm/yyyy" value={toDisplay(data.date)}
+                              onChange={e => handleDateInput(e.target.value, (v) => setCupLegs(prev => ({ ...prev, [leg.key]: { ...prev[leg.key as keyof typeof prev], date: toISO(v) } })))}
                               className="w-full px-2.5 py-1.5 border border-gray-200 rounded-lg text-sm" />
                           </div>
                           <div>
