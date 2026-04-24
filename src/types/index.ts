@@ -217,6 +217,8 @@ export interface Video {
   description: string;
   url: string;
   isFeaturedLanding: boolean;
+  isFeaturedSuperliga?: boolean;
+  isFeaturedLigaPare?: boolean;
   createdAt?: string;
 }
 

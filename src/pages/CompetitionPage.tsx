@@ -22,7 +22,7 @@ interface ScorerData {
 }
 
 const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ scorer, onClose }) => {
-  const { getTeamById, matches, getActiveSeason } = useData();
+  const { getTeamById, matches, getActiveSeason , videos } = useData() as any;
   const team = getTeamById(scorer.teamId);
   const activeSeason = getActiveSeason();
 
@@ -109,13 +109,59 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
             </div>
           )}
         </div>
+
+        {/* Video Section */}
+        {(() => {
+          const compVideos = (videos || []).filter((v: any) =>
+            type === 'superliga' ? v.isFeaturedSuperliga : type === 'liga_pare' ? v.isFeaturedLigaPare : false
+          );
+          if (compVideos.length === 0) return null;
+          return (
+            <div className="mt-8 px-3 sm:px-4 md:px-6 lg:px-8">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-1 h-5 bg-[#1E6FF2] rounded-full"></span>
+                <h2 className="text-lg font-bold text-gray-800">Video</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {compVideos.map((v: any) => (
+                  <div key={v.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div className="aspect-video">
+                      <iframe
+                        src={getEmbedUrl(v.url)}
+                        className="w-full h-full"
+                        allowFullScreen
+                        allow="autoplay; encrypted-media"
+                        title={v.title}
+                      />
+                    </div>
+                    {v.title && (
+                      <div className="p-3">
+                        <h3 className="font-semibold text-sm text-gray-800">{v.title}</h3>
+                        {v.description && <p className="text-xs text-gray-500 mt-1">{v.description}</p>}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
     </div>
   );
 };
 
+function getEmbedUrl(url: string): string {
+  let m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+  if (m) return 'https://www.youtube.com/embed/' + m[1];
+  if (url.includes('facebook.com') || url.includes('fb.watch')) {
+    return 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=false';
+  }
+  return url;
+}
+
 const CompetitionPage: React.FC<Props> = ({ type, title }) => {
-  const { competitions, matches, getActiveSeason, calculateStandings, getAggregatedScorers, getTeamById } = useData();
+  const { competitions, matches, getActiveSeason, calculateStandings, getAggregatedScorers, getTeamById, videos } = useData() as any;
   const activeSeason = getActiveSeason();
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
   const [activeTab, setActiveTab] = useState<'ndeshjet' | 'tabela' | 'golashenuesit'>('ndeshjet');
@@ -436,6 +482,43 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
           </div>
         )}
         
+
+        {/* Video Section */}
+        {(() => {
+          const compVideos = (videos || []).filter((v: any) =>
+            type === 'superliga' ? v.isFeaturedSuperliga : type === 'liga_pare' ? v.isFeaturedLigaPare : false
+          );
+          if (compVideos.length === 0) return null;
+          return (
+            <div className="mt-8">
+              <div className="flex items-center gap-2 mb-4">
+                <span className="w-1 h-5 bg-[#1E6FF2] rounded-full"></span>
+                <h2 className="text-lg font-bold text-gray-800">Video</h2>
+              </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {compVideos.map((v: any) => (
+                  <div key={v.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <div className="aspect-video">
+                      <iframe
+                        src={getEmbedUrl(v.url)}
+                        className="w-full h-full"
+                        allowFullScreen
+                        allow="autoplay; encrypted-media"
+                        title={v.title}
+                      />
+                    </div>
+                    {v.title && (
+                      <div className="p-3">
+                        <h3 className="font-semibold text-sm text-gray-800">{v.title}</h3>
+                        {v.description && <p className="text-xs text-gray-500 mt-1">{v.description}</p>}
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+          );
+        })()}
       </div>
       <Footer />
       <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />

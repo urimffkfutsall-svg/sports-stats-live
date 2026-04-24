@@ -15,7 +15,7 @@ function getEmbedUrl(url: string): string {
 
 const AdminVideos: React.FC = () => {
   const { videos, addVideo, updateVideo, deleteVideo } = useData() as any;
-  const [form, setForm] = useState({ title: '', description: '', url: '', isFeaturedLanding: false });
+  const [form, setForm] = useState({ title: '', description: '', url: '', isFeaturedLanding: false, isFeaturedSuperliga: false, isFeaturedLigaPare: false });
   const [editId, setEditId] = useState<string | null>(null);
 
   const handleSubmit = () => {
@@ -26,12 +26,12 @@ const AdminVideos: React.FC = () => {
     } else {
       addVideo(form);
     }
-    setForm({ title: '', description: '', url: '', isFeaturedLanding: false });
+    setForm({ title: '', description: '', url: '', isFeaturedLanding: false, isFeaturedSuperliga: false, isFeaturedLigaPare: false });
   };
 
   const startEdit = (v: Video) => {
     setEditId(v.id);
-    setForm({ title: v.title, description: v.description, url: v.url, isFeaturedLanding: v.isFeaturedLanding });
+    setForm({ title: v.title, description: v.description, url: v.url, isFeaturedLanding: v.isFeaturedLanding, isFeaturedSuperliga: (v as any).isFeaturedSuperliga || false, isFeaturedLigaPare: (v as any).isFeaturedLigaPare || false });
   };
 
   return (
@@ -47,11 +47,19 @@ const AdminVideos: React.FC = () => {
           <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm({...form, isFeaturedLanding: e.target.checked})} className="rounded" />
           Shfaq ne Ballina
         </label>
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" checked={form.isFeaturedSuperliga} onChange={e => setForm({...form, isFeaturedSuperliga: e.target.checked})} className="rounded" />
+          Shfaq te Superliga
+        </label>
+        <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
+          <input type="checkbox" checked={form.isFeaturedLigaPare} onChange={e => setForm({...form, isFeaturedLigaPare: e.target.checked})} className="rounded" />
+          Shfaq te Liga e Pare
+        </label>
         <div className="flex gap-2">
           <button onClick={handleSubmit} className="px-5 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
             {editId ? 'Ruaj Ndryshimet' : 'Shto Video'}
           </button>
-          {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', url: '', isFeaturedLanding: false }); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
+          {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', url: '', isFeaturedLanding: false, isFeaturedSuperliga: false, isFeaturedLigaPare: false }); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
         </div>
       </div>
 
@@ -65,6 +73,8 @@ const AdminVideos: React.FC = () => {
                 <p className="text-sm text-gray-500 mt-0.5">{v.description}</p>
                 <p className="text-xs text-gray-400 mt-1 truncate">{v.url}</p>
                 {v.isFeaturedLanding && <span className="inline-block mt-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
+                {(v as any).isFeaturedSuperliga && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">SUPERLIGA</span>}
+                {(v as any).isFeaturedLigaPare && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">LIGA E PARE</span>}
               </div>
               <div className="flex gap-2 flex-shrink-0">
                 <button onClick={() => startEdit(v)} className="px-3 py-1.5 text-xs bg-gray-100 text-gray-600 rounded-lg hover:bg-gray-200">Ndrysho</button>

@@ -402,6 +402,26 @@ export const dbNationalMatches = {
 
 
 // ============ VIDEOS ============
+const mapVideoToRow = (v: any) => ({
+  id: v.id,
+  title: v.title,
+  description: v.description,
+  url: v.url,
+  is_featured_landing: v.isFeaturedLanding || false,
+  is_featured_superliga: v.isFeaturedSuperliga || false,
+  is_featured_liga_pare: v.isFeaturedLigaPare || false,
+});
+const mapVideoFromRow = (r: any) => ({
+  id: r.id,
+  title: r.title || '',
+  description: r.description || '',
+  url: r.url || '',
+  isFeaturedLanding: r.is_featured_landing || false,
+  isFeaturedSuperliga: r.is_featured_superliga || false,
+  isFeaturedLigaPare: r.is_featured_liga_pare || false,
+  createdAt: r.created_at,
+});
+
 export const dbVideos = {
   async getAll() {
     const { data } = await supabase.from('videos').select('*').order('created_at', { ascending: false });
@@ -409,7 +429,7 @@ export const dbVideos = {
   },
   async upsert(item: any) {
     const row = toSnake(item);
-    const { data, error } = await supabase.from('videos').upsert(row).select().single();
+    const { data, error } = await supabase.from('videos').upsert(mapVideoToRow(row)).select().single();
     if (error) throw error;
     return toCamel(data);
   },
