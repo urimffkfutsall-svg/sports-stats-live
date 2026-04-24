@@ -228,6 +228,7 @@ export interface News {
   description: string;
   content: string;
   photo: string;
+  videoUrl?: string;
   isFeaturedLanding: boolean;
   createdAt?: string;
 }

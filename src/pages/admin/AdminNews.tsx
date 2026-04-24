@@ -11,7 +11,7 @@ function getPhotos(photo: string): string[] {
 
 const AdminNews: React.FC = () => {
   const { news, addNews, updateNews, deleteNews } = useData() as any;
-  const [form, setForm] = useState({ title: '', description: '', content: '', photo: '', isFeaturedLanding: false });
+  const [form, setForm] = useState({ title: '', description: '', content: '', photo: '', videoUrl: '', isFeaturedLanding: false });
   const [photos, setPhotos] = useState<string[]>([]);
   const [editId, setEditId] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
@@ -49,18 +49,18 @@ const AdminNews: React.FC = () => {
     if (!form.title.trim()) return;
     const photoJson = photos.length > 0 ? JSON.stringify(photos) : '';
     if (editId) {
-      updateNews({ ...form, photo: photoJson, id: editId } as News);
+      updateNews({ ...form, photo: photoJson, videoUrl: form.videoUrl || undefined, id: editId } as News);
       setEditId(null);
     } else {
-      addNews({ ...form, photo: photoJson });
+      addNews({ ...form, photo: photoJson, videoUrl: form.videoUrl || undefined });
     }
-    setForm({ title: '', description: '', content: '', photo: '', isFeaturedLanding: false });
+    setForm({ title: '', description: '', content: '', photo: '', videoUrl: '', isFeaturedLanding: false });
     setPhotos([]);
   };
 
   const startEdit = (n: News) => {
     setEditId(n.id);
-    setForm({ title: n.title, description: n.description, content: n.content, photo: n.photo, isFeaturedLanding: n.isFeaturedLanding });
+    setForm({ title: n.title, description: n.description, content: n.content, photo: n.photo, videoUrl: (n as any).videoUrl || '', isFeaturedLanding: n.isFeaturedLanding });
     setPhotos(getPhotos(n.photo));
   };
 
@@ -95,6 +95,12 @@ const AdminNews: React.FC = () => {
           )}
         </div>
 
+        {/* Video URL */}
+        <div>
+          <label className="block text-xs font-medium text-gray-500 mb-1">Video URL (YouTube ose Facebook)</label>
+          <input value={form.videoUrl} onChange={e => setForm({...form, videoUrl: e.target.value})} placeholder="https://youtube.com/watch?v=... ose https://facebook.com/..." className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent outline-none" />
+        </div>
+
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
           <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm({...form, isFeaturedLanding: e.target.checked})} className="rounded" />
           Shfaq ne Ballina
@@ -103,7 +109,7 @@ const AdminNews: React.FC = () => {
           <button onClick={handleSubmit} className="px-5 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
             {editId ? 'Ruaj Ndryshimet' : 'Shto Lajmin'}
           </button>
-          {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', content: '', photo: '', isFeaturedLanding: false }); setPhotos([]); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
+          {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', content: '', photo: '', videoUrl: '', isFeaturedLanding: false }); setPhotos([]); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
         </div>
       </div>
 
@@ -127,6 +133,7 @@ const AdminNews: React.FC = () => {
                   <div className="flex items-center gap-2 mt-1">
                     {n.isFeaturedLanding && <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
                     {np.length > 0 && <span className="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">{np.length} foto</span>}
+                    {(n as any).videoUrl && <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">VIDEO</span>}
                   </div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">

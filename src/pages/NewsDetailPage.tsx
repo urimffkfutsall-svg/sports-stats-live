@@ -11,6 +11,15 @@ function getPhotos(photo: string): string[] {
   return photo ? [photo] : [];
 }
 
+function getEmbedUrl(url: string): string {
+  let m = url.match(/(?:youtube\.com\/watch\?v=|youtu\.be\/)([\w-]+)/);
+  if (m) return 'https://www.youtube.com/embed/' + m[1];
+  if (url.includes('facebook.com') || url.includes('fb.watch')) {
+    return 'https://www.facebook.com/plugins/video.php?href=' + encodeURIComponent(url) + '&show_text=false';
+  }
+  return url;
+}
+
 const NewsDetailPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
@@ -100,6 +109,21 @@ const NewsDetailPage: React.FC = () => {
                 ))}
               </div>
             )}
+          </div>
+        )}
+
+        {/* Video */}
+        {(item as any).videoUrl && (
+          <div className="mb-6 rounded-2xl overflow-hidden shadow-lg">
+            <div className="aspect-video">
+              <iframe
+                src={getEmbedUrl((item as any).videoUrl)}
+                className="w-full h-full"
+                allowFullScreen
+                allow="autoplay; encrypted-media"
+                title={item.title}
+              />
+            </div>
           </div>
         )}
 
