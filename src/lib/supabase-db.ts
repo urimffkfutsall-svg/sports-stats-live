@@ -38,6 +38,7 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     isHome: 'is_home',
     createdAt: 'created_at',
     liveUrl: 'live_url',
+    dayOfWeek: 'day_of_week',
   };
   const result: Record<string, any> = {};
   for (const [key, val] of Object.entries(obj)) {
@@ -83,6 +84,7 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     is_home: 'isHome',
     created_at: 'createdAt',
     live_url: 'liveUrl',
+    day_of_week: 'dayOfWeek',
   };
   const result: Record<string, any> = {};
   for (const [key, val] of Object.entries(obj)) {
