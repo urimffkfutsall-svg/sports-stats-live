@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches } from '@/lib/supabase-db';
+import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches, dbNtActivities } from '@/lib/supabase-db';
 
 function formatDate(iso) {
   if (!iso) return '';
@@ -16,21 +16,24 @@ export default function KombetarjaPage() {
   const [groupTeams, setGroupTeams] = useState([]);
   const [groupMatches, setGroupMatches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [activities, setActivities] = useState([]);
   const [selectedCompId, setSelectedCompId] = useState('');
 
   useEffect(() => {
     const load = async () => {
       try {
-        const [c, g, gt, gm] = await Promise.all([
+        const [c, g, gt, gm, acts] = await Promise.all([
           dbNtCompetitions.getAll().catch(() => []),
           dbNtGroups.getAll().catch(() => []),
           dbNtGroupTeams.getAll().catch(() => []),
           dbNtGroupMatches.getAll().catch(() => []),
+          dbNtActivities.getAll().catch(() => []),
         ]);
         setCompetitions(c);
         setGroups(g);
         setGroupTeams(gt);
         setGroupMatches(gm);
+        setActivities(acts);
         if (c.length > 0) setSelectedCompId(c[0].id);
       } catch {}
       setLoading(false);
@@ -275,6 +278,31 @@ export default function KombetarjaPage() {
             </div>
           );
         })}
+
+        {/* Aktivitetet e Kombetares */}
+        {activities.length > 0 && (
+          <div className="mb-6">
+            <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
+              <span className="w-1 h-6 bg-[#d0a650] rounded-full"></span>Aktivitetet e Kombetares
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {activities.map(a => (
+                <div key={a.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
+                  {a.photo && (
+                    <div className="aspect-[16/10] overflow-hidden">
+                      <img src={a.photo} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
+                    </div>
+                  )}
+                  <div className="p-4">
+                    <p className="font-bold text-gray-900 text-sm line-clamp-2">{a.title}</p>
+                    {a.description && <p className="text-xs text-gray-500 mt-1 line-clamp-2">{a.description}</p>}
+                    {a.date && <p className="text-[10px] text-gray-400 mt-2">{formatDate(a.date)}</p>}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* Kosova Statistics */}
         {kosovaMatches.length > 0 && (

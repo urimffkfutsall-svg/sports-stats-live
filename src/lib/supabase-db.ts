@@ -28,6 +28,7 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     teamLogo: 'team_logo',
     isKosova: 'is_kosova',
     opponentLogo: 'opponent_logo',
+    showOnHome: 'show_on_home',
     playerId: 'player_id',
     isOwnGoal: 'is_own_goal',
     isManual: 'is_manual',
@@ -81,6 +82,7 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     team_logo: 'teamLogo',
     is_kosova: 'isKosova',
     opponent_logo: 'opponentLogo',
+    show_on_home: 'showOnHome',
     home_team_id: 'homeTeamId',
     away_team_id: 'awayTeamId',
     player_id: 'playerId',
@@ -617,5 +619,22 @@ export const dbNtGroupMatches = {
   },
   async remove(id: string) {
     await supabase.from('nt_group_matches').delete().eq('id', id);
+  }
+};
+
+// ============ NT ACTIVITIES ============
+export const dbNtActivities = {
+  async getAll() {
+    const { data } = await supabase.from('nt_activities').select('*').order('created_at', { ascending: false });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('nt_activities').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('nt_activities').delete().eq('id', id);
   }
 };

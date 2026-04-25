@@ -44,7 +44,7 @@ const Header: React.FC = () => {
             ))}
           </nav>
 
-          <div className="hidden lg:flex items-center gap-1">
+          <div className="hidden lg:flex items-center gap-2">
             <NotificationPanel />
             {isAuthenticated ? (
               <>
@@ -74,7 +74,7 @@ const Header: React.FC = () => {
           </div>
 
           {/* Mobile Toggle */}
-          <div className="lg:hidden flex items-center gap-1">
+          <div className="lg:hidden flex items-center gap-2">
             <NotificationPanel />
             <button
               onClick={() => setMenuOpen(!menuOpen)}
