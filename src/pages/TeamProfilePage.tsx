@@ -126,7 +126,7 @@ const TeamProfilePage: React.FC = () => {
 
   if (!team) {
     return (
-    <div style={Object.assign({}, { overflowX: "hidden" as const, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0A1E3C 0%, #1a3a5c 100%)' })}>
+    <div style={Object.assign({}, { overflowX: "hidden" as const, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #2a499a 0%, #1a3a5c 100%)' })}>
         <div style={Object.assign({}, { textAlign: 'center' as const, color: '#FFFFFF' })}>
           <p style={Object.assign({}, { fontSize: '18px', marginBottom: '16px' })}>Skuadra nuk u gjet.</p>
           <button onClick={() => navigate(-1)} style={Object.assign({}, { color: '#60A5FA', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' })}>← Kthehu</button>
@@ -141,7 +141,7 @@ const TeamProfilePage: React.FC = () => {
     <div style={Object.assign({}, { minHeight: '100vh', background: '#F1F5F9', fontFamily: "'Inter', -apple-system, sans-serif" })}>
 
       {/* Hero Header */}
-      <div style={Object.assign({}, { background: 'linear-gradient(135deg, #0A1E3C 0%, #1E3A5F 50%, #1E6FF2 100%)', padding: '20px 16px 32px', position: 'relative' as const, overflow: 'hidden' })}>
+      <div style={Object.assign({}, { background: 'linear-gradient(135deg, #2a499a 0%, #1E3A5F 50%, #1E6FF2 100%)', padding: '20px 16px 32px', position: 'relative' as const, overflow: 'hidden' })}>
         <div style={Object.assign({}, { position: 'absolute' as const, top: 0, right: 0, width: '300px', height: '300px', background: 'radial-gradient(circle, rgba(255,255,255,0.05) 0%, transparent 70%)', borderRadius: '50%' })}></div>
 
         <div style={Object.assign({}, { display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative' as const, zIndex: 1 })}>

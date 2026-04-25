@@ -185,7 +185,7 @@ const KupaPage: React.FC = () => {
               key={t.key}
               onClick={() => setActiveTab(t.key)}
               className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
-                activeTab === t.key ? 'bg-[#0A1E3C] text-white shadow-lg' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
+                activeTab === t.key ? 'bg-[#2a499a] text-white shadow-lg' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
               }`}
             >
               {t.label}
@@ -287,7 +287,7 @@ const KupaPage: React.FC = () => {
               <p className="text-gray-400 text-center py-8">Nuk ka golashenues te regjistruar.</p>
             ) : (
               <>
-                <div className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-4 py-3.5 bg-[#0A1E3C] text-xs font-semibold text-gray-300 uppercase">
+                <div className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-4 py-3.5 bg-[#2a499a] text-xs font-semibold text-gray-300 uppercase">
                   <span>#</span><span></span><span>Lojtari</span><span>Skuadra</span><span className="text-right">Gola</span>
                 </div>
                 {scorers.map((s, i) => {

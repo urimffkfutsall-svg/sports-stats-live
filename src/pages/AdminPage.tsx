@@ -13,7 +13,7 @@ import AdminSettings from './admin/AdminSettings';
 import AdminDecisions from './admin/AdminDecisions';
 import AdminEditors from './admin/AdminEditors';
 import AdminTeamsPlayers from './admin/AdminTeamsPlayers';
-import AdminKombetarja from './admin/AdminKombetarja';
+import AdminKombetarja from './admin/AdminNationalTeam';
 import EditorPanel from './admin/EditorPanel';
 import AdminLiveControl from './admin/AdminLiveControl';
 import AdminVideos from './admin/AdminVideos';

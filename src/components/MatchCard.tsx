@@ -30,7 +30,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
     >
       {/* Gradient Header — Date, Time, Venue */}
       {!compact && (match.date || match.time || match.venue) && (
-        <div className="bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] px-4 py-2.5">
+        <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] px-4 py-2.5">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-3">
               {match.date && (
@@ -128,7 +128,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
 
         {/* "Shiko detajet" Button */}
         {!compact && (
-          <div className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] text-white text-[11px] font-semibold rounded-xl hover:shadow-md hover:shadow-[#1E6FF2]/25 transition-all duration-200 uppercase tracking-wider">
+          <div className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] text-white text-[11px] font-semibold rounded-xl hover:shadow-md hover:shadow-[#1E6FF2]/25 transition-all duration-200 uppercase tracking-wider">
             Shiko detajet
             ›
           </div>

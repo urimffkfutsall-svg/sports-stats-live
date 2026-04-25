@@ -22,9 +22,9 @@ const KomisioniPage: React.FC = () => {
       <Header />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0A1E3C]/5 rounded-full mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
             
-            <span className="text-xs font-semibold text-[#0A1E3C] uppercase tracking-wider">Komisioni</span>
+            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Komisioni</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Komisioni i Garave</h1>
           <p className="text-gray-400 text-sm mt-1">Vendimet zyrtare sipas javeve - Sezoni {activeSeason?.name || ''}</p>
@@ -37,7 +37,7 @@ const KomisioniPage: React.FC = () => {
             {weeks.map(week => (
               <div key={week}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0A1E3C] to-[#1E6FF2] flex items-center justify-center shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] flex items-center justify-center shadow-md">
                     <span className="text-white text-sm font-black">{week}</span>
                   </div>
                   <div>

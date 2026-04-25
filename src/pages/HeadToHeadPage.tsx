@@ -71,7 +71,7 @@ const HeadToHeadPage: React.FC = () => {
         {h2h && teamA && teamB && (
           <>
             {/* VS Header */}
-            <div className="bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] rounded-2xl p-8 text-white mb-8 shadow-xl">
+            <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-8 text-white mb-8 shadow-xl">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col items-center flex-1">
                   <div className="w-20 h-20 rounded-full bg-white/10 overflow-hidden">

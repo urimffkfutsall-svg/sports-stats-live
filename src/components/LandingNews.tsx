@@ -83,7 +83,7 @@ const LandingNews: React.FC = () => {
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#0A1E3C] to-[#1E6FF2]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a499a] to-[#1E6FF2]" />
           )}
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />

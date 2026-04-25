@@ -5,7 +5,7 @@ const HeroSection: React.FC = () => {
   const { settings } = useData();
 
   return (
-    <section className="relative bg-[#0A1E3C] overflow-hidden">
+    <section className="relative bg-[#2a499a] overflow-hidden">
       <div className="absolute inset-0">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#1E6FF2]/5 rounded-full blur-3xl animate-pulse" />
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#1E6FF2]/3 rounded-full blur-3xl" style={Object.assign({}, { animation: 'pulse 4s ease-in-out infinite' })} />

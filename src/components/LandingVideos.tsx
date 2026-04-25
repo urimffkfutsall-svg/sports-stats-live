@@ -45,7 +45,7 @@ const LandingVideos: React.FC = () => {
                         <div className="absolute inset-0 bg-transparent" />
                       </div>
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2] p-4">
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] p-4">
                         <div className="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center mb-3 backdrop-blur-sm border border-white/10">
                           <span className="text-white text-2xl ml-1">▶</span>
                         </div>
@@ -56,7 +56,7 @@ const LandingVideos: React.FC = () => {
                     {/* Play overlay */}
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                        <span className="text-[#0A1E3C] text-2xl ml-1">▶</span>
+                        <span className="text-[#2a499a] text-2xl ml-1">▶</span>
                       </div>
                     </div>
                   </div>

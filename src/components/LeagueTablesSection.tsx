@@ -187,7 +187,7 @@ const LeagueTablesSection: React.FC = () => {
                       i > 0 ? 'border-l border-gray-200' : ''
                     } ${
                       isActive
-                        ? 'bg-[#0A1E3C] text-white'
+                        ? 'bg-[#2a499a] text-white'
                         : 'bg-white text-gray-500 hover:bg-gray-50 hover:text-gray-700'
                     }`}
                   >
@@ -208,7 +208,7 @@ const LeagueTablesSection: React.FC = () => {
             ) : (
               <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
                 {/* Table header */}
-                <div className="bg-[#0A1E3C] px-3 sm:px-4 md:px-6 lg:px-8 py-3 flex items-center gap-2">
+                <div className="bg-[#2a499a] px-3 sm:px-4 md:px-6 lg:px-8 py-3 flex items-center gap-2">
                   
                   <span className="text-sm font-bold text-white">{currentComp?.name || 'Tabela'}</span>
                   <span className="ml-auto text-[10px] text-gray-400 font-medium uppercase tracking-wider">Sezoni {activeSeason?.name}</span>
@@ -259,7 +259,7 @@ const LeagueTablesSection: React.FC = () => {
                         <td className="px-3 py-2.5 text-center text-gray-500 text-xs font-medium">{row.goalsFor}:{row.goalsAgainst}</td>
                         <td className="px-3 py-2.5 text-center font-bold text-xs" style={Object.assign({}, { color: row.goalDifference > 0 ? '#22C55E' : row.goalDifference < 0 ? '#EF4444' : '#9CA3AF' })}>{row.goalDifference > 0 ? '+' : ''}{row.goalDifference}</td>
                         <td className="px-3 py-2.5 text-center">
-                          <span className="inline-flex items-center justify-center w-8 h-7 rounded-md bg-[#0A1E3C] text-white font-bold text-xs">{row.points}</span>
+                          <span className="inline-flex items-center justify-center w-8 h-7 rounded-md bg-[#2a499a] text-white font-bold text-xs">{row.points}</span>
                         </td>
                         <td className="px-3 py-2.5 text-center hidden md:table-cell">
                           <div className="flex justify-center gap-0.5">

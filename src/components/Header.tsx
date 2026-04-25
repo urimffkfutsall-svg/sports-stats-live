@@ -14,15 +14,17 @@ const Header: React.FC = () => {
 
   const navLinks = [
     { path: '/', label: 'Ballina' },
+    { path: '/live', label: 'Live' },
     { path: '/superliga', label: 'Superliga' },
     { path: '/liga-pare', label: 'Liga e Pare' },
     { path: '/kupa', label: 'Kupa e Kosoves' },
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
+    { path: '/kombetarja', label: 'Kombetarja' },
   ];
 
   return (
-    <header className="bg-[#0A1E3C] text-white sticky top-0 z-50 shadow-lg">
+    <header className="bg-[#2a499a] text-white sticky top-0 z-50 shadow-lg border-b-[3px] border-[#d0a650]">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-14">
           {/* Desktop Nav */}

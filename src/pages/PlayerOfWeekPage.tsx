@@ -20,9 +20,9 @@ const PlayerOfWeekPage: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0A1E3C]/5 rounded-full mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
             
-            <span className="text-xs font-semibold text-[#0A1E3C] uppercase tracking-wider">Cmimi Javor</span>
+            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Cmimi Javor</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Lojtari i Javes</h1>
           <p className="text-gray-400 text-sm mt-1">Sezoni {activeSeason?.name || ''}</p>
@@ -37,7 +37,7 @@ const PlayerOfWeekPage: React.FC = () => {
               const team = getTeamById(latest.teamId);
               return (
                 <div className="mb-10">
-                  <div className="relative bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2] rounded-3xl overflow-hidden shadow-2xl">
+                  <div className="relative bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] rounded-3xl overflow-hidden shadow-2xl">
                     <div className="absolute inset-0">
                       <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#1E6FF2]/20 rounded-full blur-3xl" />
                       <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-amber-500/10 rounded-full blur-3xl" />
@@ -112,7 +112,7 @@ const PlayerOfWeekPage: React.FC = () => {
                         className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 group"
                       >
                         {/* Top gradient bar */}
-                        <div className="h-1.5 bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2]" />
+                        <div className="h-1.5 bg-gradient-to-r from-[#2a499a] to-[#1E6FF2]" />
 
                         <div className="p-5">
                           <div className="flex items-center gap-4">
@@ -127,7 +127,7 @@ const PlayerOfWeekPage: React.FC = () => {
                                   </div>
                                 )}
                               </div>
-                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#0A1E3C] flex items-center justify-center shadow-sm">
+                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#2a499a] flex items-center justify-center shadow-sm">
                                 
                               </div>
                             </div>

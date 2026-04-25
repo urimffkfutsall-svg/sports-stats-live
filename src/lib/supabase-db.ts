@@ -23,6 +23,11 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     isFeaturedLanding: 'is_featured_landing',
     isFeatured: 'is_featured',
     matchId: 'match_id',
+    groupId: 'group_id',
+    teamName: 'team_name',
+    teamLogo: 'team_logo',
+    isKosova: 'is_kosova',
+    opponentLogo: 'opponent_logo',
     playerId: 'player_id',
     isOwnGoal: 'is_own_goal',
     isManual: 'is_manual',
@@ -40,6 +45,7 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     liveUrl: 'live_url',
     dayOfWeek: 'day_of_week',
     videoUrl: 'video_url',
+    whatsappNumber: 'whatsapp_number',
   };
   const result: Record<string, any> = {};
   for (const [key, val] of Object.entries(obj)) {
@@ -70,6 +76,13 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     is_featured_landing: 'isFeaturedLanding',
     is_featured: 'isFeatured',
     match_id: 'matchId',
+    group_id: 'groupId',
+    team_name: 'teamName',
+    team_logo: 'teamLogo',
+    is_kosova: 'isKosova',
+    opponent_logo: 'opponentLogo',
+    home_team_id: 'homeTeamId',
+    away_team_id: 'awayTeamId',
     player_id: 'playerId',
     is_own_goal: 'isOwnGoal',
     is_manual: 'isManual',
@@ -87,6 +100,7 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     live_url: 'liveUrl',
     day_of_week: 'dayOfWeek',
     video_url: 'videoUrl',
+    whatsapp_number: 'whatsappNumber',
   };
   const result: Record<string, any> = {};
   for (const [key, val] of Object.entries(obj)) {
@@ -386,18 +400,7 @@ export function onNotification(event: string, callback: (payload: any) => void) 
 }
 
 // ============ NATIONAL TEAM PLAYERS ============
-export const dbNationalPlayers = {
-  add: (p: any) => dbInsert('national_team_players', p),
-  update: (p: any) => dbUpdate('national_team_players', p.id, p),
-  delete: (id: string) => dbDelete('national_team_players', id),
-};
 
-// ============ NATIONAL TEAM MATCHES ============
-export const dbNationalMatches = {
-  add: (m: any) => dbInsert('national_team_matches', m),
-  update: (m: any) => dbUpdate('national_team_matches', m.id, m),
-  delete: (id: string) => dbDelete('national_team_matches', id),
-};
 
 
 
@@ -498,5 +501,121 @@ export const dbVisitors = {
       uniqueToday: uniqueToday.size,
       recent: all.slice(0, 50),
     };
+  }
+};
+
+
+
+// ============ NATIONAL TEAM ============
+export const dbNationalPlayers = {
+  async getAll() {
+    const { data } = await supabase.from('national_players').select('*').order('number', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('national_players').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('national_players').delete().eq('id', id);
+  }
+};
+
+export const dbNationalMatches = {
+  async getAll() {
+    const { data } = await supabase.from('national_matches').select('*').order('date', { ascending: false });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('national_matches').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('national_matches').delete().eq('id', id);
+  }
+};
+
+export const dbNationalStaff = {
+  async getAll() {
+    const { data } = await supabase.from('national_staff').select('*').order('name', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('national_staff').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('national_staff').delete().eq('id', id);
+  }
+};
+
+// ============ NT COMPETITIONS & GROUPS ============
+export const dbNtCompetitions = {
+  async getAll() {
+    const { data } = await supabase.from('nt_competitions').select('*').order('year', { ascending: false });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('nt_competitions').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('nt_competitions').delete().eq('id', id);
+  }
+};
+
+export const dbNtGroups = {
+  async getAll() {
+    const { data } = await supabase.from('nt_groups').select('*').order('name', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('nt_groups').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('nt_groups').delete().eq('id', id);
+  }
+};
+
+export const dbNtGroupTeams = {
+  async getAll() {
+    const { data } = await supabase.from('nt_group_teams').select('*').order('team_name', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('nt_group_teams').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('nt_group_teams').delete().eq('id', id);
+  }
+};
+
+export const dbNtGroupMatches = {
+  async getAll() {
+    const { data } = await supabase.from('nt_group_matches').select('*').order('date', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('nt_group_matches').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('nt_group_matches').delete().eq('id', id);
   }
 };

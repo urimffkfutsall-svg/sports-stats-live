@@ -132,6 +132,7 @@ export interface CupRound {
 }
 
 export interface AppSettings {
+  whatsappNumber?: string;
   appName: string;
   logo: string;
   contact: string;
@@ -231,4 +232,71 @@ export interface News {
   videoUrl?: string;
   isFeaturedLanding: boolean;
   createdAt?: string;
+}
+
+export interface NationalTeamPlayer {
+  id: string;
+  firstName: string;
+  lastName: string;
+  position?: string;
+  number?: number;
+  photo?: string;
+  birthDate?: string;
+  club?: string;
+  goals?: number;
+  appearances?: number;
+}
+
+export interface NationalTeamMatch {
+  id: string;
+  opponent: string;
+  opponentLogo?: string;
+  date?: string;
+  time?: string;
+  venue?: string;
+  type?: string; // 'friendly' | 'qualifier' | 'tournament'
+  homeScore?: number;
+  awayScore?: number;
+  status?: string; // 'planned' | 'finished' | 'live'
+  isHome?: boolean;
+}
+
+export interface NationalTeamStaff {
+  id: string;
+  name: string;
+  role: string;
+  photo?: string;
+}
+
+export interface NtCompetition {
+  id: string;
+  name: string;
+  year?: string;
+}
+
+export interface NtGroup {
+  id: string;
+  competitionId: string;
+  name: string;
+}
+
+export interface NtGroupTeam {
+  id: string;
+  groupId: string;
+  teamName: string;
+  teamLogo?: string;
+  isKosova?: boolean;
+}
+
+export interface NtGroupMatch {
+  id: string;
+  groupId: string;
+  homeTeamId: string;
+  awayTeamId: string;
+  homeScore?: number;
+  awayScore?: number;
+  date?: string;
+  time?: string;
+  venue?: string;
+  status?: string;
 }

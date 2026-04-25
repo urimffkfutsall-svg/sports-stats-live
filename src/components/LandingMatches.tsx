@@ -92,7 +92,7 @@ const LandingMatches: React.FC = () => {
         <div className={`px-3 py-1.5 flex items-center justify-between text-[10px] ${
           isLive
             ? 'bg-gradient-to-r from-red-500 to-red-600 text-white/90'
-            : 'bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] text-white/80'
+            : 'bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] border-l-[3px] border-[#d0a650] text-white/80'
         }`}>
           <div className="flex items-center gap-2">
             {match.date && (
@@ -226,7 +226,7 @@ const LandingMatches: React.FC = () => {
                   isActive
                     ? t.key === 'live'
                       ? 'bg-red-500 text-white shadow-lg shadow-red-200'
-                      : 'bg-[#0A1E3C] text-white shadow-lg'
+                      : 'bg-[#2a499a] text-white shadow-lg'
                     : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
                 }`}
               >

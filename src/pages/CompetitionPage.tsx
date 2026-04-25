@@ -42,7 +42,7 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" onClick={onClose} />
       <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-2xl z-[105]" onClick={e => e.stopPropagation()}>
-        <div className="relative bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2] pt-6 pb-16 px-6">
+        <div className="relative bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] pt-6 pb-16 px-6">
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#1E6FF2]/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/20 rounded-full blur-3xl" />
@@ -97,7 +97,7 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
             </div>
           </div>
           {team && (
-            <div className="flex items-center gap-3 p-3 bg-[#0A1E3C]/5 rounded-2xl">
+            <div className="flex items-center gap-3 p-3 bg-[#2a499a]/5 rounded-2xl">
               <div className="w-10 h-10 rounded-xl bg-white border border-gray-200 overflow-hidden flex-shrink-0 shadow-sm">
                 {team.logo ? <img src={team.logo} alt="" className="w-full h-full object-cover" /> : <span className="flex items-center justify-center w-full h-full text-gray-400 text-xs font-bold">{team.name?.charAt(0)}</span>}
               </div>
@@ -287,7 +287,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
 
         <div className="flex gap-2 mb-8">
           {tabItems.map(t => {
-            return <button key={t.key} onClick={() => setActiveTab(t.key)} className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${activeTab === t.key ? 'bg-[#0A1E3C] text-white shadow-lg' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{t.label}</button>;
+            return <button key={t.key} onClick={() => setActiveTab(t.key)} className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${activeTab === t.key ? 'bg-[#2a499a] text-white shadow-lg' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{t.label}</button>;
           })}
         </div>
 
@@ -306,7 +306,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                 </div>
                 <div className="flex gap-2 mb-6">
                   {[{ value: 'all', label: 'Te gjitha' }, { value: 'finished', label: 'Perfunduara' }, { value: 'planned', label: 'Ardhshme' }, { value: 'live', label: 'Live' }].map(f => (
-                    <button key={f.value} onClick={() => handleStatusFilter(f.value)} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${statusFilter === f.value ? 'bg-[#0A1E3C] text-white shadow-sm' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{f.label}</button>
+                    <button key={f.value} onClick={() => handleStatusFilter(f.value)} className={`px-4 py-2 rounded-xl text-xs font-semibold transition-all ${statusFilter === f.value ? 'bg-[#2a499a] text-white shadow-sm' : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'}`}>{f.label}</button>
                   ))}
                 </div>
                 {weekMatches.length === 0 ? <p className="text-gray-400 text-center py-8 bg-white rounded-2xl border border-gray-100">Nuk ka ndeshje per kete jave.</p> : (
@@ -326,7 +326,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
             {standings.length === 0 ? <p className="text-gray-400 text-center py-8">Nuk ka te dhena per tabelen.</p> : (
               <>
-                <div className="bg-[#0A1E3C] px-5 py-3.5 flex items-center gap-2">
+                <div className="bg-[#2a499a] px-5 py-3.5 flex items-center gap-2">
                   <span className="text-sm font-bold text-white">{title}</span>
                   <span className="ml-auto text-[10px] text-gray-400 font-medium uppercase tracking-wider">Sezoni {activeSeason?.name}</span>
                 </div>
@@ -370,7 +370,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                           <td className="px-3 py-2.5 text-center text-gray-500 text-xs font-medium">{row.goalsFor}:{row.goalsAgainst}</td>
                           <td className="px-3 py-2.5 text-center font-bold text-xs" style={Object.assign({}, { color: row.goalDifference > 0 ? '#22C55E' : row.goalDifference < 0 ? '#EF4444' : '#9CA3AF' })}>{row.goalDifference > 0 ? '+' : ''}{row.goalDifference}</td>
                           <td className="px-3 py-2.5 text-center">
-                            <span className="inline-flex items-center justify-center w-8 h-7 rounded-md bg-[#0A1E3C] text-white font-bold text-xs">{row.points}</span>
+                            <span className="inline-flex items-center justify-center w-8 h-7 rounded-md bg-[#2a499a] text-white font-bold text-xs">{row.points}</span>
                           </td>
                           <td className="px-3 py-2.5 text-center hidden md:table-cell">
                             <div className="flex justify-center gap-0.5">
@@ -416,7 +416,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                   const team = getTeamById(s.teamId);
                   return (
                     <div onClick={() => setSelectedScorer(s)} className="cursor-pointer mb-6 group">
-                      <div className="bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2] rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative">
+                      <div className="bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative">
                         <div className="absolute inset-0"><div className="absolute -top-20 -right-20 w-60 h-60 bg-[#1E6FF2]/20 rounded-full blur-3xl" /><div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/15 rounded-full blur-3xl" /></div>
                         <div className="relative z-10 flex items-center gap-6">
                           <div className="relative">
@@ -447,7 +447,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
 
                 {/* Rest of scorers */}
                 <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
-                  <div className="bg-[#0A1E3C] px-5 py-3.5 flex items-center gap-2">
+                  <div className="bg-[#2a499a] px-5 py-3.5 flex items-center gap-2">
                     <span className="text-sm font-bold text-white">Golashenuesit</span>
                     <span className="text-[10px] text-gray-400 ml-auto">Kliko per detaje</span>
                   </div>

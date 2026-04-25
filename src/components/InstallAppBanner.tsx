@@ -35,7 +35,7 @@ function InstallAppBanner() {
 
   if (dismissed) return null;
 
-  var bannerStyle = { background: 'linear-gradient(135deg, #0A1E3C 0%, #1E6FF2 100%)' };
+  var bannerStyle = { background: 'linear-gradient(135deg, #2a499a 0%, #1E6FF2 100%)' };
 
   return (
     <div className="mx-4 my-4 rounded-xl overflow-hidden" style={bannerStyle}>

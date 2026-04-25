@@ -16,7 +16,7 @@ const PlayerOfWeekSection: React.FC = () => {
         <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Lojtari i Javës</h2>
         <div className="max-w-md mx-auto">
           <Link to="/lojtari-javes" className="block">
-            <div className="bg-gradient-to-br from-[#0A1E3C] to-[#1E6FF2] rounded-2xl p-6 text-white shadow-xl hover:shadow-2xl transition-shadow cursor-pointer">
+            <div className="bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] rounded-2xl p-6 text-white shadow-xl hover:shadow-2xl transition-shadow cursor-pointer">
               <div className="flex items-center gap-5">
                 <div className="w-24 h-24 rounded-xl overflow-hidden bg-white/10 flex-shrink-0">
                   {pow.photo ? (

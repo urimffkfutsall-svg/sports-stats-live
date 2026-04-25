@@ -19,7 +19,9 @@ import AdminPage from "./pages/AdminPage";
 import SkuadratPage from "./pages/SkuadratPage";
 import KombetarjaPage from "./pages/KombetarjaPage";
 import NewsDetailPage from './pages/NewsDetailPage';
+import LiveMatchPage from "./pages/LiveMatchPage";
 import NotFound from "./pages/NotFound";
+import WhatsAppButton from "./components/WhatsAppButton";
 
 const queryClient = new QueryClient();
 
@@ -44,10 +46,14 @@ const App = () => (
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/skuadrat" element={<SkuadratPage />} />
                 <Route path="/lajme/:id" element={<NewsDetailPage />} />
+                <Route path="/kombetarja" element={<KombetarjaPage />} />
+                <Route path="/kombetarja" element={<KombetarjaPage />} />
+                <Route path="/live" element={<LiveMatchPage />} />
                 <Route path="/admin" element={<AdminPage />} />
                 <Route path="*" element={<NotFound />} />
               </Routes>
-            </BrowserRouter>
+              <WhatsAppButton />
+              </BrowserRouter>
           </AuthProvider>
         </DataProvider>
       </TooltipProvider>

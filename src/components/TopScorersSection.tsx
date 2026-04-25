@@ -11,16 +11,16 @@ const TopScorersSection: React.FC = () => {
       <div className="max-w-4xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0A1E3C]/5 rounded-full mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
             ◎
-            <span className="text-xs font-semibold text-[#0A1E3C] uppercase tracking-wider">Golashenuesit</span>
+            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Golashenuesit</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-900">Golashenuesit Kryesore</h2>
         </div>
 
         <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
           {/* Table Header */}
-          <div className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-5 py-3.5 bg-[#0A1E3C] text-[11px] font-semibold text-gray-300 uppercase tracking-wider">
+          <div className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-5 py-3.5 bg-[#2a499a] text-[11px] font-semibold text-gray-300 uppercase tracking-wider">
             <span>#</span>
             <span></span>
             <span>Lojtari</span>

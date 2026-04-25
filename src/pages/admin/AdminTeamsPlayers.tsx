@@ -168,7 +168,7 @@ var AdminTeamsPlayers: React.FC = function() {
           ← Kthehu te Skuadrat
         </button>
 
-        <div className="bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] rounded-2xl p-6 text-white flex items-center gap-4">
+        <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-6 text-white flex items-center gap-4">
           {selectedTeam.logo && <img src={selectedTeam.logo} alt="" className="w-14 h-14 rounded-xl bg-white/10 p-1" />}
           <div>
             <h2 className="text-xl font-bold">{selectedTeam.name}</h2>
@@ -231,7 +231,7 @@ var AdminTeamsPlayers: React.FC = function() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-[#0A1E3C] to-[#1E6FF2] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] rounded-xl flex items-center justify-center shadow-lg">
             
           </div>
           <div>

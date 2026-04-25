@@ -33,7 +33,7 @@ var SkuadratPage: React.FC = function() {
       <Header />
       <div className="flex-1 max-w-6xl mx-auto w-full px-4 py-8">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#0A1E3C] to-[#1E6FF2] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] rounded-xl flex items-center justify-center shadow-lg">
             
           </div>
           <div>

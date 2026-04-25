@@ -373,6 +373,10 @@ const AdminSettings: React.FC = () => {
               <label className="block text-xs font-medium text-gray-600 mb-1">Kontakti</label>
               <input value={settings.contact} onChange={e => updateSettings({ ...settings, contact: e.target.value })} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
             </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Numri WhatsApp (me +383)</label>
+              <input value={(settings as any).whatsappNumber || ''} onChange={e => updateSettings({ ...settings, whatsappNumber: e.target.value } as any)} placeholder="+38345278279" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
+            </div>
           </div>
         </div>
       )}

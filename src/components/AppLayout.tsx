@@ -7,7 +7,6 @@ import LeagueTablesSection from './LeagueTablesSection';
 import Footer from './Footer';
 import DecisionsSection from './DecisionsSection';
 import { useData } from '@/context/DataContext';
-import LiveMatchBanner from './LiveMatchBanner';
 
 var AppLayout: React.FC = function() {
 var _data = useData();
@@ -27,7 +26,6 @@ return (
 <div className="min-h-screen bg-[#F1F5F9]">
 <Header />
 
-<LiveMatchBanner />
 <LandingNews />
       <LandingMatches />
 <LeagueTablesSection />

@@ -153,7 +153,7 @@ var EditorPanel: React.FC = function() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] rounded-2xl p-6 text-white flex items-center gap-4">
+      <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-6 text-white flex items-center gap-4">
         {team.logo && <img src={team.logo} alt="" className="w-16 h-16 rounded-xl bg-white/10 p-1" />}
         <div>
           <h2 className="text-xl font-bold">{team.name}</h2>
