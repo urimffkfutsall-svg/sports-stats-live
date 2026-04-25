@@ -29,6 +29,12 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     isKosova: 'is_kosova',
     opponentLogo: 'opponent_logo',
     showOnHome: 'show_on_home',
+    sortOrder: 'sort_order',
+    streamUrl: 'stream_url',
+    isLive: 'is_live',
+    matchTitle: 'match_title',
+    thumbnailUrl: 'thumbnail_url',
+    expiresAt: 'expires_at',
     playerId: 'player_id',
     isOwnGoal: 'is_own_goal',
     isManual: 'is_manual',
@@ -83,6 +89,12 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     is_kosova: 'isKosova',
     opponent_logo: 'opponentLogo',
     show_on_home: 'showOnHome',
+    sort_order: 'sortOrder',
+    stream_url: 'streamUrl',
+    is_live: 'isLive',
+    match_title: 'matchTitle',
+    thumbnail_url: 'thumbnailUrl',
+    expires_at: 'expiresAt',
     home_team_id: 'homeTeamId',
     away_team_id: 'awayTeamId',
     player_id: 'playerId',
@@ -636,5 +648,39 @@ export const dbNtActivities = {
   },
   async remove(id: string) {
     await supabase.from('nt_activities').delete().eq('id', id);
+  }
+};
+
+// ============ FFK FUTSAL MOMENTS ============
+export const dbFfkMoments = {
+  async getAll() {
+    const { data } = await supabase.from('ffk_moments').select('*').order('sort_order', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('ffk_moments').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('ffk_moments').delete().eq('id', id);
+  }
+};
+
+// ============ LIVE STREAMS ============
+export const dbLiveStreams = {
+  async getAll() {
+    const { data } = await supabase.from('live_streams').select('*').order('created_at', { ascending: false });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('live_streams').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('live_streams').delete().eq('id', id);
   }
 };

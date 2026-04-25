@@ -6,6 +6,7 @@ import LandingVideos from './LandingVideos';
 import LeagueTablesSection from './LeagueTablesSection';
 import Footer from './Footer';
 import NtActivitiesSection from './NtActivitiesSection';
+import FfkMomentsSection from './FfkMomentsSection';
 import DecisionsSection from './DecisionsSection';
 import { useData } from '@/context/DataContext';
 
@@ -31,8 +32,9 @@ return (
       <LandingMatches />
 <LeagueTablesSection />
 <DecisionsSection />
-<LandingVideos />
       <NtActivitiesSection />
+      <FfkMomentsSection />
+      <LandingVideos />
       <Footer />
 </div>
 );

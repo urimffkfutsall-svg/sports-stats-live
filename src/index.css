@@ -150,3 +150,15 @@
 .animate-marquee:hover {
   animation-play-state: paused;
 }
+
+/* FFK Moments Animation */
+@keyframes moments-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.animate-moments-marquee {
+  animation: moments-marquee 40s linear infinite;
+}
+.animate-moments-marquee:hover {
+  animation-play-state: paused;
+}

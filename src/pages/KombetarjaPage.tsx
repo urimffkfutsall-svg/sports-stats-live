@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches, dbNtActivities } from '@/lib/supabase-db';
@@ -287,7 +288,7 @@ export default function KombetarjaPage() {
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {activities.map(a => (
-                <div key={a.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
+                <Link key={a.id} to={'/aktivitet/' + a.id} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-lg transition-all group">
                   {a.photo && (
                     <div className="aspect-[16/10] overflow-hidden">
                       <img src={a.photo} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300" />
@@ -298,7 +299,7 @@ export default function KombetarjaPage() {
                     {a.description && <p className="text-xs text-gray-500 mt-1 line-clamp-2">{a.description}</p>}
                     {a.date && <p className="text-[10px] text-gray-400 mt-2">{formatDate(a.date)}</p>}
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>

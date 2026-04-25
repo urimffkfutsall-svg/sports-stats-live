@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -151,6 +152,12 @@ const LiveMatchPage = () => {
   return (
     <div className="min-h-screen bg-[#F1F5F9]">
       <Header />
+      <div className="max-w-6xl mx-auto px-4 pt-6">
+        <Link to="/live/streams" className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-red-500/25 transition-all hover:scale-105">
+          <span className="w-2.5 h-2.5 bg-white rounded-full animate-pulse"></span>
+          Shiko Ndeshje Live
+        </Link>
+      </div>
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1E6FF2]/10 rounded-full mb-3">
