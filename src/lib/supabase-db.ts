@@ -35,6 +35,13 @@ function toSnake(obj: Record<string, any>): Record<string, any> {
     matchTitle: 'match_title',
     thumbnailUrl: 'thumbnail_url',
     expiresAt: 'expires_at',
+    team1Id: 'team1_id',
+    team2Id: 'team2_id',
+    team1Seed: 'team1_seed',
+    team2Seed: 'team2_seed',
+    winnerId: 'winner_id',
+    seriesId: 'series_id',
+    matchNumber: 'match_number',
     playerId: 'player_id',
     isOwnGoal: 'is_own_goal',
     isManual: 'is_manual',
@@ -95,6 +102,13 @@ function toCamel(obj: Record<string, any>): Record<string, any> {
     match_title: 'matchTitle',
     thumbnail_url: 'thumbnailUrl',
     expires_at: 'expiresAt',
+    team1_id: 'team1Id',
+    team2_id: 'team2Id',
+    team1_seed: 'team1Seed',
+    team2_seed: 'team2Seed',
+    winner_id: 'winnerId',
+    series_id: 'seriesId',
+    match_number: 'matchNumber',
     home_team_id: 'homeTeamId',
     away_team_id: 'awayTeamId',
     player_id: 'playerId',
@@ -682,5 +696,38 @@ export const dbLiveStreams = {
   },
   async remove(id: string) {
     await supabase.from('live_streams').delete().eq('id', id);
+  }
+};
+
+// ============ PLAYOFF ============
+export const dbPlayoffSeries = {
+  async getAll() {
+    const { data } = await supabase.from('playoff_series').select('*').order('created_at', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('playoff_series').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('playoff_series').delete().eq('id', id);
+  }
+};
+
+export const dbPlayoffMatches = {
+  async getAll() {
+    const { data } = await supabase.from('playoff_matches').select('*').order('match_number', { ascending: true });
+    return (data || []).map(toCamel) as any[];
+  },
+  async upsert(item: any) {
+    const row = toSnake(item);
+    const { data, error } = await supabase.from('playoff_matches').upsert(row).select().single();
+    if (error) throw error;
+    return toCamel(data);
+  },
+  async remove(id: string) {
+    await supabase.from('playoff_matches').delete().eq('id', id);
   }
 };

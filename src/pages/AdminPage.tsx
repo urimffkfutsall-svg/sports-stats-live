@@ -18,6 +18,7 @@ import EditorPanel from './admin/EditorPanel';
 import AdminLiveControl from './admin/AdminLiveControl';
 import AdminVideos from './admin/AdminVideos';
 import AdminNews from './admin/AdminNews';
+import AdminPlayoff from './admin/AdminPlayoff';
 const AdminPage: React.FC = () => {
   const { isAuthenticated, isAdmin, isEditor, currentUser } = useAuth();
   const { matches, teams, players, getActiveSeason, competitions, scorers, playersOfWeek } = useData();
@@ -69,6 +70,7 @@ const AdminPage: React.FC = () => {
     { key: 'editors', label: 'Editoret', icon: null, editorAccess: false },
     { key: 'teamsplayers', label: 'Skuadrat & Lojtaret', icon: null, editorAccess: false },
     { key: 'kombetarja', label: 'Kombetarja', icon: null, editorAccess: false },
+    { key: 'playoff', label: 'PlayOff', icon: null, editorAccess: false },
     { key: 'videos', label: 'Video', icon: null, editorAccess: false },
     { key: 'news', label: 'Lajme', icon: null, editorAccess: false },
   ];
@@ -251,6 +253,7 @@ const AdminPage: React.FC = () => {
         {activeTab === 'editors' && isAdmin && <AdminEditors />}
         {activeTab === 'teamsplayers' && isAdmin && <AdminTeamsPlayers />}
         {activeTab === 'kombetarja' && isAdmin && <AdminKombetarja />}
+        {activeTab === 'playoff' && isAdmin && <AdminPlayoff />}
         {activeTab === 'videos' && isAdmin && <AdminVideos />}
         {activeTab === 'news' && isAdmin && <AdminNews />}
       </div>

@@ -21,6 +21,7 @@ const Header: React.FC = () => {
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
     { path: '/kombetarja', label: 'Kombetarja' },
+    { path: '/playoff', label: 'PlayOff' },
   ];
 
   return (

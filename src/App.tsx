@@ -18,6 +18,7 @@ import LoginPage from "./pages/LoginPage";
 import AdminPage from "./pages/AdminPage";
 import SkuadratPage from "./pages/SkuadratPage";
 import KombetarjaPage from "./pages/KombetarjaPage";
+import PlayoffPage from "./pages/PlayoffPage";
 import ActivityDetailPage from "./pages/ActivityDetailPage";
 import NewsDetailPage from './pages/NewsDetailPage';
 import LiveMatchPage from "./pages/LiveMatchPage";
@@ -49,6 +50,7 @@ const App = () => (
                 <Route path="/skuadrat" element={<SkuadratPage />} />
                 <Route path="/lajme/:id" element={<NewsDetailPage />} />
                 <Route path="/kombetarja" element={<KombetarjaPage />} />
+                <Route path="/playoff" element={<PlayoffPage />} />
                 <Route path="/aktivitet/:id" element={<ActivityDetailPage />} />
                 <Route path="/kombetarja" element={<KombetarjaPage />} />
                 <Route path="/live" element={<LiveMatchPage />} />
