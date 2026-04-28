@@ -47,11 +47,6 @@ const PlayerOfWeekPage: React.FC = () => {
                     <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
                       {/* Photo */}
                       <div className="relative">
-                        <div className="absolute -top-3 -left-3 z-10">
-                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 flex items-center justify-center shadow-lg">
-                            
-                          </div>
-                        </div>
                         <div className="relative">
                           <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#1E6FF2] rounded-2xl rotate-6 opacity-40 blur-sm scale-105" />
                           <div className="absolute inset-0 bg-gradient-to-br from-[#1E6FF2] to-amber-400 rounded-2xl -rotate-3 opacity-25 scale-105" />
@@ -126,9 +121,6 @@ const PlayerOfWeekPage: React.FC = () => {
                                     {pow.firstName.charAt(0)}{pow.lastName.charAt(0)}
                                   </div>
                                 )}
-                              </div>
-                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#2a499a] flex items-center justify-center shadow-sm">
-                                
                               </div>
                             </div>
 
