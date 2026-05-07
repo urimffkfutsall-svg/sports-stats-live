@@ -206,7 +206,7 @@ const LeagueTablesSection: React.FC = () => {
             {standings.length === 0 ? (
               <p className="text-center text-gray-400 py-8">Nuk ka te dhena per tabelen.</p>
             ) : (
-              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
+              <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden"><div className="overflow-x-auto">
                 {/* Table header */}
                 <div className="bg-[#2a499a] px-3 sm:px-4 md:px-6 lg:px-8 py-3 flex items-center gap-2">
                   
@@ -273,9 +273,7 @@ const LeagueTablesSection: React.FC = () => {
                       </tr>
                     ))}
                   </tbody>
-                </table>
-
-                {/* Legend */}
+                </table></div>{/* Legend */}
                 <div className="px-3 sm:px-4 md:px-6 lg:px-8 py-3 border-t border-gray-200 bg-gray-50/50 flex flex-wrap gap-4 text-[10px] text-gray-500 font-medium">
                   {isSuperliga ? (
                     <>
