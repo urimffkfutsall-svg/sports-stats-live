@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { dbNtActivities } from '@/lib/supabase-db';
+import { dbNtActivities } from '@/lib/api-db';
 
 function formatDate(iso: string) {
   if (!iso) return '';

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { dbLiveStreams } from '@/lib/supabase-db';
+import { dbLiveStreams } from '@/lib/api-db';
 
 function getEmbedUrl(url: string) {
   if (!url) return '';
@@ -78,7 +78,7 @@ export default function LiveStreamsPage() {
         {streams.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-800 flex items-center justify-center">
-              <span className="text-3xl">📺</span>
+              <span className="text-3xl">ðŸ“º</span>
             </div>
             <h2 className="text-xl font-black text-white mb-2">Nuk ka transmetim live</h2>
             <p className="text-gray-500">Momentalisht nuk ka asnje ndeshje qe trasmetohet live</p>

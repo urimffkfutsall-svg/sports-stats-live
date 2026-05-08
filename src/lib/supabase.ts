@@ -1,7 +1,19 @@
-import { createClient } from '@supabase/supabase-js';
+// DEPRECATED: Migrated to MongoDB API. Kept as stub to avoid breaking imports.
+// All real calls should use @/lib/api-db.
+const noop = () => Promise.resolve({ data: null, error: new Error("supabase deprecated - use api-db") });
+const noopUpload = () => Promise.resolve({ data: null, error: new Error("supabase deprecated - use api-db uploadFile") });
 
-const supabaseUrl = 'https://agzbkdinigtbadhdigig.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFnemJrZGluaWd0YmFkaGRpZ2lnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NDE1MTQsImV4cCI6MjA5MDAxNzUxNH0.RRC9OLSiCcqunTej2auxoIIWU8l69NqkE6mxRovIU6U';
-const supabase = createClient(supabaseUrl, supabaseKey);
+const queryBuilder: any = {
+  select: () => ({ ...queryBuilder, then: (cb: any) => cb({ data: [], error: null }) }),
+  insert: noop, update: () => queryBuilder, delete: () => queryBuilder,
+  eq: () => queryBuilder, order: () => queryBuilder, single: noop,
+  then: (cb: any) => cb({ data: [], error: null }),
+};
 
-export { supabase };
+export const supabase = {
+  from: () => queryBuilder,
+  storage: { from: () => ({ upload: noopUpload, remove: noop, getPublicUrl: () => ({ data: { publicUrl: "" } }) }) },
+  auth: { signIn: noop, signOut: noop, getUser: noop, onAuthStateChange: () => ({ data: { subscription: { unsubscribe: () => {} } } }) },
+  channel: () => ({ on: () => ({ subscribe: () => ({}) }), subscribe: () => ({}) }),
+  removeChannel: () => {},
+};

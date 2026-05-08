@@ -1,5 +1,5 @@
-﻿import React, { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import React, { useState, useEffect } from 'react';
+import { dbNationalPlayers, dbNationalMatches, uploadFile } from '@/lib/api-db';
 import { v4 as uuidv4 } from 'uuid';
 
 interface NationalPlayer {
@@ -13,28 +13,6 @@ interface NationalMatch {
   time?: string; venue?: string; competition: string; homeScore?: number;
   awayScore?: number; isHome: boolean; status: string; liveUrl?: string;
 }
-
-const toCamel = (obj: any) => {
-  const map: Record<string,string> = {
-    first_name:'firstName', last_name:'lastName', birth_date:'birthDate',
-    opponent_logo:'opponentLogo', home_score:'homeScore', away_score:'awayScore',
-    is_home:'isHome', live_url:'liveUrl',
-  };
-  const r: any = {};
-  for (const [k,v] of Object.entries(obj)) { if (k==='created_at') continue; r[map[k]||k]=v; }
-  return r;
-};
-
-const toSnake = (obj: any) => {
-  const map: Record<string,string> = {
-    firstName:'first_name', lastName:'last_name', birthDate:'birth_date',
-    opponentLogo:'opponent_logo', homeScore:'home_score', awayScore:'away_score',
-    isHome:'is_home', liveUrl:'live_url',
-  };
-  const r: any = {};
-  for (const [k,v] of Object.entries(obj)) { r[map[k]||k]=v; }
-  return r;
-};
 
 const AdminKombetarja: React.FC = () => {
   const [tab, setTab] = useState<'players'|'matches'>('players');
@@ -50,66 +28,57 @@ const AdminKombetarja: React.FC = () => {
   const [mForm, setMForm] = useState({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' });
 
   const load = async () => {
-    const [pRes, mRes] = await Promise.all([
-      supabase.from('national_team_players').select('*').order('number'),
-      supabase.from('national_team_matches').select('*').order('date', { ascending: false }),
-    ]);
-    setPlayers((pRes.data||[]).map(toCamel));
-    setMatches((mRes.data||[]).map(toCamel));
+    try {
+      const [pData, mData] = await Promise.all([
+        dbNationalPlayers.getAll() as Promise<NationalPlayer[]>,
+        dbNationalMatches.getAll() as Promise<NationalMatch[]>,
+      ]);
+      const sortedP = [...(pData||[])].sort((a,b) => (a.number||0) - (b.number||0));
+      const sortedM = [...(mData||[])].sort((a,b) => (b.date||'').localeCompare(a.date||''));
+      setPlayers(sortedP);
+      setMatches(sortedM);
+    } catch (e) { console.error(e); }
     setLoading(false);
   };
 
   useEffect(() => { load(); }, []);
 
   const handlePlayerPhotoUpload = async (file: File, playerId: string): Promise<string> => {
-    const ext = file.name.split('.').pop() || 'png';
-    const path = 'national/' + playerId + '.' + ext;
-    await supabase.storage.from('player-photos').remove([path]);
-    const { error } = await supabase.storage.from('player-photos').upload(path, file, { cacheControl: '3600', upsert: true });
-    if (error) {
-      return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target?.result as string || ''); r.readAsDataURL(file); });
+    try {
+      return await uploadFile('national-photos', file, playerId);
+    } catch (e) {
+      console.error('Upload failed:', e);
+      return new Promise(res => { const r = new FileReader(); r.onload = ev => res(ev.target?.result as string || ''); r.readAsDataURL(file); });
     }
-    const { data } = supabase.storage.from('player-photos').getPublicUrl(path);
-    return data.publicUrl + '?t=' + Date.now();
   };
 
   const savePlayer = async () => {
     const id = editPlayer ? editPlayer.id : uuidv4();
-    const data = toSnake({ id, ...pForm });
-    if (editPlayer) {
-      delete data.id;
-      await supabase.from('national_team_players').update(data).eq('id', id);
-    } else {
-      await supabase.from('national_team_players').insert(data);
-    }
+    const data = { id, ...pForm };
+    await dbNationalPlayers.upsert(data);
     setShowPlayerForm(false); setEditPlayer(null);
     setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 });
     load();
   };
 
   const deletePlayer = async (id: string) => {
-    if (!confirm('Fshi lojtarin?')) return null;
-    await supabase.from('national_team_players').delete().eq('id', id);
+    if (!confirm('Fshi lojtarin?')) return;
+    await dbNationalPlayers.remove(id);
     load();
   };
 
   const saveMatch = async () => {
     const id = editMatch ? editMatch.id : uuidv4();
-    const data = toSnake({ id, ...mForm });
-    if (editMatch) {
-      delete data.id;
-      await supabase.from('national_team_matches').update(data).eq('id', id);
-    } else {
-      await supabase.from('national_team_matches').insert(data);
-    }
+    const data = { id, ...mForm };
+    await dbNationalMatches.upsert(data);
     setShowMatchForm(false); setEditMatch(null);
     setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' });
     load();
   };
 
   const deleteMatch = async (id: string) => {
-    if (!confirm('Fshi ndeshjen?')) return null;
-    await supabase.from('national_team_matches').delete().eq('id', id);
+    if (!confirm('Fshi ndeshjen?')) return;
+    await dbNationalMatches.remove(id);
     load();
   };
 
@@ -131,14 +100,13 @@ const AdminKombetarja: React.FC = () => {
     <div>
       <div className="flex gap-2 mb-6">
         <button onClick={() => setTab('players')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='players' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
-           Lojtaret ({players.length})
+          Lojtaret ({players.length})
         </button>
         <button onClick={() => setTab('matches')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='matches' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
-           Ndeshjet ({matches.length})
+          Ndeshjet ({matches.length})
         </button>
       </div>
 
-      {/* PLAYERS TAB */}
       {tab === 'players' && (
         <div>
           <div className="flex justify-between items-center mb-4">
@@ -177,12 +145,8 @@ const AdminKombetarja: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
-                  ✓ Ruaj
-                </button>
-                <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
-                  ✕ Anulo
-                </button>
+                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">✓ Ruaj</button>
+                <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">✕ Anulo</button>
               </div>
             </div>
           )}
@@ -198,7 +162,7 @@ const AdminKombetarja: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#1E6FF2]">✎</button>
                   <button onClick={() => deletePlayer(p.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
                 </div>
               </div>
@@ -208,7 +172,6 @@ const AdminKombetarja: React.FC = () => {
         </div>
       )}
 
-      {/* MATCHES TAB */}
       {tab === 'matches' && (
         <div>
           <div className="flex justify-between items-center mb-4">
@@ -239,12 +202,8 @@ const AdminKombetarja: React.FC = () => {
                 <input placeholder="Link LIVE (URL)" value={mForm.liveUrl} onChange={e => setMForm({...mForm, liveUrl:e.target.value})} className="border rounded-lg px-3 py-2 text-sm col-span-2" />
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
-                  ✓ Ruaj
-                </button>
-                <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
-                  ✕ Anulo
-                </button>
+                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">✓ Ruaj</button>
+                <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">✕ Anulo</button>
               </div>
             </div>
           )}
@@ -266,7 +225,7 @@ const AdminKombetarja: React.FC = () => {
                   {m.liveUrl && <p className="text-xs text-[#1E6FF2] mt-1 truncate max-w-xs">{m.liveUrl}</p>}
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#1E6FF2]">✎</button>
                   <button onClick={() => deleteMatch(m.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
                 </div>
               </div>

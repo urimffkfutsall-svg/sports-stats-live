@@ -25,3 +25,14 @@ dist-ssr
 
 .vercel
 .env*.local
+
+# Migration backups & logs
+src.backup-*
+.env.local.backup-*
+vite.config.ts.bak
+vercel-live.log
+vercel-dev.log
+exports/
+
+.env.local
+build.log

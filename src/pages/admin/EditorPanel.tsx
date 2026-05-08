@@ -3,7 +3,7 @@ import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { Editor, Player, Official } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
-import { uploadPlayerPhoto } from '@/lib/supabase-db';
+import { uploadPlayerPhoto } from '@/lib/api-db';
 
 function loadOfficials(): Official[] {
   try { var s = localStorage.getItem('ffk_officials'); if (s) return JSON.parse(s); } catch(e) {}
@@ -122,7 +122,7 @@ var EditorPanel: React.FC = function() {
         <label className="block text-xs font-medium text-gray-600 mb-1">Foto (opsionale)</label>
         <div className="flex gap-2">
           <label className="flex items-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl text-sm cursor-pointer hover:bg-gray-50 transition-colors flex-1">
-            ▲
+            â–²
             <span className="text-gray-500 truncate">{props.file ? props.file.name : 'Ngarko foto nga PC'}</span>
             <input type="file" accept="image/*" className="hidden" onChange={function(e) { if (e.target.files && e.target.files[0]) { props.setFile(e.target.files[0]); props.setPhotoUrl(''); } }} />
           </label>
@@ -214,7 +214,7 @@ var EditorPanel: React.FC = function() {
                     {p.position && <p className="text-xs text-gray-500">Nr. {p.position}</p>}
                   </div>
                   <button onClick={function() { handleDeletePlayer(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                    ✗
+                    âœ—
                   </button>
                 </div>
               );
@@ -267,7 +267,7 @@ var EditorPanel: React.FC = function() {
                     <p className="text-xs text-gray-500">{o.position}</p>
                   </div>
                   <button onClick={function() { handleDeleteOfficial(o.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                    ✗
+                    âœ—
                   </button>
                 </div>
               );

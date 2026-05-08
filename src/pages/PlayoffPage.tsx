@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { dbPlayoffSeries, dbPlayoffMatches } from '@/lib/supabase-db';
+import { dbPlayoffSeries, dbPlayoffMatches } from '@/lib/api-db';
 
 function formatDate(iso) {
   if (!iso) return '';

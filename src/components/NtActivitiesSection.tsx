@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { dbNtActivities } from '@/lib/supabase-db';
+import { dbNtActivities } from '@/lib/api-db';
 
 function formatDate(iso: string) {
   if (!iso) return '';

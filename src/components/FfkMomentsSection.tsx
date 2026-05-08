@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {dbFfkMoments} from '@/lib/supabase-db';
+import {dbFfkMoments} from '@/lib/api-db';
 
 const FfkMomentsSection: React.FC = () => {
   const [moments, setMoments] = useState<any[]>([]);

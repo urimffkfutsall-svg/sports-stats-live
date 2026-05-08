@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches, dbNtActivities, dbFfkMoments } from '@/lib/supabase-db';
+import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches, dbNtActivities, dbFfkMoments } from '@/lib/api-db';
 
 const AdminNationalTeam: React.FC = () => {
   const [competitions, setCompetitions] = useState<any[]>([]);
@@ -45,25 +45,27 @@ const AdminNationalTeam: React.FC = () => {
 
   const load = async () => {
     try {
-      const [c, g, gt, gm, acts, moms] = await Promise.all([
+      const [c, g, gt, gm, acts] = await Promise.all([
         dbNtCompetitions.getAll().catch(() => []),
         dbNtGroups.getAll().catch(() => []),
         dbNtGroupTeams.getAll().catch(() => []),
         dbNtGroupMatches.getAll().catch(() => []),
         dbNtActivities.getAll().catch(() => []),
-        dbFfkMoments.getAll().catch(() => []),
       ]);
       setCompetitions(c);
       setGroups(g);
       setGroupTeams(gt);
       setGroupMatches(gm);
       setActivities(acts);
-      setMoments(moms);
     } catch {}
     setLoading(false);
   };
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => {
+    load();
+    // Lazy-load FFK Moments ne background (imazhe base64 mund te jene shume MB)
+    dbFfkMoments.getAll().then((m: any[]) => setMoments(m)).catch(() => {});
+  }, []);
 
   const handleAddComp = async () => {
     if (!compName.trim()) return;

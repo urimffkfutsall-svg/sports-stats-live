@@ -1,7 +1,7 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Navigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
-import { dbVisitors } from '@/lib/supabase-db';
+import { dbVisitors } from '@/lib/api-db';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
 import AdminTeams from './admin/AdminTeams';

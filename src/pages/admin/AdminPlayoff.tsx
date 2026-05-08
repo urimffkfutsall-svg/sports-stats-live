@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
-import { dbPlayoffSeries, dbPlayoffMatches } from '@/lib/supabase-db';
+import { dbPlayoffSeries, dbPlayoffMatches } from '@/lib/api-db';
 
 type PlayoffType = 'superliga' | 'liga_pare';
 type PlayoffRound = 'quarter' | 'semi' | 'final';

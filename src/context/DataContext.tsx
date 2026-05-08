@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -6,9 +6,9 @@ import {
   dbSeasons, dbCompetitions, dbTeams, dbPlayers, dbMatches, dbGoals, dbScorers, dbPlayerOfWeek, dbUsers, dbSettings, dbDecisions,
   subscribeToMatches, subscribeToGoals, subscribeToTable,
   dbVisitors,
-} from '@/lib/supabase-db';
+} from '@/lib/api-db';
 import { dbVideos, dbNews
-} from '@/lib/supabase-db';
+} from '@/lib/api-db';
 
 interface DataState {
   seasons: Season[];

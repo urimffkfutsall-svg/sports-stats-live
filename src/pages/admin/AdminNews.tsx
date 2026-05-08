@@ -1,7 +1,7 @@
 import React, { useState, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { News } from '@/types';
-import { supabase } from '@/lib/supabase';
+import { uploadFile } from '@/lib/api-db';
 
 function getPhotos(photo: string): string[] {
   if (!photo) return [];
