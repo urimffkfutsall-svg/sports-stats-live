@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
 import { Link } from 'react-router-dom';
 interface ScorerModalData {
@@ -41,7 +41,7 @@ const ScorerModal: React.FC<{ scorer: ScorerModalData; onClose: () => void }> = 
 
         {/* Close */}
         <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 z-[110] w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">
-          ×
+          Ã—
         </button>
 
         {/* Player Header */}
@@ -112,7 +112,7 @@ const ScorerModal: React.FC<{ scorer: ScorerModalData; onClose: () => void }> = 
 };
 
 const LeagueTablesSection: React.FC = () => {
-  const { competitions, calculateStandings, getActiveSeason, getLatestPlayerOfWeek, getTeamById, getAggregatedScorers } = useData();
+  const { competitions, calculateStandings, getActiveSeason, getLatestPlayerOfWeek, getTeamById, getAggregatedScorers, isLoading } = useData();
   const activeSeason = getActiveSeason();
   const [selectedScorer, setSelectedScorer] = useState<ScorerModalData | null>(null);
 
@@ -123,6 +123,12 @@ const LeagueTablesSection: React.FC = () => {
     ), [competitions, activeSeason]);
 
   const [selectedComp, setSelectedComp] = useState<string>(leagueComps[0]?.id || '');
+
+  useEffect(() => {
+    if (!selectedComp && leagueComps.length > 0) {
+      setSelectedComp(leagueComps[0].id);
+    }
+  }, [leagueComps, selectedComp]);
 
   const standings = useMemo(() => {
     if (!selectedComp) return [];
@@ -137,6 +143,14 @@ const LeagueTablesSection: React.FC = () => {
 
   const topScorers = getAggregatedScorers().slice(0, 3);
 
+  if (isLoading) return (
+    <section className="py-10 px-4 flex justify-center items-center min-h-[200px]">
+      <div className="flex flex-col items-center gap-3">
+        <div className="w-10 h-10 rounded-full border-4 border-[#1E6FF2] border-t-transparent animate-spin" />
+        <span className="text-sm text-gray-400 font-medium">Duke ngarkuar tabelën...</span>
+      </div>
+    </section>
+  );
   if (leagueComps.length === 0) return null;
 
   const getRowBorder = (pos: number) => {
@@ -276,7 +290,7 @@ const LeagueTablesSection: React.FC = () => {
                   </tbody>
                 </table>
                 </div>
-                <p className="sm:hidden text-center text-[10px] text-gray-400 py-1.5 bg-gray-50/50 border-t border-gray-100">← Shtyj tabelën për të parë pikët →</p>
+                <p className="sm:hidden text-center text-[10px] text-gray-400 py-1.5 bg-gray-50/50 border-t border-gray-100">â† Shtyj tabelÃ«n pÃ«r tÃ« parÃ« pikÃ«t â†’</p>
 
                 {/* Legend */}
                 <div className="px-3 sm:px-4 md:px-6 lg:px-8 py-3 border-t border-gray-200 bg-gray-50/50 flex flex-wrap gap-4 text-[10px] text-gray-500 font-medium">
