@@ -1,4 +1,23 @@
-﻿import { Toaster } from "@/components/ui/toaster";
+import React from 'react';\nimport { useData } from '@/context/DataContext';
+
+const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+  const { isLoading } = useData();
+  if (isLoading) {
+    return (
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-white">
+        <img
+          src="https://d64gsuwffb70l.cloudfront.net/69b1c5d3aa33715dda5ad3a9_1773258315744_b173e8af.png"
+          alt="FFK Futsall"
+          className="w-20 h-20 object-contain mb-6 rounded-2xl shadow-lg"
+        />
+        <div className="w-12 h-12 rounded-full border-4 border-[#1E6FF2] border-t-transparent animate-spin mb-4" />
+        <span className="text-sm text-gray-400 font-medium tracking-wide">Duke ngarkuar...</span>
+      </div>
+    );
+  }
+  return <>{children}</>;
+};
+import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -34,7 +53,8 @@ const App = () => (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <DataProvider>
-          <AuthProvider>
+        <AppLoader>
+        <AuthProvider>
             <Toaster />
             <Sonner />
             <BrowserRouter>
@@ -65,6 +85,7 @@ const App = () => (
               <BottomNav />
               </BrowserRouter>
           </AuthProvider>
+        </AppLoader>
         </DataProvider>
       </TooltipProvider>
     </QueryClientProvider>
