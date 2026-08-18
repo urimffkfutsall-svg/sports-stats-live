@@ -247,12 +247,17 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // ============ INITIAL LOAD ============
   const loadData = useCallback(async () => {
+    // Start timer for minimum loading duration (2 seconds)
+    const startTime = Date.now();
+    const minLoadingTime = 2000; // 2 seconds minimum
+    let localState: DataState | null = null;
+    
     try {
       const saved = localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
-          setState({
+          localState = {
             seasons: parsed.seasons || [],
             competitions: parsed.competitions || [],
             teams: parsed.teams || [],
@@ -268,7 +273,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             settings: parsed.settings || defaultSettings,
             shortiSuperliga: parsed.shortiSuperliga || [],
             shortiLigaPare: parsed.shortiLigaPare || [],
-          });
+          };
+          setState(localState);
           hasHydratedRef.current = true;
         } catch {}
       }
@@ -278,7 +284,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         if (remoteRes.ok) {
           const remoteData = await remoteRes.json();
           if (remoteData && Array.isArray(remoteData.seasons)) {
-            setState({
+            // Merge local unsaved data with remote data
+            // Keep local data that doesn't exist on remote (newly added items)
+            const mergedState = {
               seasons: remoteData.seasons || [],
               competitions: remoteData.competitions || [],
               teams: remoteData.teams || [],
@@ -294,10 +302,42 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               settings: remoteData.settings || defaultSettings,
               shortiSuperliga: remoteData.shortiSuperliga || [],
               shortiLigaPare: remoteData.shortiLigaPare || [],
-            });
-            localStorage.setItem('ffk_futsall_data', JSON.stringify(remoteData));
-            localStorage.setItem('ffk_cache_v2', JSON.stringify(remoteData));
+            };
+
+            // If we have local state, merge it with remote to preserve unsaved local data
+            if (localState) {
+              // Keep local teams that don't exist on server
+              const remoteTeamIds = new Set(remoteData.teams?.map((t: any) => t.id) || []);
+              const localOnlyTeams = (localState.teams || []).filter(t => !remoteTeamIds.has(t.id));
+              
+              // Keep local players that don't exist on server
+              const remotePlayerIds = new Set(remoteData.players?.map((p: any) => p.id) || []);
+              const localOnlyPlayers = (localState.players || []).filter(p => !remotePlayerIds.has(p.id));
+
+              // Keep local goals that don't exist on server
+              const remoteGoalIds = new Set(remoteData.goals?.map((g: any) => g.id) || []);
+              const localOnlyGoals = (localState.goals || []).filter(g => !remoteGoalIds.has(g.id));
+
+              // Keep local scorers that don't exist on server
+              const remoteScorerIds = new Set(remoteData.scorers?.map((s: any) => s.id) || []);
+              const localOnlyScorerss = (localState.scorers || []).filter(s => !remoteScorerIds.has(s.id));
+
+              // Merge: remote data + locally added items
+              mergedState.teams = [...mergedState.teams, ...localOnlyTeams];
+              mergedState.players = [...mergedState.players, ...localOnlyPlayers];
+              mergedState.goals = [...mergedState.goals, ...localOnlyGoals];
+              mergedState.scorers = [...mergedState.scorers, ...localOnlyScorerss];
+            }
+
+            setState(mergedState);
+            localStorage.setItem('ffk_futsall_data', JSON.stringify(mergedState));
+            localStorage.setItem('ffk_cache_v2', JSON.stringify(mergedState));
             hasHydratedRef.current = true;
+            // Wait for minimum loading time before showing content
+            const elapsed = Date.now() - startTime;
+            if (elapsed < minLoadingTime) {
+              await new Promise(resolve => setTimeout(resolve, minLoadingTime - elapsed));
+            }
             setIsLoading(false);
             return;
           } else {
@@ -321,6 +361,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (!hasValidSupabase) {
         hasHydratedRef.current = true;
+        // Wait for minimum loading time before showing content
+        const elapsed = Date.now() - startTime;
+        if (elapsed < minLoadingTime) {
+          await new Promise(resolve => setTimeout(resolve, minLoadingTime - elapsed));
+        }
         setIsLoading(false);
         return;
       }
@@ -330,7 +375,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         dbVideos.getAll(),
         dbNews.getAll(),
       ]);
-      setState({
+
+      // Merge local unsaved data with remote Supabase data
+      let finalState = {
         seasons: data.seasons,
         competitions: data.competitions,
         teams: data.teams,
@@ -346,14 +393,41 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         settings: data.settings,
         shortiSuperliga: data.shortiSuperliga || [],
         shortiLigaPare: data.shortiLigaPare || [],
-      });
+      };
+
+      // If we have local state, merge it with remote to preserve unsaved local data
+      if (localState) {
+        // Keep local teams that don't exist on server
+        const remoteTeamIds = new Set(data.teams?.map((t: any) => t.id) || []);
+        const localOnlyTeams = (localState.teams || []).filter(t => !remoteTeamIds.has(t.id));
+        
+        // Keep local players that don't exist on server
+        const remotePlayerIds = new Set(data.players?.map((p: any) => p.id) || []);
+        const localOnlyPlayers = (localState.players || []).filter(p => !remotePlayerIds.has(p.id));
+
+        // Keep local goals that don't exist on server
+        const remoteGoalIds = new Set(data.goals?.map((g: any) => g.id) || []);
+        const localOnlyGoals = (localState.goals || []).filter(g => !remoteGoalIds.has(g.id));
+
+        // Keep local scorers that don't exist on server
+        const remoteScorerIds = new Set(data.scorers?.map((s: any) => s.id) || []);
+        const localOnlyScorerss = (localState.scorers || []).filter(s => !remoteScorerIds.has(s.id));
+
+        // Merge: remote data + locally added items
+        finalState.teams = [...finalState.teams, ...localOnlyTeams];
+        finalState.players = [...finalState.players, ...localOnlyPlayers];
+        finalState.goals = [...finalState.goals, ...localOnlyGoals];
+        finalState.scorers = [...finalState.scorers, ...localOnlyScorerss];
+      }
+
+      setState(finalState);
       try { localStorage.setItem('ffk_cache_v2', JSON.stringify({
-        seasons: data.seasons, competitions: data.competitions, teams: data.teams,
-        players: data.players, matches: data.matches, goals: data.goals,
-        scorers: data.scorers, playersOfWeek: data.playersOfWeek,
-        decisions: data.decisions || [], settings: data.settings,
-        videos: videosData || [], news: newsData || [],
-        shortiSuperliga: data.shortiSuperliga || [], shortiLigaPare: data.shortiLigaPare || [],
+        seasons: finalState.seasons, competitions: finalState.competitions, teams: finalState.teams,
+        players: finalState.players, matches: finalState.matches, goals: finalState.goals,
+        scorers: finalState.scorers, playersOfWeek: finalState.playersOfWeek,
+        decisions: finalState.decisions || [], settings: finalState.settings,
+        videos: finalState.videos || [], news: finalState.news || [],
+        shortiSuperliga: finalState.shortiSuperliga || [], shortiLigaPare: finalState.shortiLigaPare || [],
       })); } catch {}
     } catch (err) {
       console.error('Failed to load data from app storage:', err);
@@ -363,7 +437,13 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       } catch { /* ignore */ }
     } finally {
       hasHydratedRef.current = true;
-      setIsLoading(false);
+      // Wait for minimum loading time before showing content
+      const elapsed = Date.now() - startTime;
+      if (elapsed < minLoadingTime) {
+        setTimeout(() => setIsLoading(false), minLoadingTime - elapsed);
+      } else {
+        setIsLoading(false);
+      }
     }
   }, []);
 
