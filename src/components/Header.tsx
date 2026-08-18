@@ -2,10 +2,13 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
+import { Settings } from 'lucide-react';
 import NotificationPanel from './NotificationPanel';
+import SettingsPage from './SettingsPage';
 
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [settingsOpen, setSettingsOpen] = useState(false);
   const { isAuthenticated, isAdmin, logout, currentUser } = useAuth();
   const { settings } = useData();
   const location = useLocation();
@@ -23,6 +26,10 @@ const Header: React.FC = () => {
     { path: '/kombetarja', label: 'Kombetarja' },
     { path: '/playoff', label: 'PlayOff' },
   ];
+
+  if (settingsOpen) {
+    return <SettingsPage onBack={() => setSettingsOpen(false)} />;
+  }
 
   return (
     <header className="bg-[#2a499a] text-white sticky top-0 z-50 shadow-lg border-b-[3px] border-[#d0a650]">
@@ -47,6 +54,13 @@ const Header: React.FC = () => {
 
           <div className="hidden lg:flex items-center gap-2">
             <NotificationPanel />
+            <button
+              onClick={() => setSettingsOpen(true)}
+              className="p-2 text-gray-300 hover:text-white transition-colors rounded-lg hover:bg-white/10"
+              title="Cilesimet"
+            >
+              <Settings size={20} />
+            </button>
             {isAuthenticated ? (
               <>
                 <Link
@@ -77,6 +91,13 @@ const Header: React.FC = () => {
           {/* Mobile Toggle */}
           <div className="lg:hidden flex items-center gap-2">
             <NotificationPanel />
+            <button
+              onClick={() => setSettingsOpen(true)}
+              className="p-2 text-gray-300 hover:text-white transition-colors"
+              title="Cilesimet"
+            >
+              <Settings size={20} />
+            </button>
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="p-2 text-gray-300 hover:text-white"

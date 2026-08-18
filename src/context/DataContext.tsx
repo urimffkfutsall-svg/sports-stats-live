@@ -9,6 +9,7 @@ import {
 } from '@/lib/supabase-db';
 import { dbVideos, dbNews
 } from '@/lib/supabase-db';
+import { notificationService } from '@/lib/notifications';
 
 interface DataState {
   seasons: Season[];
@@ -602,6 +603,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const newTeam: Team = { ...t, id: uuidv4() };
     update(prev => ({ ...prev, teams: [...prev.teams, newTeam] }));
     dbTeams.add(newTeam);
+    // Send notification
+    notificationService.notifyNewTeam(newTeam.name);
     return newTeam.id;
   };
 
@@ -655,12 +658,33 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const newMatch: Match = { ...m, id: uuidv4() };
     update(prev => ({ ...prev, matches: [...prev.matches, newMatch] }));
     dbMatches.add(newMatch);
+    
+    // Send notification with team names
+    const homeTeam = state.teams.find(t => t.id === newMatch.homeTeamId);
+    const awayTeam = state.teams.find(t => t.id === newMatch.awayTeamId);
+    if (homeTeam && awayTeam) {
+      const time = newMatch.time || 'TBD';
+      notificationService.notifyNewMatch(homeTeam.name, awayTeam.name, time);
+    }
+    
     return newMatch.id;
   };
 
   const updateMatch = (m: Match) => {
+    const oldMatch = state.matches.find(x => x.id === m.id);
     update(prev => ({ ...prev, matches: prev.matches.map(x => x.id === m.id ? m : x) }));
     dbMatches.update(m);
+    
+    // Send notification if match just finished
+    if (oldMatch && oldMatch.status !== 'finished' && m.status === 'finished') {
+      const homeTeam = state.teams.find(t => t.id === m.homeTeamId);
+      const awayTeam = state.teams.find(t => t.id === m.awayTeamId);
+      if (homeTeam && awayTeam) {
+        const homeScore = m.homeScore ?? 0;
+        const awayScore = m.awayScore ?? 0;
+        notificationService.notifyMatchFinished(homeTeam.name, awayTeam.name, homeScore, awayScore);
+      }
+    }
   };
 
   const deleteMatch = (id: string) => {
@@ -925,6 +949,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const item = { ...v, id } as Video;
     setState(p => ({ ...p, videos: [item, ...p.videos] }));
     dbVideos.upsert(item).catch(console.error);
+    // Send notification
+    notificationService.notifyNewVideo(item.title);
     return id;
   };
   const updateVideo = (v: Video) => {
@@ -942,6 +968,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const item = { ...n, id } as News;
     setState(p => ({ ...p, news: [item, ...p.news] }));
     dbNews.upsert(item).catch(console.error);
+    // Send notification
+    notificationService.notifyNewNews(item.title, item.description);
     return id;
   };
   const updateNews = (n: News) => {
