@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -165,14 +165,7 @@ export const useData = () => {
 
 export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [state, setState] = useState<DataState>(initialState);
-  const [isLoading, setIsLoading] = useState(() => {
-    // Try to load from cache instantly
-    try {
-      const cached = localStorage.getItem('ffk_cache_v2');
-      if (cached) return false; // Don't show loading if we have cache
-    } catch {}
-    return true;
-  });
+  const [isLoading, setIsLoading] = useState(true);
   const stateRef = useRef(state);
   const hasHydratedRef = useRef(false);
   stateRef.current = state;
