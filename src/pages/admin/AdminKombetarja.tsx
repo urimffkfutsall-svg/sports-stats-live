@@ -1,0 +1,282 @@
+﻿import React, { useState, useEffect } from 'react';
+import { supabase } from '@/lib/supabase';
+import { v4 as uuidv4 } from 'uuid';
+
+interface NationalPlayer {
+  id: string; firstName: string; lastName: string; photo: string;
+  position: string; number?: number; birthDate?: string; club?: string;
+  caps?: number; goals?: number;
+}
+
+interface NationalMatch {
+  id: string; opponent: string; opponentLogo: string; date?: string;
+  time?: string; venue?: string; competition: string; homeScore?: number;
+  awayScore?: number; isHome: boolean; status: string; liveUrl?: string;
+}
+
+const toCamel = (obj: any) => {
+  const map: Record<string,string> = {
+    first_name:'firstName', last_name:'lastName', birth_date:'birthDate',
+    opponent_logo:'opponentLogo', home_score:'homeScore', away_score:'awayScore',
+    is_home:'isHome', live_url:'liveUrl',
+  };
+  const r: any = {};
+  for (const [k,v] of Object.entries(obj)) { if (k==='created_at') continue; r[map[k]||k]=v; }
+  return r;
+};
+
+const toSnake = (obj: any) => {
+  const map: Record<string,string> = {
+    firstName:'first_name', lastName:'last_name', birthDate:'birth_date',
+    opponentLogo:'opponent_logo', homeScore:'home_score', awayScore:'away_score',
+    isHome:'is_home', liveUrl:'live_url',
+  };
+  const r: any = {};
+  for (const [k,v] of Object.entries(obj)) { r[map[k]||k]=v; }
+  return r;
+};
+
+const AdminKombetarja: React.FC = () => {
+  const [tab, setTab] = useState<'players'|'matches'>('players');
+  const [players, setPlayers] = useState<NationalPlayer[]>([]);
+  const [matches, setMatches] = useState<NationalMatch[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [editPlayer, setEditPlayer] = useState<NationalPlayer|null>(null);
+  const [editMatch, setEditMatch] = useState<NationalMatch|null>(null);
+  const [showPlayerForm, setShowPlayerForm] = useState(false);
+  const [showMatchForm, setShowMatchForm] = useState(false);
+
+  const [pForm, setPForm] = useState({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 });
+  const [mForm, setMForm] = useState({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' });
+
+  const load = async () => {
+    const [pRes, mRes] = await Promise.all([
+      supabase.from('national_team_players').select('*').order('number'),
+      supabase.from('national_team_matches').select('*').order('date', { ascending: false }),
+    ]);
+    setPlayers((pRes.data||[]).map(toCamel));
+    setMatches((mRes.data||[]).map(toCamel));
+    setLoading(false);
+  };
+
+  useEffect(() => { load(); }, []);
+
+  const handlePlayerPhotoUpload = async (file: File, playerId: string): Promise<string> => {
+    const ext = file.name.split('.').pop() || 'png';
+    const path = 'national/' + playerId + '.' + ext;
+    await supabase.storage.from('player-photos').remove([path]);
+    const { error } = await supabase.storage.from('player-photos').upload(path, file, { cacheControl: '3600', upsert: true });
+    if (error) {
+      return new Promise(res => { const r = new FileReader(); r.onload = e => res(e.target?.result as string || ''); r.readAsDataURL(file); });
+    }
+    const { data } = supabase.storage.from('player-photos').getPublicUrl(path);
+    return data.publicUrl + '?t=' + Date.now();
+  };
+
+  const savePlayer = async () => {
+    const id = editPlayer ? editPlayer.id : uuidv4();
+    const data = toSnake({ id, ...pForm });
+    if (editPlayer) {
+      delete data.id;
+      await supabase.from('national_team_players').update(data).eq('id', id);
+    } else {
+      await supabase.from('national_team_players').insert(data);
+    }
+    setShowPlayerForm(false); setEditPlayer(null);
+    setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 });
+    load();
+  };
+
+  const deletePlayer = async (id: string) => {
+    if (!confirm('Fshi lojtarin?')) return null;
+    await supabase.from('national_team_players').delete().eq('id', id);
+    load();
+  };
+
+  const saveMatch = async () => {
+    const id = editMatch ? editMatch.id : uuidv4();
+    const data = toSnake({ id, ...mForm });
+    if (editMatch) {
+      delete data.id;
+      await supabase.from('national_team_matches').update(data).eq('id', id);
+    } else {
+      await supabase.from('national_team_matches').insert(data);
+    }
+    setShowMatchForm(false); setEditMatch(null);
+    setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' });
+    load();
+  };
+
+  const deleteMatch = async (id: string) => {
+    if (!confirm('Fshi ndeshjen?')) return null;
+    await supabase.from('national_team_matches').delete().eq('id', id);
+    load();
+  };
+
+  const openEditPlayer = (p: NationalPlayer) => {
+    setEditPlayer(p);
+    setPForm({ firstName:p.firstName, lastName:p.lastName, photo:p.photo, position:p.position, number:p.number||0, birthDate:p.birthDate||'', club:p.club||'', caps:p.caps||0, goals:p.goals||0 });
+    setShowPlayerForm(true);
+  };
+
+  const openEditMatch = (m: NationalMatch) => {
+    setEditMatch(m);
+    setMForm({ opponent:m.opponent, opponentLogo:m.opponentLogo, date:m.date||'', time:m.time||'', venue:m.venue||'', competition:m.competition, homeScore:m.homeScore||0, awayScore:m.awayScore||0, isHome:m.isHome, status:m.status, liveUrl:m.liveUrl||'' });
+    setShowMatchForm(true);
+  };
+
+  if (loading) return <div className="text-center py-10 text-gray-400">Duke u ngarkuar...</div>;
+
+  return (
+    <div>
+      <div className="flex gap-2 mb-6">
+        <button onClick={() => setTab('players')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='players' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
+           Lojtaret ({players.length})
+        </button>
+        <button onClick={() => setTab('matches')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='matches' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
+           Ndeshjet ({matches.length})
+        </button>
+      </div>
+
+      {/* PLAYERS TAB */}
+      {tab === 'players' && (
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">Lojtaret e Kombetares</h3>
+            <button onClick={() => { setEditPlayer(null); setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 }); setShowPlayerForm(true); }} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+              + Shto Lojtar
+            </button>
+          </div>
+
+          {showPlayerForm && (
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+              <h4 className="font-semibold mb-3">{editPlayer ? 'Edito Lojtarin' : 'Shto Lojtar te Ri'}</h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <input placeholder="Emri" value={pForm.firstName} onChange={e => setPForm({...pForm, firstName:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Mbiemri" value={pForm.lastName} onChange={e => setPForm({...pForm, lastName:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <select value={pForm.position} onChange={e => setPForm({...pForm, position:e.target.value})} className="border rounded-lg px-3 py-2 text-sm">
+                  <option>Portier</option><option>Mbrojtës</option><option>Mesfushor</option><option>Sulmues</option>
+                </select>
+                <input type="number" placeholder="Nr." value={pForm.number||''} onChange={e => setPForm({...pForm, number:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Klubi" value={pForm.club} onChange={e => setPForm({...pForm, club:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="date" value={pForm.birthDate} onChange={e => setPForm({...pForm, birthDate:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="number" placeholder="Paraqitje" value={pForm.caps||''} onChange={e => setPForm({...pForm, caps:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="number" placeholder="Gola" value={pForm.goals||''} onChange={e => setPForm({...pForm, goals:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <div>
+                  <input placeholder="URL e fotos" value={pForm.photo} onChange={e => setPForm({...pForm, photo:e.target.value})} className="border rounded-lg px-3 py-2 text-sm w-full mb-1" />
+                  <label className="flex items-center gap-1 text-xs text-[#1E6FF2] cursor-pointer">
+                    ▲ Ngarko foto
+                    <input type="file" accept="image/*" className="hidden" onChange={async e => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const url = await handlePlayerPhotoUpload(file, editPlayer?.id || uuidv4());
+                        setPForm({...pForm, photo: url});
+                      }
+                    }} />
+                  </label>
+                </div>
+              </div>
+              <div className="flex gap-2 mt-4">
+                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                  ✓ Ruaj
+                </button>
+                <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
+                  ✕ Anulo
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-2">
+            {players.map(p => (
+              <div key={p.id} className="bg-white rounded-xl border border-gray-100 p-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  {p.photo ? <img src={p.photo} className="w-10 h-10 rounded-full object-cover" /> : <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center text-xs font-bold text-gray-500">{p.firstName?.[0]}{p.lastName?.[0]}</div>}
+                  <div>
+                    <p className="font-medium text-sm text-gray-800">{p.number ? '#'+p.number+' ' : ''}{p.firstName} {p.lastName}</p>
+                    <p className="text-xs text-gray-400">{p.position} {p.club ? '| '+p.club : ''}</p>
+                  </div>
+                </div>
+                <div className="flex gap-1">
+                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => deletePlayer(p.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
+                </div>
+              </div>
+            ))}
+            {players.length === 0 && <p className="text-center text-gray-400 py-8 text-sm">Nuk ka lojtare. Shto lojtarin e pare!</p>}
+          </div>
+        </div>
+      )}
+
+      {/* MATCHES TAB */}
+      {tab === 'matches' && (
+        <div>
+          <div className="flex justify-between items-center mb-4">
+            <h3 className="text-lg font-semibold text-gray-800">Ndeshjet e Kombetares</h3>
+            <button onClick={() => { setEditMatch(null); setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' }); setShowMatchForm(true); }} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+              + Shto Ndeshje
+            </button>
+          </div>
+
+          {showMatchForm && (
+            <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
+              <h4 className="font-semibold mb-3">{editMatch ? 'Edito Ndeshjen' : 'Shto Ndeshje te Re'}</h4>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                <input placeholder="Kundershtar" value={mForm.opponent} onChange={e => setMForm({...mForm, opponent:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Logo kundershtar (URL)" value={mForm.opponentLogo} onChange={e => setMForm({...mForm, opponentLogo:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Kompeticion" value={mForm.competition} onChange={e => setMForm({...mForm, competition:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="date" value={mForm.date} onChange={e => setMForm({...mForm, date:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="time" value={mForm.time} onChange={e => setMForm({...mForm, time:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Vendi" value={mForm.venue} onChange={e => setMForm({...mForm, venue:e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <select value={mForm.status} onChange={e => setMForm({...mForm, status:e.target.value})} className="border rounded-lg px-3 py-2 text-sm">
+                  <option value="planned">E planifikuar</option><option value="live">LIVE</option><option value="finished">Perfunduar</option>
+                </select>
+                <label className="flex items-center gap-2 text-sm">
+                  <input type="checkbox" checked={mForm.isHome} onChange={e => setMForm({...mForm, isHome:e.target.checked})} /> Vendas
+                </label>
+                <input type="number" placeholder="Gola Vendas" value={mForm.homeScore||''} onChange={e => setMForm({...mForm, homeScore:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input type="number" placeholder="Gola Mysafir" value={mForm.awayScore||''} onChange={e => setMForm({...mForm, awayScore:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
+                <input placeholder="Link LIVE (URL)" value={mForm.liveUrl} onChange={e => setMForm({...mForm, liveUrl:e.target.value})} className="border rounded-lg px-3 py-2 text-sm col-span-2" />
+              </div>
+              <div className="flex gap-2 mt-4">
+                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                  ✓ Ruaj
+                </button>
+                <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
+                  ✕ Anulo
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-2">
+            {matches.map(m => (
+              <div key={m.id} className={`bg-white rounded-xl border p-3 flex items-center justify-between ${m.status==='live' ? 'border-red-200' : 'border-gray-100'}`}>
+                <div>
+                  <div className="flex items-center gap-2">
+                    {m.status==='live' && <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />}
+                    <p className="font-medium text-sm text-gray-800">
+                      {m.isHome ? 'Kosova' : m.opponent} {m.status !== 'planned' ? (m.homeScore??0)+' - '+(m.awayScore??0) : 'vs'} {m.isHome ? m.opponent : 'Kosova'}
+                    </p>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${m.status==='live' ? 'bg-red-100 text-red-600' : m.status==='finished' ? 'bg-gray-100 text-gray-500' : 'bg-blue-50 text-blue-600'}`}>
+                      {m.status==='live' ? 'LIVE' : m.status==='finished' ? 'Perfunduar' : 'Planifikuar'}
+                    </span>
+                  </div>
+                  <p className="text-xs text-gray-400 mt-1">{m.competition} | {m.date} {m.time} | {m.venue}</p>
+                  {m.liveUrl && <p className="text-xs text-[#1E6FF2] mt-1 truncate max-w-xs">{m.liveUrl}</p>}
+                </div>
+                <div className="flex gap-1">
+                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => deleteMatch(m.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
+                </div>
+              </div>
+            ))}
+            {matches.length === 0 && <p className="text-center text-gray-400 py-8 text-sm">Nuk ka ndeshje. Shto ndeshjen e pare!</p>}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default AdminKombetarja;

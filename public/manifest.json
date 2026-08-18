@@ -1,0 +1,22 @@
+{
+  "name": "FFK FUTSALL",
+  "short_name": "FFK FUTSALL",
+  "description": "FFK FUTSALL - Platforma zyrtare e statistikave te futsallit ne Kosove",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0A1E3C",
+  "theme_color": "#0A1E3C",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/ffk-logo-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/ffk-logo-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
