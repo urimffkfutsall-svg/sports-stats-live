@@ -1,0 +1,175 @@
+import React from 'react';
+import { useData } from '@/context/DataContext';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Star, Award, Trophy, Crown } from 'lucide-react';
+
+const PlayerOfWeekPage: React.FC = () => {
+  const { playersOfWeek, getTeamById, getActiveSeason } = useData();
+  const activeSeason = getActiveSeason();
+
+  const filtered = activeSeason
+    ? playersOfWeek.filter(p => p.seasonId === activeSeason.id)
+    : playersOfWeek;
+
+  const sorted = [...filtered].sort((a, b) => b.week - a.week);
+  const latest = sorted[0];
+  const rest = sorted.slice(1);
+
+  return (
+    <div className="min-h-screen bg-[#F1F5F9]">
+      <Header />
+      <div className="max-w-5xl mx-auto px-4 py-8">
+        {/* Page Header */}
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0A1E3C]/5 rounded-full mb-3">
+            <Star className="w-4 h-4 text-amber-500 fill-amber-500" />
+            <span className="text-xs font-semibold text-[#0A1E3C] uppercase tracking-wider">Cmimi Javor</span>
+          </div>
+          <h1 className="text-3xl font-black text-gray-900">Lojtari i Javes</h1>
+          <p className="text-gray-400 text-sm mt-1">Sezoni {activeSeason?.name || ''}</p>
+        </div>
+
+        {sorted.length === 0 ? (
+          <p className="text-gray-400 text-center py-12 bg-white rounded-2xl border border-gray-100">Nuk ka Lojtar te Javes te zgjedhur aktualisht.</p>
+        ) : (
+          <>
+            {/* Latest - Hero Card */}
+            {latest && (() => {
+              const team = getTeamById(latest.teamId);
+              return (
+                <div className="mb-10">
+                  <div className="relative bg-gradient-to-br from-[#0A1E3C] via-[#0F2D5E] to-[#1E6FF2] rounded-3xl overflow-hidden shadow-2xl">
+                    <div className="absolute inset-0">
+                      <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#1E6FF2]/20 rounded-full blur-3xl" />
+                      <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-amber-500/10 rounded-full blur-3xl" />
+                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/[0.02] rounded-full" />
+                    </div>
+
+                    <div className="relative z-10 flex flex-col md:flex-row items-center gap-8 p-8 md:p-10">
+                      {/* Photo */}
+                      <div className="relative">
+                        <div className="absolute -top-3 -left-3 z-10">
+                          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 flex items-center justify-center shadow-lg">
+                            <Crown className="w-6 h-6 text-white" />
+                          </div>
+                        </div>
+                        <div className="relative">
+                          <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#1E6FF2] rounded-2xl rotate-6 opacity-40 blur-sm scale-105" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#1E6FF2] to-amber-400 rounded-2xl -rotate-3 opacity-25 scale-105" />
+                          <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-3 border-white/30 shadow-2xl">
+                            {latest.photo ? (
+                              <img src={latest.photo} alt="" className="w-full h-full object-cover" />
+                            ) : (
+                              <div className="w-full h-full bg-white/10 flex items-center justify-center text-white/40 text-5xl font-bold">
+                                {latest.firstName.charAt(0)}{latest.lastName.charAt(0)}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Info */}
+                      <div className="text-center md:text-left flex-1">
+                        <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400/20 backdrop-blur-sm rounded-full mb-3">
+                          <Star className="w-3.5 h-3.5 text-amber-400 fill-amber-400" />
+                          <span className="text-[11px] font-bold text-amber-300 uppercase tracking-widest">Java {latest.week}</span>
+                        </div>
+                        <h2 className="text-3xl md:text-4xl font-black text-white mb-2">{latest.firstName} {latest.lastName}</h2>
+                        <div className="flex items-center justify-center md:justify-start gap-2.5 mb-4">
+                          {team?.logo && <img src={team.logo} alt="" className="w-7 h-7 rounded-full border-2 border-white/20 shadow-sm" />}
+                          <span className="text-base text-gray-300 font-medium">{team?.name || '-'}</span>
+                        </div>
+                        {latest.isScorer && (
+                          <div className="flex items-center justify-center md:justify-start gap-4">
+                            <div className="flex items-center gap-2 px-4 py-2 bg-white/10 backdrop-blur-sm rounded-xl">
+                              <Award className="w-5 h-5 text-amber-400" />
+                              <div>
+                                <span className="block text-2xl font-black text-white">{latest.goalsCount}</span>
+                                <span className="text-[10px] text-gray-400 uppercase tracking-wider">Gola</span>
+                              </div>
+                            </div>
+                          </div>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })()}
+
+            {/* Previous Winners */}
+            {rest.length > 0 && (
+              <div>
+                <div className="flex items-center gap-2 mb-6">
+                  <Trophy className="w-5 h-5 text-[#1E6FF2]" />
+                  <h2 className="text-lg font-bold text-gray-900">Fitueset e meparshem</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {rest.map(pow => {
+                    const team = getTeamById(pow.teamId);
+                    return (
+                      <div
+                        key={pow.id}
+                        className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 group"
+                      >
+                        {/* Top gradient bar */}
+                        <div className="h-1.5 bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2]" />
+
+                        <div className="p-5">
+                          <div className="flex items-center gap-4">
+                            {/* Photo */}
+                            <div className="relative flex-shrink-0">
+                              <div className="w-16 h-16 rounded-xl overflow-hidden bg-gray-100 border border-gray-200 shadow-sm group-hover:shadow-md transition-shadow">
+                                {pow.photo ? (
+                                  <img src={pow.photo} alt="" className="w-full h-full object-cover" />
+                                ) : (
+                                  <div className="w-full h-full flex items-center justify-center text-gray-400 text-lg font-bold">
+                                    {pow.firstName.charAt(0)}{pow.lastName.charAt(0)}
+                                  </div>
+                                )}
+                              </div>
+                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#0A1E3C] flex items-center justify-center shadow-sm">
+                                <Star className="w-3 h-3 text-amber-400 fill-amber-400" />
+                              </div>
+                            </div>
+
+                            {/* Info */}
+                            <div className="flex-1 min-w-0">
+                              <div className="flex items-center gap-2 mb-1">
+                                <span className="px-2 py-0.5 bg-[#1E6FF2]/10 rounded-md text-[10px] font-bold text-[#1E6FF2] uppercase tracking-wider">Java {pow.week}</span>
+                              </div>
+                              <h3 className="text-base font-bold text-gray-900 truncate group-hover:text-[#1E6FF2] transition-colors">{pow.firstName} {pow.lastName}</h3>
+                              <div className="flex items-center gap-1.5 mt-1">
+                                {team?.logo && <img src={team.logo} alt="" className="w-4 h-4 rounded-full" />}
+                                <span className="text-xs text-gray-500 font-medium">{team?.name || '-'}</span>
+                              </div>
+                            </div>
+                          </div>
+
+                          {/* Footer stats */}
+                          {pow.isScorer && (
+                            <div className="mt-4 pt-3 border-t border-gray-100 flex items-center justify-between">
+                              <div className="flex items-center gap-1.5">
+                                <Award className="w-4 h-4 text-amber-500" />
+                                <span className="text-xs font-semibold text-gray-600">Golashenues</span>
+                              </div>
+                              <span className="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-[#1E6FF2]/10 text-[#1E6FF2] text-sm font-bold">{pow.goalsCount} gola</span>
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+      <Footer />
+    </div>
+  );
+};
+
+export default PlayerOfWeekPage;

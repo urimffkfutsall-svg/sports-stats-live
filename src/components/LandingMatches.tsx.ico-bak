@@ -1,0 +1,253 @@
+import React, { useState, useMemo } from 'react';
+import { useData } from '@/context/DataContext';
+import MatchDetailModal from './MatchDetailModal';
+import { Match } from '@/types';
+import { MapPin, Calendar, Clock, ChevronRight, Radio, CheckCircle2, CalendarClock } from 'lucide-react';
+
+type TabType = 'upcoming' | 'live' | 'finished';
+
+function formatDate(iso?: string): string {
+  if (!iso) return '';
+  const p = iso.split('-');
+  if (p.length === 3) return `${p[2]}/${p[1]}/${p[0]}`;
+  return iso;
+}
+
+const LandingMatches: React.FC = () => {
+  const { matches, competitions, getActiveSeason, getTeamById } = useData();
+  const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
+  const [activeTab, setActiveTab] = useState<TabType>('upcoming');
+  const activeSeason = getActiveSeason();
+
+  const seasonMatches = useMemo(() =>
+    activeSeason ? matches.filter(m => m.seasonId === activeSeason.id) : matches,
+    [matches, activeSeason]
+  );
+
+  const superligaComp = useMemo(() =>
+    competitions.find(c => c.type === 'superliga' && (activeSeason ? c.seasonId === activeSeason.id : true)),
+    [competitions, activeSeason]
+  );
+
+  const ligaPareComp = useMemo(() =>
+    competitions.find(c => c.type === 'liga_pare' && (activeSeason ? c.seasonId === activeSeason.id : true)),
+    [competitions, activeSeason]
+  );
+
+  const getCompMatches = (compId: string | undefined, status: string) => {
+    if (!compId) return [];
+    const filtered = seasonMatches.filter(m => m.competitionId === compId && m.isFeaturedLanding);
+    if (status === 'finished') {
+      const fin = filtered.filter(m => m.status === 'finished');
+      if (fin.length === 0) return [];
+      const maxWeek = Math.max(...fin.map(m => m.week || 0));
+      return fin.filter(m => m.week === maxWeek).sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+    }
+    if (status === 'planned') return filtered.filter(m => m.status === 'planned').sort((a, b) => (a.date || '').localeCompare(b.date || ''));
+    if (status === 'live') return filtered.filter(m => m.status === 'live');
+    return [];
+  };
+
+  const statusMap: Record<TabType, string> = { upcoming: 'planned', live: 'live', finished: 'finished' };
+  const currentStatus = statusMap[activeTab];
+
+  const superligaMatches = getCompMatches(superligaComp?.id, currentStatus);
+  const ligaPareMatches = getCompMatches(ligaPareComp?.id, currentStatus);
+  const hasAny = superligaMatches.length > 0 || ligaPareMatches.length > 0;
+
+  const liveCount = seasonMatches.filter(m => m.status === 'live').length;
+
+  const tabs: { key: TabType; label: string; icon: React.ElementType; activeColor: string; activeBg: string; activeShadow: string }[] = [
+    { key: 'live', label: 'Live', icon: Radio, activeColor: 'text-white', activeBg: 'bg-gradient-to-br from-red-500 to-red-600', activeShadow: 'shadow-red-200' },
+    { key: 'finished', label: 'Te luajtura', icon: CheckCircle2, activeColor: 'text-white', activeBg: 'bg-gradient-to-br from-[#0A1E3C] to-[#1E3A5F]', activeShadow: 'shadow-gray-300' },
+    { key: 'upcoming', label: 'Te ardhshme', icon: CalendarClock, activeColor: 'text-white', activeBg: 'bg-gradient-to-br from-[#1E6FF2] to-[#3B82F6]', activeShadow: 'shadow-blue-200' },
+  ];
+
+  // ============ COMPACT MATCH CARD ============
+  const MatchRow: React.FC<{ match: Match }> = ({ match }) => {
+    const home = getTeamById(match.homeTeamId);
+    const away = getTeamById(match.awayTeamId);
+    const isFinished = match.status === 'finished';
+    const isLive = match.status === 'live';
+
+    return (
+      <div
+        className={`bg-white rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md cursor-pointer ${
+          isLive ? 'ring-1 ring-red-200 shadow-md shadow-red-50' : 'border border-gray-100'
+        }`}
+        onClick={() => setSelectedMatch(match)}
+      >
+        {/* Top bar: date + venue — compact */}
+        <div className={`px-3 py-1.5 flex items-center justify-between text-[10px] ${
+          isLive
+            ? 'bg-gradient-to-r from-red-500 to-red-600 text-white/90'
+            : 'bg-gradient-to-r from-[#0A1E3C] to-[#1E6FF2] text-white/80'
+        }`}>
+          <div className="flex items-center gap-2">
+            {match.date && (
+              <span className="flex items-center gap-1 font-medium">
+                <Calendar className="w-2.5 h-2.5 opacity-60" />
+                {formatDate(match.date)}
+              </span>
+            )}
+            {match.time && (
+              <span className="flex items-center gap-1 font-medium">
+                <Clock className="w-2.5 h-2.5 opacity-60" />
+                {match.time}
+              </span>
+            )}
+          </div>
+          <div className="flex items-center gap-2">
+            {match.venue && (
+              <span className="flex items-center gap-1 opacity-70">
+                <MapPin className="w-2.5 h-2.5" />
+                {match.venue}
+              </span>
+            )}
+            {isLive && (
+              <span className="flex items-center gap-1 bg-white/20 px-1.5 py-0.5 rounded">
+                <span className="w-1 h-1 bg-white rounded-full animate-pulse" />
+                <span className="font-bold tracking-wide">LIVE</span>
+              </span>
+            )}
+          </div>
+        </div>
+
+        {/* Main row: home — score — away */}
+        <div className="flex items-center justify-between px-4 py-3">
+          {/* Home */}
+          <div className="flex items-center gap-2.5 flex-1 min-w-0">
+            <div className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+              {home?.logo ? (
+                <img src={home.logo} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-gray-300 text-sm font-bold">{home?.name?.charAt(0) || '?'}</span>
+              )}
+            </div>
+            <span className="text-[13px] font-bold text-gray-800 truncate">{home?.name || 'TBD'}</span>
+          </div>
+
+          {/* Score */}
+          <div className="flex items-center gap-0.5 px-3 min-w-[60px] justify-center">
+            {isFinished || isLive ? (
+              <>
+                <span className="text-xl font-black text-gray-900 tabular-nums w-6 text-right">{match.homeScore ?? 0}</span>
+                <span className="text-sm font-light text-gray-300 mx-0.5">:</span>
+                <span className="text-xl font-black text-gray-900 tabular-nums w-6 text-left">{match.awayScore ?? 0}</span>
+              </>
+            ) : (
+              <span className="text-sm font-bold text-[#1E6FF2]">{match.time || 'VS'}</span>
+            )}
+          </div>
+
+          {/* Away */}
+          <div className="flex items-center gap-2.5 flex-1 min-w-0 justify-end">
+            <span className="text-[13px] font-bold text-gray-800 truncate text-right">{away?.name || 'TBD'}</span>
+            <div className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+              {away?.logo ? (
+                <img src={away.logo} alt="" className="w-full h-full object-cover" />
+              ) : (
+                <span className="text-gray-300 text-sm font-bold">{away?.name?.charAt(0) || '?'}</span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Footer button */}
+        <div className="px-3 pb-3">
+          <div className="w-full flex items-center justify-center gap-1.5 py-2 bg-gray-50 hover:bg-gray-100 text-gray-500 text-[10px] font-semibold rounded-lg transition-colors uppercase tracking-wider border border-gray-100">
+            Shiko te dhenat
+            <ChevronRight className="w-3 h-3" />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  // ============ MATCH GRID ============
+  const MatchGrid: React.FC<{ matchList: Match[]; title: string }> = ({ matchList, title }) => {
+    if (matchList.length === 0) {
+      return (
+        <div className="mb-6">
+          <h3 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+            <span className="w-1 h-5 bg-[#1E6FF2] rounded-full" />
+            {title}
+          </h3>
+          <p className="text-gray-400 text-xs text-center py-6 bg-white rounded-xl border border-gray-100">
+            Nuk ka ndeshje per kete kategori.
+          </p>
+        </div>
+      );
+    }
+    return (
+      <div className="mb-6">
+        <h3 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
+          <span className="w-1 h-5 bg-[#1E6FF2] rounded-full" />
+          {title}
+          <span className="ml-auto text-[10px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-0.5 rounded-full">{matchList.length}</span>
+        </h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+          {matchList.map(m => <MatchRow key={m.id} match={m} />)}
+        </div>
+      </div>
+    );
+  };
+
+  // ============ RENDER ============
+  return (
+    <section className="py-10 px-4 bg-[#F1F5F9]">
+      <div className="max-w-7xl mx-auto">
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-black text-gray-900 tracking-tight">Ndeshjet</h2>
+          <p className="text-gray-400 text-xs mt-1">Superliga e Kosoves dhe Liga e Pare</p>
+        </div>
+
+        {/* Professional square tabs */}
+        <div className="flex items-center justify-center gap-3 mb-8">
+          {tabs.map(t => {
+            const isActive = activeTab === t.key;
+            const Icon = t.icon;
+            const isLiveTab = t.key === 'live';
+            return (
+              <button
+                key={t.key}
+                onClick={() => setActiveTab(t.key)}
+                className={`relative flex flex-col items-center justify-center w-[120px] h-[80px] rounded-xl transition-all duration-300 cursor-pointer ${
+                  isActive
+                    ? `${t.activeBg} ${t.activeColor} shadow-lg ${t.activeShadow}`
+                    : 'bg-white text-gray-400 border border-gray-200 hover:border-gray-300 hover:shadow-sm'
+                }`}
+              >
+                {isLiveTab && liveCount > 0 && (
+                  <span className={`absolute -top-1.5 -right-1.5 w-5 h-5 flex items-center justify-center rounded-full text-[9px] font-black ${
+                    isActive ? 'bg-white text-red-500' : 'bg-red-500 text-white'
+                  }`}>
+                    {liveCount}
+                  </span>
+                )}
+                <Icon className={`w-5 h-5 mb-1.5 ${isActive ? 'opacity-90' : ''}`} />
+                <span className="text-[11px] font-bold tracking-wide">{t.label}</span>
+                {isLiveTab && liveCount > 0 && isActive && (
+                  <span className="absolute top-2 left-2 w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        <MatchGrid matchList={superligaMatches} title="Superliga e Kosoves" />
+        <MatchGrid matchList={ligaPareMatches} title="Liga e Pare" />
+
+        {!hasAny && (
+          <div className="text-center py-10">
+            <p className="text-gray-400 text-sm">Nuk ka ndeshje per kete kategori.</p>
+          </div>
+        )}
+      </div>
+
+      <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />
+    </section>
+  );
+};
+
+export default LandingMatches;
