@@ -290,7 +290,6 @@ const LeagueTablesSection: React.FC = () => {
                   </tbody>
                 </table>
                 </div>
-                <p className="sm:hidden text-center text-[10px] text-gray-400 py-1.5 bg-gray-50/50 border-t border-gray-100">â† Shtyj tabelÃ«n pÃ«r tÃ« parÃ« pikÃ«t â†’</p>
 
                 {/* Legend */}
                 <div className="px-3 sm:px-4 md:px-6 lg:px-8 py-3 border-t border-gray-200 bg-gray-50/50 flex flex-wrap gap-4 text-[10px] text-gray-500 font-medium">
