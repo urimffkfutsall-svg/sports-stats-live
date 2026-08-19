@@ -83,16 +83,19 @@ const LandingMatches: React.FC = () => {
 
     return (
       <div
-        className={`bg-white rounded-xl overflow-hidden transition-all duration-200 hover:shadow-md cursor-pointer ${
-          isLive ? 'ring-1 ring-red-200 shadow-md shadow-red-50' : 'border border-gray-100'
+        className={`relative bg-white rounded-2xl overflow-hidden transition-all duration-200 hover:shadow-lg hover:-translate-y-0.5 cursor-pointer ${
+          isLive ? 'shadow-lg shadow-red-100' : 'shadow-sm border border-gray-100'
         }`}
         onClick={() => setSelectedMatch(match)}
       >
+        {/* Left accent stripe, mockup-style */}
+        <div className={`absolute left-0 top-0 bottom-0 w-1 ${isLive ? 'bg-red-500' : 'bg-[#d0a650]'}`} />
+
         {/* Top bar: date + venue - compact */}
-        <div className={`px-3 py-1.5 flex items-center justify-between text-[10px] ${
+        <div className={`pl-4 pr-3 py-1.5 flex items-center justify-between text-[10px] ${
           isLive
             ? 'bg-gradient-to-r from-red-500 to-red-600 text-white/90'
-            : 'bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] border-l-[3px] border-[#d0a650] text-white/80'
+            : 'bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] text-white/80'
         }`}>
           <div className="flex items-center gap-2">
             {match.date && (
@@ -126,48 +129,48 @@ const LandingMatches: React.FC = () => {
         </div>
 
         {/* Main row: home - score - away */}
-        <div className="flex items-center justify-between px-4 py-3">
+        <div className="flex items-center justify-between pl-4 pr-4 py-4">
           {/* Home */}
-          <div className="flex items-center gap-2.5 flex-1 min-w-0">
-            <div className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+          <div className="flex items-center gap-3 flex-1 min-w-0">
+            <div className="w-12 h-12 rounded-full bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
               {home?.logo ? (
                 <img src={home.logo} alt="" className="w-full h-full object-cover" />
               ) : (
-                <span className="text-gray-300 text-sm font-bold">{home?.name?.charAt(0) || '?'}</span>
+                <span className="text-gray-300 text-base font-bold">{home?.name?.charAt(0) || '?'}</span>
               )}
             </div>
             <span className="text-[13px] font-bold text-gray-800 truncate">{home?.name || 'TBD'}</span>
           </div>
 
           {/* Score */}
-          <div className="flex items-center gap-0.5 px-3 min-w-[60px] justify-center">
+          <div className="flex items-center gap-1 px-3 min-w-[70px] justify-center">
             {isFinished || isLive ? (
               <>
-                <span className="text-xl font-black text-gray-900 tabular-nums w-6 text-right">{match.homeScore ?? 0}</span>
+                <span className={`text-2xl font-black tabular-nums w-7 text-right ${isLive ? 'text-red-500' : 'text-gray-900'}`}>{match.homeScore ?? 0}</span>
                 <span className="text-sm font-light text-gray-300 mx-0.5">:</span>
-                <span className="text-xl font-black text-gray-900 tabular-nums w-6 text-left">{match.awayScore ?? 0}</span>
+                <span className={`text-2xl font-black tabular-nums w-7 text-left ${isLive ? 'text-red-500' : 'text-gray-900'}`}>{match.awayScore ?? 0}</span>
               </>
             ) : (
-              <span className="text-sm font-bold text-[#1E6FF2]">{match.time || 'VS'}</span>
+              <span className="text-sm font-bold text-[#1E6FF2] bg-[#1E6FF2]/10 px-2.5 py-1 rounded-lg">{match.time || 'VS'}</span>
             )}
           </div>
 
           {/* Away */}
-          <div className="flex items-center gap-2.5 flex-1 min-w-0 justify-end">
+          <div className="flex items-center gap-3 flex-1 min-w-0 justify-end">
             <span className="text-[13px] font-bold text-gray-800 truncate text-right">{away?.name || 'TBD'}</span>
-            <div className="w-10 h-10 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+            <div className="w-12 h-12 rounded-full bg-gray-50 border-2 border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0 shadow-sm">
               {away?.logo ? (
                 <img src={away.logo} alt="" className="w-full h-full object-cover" />
               ) : (
-                <span className="text-gray-300 text-sm font-bold">{away?.name?.charAt(0) || '?'}</span>
+                <span className="text-gray-300 text-base font-bold">{away?.name?.charAt(0) || '?'}</span>
               )}
             </div>
           </div>
         </div>
 
         {/* Footer button */}
-        <div className="px-3 pb-3">
-          <div className="w-full flex items-center justify-center gap-1.5 py-2 bg-gray-50 hover:bg-gray-100 text-gray-500 text-[10px] font-semibold rounded-lg transition-colors uppercase tracking-wider border border-gray-100">
+        <div className="pl-4 pr-3 pb-3">
+          <div className="w-full flex items-center justify-center gap-1.5 py-2 bg-gray-50 hover:bg-gray-100 text-gray-500 text-[10px] font-bold rounded-lg transition-colors uppercase tracking-wider">
             Shiko detajet
             ›
           </div>
@@ -213,37 +216,39 @@ const LandingMatches: React.FC = () => {
   return (
     <section className="py-10 px-3 sm:px-4 md:px-6 lg:px-8 bg-[#F1F5F9]">
       <div className="w-full">
-                {/* Tab buttons */}
-        <div className="flex items-center justify-center gap-2 mb-8">
-          {tabs.map(t => {
-            const isActive = activeTab === t.key;
-            const isLiveTab = t.key === 'live';
-            return (
-              <button
-                key={t.key}
-                onClick={() => setActiveTab(t.key)}
-                className={`relative flex items-center gap-2 px-5 py-2.5 rounded-none text-sm font-semibold transition-all duration-200 ${
-                  isActive
-                    ? t.key === 'live'
-                      ? 'bg-red-500 text-white shadow-lg shadow-red-200'
-                      : 'bg-[#2a499a] text-white shadow-lg'
-                    : 'bg-white text-gray-500 border border-gray-200 hover:bg-gray-50'
-                }`}
-              >
-                {isLiveTab && liveCount > 0 && (
-                  <span className={`w-5 h-5 flex items-center justify-center rounded-full text-[9px] font-black ${
-                    isActive ? 'bg-white text-red-500' : 'bg-red-500 text-white'
-                  }`}>
-                    {liveCount}
-                  </span>
-                )}
-                {t.label}
-                {isLiveTab && liveCount > 0 && isActive && (
-                  <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
-                )}
-              </button>
-            );
-          })}
+                {/* Tab buttons — segmented pill control */}
+        <div className="flex items-center justify-center mb-8">
+          <div className="inline-flex items-center gap-1 bg-white rounded-full p-1 border border-gray-200 shadow-sm">
+            {tabs.map(t => {
+              const isActive = activeTab === t.key;
+              const isLiveTab = t.key === 'live';
+              return (
+                <button
+                  key={t.key}
+                  onClick={() => setActiveTab(t.key)}
+                  className={`relative flex items-center gap-1.5 px-5 py-2 rounded-full text-sm font-bold transition-all duration-200 ${
+                    isActive
+                      ? t.key === 'live'
+                        ? 'bg-red-500 text-white shadow-md shadow-red-200'
+                        : 'bg-[#2a499a] text-white shadow-md'
+                      : 'text-gray-400 hover:text-gray-600'
+                  }`}
+                >
+                  {isLiveTab && liveCount > 0 && (
+                    <span className={`w-5 h-5 flex items-center justify-center rounded-full text-[9px] font-black ${
+                      isActive ? 'bg-white text-red-500' : 'bg-red-500 text-white'
+                    }`}>
+                      {liveCount}
+                    </span>
+                  )}
+                  {t.label}
+                  {isLiveTab && liveCount > 0 && isActive && (
+                    <span className="w-1.5 h-1.5 bg-white rounded-full animate-pulse" />
+                  )}
+                </button>
+              );
+            })}
+          </div>
         </div>
         <MatchGrid matchList={superligaMatches} title="Superliga e Kosoves" week={superligaData.week} />
         <MatchGrid matchList={ligaPareMatches} title="Liga e Pare" week={ligaPareData.week} />
