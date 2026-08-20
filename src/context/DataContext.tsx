@@ -1,4 +1,4 @@
-﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik, NormativeAct } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -175,16 +175,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
-    // VETÃ‹M cache lokale (pÃ«r ngarkim tÃ« shpejtÃ«) â€” JO push nÃ« MongoDB kÃ«tu.
+    // VETËM cache lokale (për ngarkim të shpejtë) — JO push në MongoDB këtu.
     //
-    // PSE: kjo funksion pÃ«rdor state-in LOKAL tÃ« React-it (`snapshot`), i cili
-    // mund tÃ« jetÃ« "i vjetruar" nÃ«se ky tab/browser ka qÃ«ndruar hapur pÃ«r njÃ«
-    // kohÃ« dhe ndÃ«rkohÃ« dikush tjetÃ«r (ose njÃ« pajisje tjetÃ«r) ka shtuar diÃ§ka
-    // te MongoDB. NÃ«se do tÃ« bÃ«nim PUT me kÃ«tÃ« snapshot tÃ« vjetÃ«r, do tÃ«
-    // FSHINim/mbishkruanim ndryshimet e reja tÃ« bÃ«ra ndÃ«rkohÃ« â€” pikÃ«risht bug-u
-    // "shtoj diÃ§ka dhe pas njÃ« kohe zhduket". Prandaj push-i real nÃ« MongoDB
-    // bÃ«het VETÃ‹M te modulet dbXxx (supabase-db.ts), tÃ« cilat GJITHMONÃ‹ marrin
-    // kopjen mÃ« tÃ« fundit nga serveri PARA se tÃ« shkruajnÃ«.
+    // PSE: kjo funksion përdor state-in LOKAL të React-it (`snapshot`), i cili
+    // mund të jetë "i vjetruar" nëse ky tab/browser ka qëndruar hapur për një
+    // kohë dhe ndërkohë dikush tjetër (ose një pajisje tjetër) ka shtuar diçka
+    // te MongoDB. Nëse do të bënim PUT me këtë snapshot të vjetër, do të
+    // FSHINim/mbishkruanim ndryshimet e reja të bëra ndërkohë — pikërisht bug-u
+    // "shtoj diçka dhe pas një kohe zhduket". Prandaj push-i real në MongoDB
+    // bëhet VETËM te modulet dbXxx (supabase-db.ts), të cilat GJITHMONË marrin
+    // kopjen më të fundit nga serveri PARA se të shkruajnë.
     const payload = {
       seasons: snapshot.seasons,
       competitions: snapshot.competitions,
@@ -196,6 +196,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       playersOfWeek: snapshot.playersOfWeek,
       users: snapshot.users,
       decisions: snapshot.decisions,
+      normativeActs: snapshot.normativeActs,
+      normativeActs: snapshot.normativeActs,
       settings: snapshot.settings,
       videos: snapshot.videos,
       news: snapshot.news,
@@ -237,6 +239,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
           scorers: d.scorers || prev.scorers,
           playersOfWeek: d.playersOfWeek || prev.playersOfWeek,
           decisions: d.decisions || prev.decisions,
+          normativeActs: d.normativeActs || prev.normativeActs,
+          normativeActs: d.normativeActs || prev.normativeActs,
           settings: d.settings || prev.settings,
           videos: d.videos || prev.videos,
           news: d.news || prev.news,
@@ -300,6 +304,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               playersOfWeek: remoteData.playersOfWeek || [],
               users: remoteData.users || [],
               decisions: remoteData.decisions || [],
+            normativeActs: remoteData.normativeActs || [],
+            normativeActs: remoteData.normativeActs || [],
               videos: remoteData.videos || [],
               news: remoteData.news || [],
               settings: remoteData.settings || defaultSettings,
@@ -344,15 +350,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoading(false);
             return;
           } else {
-            console.error('MongoDB API u pÃ«rgjigj por forma e tÃ« dhÃ«nave ishte e papritur:', remoteData);
+            console.error('MongoDB API u përgjigj por forma e të dhënave ishte e papritur:', remoteData);
           }
         } else {
           const err = await remoteRes.json().catch(() => ({}));
-          console.error('Ngarkimi nga MongoDB dÃ«shtoi:', err.error || remoteRes.status);
+          console.error('Ngarkimi nga MongoDB dështoi:', err.error || remoteRes.status);
         }
       } catch (e) {
         // fall back to browser cache if Mongo API is unavailable
-        console.error('Ngarkimi nga MongoDB dÃ«shtoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
+        console.error('Ngarkimi nga MongoDB dështoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
       }
 
       const hasValidSupabase = Boolean(
@@ -373,10 +379,11 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         return;
       }
 
-      const [data, videosData, newsData] = await Promise.all([
+      const [data, videosData, newsData, normativeActsData] = await Promise.all([
         fetchAllData(),
         dbVideos.getAll(),
         dbNews.getAll(),
+        dbNormativeActs.getAll(),
       ]);
 
       // Merge local unsaved data with remote Supabase data
@@ -391,6 +398,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         playersOfWeek: data.playersOfWeek,
         users: data.users.length > 0 ? [...data.users.filter((u: any) => u.username !== 'urimi1806'), { id: 'admin-main', username: 'urimi1806', password: '1806', role: 'admin' }] : [{ id: 'admin-main', username: 'urimi1806', password: '1806', role: 'admin' }],
         decisions: data.decisions || [],
+        normativeActs: (normativeActsData || []) as NormativeAct[],
+        normativeActs: (normativeActsData || []) as NormativeAct[],
         videos: (videosData || []) as Video[],
         news: (newsData || []) as News[],
         settings: data.settings,
@@ -428,7 +437,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         seasons: finalState.seasons, competitions: finalState.competitions, teams: finalState.teams,
         players: finalState.players, matches: finalState.matches, goals: finalState.goals,
         scorers: finalState.scorers, playersOfWeek: finalState.playersOfWeek,
-        decisions: finalState.decisions || [], settings: finalState.settings,
+        decisions: finalState.decisions || [],
+      normativeActs: finalState.normativeActs || [],
+      normativeActs: finalState.normativeActs || [], settings: finalState.settings,
         videos: finalState.videos || [], news: finalState.news || [],
         shortiSuperliga: finalState.shortiSuperliga || [], shortiLigaPare: finalState.shortiLigaPare || [],
       })); } catch {}

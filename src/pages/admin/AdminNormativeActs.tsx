@@ -1,4 +1,4 @@
-﻿import React, { useState, useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { NormativeAct } from '@/types';
 
@@ -14,7 +14,7 @@ const AdminNormativeActs: React.FC = () => {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 10 * 1024 * 1024) { alert('PDF shumë i madh (max 10MB)'); return; }
+    if (file.size > 10 * 1024 * 1024) { alert('PDF shum� i madh (max 10MB)'); return; }
     setUploading(true);
     setFileName(file.name);
     const reader = new FileReader();
@@ -100,7 +100,7 @@ const AdminNormativeActs: React.FC = () => {
             className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#1E6FF2] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
           />
           {uploading && <p className="text-xs text-blue-500 mt-1">Duke ngarkuar...</p>}
-          {fileName && !uploading && <p className="text-xs text-green-600 mt-1">✓ {fileName}</p>}
+          {fileName && !uploading && <p className="text-xs text-green-600 mt-1">? {fileName}</p>}
         </div>
         <div className="flex gap-2">
           <button
