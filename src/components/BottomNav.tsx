@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Trophy, PlayCircle, BarChart3, Menu, X } from 'lucide-react';
 
@@ -33,7 +33,7 @@ const BottomNav: React.FC = () => {
         <div className="lg:hidden fixed inset-0 z-[95]" onClick={() => setMoreOpen(false)}>
           <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
-            className="absolute bottom-[calc(4.75rem+env(safe-area-inset-bottom))] left-3 right-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 animate-in fade-in slide-in-from-bottom-4 duration-200"
+            className="absolute bottom-[calc(5.5rem+env(safe-area-inset-bottom))] left-3 right-3 bg-white rounded-2xl shadow-2xl border border-gray-100 p-2 animate-in fade-in slide-in-from-bottom-4 duration-200"
             onClick={e => e.stopPropagation()}
           >
             {MORE_LINKS.map(link => (
@@ -52,11 +52,9 @@ const BottomNav: React.FC = () => {
         </div>
       )}
 
-      {/* Bottom nav bar */}
-      <nav
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-[96] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-0"
-      >
-        <div className="mx-auto max-w-md bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_30px_-6px_rgba(0,0,0,0.25)] border border-gray-100 flex items-center justify-around px-1.5 py-2">
+      {/* Bottom nav bar — floating blue pill, active tab expands to white pill w/ label */}
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-[96] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-0">
+        <div className="mx-auto max-w-md bg-[#1E6FF2] rounded-full shadow-[0_10px_35px_-8px_rgba(30,111,242,0.55)] flex items-center gap-1 px-2 py-2">
           {items.map(({ path, label, icon: Icon }) => {
             const active = isActive(path);
             return (
@@ -64,36 +62,49 @@ const BottomNav: React.FC = () => {
                 key={path}
                 to={path}
                 onClick={() => setMoreOpen(false)}
-                className="flex flex-col items-center justify-center gap-0.5 min-w-[3.5rem] py-1 rounded-xl transition-all"
+                className={`flex items-center justify-center rounded-full transition-all duration-300 ease-out overflow-hidden ${
+                  active
+                    ? 'flex-1 bg-white gap-1.5 px-3 py-2.5 shadow-sm'
+                    : 'w-10 h-10 flex-shrink-0'
+                }`}
               >
+                <Icon
+                  className={`w-[19px] h-[19px] flex-shrink-0 transition-colors ${
+                    active ? 'text-[#1E6FF2]' : 'text-white/75'
+                  }`}
+                  strokeWidth={2.3}
+                />
                 <span
-                  className={`flex items-center justify-center w-9 h-9 rounded-full transition-all ${
-                    active ? 'bg-[#1E6FF2] shadow-md shadow-[#1E6FF2]/30 scale-105' : ''
+                  className={`text-[12px] font-bold text-[#1E6FF2] whitespace-nowrap transition-all duration-300 ${
+                    active ? 'max-w-[6rem] opacity-100' : 'max-w-0 opacity-0'
                   }`}
                 >
-                  <Icon className={`w-[19px] h-[19px] ${active ? 'text-white' : 'text-gray-400'}`} strokeWidth={2.2} />
+                  {label}
                 </span>
-                <span className={`text-[10px] font-semibold ${active ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{label}</span>
               </Link>
             );
           })}
 
           <button
             onClick={() => setMoreOpen(v => !v)}
-            className="flex flex-col items-center justify-center gap-0.5 min-w-[3.5rem] py-1 rounded-xl transition-all"
+            className={`flex items-center justify-center rounded-full transition-all duration-300 ease-out overflow-hidden ${
+              moreOpen || isMoreActive
+                ? 'flex-1 bg-white gap-1.5 px-3 py-2.5 shadow-sm'
+                : 'w-10 h-10 flex-shrink-0'
+            }`}
           >
+            {moreOpen ? (
+              <X className={`w-[19px] h-[19px] flex-shrink-0 ${moreOpen || isMoreActive ? 'text-[#1E6FF2]' : 'text-white/75'}`} strokeWidth={2.3} />
+            ) : (
+              <Menu className={`w-[19px] h-[19px] flex-shrink-0 ${isMoreActive ? 'text-[#1E6FF2]' : 'text-white/75'}`} strokeWidth={2.3} />
+            )}
             <span
-              className={`flex items-center justify-center w-9 h-9 rounded-full transition-all ${
-                moreOpen || isMoreActive ? 'bg-[#1E6FF2] shadow-md shadow-[#1E6FF2]/30 scale-105' : ''
+              className={`text-[12px] font-bold text-[#1E6FF2] whitespace-nowrap transition-all duration-300 ${
+                moreOpen || isMoreActive ? 'max-w-[6rem] opacity-100' : 'max-w-0 opacity-0'
               }`}
             >
-              {moreOpen ? (
-                <X className="w-[19px] h-[19px] text-white" strokeWidth={2.2} />
-              ) : (
-                <Menu className={`w-[19px] h-[19px] ${isMoreActive ? 'text-white' : 'text-gray-400'}`} strokeWidth={2.2} />
-              )}
+              Më shumë
             </span>
-            <span className={`text-[10px] font-semibold ${moreOpen || isMoreActive ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>Më shumë</span>
           </button>
         </div>
       </nav>
