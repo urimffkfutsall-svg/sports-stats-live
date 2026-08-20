@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -9,6 +9,8 @@ import SettingsPage from './SettingsPage';
 const Header: React.FC = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const [settingsOpen, setSettingsOpen] = useState(false);
+  const [moreOpen, setMoreOpen] = useState(false);
+  const moreRef = useRef<HTMLDivElement>(null);
   const { isAuthenticated, isAdmin, logout, currentUser } = useAuth();
   const { settings } = useData();
   const location = useLocation();
@@ -24,9 +26,26 @@ const Header: React.FC = () => {
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
     { path: '/komisioni', label: 'Komisioni' },
+    { path: '/komisioni', label: 'Komisioni' },
     { path: '/kombetarja', label: 'Kombetarja' },
     { path: '/playoff', label: 'PlayOff' },
   ];
+
+  const mainPaths = ['/', '/superliga', '/liga-pare'];
+  const mainLinks = navLinks.filter(l => mainPaths.includes(l.path));
+  const moreLinks = navLinks.filter(l => !mainPaths.includes(l.path));
+  const isMoreActive = moreLinks.some(l => isActive(l.path));
+
+  useEffect(() => {
+    if (!moreOpen) return;
+    const handleClickOutside = (e: MouseEvent) => {
+      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+        setMoreOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [moreOpen]);
 
   if (settingsOpen) {
     return <SettingsPage onBack={() => setSettingsOpen(false)} />;
@@ -38,7 +57,38 @@ const Header: React.FC = () => {
         <div className="flex items-center justify-between h-14">
           {/* Desktop Nav */}
           <nav className="hidden lg:flex items-center gap-1">
-            {navLinks.map(link => (
+            <div className="relative" ref={moreRef}>
+              <button
+                onClick={() => setMoreOpen(o => !o)}
+                className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                  isMoreActive
+                    ? 'bg-[#1E6FF2] text-white'
+                    : 'text-gray-300 hover:text-white hover:bg-white/10'
+                }`}
+              >
+                Më shumë
+                <span className={`text-[10px] transition-transform ${moreOpen ? 'rotate-180' : ''}`}>▾</span>
+              </button>
+              {moreOpen && (
+                <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-1.5 z-50">
+                  {moreLinks.map(link => (
+                    <Link
+                      key={link.path}
+                      to={link.path}
+                      onClick={() => setMoreOpen(false)}
+                      className={`block px-4 py-2 text-sm font-medium transition-colors ${
+                        isActive(link.path)
+                          ? 'bg-[#1E6FF2]/10 text-[#1E6FF2]'
+                          : 'text-gray-700 hover:bg-gray-50'
+                      }`}
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+            {mainLinks.map(link => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -119,7 +169,7 @@ const Header: React.FC = () => {
         {/* Mobile Menu */}
         {menuOpen && (
           <div className="lg:hidden pb-4 border-t border-white/10 mt-2 pt-2">
-            {navLinks.map(link => (
+            {mainLinks.map(link => (
               <Link
                 key={link.path}
                 to={link.path}
@@ -131,6 +181,21 @@ const Header: React.FC = () => {
                 {link.label}
               </Link>
             ))}
+            <div className="mt-2 pt-2 border-t border-white/10">
+              <span className="block px-3 py-1 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Më shumë</span>
+              {moreLinks.map(link => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  onClick={() => setMenuOpen(false)}
+                  className={`block px-3 py-2 rounded-lg text-sm font-medium ${
+                    isActive(link.path) ? 'bg-[#1E6FF2] text-white' : 'text-gray-300 hover:text-white'
+                  }`}
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
             <div className="border-t border-white/10 mt-2 pt-2">
               {isAuthenticated ? (
                 <>

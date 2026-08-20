@@ -1,5 +1,92 @@
 // Notification permissions management
 
+const VAPID_PUBLIC_KEY = import.meta.env.VITE_VAPID_PUBLIC_KEY || '';
+
+function urlBase64ToUint8Array(base64String: string): Uint8Array {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; i++) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+// ============ REAL PUSH (Service Worker + VAPID) ============
+export const pushNotifications = {
+  isSupported: (): boolean =>
+    'serviceWorker' in navigator && 'PushManager' in window && !!VAPID_PUBLIC_KEY,
+
+  registerServiceWorker: async (): Promise<ServiceWorkerRegistration | null> => {
+    if (!('serviceWorker' in navigator)) return null;
+    try {
+      return await navigator.serviceWorker.register('/sw.js');
+    } catch (err) {
+      console.error('Regjistrimi i Service Worker dështoi:', err);
+      return null;
+    }
+  },
+
+  subscribe: async (): Promise<boolean> => {
+    if (!pushNotifications.isSupported()) return false;
+    try {
+      const registration = await pushNotifications.registerServiceWorker();
+      if (!registration) return false;
+
+      let subscription = await registration.pushManager.getSubscription();
+      if (!subscription) {
+        subscription = await registration.pushManager.subscribe({
+          userVisibleOnly: true,
+          applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY),
+        });
+      }
+
+      const json = subscription.toJSON();
+      const apiBase = window.location.origin.includes('ffk-futsal.com')
+        ? 'https://www.ffk-futsal.com/api/push-subscribe'
+        : '/api/push-subscribe';
+
+      await fetch(apiBase, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          endpoint: json.endpoint,
+          keys: json.keys,
+          userAgent: navigator.userAgent.substring(0, 200),
+        }),
+      });
+
+      return true;
+    } catch (err) {
+      console.error('Push subscription dështoi:', err);
+      return false;
+    }
+  },
+
+  unsubscribe: async (): Promise<void> => {
+    if (!('serviceWorker' in navigator)) return;
+    try {
+      const registration = await navigator.serviceWorker.getRegistration('/sw.js');
+      const subscription = await registration?.pushManager.getSubscription();
+      if (subscription) {
+        const endpoint = subscription.endpoint;
+        await subscription.unsubscribe();
+        const apiBase = window.location.origin.includes('ffk-futsal.com')
+          ? 'https://www.ffk-futsal.com/api/push-subscribe'
+          : '/api/push-subscribe';
+        await fetch(apiBase, {
+          method: 'DELETE',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ endpoint }),
+        });
+      }
+    } catch (err) {
+      console.error('Push unsubscribe dështoi:', err);
+    }
+  },
+};
+
 export const notificationPermissions = {
   // Check if browser supports notifications
   isSupported: (): boolean => {
