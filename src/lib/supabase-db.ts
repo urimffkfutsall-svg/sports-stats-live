@@ -276,6 +276,7 @@ function pollLightField(arrKey: string, callback: (payload: any) => void, interv
 
   const tick = async () => {
     if (stopped) return;
+    if (typeof document !== 'undefined' && document.hidden) return;
     try {
       const rows: any[] = await apiGet(`/live?field=${arrKey}`);
       diffAndEmit(arrKey, rows || [], prevMaps, callback, first);
@@ -296,6 +297,7 @@ let _slowFirst = true;
 let _slowTimer: any = null;
 
 async function slowPollTick() {
+  if (typeof document !== 'undefined' && document.hidden) return;
   try {
     const blob = await apiGet('/data');
     for (const { arrKey, callback } of _slowListeners) {
@@ -355,6 +357,7 @@ function ensureNotificationPolling() {
   if (_notifPollStarted) return;
   _notifPollStarted = true;
   const tick = async () => {
+    if (typeof document !== 'undefined' && document.hidden) return;
     try {
       const items: any[] = await apiGet(`/notifications?since=${encodeURIComponent(_notifLastTs)}`);
       items.forEach(n => {
@@ -465,5 +468,9 @@ export const dbNormativeActs = {
     return true;
   },
 };
+
+
+
+
 
 
