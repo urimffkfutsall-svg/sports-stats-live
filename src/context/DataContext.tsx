@@ -11,6 +11,19 @@ import { dbVideos, dbNews, dbNormativeActs
 } from '@/lib/supabase-db';
 import { notificationService } from '@/lib/notifications';
 
+// CACHE DISABLED - intercept all localStorage writes for large keys
+if (typeof window !== 'undefined') {
+  const _origSet = window.localStorage.setItem.bind(window.localStorage);
+  (window.localStorage as any).setItem = (key: string, value: string) => {
+    if (key === 'ffk_cache_v2' || key === 'ffk_futsall_data' || key === 'ffk_futsal_data') return;
+    _origSet(key, value);
+  };
+  window.localStorage.removeItem('ffk_cache_v2');
+  window.localStorage.removeItem('ffk_futsall_data');
+  window.localStorage.removeItem('ffk_futsal_data');
+}
+
+
 interface DataState {
   seasons: Season[];
   competitions: Competition[];
