@@ -175,6 +175,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
+    return; // DISABLED: cache too large, data comes from Supabase
     // VETÃ‹M cache lokale (pÃ«r ngarkim tÃ« shpejtÃ«) â€” JO push nÃ« MongoDB kÃ«tu.
     //
     // PSE: kjo funksion pÃ«rdor state-in LOKAL tÃ« React-it (`snapshot`), i cili
@@ -250,7 +251,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // ============ INITIAL LOAD ============
   const loadData = useCallback(async () => {
-    const CACHE_VER = 'v3'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
+    localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.removeItem('ffk_futsal_data'); localStorage.removeItem('ffk_cache_ver'); const CACHE_VER = 'disabled'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
     // Start timer for minimum loading duration (2 seconds)
     const startTime = Date.now();
     const minLoadingTime = 2000; // 2 seconds minimum
