@@ -129,7 +129,7 @@ const Header: React.FC = () => {
                   onClick={logout}
                   className="flex items-center gap-1 px-3 py-2 text-gray-300 hover:text-white text-sm transition-colors"
                 >
-                  ?
+                  Dil
                 </button>
               </>
             ) : (
@@ -158,7 +158,7 @@ const Header: React.FC = () => {
               className="p-2 text-gray-300 hover:text-white"
             >
               {menuOpen ? (
-                <span className="text-xl font-bold">?</span>
+                <span className="text-xl font-bold">✕</span>
               ) : (
                 <div className="space-y-1.5">
                   <span className="block w-6 h-0.5 bg-white rounded-full"></span>

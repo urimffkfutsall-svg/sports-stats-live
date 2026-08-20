@@ -11,10 +11,14 @@ function formatDate(iso?: string): string {
   return iso;
 }
 
-const LandingMatches: React.FC = () => {
+interface LandingMatchesProps {
+  initialTab?: TabType;
+}
+
+const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming' }) => {
   const { matches, competitions, getActiveSeason, getTeamById } = useData();
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
-  const [activeTab, setActiveTab] = useState<TabType>('upcoming');
+  const [activeTab, setActiveTab] = useState<TabType>(initialTab);
   const activeSeason = getActiveSeason();
 
   const seasonMatches = useMemo(() =>

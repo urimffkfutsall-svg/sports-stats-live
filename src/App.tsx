@@ -9,6 +9,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { DataProvider } from "@/context/DataContext";
 import { AuthProvider } from "@/context/AuthContext";
 import Index from "./pages/Index";
+import LivePage from "./pages/LivePage";
 import SuperligaPage from "./pages/SuperligaPage";
 import LigaParePage from "./pages/LigaParePage";
 import KupaPage from "./pages/KupaPage";
@@ -57,6 +58,7 @@ const App = () => (
                 <div className="pb-24 lg:pb-0">
                   <Routes>
                     <Route path="/" element={<Index />} />
+                    <Route path="/live" element={<LivePage />} />
                     <Route path="/superliga" element={<SuperligaPage />} />
                     <Route path="/liga-pare" element={<LigaParePage />} />
                     <Route path="/kupa" element={<KupaPage />} />
