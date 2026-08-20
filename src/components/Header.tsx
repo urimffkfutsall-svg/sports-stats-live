@@ -2,7 +2,7 @@
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
-import { Settings, Home, Radio, Trophy, Star, MoreHorizontal } from 'lucide-react';
+import { Settings } from 'lucide-react';
 import NotificationPanel from './NotificationPanel';
 import SettingsPage from './SettingsPage';
 
@@ -12,7 +12,6 @@ const Header: React.FC = () => {
   const moreRefDesktop = useRef<HTMLDivElement>(null);
   const moreRefMobile = useRef<HTMLDivElement>(null);
   const location = useLocation();
-  // Auto-close dropdown on navigation
   useEffect(() => { setMoreOpen(false); }, [location.pathname]);
   const { isAuthenticated, logout } = useAuth();
   const { settings } = useData();
@@ -38,17 +37,13 @@ const Header: React.FC = () => {
   const moreLinks = navLinks.filter(l => !mainPaths.includes(l.path));
   const isMoreActive = moreLinks.some(l => isActive(l.path));
 
-  const mobileMain = [
-    { path: '/', label: 'Ballina', emoji: '=ƒÅá' },
-    { path: '/live', label: 'Live', emoji: '=ƒôí' },
-    { path: '/superliga', label: 'Superliga', emoji: '=ƒÅå' },
-    { path: '/liga-pare', label: 'Liga I', emoji: 'G¡É' },
-  ];
-
   useEffect(() => {
     if (!moreOpen) return;
     const handleClickOutside = (e: MouseEvent) => {
-      if (moreRefDesktop.current && !moreRefDesktop.current.contains(e.target as Node) && moreRefMobile.current && !moreRefMobile.current.contains(e.target as Node)) {
+      if (
+        moreRefDesktop.current && !moreRefDesktop.current.contains(e.target as Node) &&
+        moreRefMobile.current && !moreRefMobile.current.contains(e.target as Node)
+      ) {
         setMoreOpen(false);
       }
     };
@@ -62,7 +57,6 @@ const Header: React.FC = () => {
 
   return (
     <>
-      {/* ===== TOP HEADER ===== */}
       <header className="bg-[#2a499a] text-white sticky top-0 z-50 shadow-lg border-b-[3px] border-[#d0a650]">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
@@ -144,7 +138,7 @@ const Header: React.FC = () => {
               <Link to="/" className="text-white font-bold text-base tracking-wide">
                 FFK Futsall
               </Link>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-1" ref={moreRefMobile}>
                 <NotificationPanel />
                 <button onClick={() => setSettingsOpen(true)} className="p-2 text-gray-300 hover:text-white transition-colors" title="Cilesimet">
                   <Settings size={20} />
@@ -164,12 +158,8 @@ const Header: React.FC = () => {
           </div>
         </div>
       </header>
-
     </>
   );
 };
 
 export default Header;
-
-
-
