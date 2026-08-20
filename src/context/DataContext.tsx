@@ -175,6 +175,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
+    return; // DISABLED - Supabase is source of truth
     return; // DISABLED: cache too large, data comes from Supabase
     return; // DISABLED: cache too large, data comes from Supabase
     return; // DISABLED: cache too large, data comes from Supabase
@@ -226,7 +227,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // ============ CACHE HYDRATION ============
   useEffect(() => {
     try {
-      const cached = localStorage.getItem('ffk_cache_v2');
+      const cached = null;
       if (cached) {
         const d = JSON.parse(cached);
         setState(prev => ({
@@ -260,7 +261,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     let localState: DataState | null = null;
     
     try {
-      const saved = localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2');
+      const saved = null;
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -444,7 +445,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err) {
       console.error('Failed to load data from app storage:', err);
       try {
-        const saved = localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2');
+        const saved = null;
         if (saved) setState(JSON.parse(saved));
       } catch { /* ignore */ }
     } finally {
@@ -857,7 +858,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // cache used for instant reload, so adding a team + refreshing never loses data.
   const persistShortiCache = (patch: Partial<{ shortiSuperliga: ShortiRubrik[]; shortiLigaPare: ShortiRubrik[] }>) => {
     try {
-      const cached = localStorage.getItem('ffk_cache_v2');
+      const cached = null;
       const parsed = cached ? JSON.parse(cached) : {};
       const next = { ...parsed, ...patch };
       localStorage.setItem('ffk_cache_v2', JSON.stringify(next));

@@ -1,26 +1,34 @@
 ﻿const fs = require('fs');
 const filePath = 'src/context/DataContext.tsx';
 let content = fs.readFileSync(filePath, 'utf8');
-const original = content;
-let changes = 0;
+let count = 0;
 
 // 1. Disable persistCache - add early return
-const r1 = content.replace(
-  'const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {',
-  'const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {\n    return; // DISABLED: cache too large, data comes from Supabase'
-);
-if (r1 !== content) { content = r1; changes++; console.log('ok: persistCache disabled'); }
-
-// 2. Force-clear old cache on every startup
-const r2 = content.replace(
-  /const CACHE_VER = 'v\d+';/,
-  "localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.removeItem('ffk_futsal_data'); localStorage.removeItem('ffk_cache_ver'); const CACHE_VER = 'disabled';"
-);
-if (r2 !== content) { content = r2; changes++; console.log('ok: cache clear on startup'); }
-
-if (changes === 0) {
-  console.log('WARNING: asnje ndryshim - pattern nuk u gjet, kontroll manual nevojitet');
-} else {
-  fs.writeFileSync(filePath, content, 'utf8');
-  console.log('\nGATI! ' + changes + ' rregullime u aplikuan.');
+const MARKER = 'const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {';
+if (content.includes(MARKER)) {
+  content = content.replace(MARKER, MARKER + '\n    return; // DISABLED - Supabase is source of truth');
+  count++; console.log('ok 1: persistCache disabled');
 }
+
+// 2. Force reads to return null -> always fetch from Supabase
+const reads = [
+  ["localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2')", 'null'],
+  ["localStorage.getItem('ffk_futsall_data')", 'null'],
+  ["localStorage.getItem('ffk_cache_v2')", 'null'],
+];
+for (const [from, to] of reads) {
+  if (content.includes(from)) {
+    content = content.split(from).join(to);
+    count++; console.log('ok 2:', from.slice(0,40));
+  }
+}
+
+// 3. Bump cache version to clear all browsers
+const ver = content.match(/const CACHE_VER = '(v\d+)'/);
+if (ver) {
+  content = content.replace("const CACHE_VER = '" + ver[1] + "'", "const CACHE_VER = 'no-cache'");
+  count++; console.log('ok 3: CACHE_VER -> no-cache');
+}
+
+if (count === 0) { console.log('WARNING: asnje ndryshim!'); }
+else { fs.writeFileSync(filePath, content, 'utf8'); console.log('\nGATI! ' + count + ' ndryshime.'); }
