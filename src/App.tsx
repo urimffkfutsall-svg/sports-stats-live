@@ -26,6 +26,7 @@ import NewsDetailPage from "./pages/NewsDetailPage";
 import LiveMatchPage from "./pages/LiveMatchPage";
 import LiveStreamsPage from "./pages/LiveStreamsPage";
 import NotFound from "./pages/NotFound";
+import KomisioniPage from "./pages/KomisioniPage";
 import WhatsAppButton from "./components/WhatsAppButton";
 import BottomNav from "./components/BottomNav";
 
@@ -72,6 +73,7 @@ const App = () => (
                     <Route path="/lajme/:id" element={<NewsDetailPage />} />
                     <Route path="/live/:id" element={<LiveMatchPage />} />
                     <Route path="/live-streams" element={<LiveStreamsPage />} />
+                    <Route path="/komisioni" element={<KomisioniPage />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <WhatsAppButton />
