@@ -1,5 +1,5 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
-import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik } from '@/types';
+﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik, NormativeAct } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
   fetchAllData,
@@ -7,7 +7,7 @@ import {
   subscribeToMatches, subscribeToGoals, subscribeToTable,
   dbVisitors, dbShorti,
 } from '@/lib/supabase-db';
-import { dbVideos, dbNews
+import { dbVideos, dbNews, dbNormativeActs
 } from '@/lib/supabase-db';
 import { notificationService } from '@/lib/notifications';
 
@@ -22,6 +22,7 @@ interface DataState {
   playersOfWeek: PlayerOfWeek[];
   users: User[];
   decisions: Decision[];
+  normativeActs: NormativeAct[];
   videos: Video[];
   news: News[];
   settings: AppSettings;
@@ -46,7 +47,8 @@ const initialState: DataState = {
   playersOfWeek: [],
   users: [],
   decisions: [],
-  videos: [],
+  normativeActs: [],
+    videos: [],
   news: [],
   settings: defaultSettings,
   shortiSuperliga: [],
@@ -173,16 +175,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
-    // VETËM cache lokale (për ngarkim të shpejtë) — JO push në MongoDB këtu.
+    // VETÃ‹M cache lokale (pÃ«r ngarkim tÃ« shpejtÃ«) â€” JO push nÃ« MongoDB kÃ«tu.
     //
-    // PSE: kjo funksion përdor state-in LOKAL të React-it (`snapshot`), i cili
-    // mund të jetë "i vjetruar" nëse ky tab/browser ka qëndruar hapur për një
-    // kohë dhe ndërkohë dikush tjetër (ose një pajisje tjetër) ka shtuar diçka
-    // te MongoDB. Nëse do të bënim PUT me këtë snapshot të vjetër, do të
-    // FSHINim/mbishkruanim ndryshimet e reja të bëra ndërkohë — pikërisht bug-u
-    // "shtoj diçka dhe pas një kohe zhduket". Prandaj push-i real në MongoDB
-    // bëhet VETËM te modulet dbXxx (supabase-db.ts), të cilat GJITHMONË marrin
-    // kopjen më të fundit nga serveri PARA se të shkruajnë.
+    // PSE: kjo funksion pÃ«rdor state-in LOKAL tÃ« React-it (`snapshot`), i cili
+    // mund tÃ« jetÃ« "i vjetruar" nÃ«se ky tab/browser ka qÃ«ndruar hapur pÃ«r njÃ«
+    // kohÃ« dhe ndÃ«rkohÃ« dikush tjetÃ«r (ose njÃ« pajisje tjetÃ«r) ka shtuar diÃ§ka
+    // te MongoDB. NÃ«se do tÃ« bÃ«nim PUT me kÃ«tÃ« snapshot tÃ« vjetÃ«r, do tÃ«
+    // FSHINim/mbishkruanim ndryshimet e reja tÃ« bÃ«ra ndÃ«rkohÃ« â€” pikÃ«risht bug-u
+    // "shtoj diÃ§ka dhe pas njÃ« kohe zhduket". Prandaj push-i real nÃ« MongoDB
+    // bÃ«het VETÃ‹M te modulet dbXxx (supabase-db.ts), tÃ« cilat GJITHMONÃ‹ marrin
+    // kopjen mÃ« tÃ« fundit nga serveri PARA se tÃ« shkruajnÃ«.
     const payload = {
       seasons: snapshot.seasons,
       competitions: snapshot.competitions,
@@ -342,15 +344,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoading(false);
             return;
           } else {
-            console.error('MongoDB API u përgjigj por forma e të dhënave ishte e papritur:', remoteData);
+            console.error('MongoDB API u pÃ«rgjigj por forma e tÃ« dhÃ«nave ishte e papritur:', remoteData);
           }
         } else {
           const err = await remoteRes.json().catch(() => ({}));
-          console.error('Ngarkimi nga MongoDB dështoi:', err.error || remoteRes.status);
+          console.error('Ngarkimi nga MongoDB dÃ«shtoi:', err.error || remoteRes.status);
         }
       } catch (e) {
         // fall back to browser cache if Mongo API is unavailable
-        console.error('Ngarkimi nga MongoDB dështoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
+        console.error('Ngarkimi nga MongoDB dÃ«shtoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
       }
 
       const hasValidSupabase = Boolean(
@@ -943,6 +945,21 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   
+  // ============ NORMATIVE ACTS ============
+  const addNormativeAct = (a: Omit<NormativeAct, 'id'>) => {
+    const item = { ...a, id: uuidv4(), createdAt: new Date().toISOString() };
+    setState(p => ({ ...p, normativeActs: [item, ...p.normativeActs] }));
+    dbNormativeActs.upsert(item).catch(console.error);
+  };
+  const updateNormativeAct = (a: NormativeAct) => {
+    setState(p => ({ ...p, normativeActs: p.normativeActs.map(x => x.id === a.id ? a : x) }));
+    dbNormativeActs.upsert(a).catch(console.error);
+  };
+  const deleteNormativeAct = (id: string) => {
+    setState(p => ({ ...p, normativeActs: p.normativeActs.filter(x => x.id !== id) }));
+    dbNormativeActs.remove(id).catch(console.error);
+  };
+
   // ============ VIDEOS ============
   const addVideo = (v: Omit<Video, 'id'>) => {
     const id = uuidv4();
@@ -997,6 +1014,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     addPlayerOfWeek, updatePlayerOfWeek, deletePlayerOfWeek, getLatestPlayerOfWeek,
     addUser, deleteUser, updateUser,
     addDecision, updateDecision, deleteDecision,
+    addNormativeAct, updateNormativeAct, deleteNormativeAct,
     updateSettings,
     updateShortiSuperliga, updateShortiLigaPare,
     calculateStandings,

@@ -306,3 +306,12 @@ export interface NtGroupMatch {
   venue?: string;
   status?: string;
 }
+
+export interface NormativeAct {
+  id: string;
+  title: string;
+  description?: string;
+  pdfUrl: string;
+  order?: number;
+  createdAt?: string;
+}

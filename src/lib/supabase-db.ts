@@ -440,3 +440,5 @@ export const dbLiveStreams = makeUpsertCrud('liveStreams');
 // ============ PLAYOFF ============
 export const dbPlayoffSeries = makeUpsertCrud('playoffSeries');
 export const dbPlayoffMatches = makeUpsertCrud('playoffMatches');
+
+export const dbNormativeActs = makeUpsertCrud('normativeActs');

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { useData } from "@/context/DataContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -28,6 +28,7 @@ import LiveMatchPage from "./pages/LiveMatchPage";
 import LiveStreamsPage from "./pages/LiveStreamsPage";
 import NotFound from "./pages/NotFound";
 import KomisioniPage from "./pages/KomisioniPage";
+import AktetNormativePage from "./pages/AktetNormativePage";
 import WhatsAppButton from "./components/WhatsAppButton";
 import BottomNav from "./components/BottomNav";
 
@@ -97,6 +98,7 @@ const App = () => (
                     <Route path="/live/:id" element={<LiveMatchPage />} />
                     <Route path="/live-streams" element={<LiveStreamsPage />} />
                     <Route path="/komisioni" element={<KomisioniPage />} />
+                    <Route path="/aktet-normative" element={<AktetNormativePage />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <WhatsAppButton />
