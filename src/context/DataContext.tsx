@@ -66,10 +66,6 @@ const initialState: DataState = {
   shortiLigaPare: []
 };
 
-const mongoApiUrl = typeof window !== 'undefined'
-  ? (window.location.origin.includes('ffk-futsal.com') ? 'https://www.ffk-futsal.com/api/data' : '/api/data')
-  : '/api/data';
-
 // Helper to map a realtime payload row from snake_case to camelCase
 function mapRealtimeRow(row: any): any {
   if (!row) return row;
@@ -264,7 +260,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     const CACHE_VER = 'v3'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
     // Start timer for minimum loading duration (2 seconds)
     const startTime = Date.now();
-    const minLoadingTime = 2000; // 2 seconds minimum
+    const minLoadingTime = 0; // pa vonese artificiale
     let localState: DataState | null = null;
     
     try {
@@ -295,80 +291,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         } catch {}
       }
 
-      try {
-        const remoteRes = await fetch(mongoApiUrl, { cache: 'no-store' });
-        if (remoteRes.ok) {
-          const remoteData = await remoteRes.json();
-          if (remoteData && Array.isArray(remoteData.seasons)) {
-            // Merge local unsaved data with remote data
-            // Keep local data that doesn't exist on remote (newly added items)
-            const mergedState = {
-              seasons: remoteData.seasons || [],
-              competitions: remoteData.competitions || [],
-              teams: remoteData.teams || [],
-              players: remoteData.players || [],
-              matches: remoteData.matches || [],
-              goals: remoteData.goals || [],
-              scorers: remoteData.scorers || [],
-              playersOfWeek: remoteData.playersOfWeek || [],
-              users: remoteData.users || [],
-              decisions: remoteData.decisions || [],
-            normativeActs: [],
-              videos: remoteData.videos || [],
-              news: remoteData.news || [],
-              settings: remoteData.settings || defaultSettings,
-              shortiSuperliga: remoteData.shortiSuperliga || [],
-              shortiLigaPare: remoteData.shortiLigaPare || [],
-            };
-
-            // If we have local state, merge it with remote to preserve unsaved local data
-            if (localState) {
-              // Keep local teams that don't exist on server
-              const remoteTeamIds = new Set(remoteData.teams?.map((t: any) => t.id) || []);
-              const localOnlyTeams = (localState.teams || []).filter(t => !remoteTeamIds.has(t.id));
-              
-              // Keep local players that don't exist on server
-              const remotePlayerIds = new Set(remoteData.players?.map((p: any) => p.id) || []);
-              const localOnlyPlayers = (localState.players || []).filter(p => !remotePlayerIds.has(p.id));
-
-              // Keep local goals that don't exist on server
-              const remoteGoalIds = new Set(remoteData.goals?.map((g: any) => g.id) || []);
-              const localOnlyGoals = (localState.goals || []).filter(g => !remoteGoalIds.has(g.id));
-
-              // Keep local scorers that don't exist on server
-              const remoteScorerIds = new Set(remoteData.scorers?.map((s: any) => s.id) || []);
-              const localOnlyScorerss = (localState.scorers || []).filter(s => !remoteScorerIds.has(s.id));
-
-              // Merge: remote data + locally added items
-              mergedState.teams = [...mergedState.teams, ...localOnlyTeams];
-              mergedState.players = [...mergedState.players, ...localOnlyPlayers];
-              mergedState.goals = [...mergedState.goals, ...localOnlyGoals];
-              mergedState.scorers = [...mergedState.scorers, ...localOnlyScorerss];
-            }
-
-            setState(mergedState);
-            dbNormativeActs.getAll().then((acts: any[]) => { if (acts && acts.length) setState((p: any) => ({ ...p, normativeActs: acts })); }).catch(() => {});
-            localStorage.setItem('ffk_futsall_data', JSON.stringify(mergedState));
-            localStorage.setItem('ffk_cache_v2', JSON.stringify(mergedState));
-            hasHydratedRef.current = true;
-            // Wait for minimum loading time before showing content
-            const elapsed = Date.now() - startTime;
-            if (elapsed < minLoadingTime) {
-              await new Promise(resolve => setTimeout(resolve, minLoadingTime - elapsed));
-            }
-            setIsLoading(false);
-            return;
-          } else {
-            console.error('MongoDB API u p├â┬½rgjigj por forma e t├â┬½ dh├â┬½nave ishte e papritur:', remoteData);
-          }
-        } else {
-          const err = await remoteRes.json().catch(() => ({}));
-          console.error('Ngarkimi nga MongoDB d├â┬½shtoi:', err.error || remoteRes.status);
-        }
-      } catch (e) {
-        // fall back to browser cache if Mongo API is unavailable
-        console.error('Ngarkimi nga MongoDB d├â┬½shtoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
-      }
 
       const hasValidSupabase = Boolean(
         import.meta.env.VITE_SUPABASE_URL &&
@@ -1043,4 +965,6 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
+
+
 
