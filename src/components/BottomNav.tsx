@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Trophy, PlayCircle, BarChart3, Menu, X, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -18,23 +18,8 @@ const ALL_NAV_LINKS = [
 const BottomNav: React.FC = () => {
   const location = useLocation();
   const [moreOpen, setMoreOpen] = useState(false);
-  const [visible, setVisible] = useState(true);
-  const lastScrollY = useRef(0);
   const { isAuthenticated, logout } = useAuth();
   const isActive = (path: string) => location.pathname === path;
-
-  // Hide on scroll down, show on scroll up (si Facebook)
-  useEffect(() => {
-    const onScroll = () => {
-      const y = window.scrollY;
-      if (y < 50) { setVisible(true); }
-      else if (y > lastScrollY.current + 5) { setVisible(false); setMoreOpen(false); }
-      else if (y < lastScrollY.current - 5) { setVisible(true); }
-      lastScrollY.current = y;
-    };
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-  }, []);
 
   useEffect(() => { setMoreOpen(false); }, [location.pathname]);
 
@@ -91,11 +76,8 @@ const BottomNav: React.FC = () => {
         </div>
       )}
 
-      <nav
-        className="lg:hidden fixed bottom-0 left-0 right-0 z-[96] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-0 transition-transform duration-300"
-        style={{ transform: visible ? 'translateY(0)' : 'translateY(110%)' }}
-      >
-        <div className="mx-auto max-w-md bg-white/95 backdrop-blur-xl rounded-2xl shadow-[0_8px_30px_-6px_rgba(0,0,0,0.25)] border border-gray-100 flex items-center justify-around px-1.5 py-2">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-[96] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] pt-0">
+        <div className="mx-auto max-w-md bg-white rounded-[28px] shadow-[0_8px_30px_-6px_rgba(0,0,0,0.25)] border border-gray-100 flex items-end justify-around px-1.5 pt-3 pb-2 overflow-visible">
           {items.map(({ path, label, icon: Icon }) => {
             const active = isActive(path);
             return (
@@ -103,25 +85,33 @@ const BottomNav: React.FC = () => {
                 key={path}
                 to={path}
                 onClick={() => setMoreOpen(false)}
-                className="flex flex-col items-center justify-center gap-0.5 min-w-[3.5rem] py-1 rounded-xl transition-all"
+                className="relative flex flex-col items-center justify-end min-w-[3.5rem]"
+                style={{ transform: active ? 'translateY(-16px)' : 'translateY(0)', transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)' }}
               >
-                <span className={`flex items-center justify-center w-9 h-9 rounded-full transition-all ${active ? 'bg-[#1E6FF2] shadow-md shadow-[#1E6FF2]/30 scale-105' : ''}`}>
-                  <Icon className={`w-[19px] h-[19px] ${active ? 'text-white' : 'text-gray-400'}`} strokeWidth={2.2} />
+                <span
+                  className={`flex items-center justify-center rounded-full transition-all ${active ? 'bg-[#1E6FF2] shadow-lg shadow-[#1E6FF2]/40' : ''}`}
+                  style={{ width: active ? '52px' : '38px', height: active ? '52px' : '38px', transition: 'all 0.25s cubic-bezier(.34,1.56,.64,1)' }}
+                >
+                  <Icon className={active ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />
                 </span>
-                <span className={`text-[10px] font-semibold ${active ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{label}</span>
+                <span className={`text-[10px] font-semibold mt-1 ${active ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{label}</span>
               </Link>
             );
           })}
           <button
             onClick={() => setMoreOpen(v => !v)}
-            className="flex flex-col items-center justify-center gap-0.5 min-w-[3.5rem] py-1 rounded-xl transition-all"
+            className="relative flex flex-col items-center justify-end min-w-[3.5rem]"
+            style={{ transform: (moreOpen || isMoreActive) ? 'translateY(-16px)' : 'translateY(0)', transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)' }}
           >
-            <span className={`flex items-center justify-center w-9 h-9 rounded-full transition-all ${moreOpen || isMoreActive ? 'bg-[#1E6FF2] shadow-md shadow-[#1E6FF2]/30 scale-105' : ''}`}>
+            <span
+              className={`flex items-center justify-center rounded-full transition-all ${(moreOpen || isMoreActive) ? 'bg-[#1E6FF2] shadow-lg shadow-[#1E6FF2]/40' : ''}`}
+              style={{ width: (moreOpen || isMoreActive) ? '52px' : '38px', height: (moreOpen || isMoreActive) ? '52px' : '38px', transition: 'all 0.25s cubic-bezier(.34,1.56,.64,1)' }}
+            >
               {moreOpen
-                ? <X className="w-[19px] h-[19px] text-white" strokeWidth={2.2} />
-                : <Menu className={`w-[19px] h-[19px] ${isMoreActive ? 'text-white' : 'text-gray-400'}`} strokeWidth={2.2} />}
+                ? <X className="w-6 h-6 text-white" strokeWidth={2.2} />
+                : <Menu className={(moreOpen || isMoreActive) ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />}
             </span>
-            <span className={`text-[10px] font-semibold ${moreOpen || isMoreActive ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>Me shume</span>
+            <span className={`text-[10px] font-semibold mt-1 ${(moreOpen || isMoreActive) ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>Me shume</span>
           </button>
         </div>
       </nav>

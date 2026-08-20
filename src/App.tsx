@@ -37,15 +37,52 @@ const queryClient = new QueryClient();
 const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useData();
   const [showContent, setShowContent] = useState(false);
+  const [isPhoneOrTablet, setIsPhoneOrTablet] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsPhoneOrTablet(window.innerWidth <= 1024);
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, []);
 
   useEffect(() => {
     if (!isLoading) {
-      const t = setTimeout(() => setShowContent(true), 60);
+      const t = setTimeout(() => setShowContent(true), 50);
       return () => clearTimeout(t);
     }
   }, [isLoading]);
 
   if (isLoading) {
+    if (isPhoneOrTablet) {
+      return (
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0EA5FF]">
+          <div className="relative w-16 h-16">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <span
+                key={i}
+                className="absolute top-1/2 left-1/2 rounded-full bg-white"
+                style={{
+                  width: '11px',
+                  height: '11px',
+                  marginTop: '-5.5px',
+                  marginLeft: '-5.5px',
+                  transform: `rotate(${i * 45}deg) translate(26px)`,
+                  animation: 'dotFade 1s linear infinite',
+                  animationDelay: `${i * 0.125}s`,
+                }}
+              />
+            ))}
+          </div>
+          <style>{`
+            @keyframes dotFade {
+              0% { opacity: 1; }
+              100% { opacity: 0.15; }
+            }
+          `}</style>
+        </div>
+      );
+    }
     return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
         <div className="relative w-14 h-14">
