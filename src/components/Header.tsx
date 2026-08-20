@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+Ôªøimport React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -39,16 +39,16 @@ const Header: React.FC = () => {
   const isMoreActive = moreLinks.some(l => isActive(l.path));
 
   const mobileMain = [
-    { path: '/', label: 'Ballina', emoji: '=É≈·' },
-    { path: '/live', label: 'Live', emoji: '=ÉÙÌ' },
-    { path: '/superliga', label: 'Superliga', emoji: '=É≈Â' },
-    { path: '/liga-pare', label: 'Liga I', emoji: 'G°…' },
+    { path: '/', label: 'Ballina', emoji: '=∆í√Ö√°' },
+    { path: '/live', label: 'Live', emoji: '=∆í√¥√≠' },
+    { path: '/superliga', label: 'Superliga', emoji: '=∆í√Ö√•' },
+    { path: '/liga-pare', label: 'Liga I', emoji: 'G¬°√â' },
   ];
 
   useEffect(() => {
     if (!moreOpen) return;
     const handleClickOutside = (e: MouseEvent) => {
-      if (moreRef.current && !moreRef.current.contains(e.target as Node)) {
+      if (moreRefDesktop.current && !moreRefDesktop.current.contains(e.target as Node) && moreRefMobile.current && !moreRefMobile.current.contains(e.target as Node)) {
         setMoreOpen(false);
       }
     };
@@ -149,9 +149,13 @@ const Header: React.FC = () => {
                 <button onClick={() => setSettingsOpen(true)} className="p-2 text-gray-300 hover:text-white transition-colors" title="Cilesimet">
                   <Settings size={20} />
                 </button>
-                {isAuthenticated && (
-                  <Link to="/admin" className="px-2 py-1 bg-[#1E6FF2] rounded-lg text-xs font-medium">
+                {isAuthenticated ? (
+                  <Link to="/admin" className="px-2 py-1 bg-[#1E6FF2] rounded-lg text-xs font-medium whitespace-nowrap">
                     Admin
+                  </Link>
+                ) : (
+                  <Link to="/login" className="px-2 py-1 border border-white/30 rounded-lg text-xs font-medium text-white whitespace-nowrap">
+                    Ky√ßu
                   </Link>
                 )}
               </div>
@@ -166,5 +170,6 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
 
 
