@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -23,6 +23,7 @@ const Header: React.FC = () => {
     { path: '/kupa', label: 'Kupa e Kosoves' },
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
+    { path: '/komisioni', label: 'Komisioni' },
     { path: '/kombetarja', label: 'Kombetarja' },
     { path: '/playoff', label: 'PlayOff' },
   ];
@@ -74,7 +75,7 @@ const Header: React.FC = () => {
                   onClick={logout}
                   className="flex items-center gap-1 px-3 py-2 text-gray-300 hover:text-white text-sm transition-colors"
                 >
-                  →
+                  ?
                 </button>
               </>
             ) : (
@@ -103,7 +104,7 @@ const Header: React.FC = () => {
               className="p-2 text-gray-300 hover:text-white"
             >
               {menuOpen ? (
-                <span className="text-xl font-bold">✕</span>
+                <span className="text-xl font-bold">?</span>
               ) : (
                 <div className="space-y-1.5">
                   <span className="block w-6 h-0.5 bg-white rounded-full"></span>
