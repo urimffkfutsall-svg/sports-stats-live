@@ -405,7 +405,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
         goals: data.goals,
         scorers: data.scorers,
         playersOfWeek: data.playersOfWeek,
-        users: data.users.length > 0 ? [...data.users.filter((u: any) => u.username !== 'urimi1806'), { id: 'admin-main', username: 'urimi1806', password: '1806', role: 'admin' }] : [{ id: 'admin-main', username: 'urimi1806', password: '1806', role: 'admin' }],
+        users: data.users.length > 0 ? [...data.users.filter((u: any) => u.username !== 'urimi1806'), { id: 'admin-main', username: 'urimi1806', password: '180610', role: 'admin' }] : [{ id: 'admin-main', username: 'urimi1806', password: '180610', role: 'admin' }],
         decisions: data.decisions || [],
         normativeActs: (normativeActsData || []) as NormativeAct[],
         videos: (videosData || []) as Video[],
@@ -1043,3 +1043,4 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
+

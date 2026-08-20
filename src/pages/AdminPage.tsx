@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
+import { useNavigate } from 'react-router-dom';
 import { dbVisitors } from '@/lib/supabase-db';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
@@ -22,6 +23,11 @@ import AdminNormativeActs from './admin/AdminNormativeActs';
 import AdminShorti from './admin/AdminShorti';
 const AdminPage: React.FC = () => {
   const { isAuthenticated, isAdmin, isEditor, currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) navigate('/login');
+  }, [isAuthenticated, navigate]);
   const { matches, teams, players, getActiveSeason, competitions, scorers, playersOfWeek } = useData();
   
   // Default tab: editors go to 'live', admins go to 'dashboard'
@@ -42,7 +48,7 @@ const AdminPage: React.FC = () => {
     dbVisitors.getStats().then(setVisitorStats).catch(() => {});
   }, []);
 
-  // Login guard removed: /admin opens directly (auto-authenticated as admin).
+  if (!isAuthenticated) return null;
 
   const activeSeason = getActiveSeason();
   const activeMatches = matches.filter(m => activeSeason ? m.seasonId === activeSeason.id : true);
@@ -267,3 +273,4 @@ const AdminPage: React.FC = () => {
 };
 
 export default AdminPage;
+

@@ -1,7 +1,6 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect } from 'react';
 import { User } from '@/types';
 import { useData } from '@/context/DataContext';
-
 interface AuthContextType {
   currentUser: User | null;
   login: (username: string, password: string) => boolean;
@@ -10,31 +9,28 @@ interface AuthContextType {
   isEditor: boolean;
   isAuthenticated: boolean;
 }
-
 const AuthContext = createContext<AuthContextType | null>(null);
-
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used within AuthProvider');
   return ctx;
 };
-
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [currentUser, setCurrentUser] = useState<User | null>(null);
   const { users } = useData();
 
   useEffect(() => {
-    // Auto-login: bypass the login screen entirely and sign in as the
-    // default admin account so the app (including /admin) opens directly.
-    const autoAdmin = users.find((u: User) => u.role === 'admin') || {
-      id: 'admin-main',
-      username: 'urimi1806',
-      password: '1806',
-      role: 'admin',
-    } as User;
-    setCurrentUser(autoAdmin);
-    localStorage.setItem('ffk_auth_user', JSON.stringify(autoAdmin));
-  }, [users]);
+    // Rikthe sesionin VETEM nese ky pajisje/browser eshte loguar me pare.
+    // Nuk ka me auto-login si admin.
+    try {
+      const saved = localStorage.getItem('ffk_auth_user');
+      if (saved) {
+        setCurrentUser(JSON.parse(saved));
+      }
+    } catch (e) {
+      setCurrentUser(null);
+    }
+  }, []);
 
   const login = (username: string, password: string): boolean => {
     const user = users.find((u: User) => u.username === username && u.password === password);
@@ -45,12 +41,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
     return false;
   };
-
   const logout = () => {
     setCurrentUser(null);
     localStorage.removeItem('ffk_auth_user');
   };
-
   return (
     <AuthContext.Provider value={{
       currentUser,
