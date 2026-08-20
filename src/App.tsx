@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useData } from "@/context/DataContext";
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
@@ -35,14 +35,35 @@ const queryClient = new QueryClient();
 
 const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useData();
+  const [showContent, setShowContent] = useState(false);
+
+  useEffect(() => {
+    if (!isLoading) {
+      const t = setTimeout(() => setShowContent(true), 60);
+      return () => clearTimeout(t);
+    }
+  }, [isLoading]);
+
   if (isLoading) {
     return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
-        <div className="w-12 h-12 rounded-full border-4 border-[#1E6FF2] border-t-transparent animate-spin" />
+        <div className="relative w-14 h-14">
+          <div className="absolute inset-0 rounded-full border-4 border-[#1E6FF2]/15" />
+          <div className="absolute inset-0 rounded-full border-4 border-[#1E6FF2] border-t-transparent animate-spin" />
+        </div>
       </div>
     );
   }
-  return <>{children}</>;
+
+  return (
+    <div
+      className={`transition-all duration-700 ease-out ${
+        showContent ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-3 scale-[0.99]'
+      }`}
+    >
+      {children}
+    </div>
+  );
 };
 
 const App = () => (
