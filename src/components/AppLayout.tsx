@@ -11,33 +11,61 @@ import DecisionsSection from './DecisionsSection';
 import { useData } from '@/context/DataContext';
 
 var AppLayout: React.FC = function() {
-var _data = useData();
-var isLoading = _data.isLoading;
+  var _data = useData();
+  var isLoading = _data.isLoading;
 
-if (isLoading) {
-return (
-<div className="min-h-screen bg-[#F1F5F9] flex items-center justify-center">
-<div className="relative">
-<div className="w-14 h-14 rounded-full border-4 border-[#1E6FF2]/20 border-t-[#1E6FF2] animate-spin" />
-</div>
-</div>
-);
-}
+  if (isLoading) {
+    const dots = Array.from({ length: 8 });
+    return (
+      <div style={{ minHeight: '100vh', background: '#1E6FF2', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <style>{`
+          @keyframes ffkDot {
+            0%, 80%, 100% { transform: translate(-50%,-50%) scale(0.4); opacity: 0.25; }
+            40% { transform: translate(-50%,-50%) scale(1.1); opacity: 1; }
+          }
+        `}</style>
+        <div style={{ position: 'relative', width: '72px', height: '72px' }}>
+          {dots.map((_, i) => {
+            const angle = i * 45;
+            const rad = (angle * Math.PI) / 180;
+            const r = 28;
+            const x = 36 + r * Math.sin(rad);
+            const y = 36 - r * Math.cos(rad);
+            return (
+              <div
+                key={i}
+                style={{
+                  position: 'absolute',
+                  width: '11px',
+                  height: '11px',
+                  borderRadius: '50%',
+                  backgroundColor: 'white',
+                  left: `${x}px`,
+                  top: `${y}px`,
+                  transform: 'translate(-50%,-50%)',
+                  animation: `ffkDot 1.2s ease-in-out ${(i * 0.15).toFixed(2)}s infinite`,
+                }}
+              />
+            );
+          })}
+        </div>
+      </div>
+    );
+  }
 
-return (
-<div className="min-h-screen bg-[#F1F5F9]">
-<Header />
-
-<LandingNews />
+  return (
+    <div className="min-h-screen bg-[#F1F5F9] pb-20 lg:pb-0">
+      <Header />
+      <LandingNews />
       <LandingMatches />
-<LeagueTablesSection />
-<DecisionsSection />
+      <LeagueTablesSection />
+      <DecisionsSection />
       <NtActivitiesSection />
       <FfkMomentsSection />
       <LandingVideos />
       <Footer />
-</div>
-);
+    </div>
+  );
 };
 
 export default AppLayout;
