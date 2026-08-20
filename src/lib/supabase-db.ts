@@ -445,13 +445,13 @@ export const dbPlayoffMatches = makeUpsertCrud('playoffMatches');
 export const dbNormativeActs = {
   getAll: async () => {
     try {
-      const res = await fetch(${API_BASE}/normative-acts);
+      const res = await fetch(`${API_BASE}/normative-acts`);
       if (!res.ok) return [];
       return await res.json();
     } catch { return []; }
   },
   upsert: async (item: any) => {
-    const res = await fetch(${API_BASE}/normative-acts, {
+    const res = await fetch(`${API_BASE}/normative-acts`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(item),
@@ -460,7 +460,7 @@ export const dbNormativeActs = {
     return item;
   },
   remove: async (id: string) => {
-    const res = await fetch(${API_BASE}/normative-acts?id=, { method: 'DELETE' });
+    const res = await fetch(`${API_BASE}/normative-acts?id=${encodeURIComponent(id)}`, { method: 'DELETE' });
     if (!res.ok) { const e = await res.json().catch(() => ({})); throw new Error(e.error || 'normative-acts remove failed'); }
     return true;
   },
