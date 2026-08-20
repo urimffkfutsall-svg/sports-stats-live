@@ -1,4 +1,4 @@
-import { supabase } from './_supabaseClient.js';
+﻿import { supabase } from './_supabaseClient.js';
 
 const LIGHT_FIELDS = new Set([
   'matches', 'goals', 'seasons', 'competitions', 'scorers', 'playersOfWeek', 'users', 'decisions',
@@ -11,6 +11,7 @@ export default async function handler(req, res) {
   }
 
   const field = String(req.query.field || 'matches');
+
   if (!LIGHT_FIELDS.has(field)) {
     res.status(400).json({ error: `Fusha "${field}" nuk lejohet` });
     return;
