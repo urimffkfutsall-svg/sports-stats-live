@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik, NormativeAct } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -11,16 +11,14 @@ import { dbVideos, dbNews, dbNormativeActs
 } from '@/lib/supabase-db';
 import { notificationService } from '@/lib/notifications';
 
-// CACHE DISABLED - intercept all localStorage writes for large keys
+// CACHE DISABLED: blloko shkrimet e localStorage per cache te madh
 if (typeof window !== 'undefined') {
-  const _origSet = window.localStorage.setItem.bind(window.localStorage);
-  (window.localStorage as any).setItem = (key: string, value: string) => {
-    if (key === 'ffk_cache_v2' || key === 'ffk_futsall_data' || key === 'ffk_futsal_data') return;
-    _origSet(key, value);
+  const _ls = window.localStorage.setItem.bind(window.localStorage);
+  (window.localStorage as any).setItem = (k: string, v: string) => {
+    if (k === 'ffk_cache_v2' || k === 'ffk_futsall_data' || k === 'ffk_futsal_data') return;
+    _ls(k, v);
   };
-  window.localStorage.removeItem('ffk_cache_v2');
-  window.localStorage.removeItem('ffk_futsall_data');
-  window.localStorage.removeItem('ffk_futsal_data');
+  ['ffk_cache_v2', 'ffk_futsall_data', 'ffk_futsal_data'].forEach(k => window.localStorage.removeItem(k));
 }
 
 
@@ -188,20 +186,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
-    return; // DISABLED - Supabase is source of truth
-    return; // DISABLED: cache too large, data comes from Supabase
-    return; // DISABLED: cache too large, data comes from Supabase
-    return; // DISABLED: cache too large, data comes from Supabase
-    // VETÃ‹M cache lokale (pÃ«r ngarkim tÃ« shpejtÃ«) â€” JO push nÃ« MongoDB kÃ«tu.
+    // VET├âΓÇ╣M cache lokale (p├â┬½r ngarkim t├â┬½ shpejt├â┬½) ├óΓé¼ΓÇ¥ JO push n├â┬½ MongoDB k├â┬½tu.
     //
-    // PSE: kjo funksion pÃ«rdor state-in LOKAL tÃ« React-it (`snapshot`), i cili
-    // mund tÃ« jetÃ« "i vjetruar" nÃ«se ky tab/browser ka qÃ«ndruar hapur pÃ«r njÃ«
-    // kohÃ« dhe ndÃ«rkohÃ« dikush tjetÃ«r (ose njÃ« pajisje tjetÃ«r) ka shtuar diÃ§ka
-    // te MongoDB. NÃ«se do tÃ« bÃ«nim PUT me kÃ«tÃ« snapshot tÃ« vjetÃ«r, do tÃ«
-    // FSHINim/mbishkruanim ndryshimet e reja tÃ« bÃ«ra ndÃ«rkohÃ« â€” pikÃ«risht bug-u
-    // "shtoj diÃ§ka dhe pas njÃ« kohe zhduket". Prandaj push-i real nÃ« MongoDB
-    // bÃ«het VETÃ‹M te modulet dbXxx (supabase-db.ts), tÃ« cilat GJITHMONÃ‹ marrin
-    // kopjen mÃ« tÃ« fundit nga serveri PARA se tÃ« shkruajnÃ«.
+    // PSE: kjo funksion p├â┬½rdor state-in LOKAL t├â┬½ React-it (`snapshot`), i cili
+    // mund t├â┬½ jet├â┬½ "i vjetruar" n├â┬½se ky tab/browser ka q├â┬½ndruar hapur p├â┬½r nj├â┬½
+    // koh├â┬½ dhe nd├â┬½rkoh├â┬½ dikush tjet├â┬½r (ose nj├â┬½ pajisje tjet├â┬½r) ka shtuar di├â┬ºka
+    // te MongoDB. N├â┬½se do t├â┬½ b├â┬½nim PUT me k├â┬½t├â┬½ snapshot t├â┬½ vjet├â┬½r, do t├â┬½
+    // FSHINim/mbishkruanim ndryshimet e reja t├â┬½ b├â┬½ra nd├â┬½rkoh├â┬½ ├óΓé¼ΓÇ¥ pik├â┬½risht bug-u
+    // "shtoj di├â┬ºka dhe pas nj├â┬½ kohe zhduket". Prandaj push-i real n├â┬½ MongoDB
+    // b├â┬½het VET├âΓÇ╣M te modulet dbXxx (supabase-db.ts), t├â┬½ cilat GJITHMON├âΓÇ╣ marrin
+    // kopjen m├â┬½ t├â┬½ fundit nga serveri PARA se t├â┬½ shkruajn├â┬½.
     const payload = {
       seasons: snapshot.seasons,
       competitions: snapshot.competitions,
@@ -240,7 +234,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // ============ CACHE HYDRATION ============
   useEffect(() => {
     try {
-      const cached = null;
+      const cached = localStorage.getItem('ffk_cache_v2');
       if (cached) {
         const d = JSON.parse(cached);
         setState(prev => ({
@@ -267,14 +261,14 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // ============ INITIAL LOAD ============
   const loadData = useCallback(async () => {
-    localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.removeItem('ffk_futsal_data'); localStorage.removeItem('ffk_cache_ver'); const CACHE_VER = 'disabled'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
+    const CACHE_VER = 'v3'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
     // Start timer for minimum loading duration (2 seconds)
     const startTime = Date.now();
     const minLoadingTime = 2000; // 2 seconds minimum
     let localState: DataState | null = null;
     
     try {
-      const saved = null;
+      const saved = localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2');
       if (saved) {
         try {
           const parsed = JSON.parse(saved);
@@ -365,15 +359,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             setIsLoading(false);
             return;
           } else {
-            console.error('MongoDB API u pÃ«rgjigj por forma e tÃ« dhÃ«nave ishte e papritur:', remoteData);
+            console.error('MongoDB API u p├â┬½rgjigj por forma e t├â┬½ dh├â┬½nave ishte e papritur:', remoteData);
           }
         } else {
           const err = await remoteRes.json().catch(() => ({}));
-          console.error('Ngarkimi nga MongoDB dÃ«shtoi:', err.error || remoteRes.status);
+          console.error('Ngarkimi nga MongoDB d├â┬½shtoi:', err.error || remoteRes.status);
         }
       } catch (e) {
         // fall back to browser cache if Mongo API is unavailable
-        console.error('Ngarkimi nga MongoDB dÃ«shtoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
+        console.error('Ngarkimi nga MongoDB d├â┬½shtoi (rrjeti ose /api u zu nga rewrite-i i SPA-s):', e);
       }
 
       const hasValidSupabase = Boolean(
@@ -458,7 +452,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
     } catch (err) {
       console.error('Failed to load data from app storage:', err);
       try {
-        const saved = null;
+        const saved = localStorage.getItem('ffk_futsall_data') || localStorage.getItem('ffk_cache_v2');
         if (saved) setState(JSON.parse(saved));
       } catch { /* ignore */ }
     } finally {
@@ -871,7 +865,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // cache used for instant reload, so adding a team + refreshing never loses data.
   const persistShortiCache = (patch: Partial<{ shortiSuperliga: ShortiRubrik[]; shortiLigaPare: ShortiRubrik[] }>) => {
     try {
-      const cached = null;
+      const cached = localStorage.getItem('ffk_cache_v2');
       const parsed = cached ? JSON.parse(cached) : {};
       const next = { ...parsed, ...patch };
       localStorage.setItem('ffk_cache_v2', JSON.stringify(next));
