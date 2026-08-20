@@ -60,14 +60,18 @@ const Header: React.FC = () => {
             <div className="relative" ref={moreRef}>
               <button
                 onClick={() => setMoreOpen(o => !o)}
-                className={`flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
+                className={`flex items-center justify-center p-2 rounded-lg transition-colors ${
                   isMoreActive
                     ? 'bg-[#1E6FF2] text-white'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
+                title="Më shumë"
               >
-                Më shumë
-                <span className={`text-[10px] transition-transform ${moreOpen ? 'rotate-180' : ''}`}>▾</span>
+                <div className="space-y-1">
+                  <span className="block w-5 h-0.5 bg-current rounded-full"></span>
+                  <span className="block w-5 h-0.5 bg-current rounded-full"></span>
+                  <span className="block w-5 h-0.5 bg-current rounded-full"></span>
+                </div>
               </button>
               {moreOpen && (
                 <div className="absolute left-0 top-full mt-1 w-48 bg-white rounded-lg shadow-xl border border-gray-100 py-1.5 z-50">
