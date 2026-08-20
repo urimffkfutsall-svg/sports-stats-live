@@ -56,11 +56,9 @@ const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (isLoading) {
     if (isPhoneOrTablet) {
       return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">
-          <img src="/field-bg.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-16 h-16 z-10 opacity-90" />
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-24 h-24 z-10 opacity-90" />
           <img src="/images/field-bg.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
-          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-16 h-16 z-10 opacity-90" />
+          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-24 h-24 z-10 opacity-90" />
           <div className="relative w-16 h-16">
             {Array.from({ length: 8 }).map((_, i) => (
               <span
