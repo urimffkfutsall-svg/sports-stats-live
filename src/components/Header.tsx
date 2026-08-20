@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -25,8 +25,6 @@ const Header: React.FC = () => {
     { path: '/kupa', label: 'Kupa e Kosoves' },
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
-    { path: '/komisioni', label: 'Komisioni' },
-    { path: '/aktet-normative', label: 'Aktet Normative' },
     { path: '/komisioni', label: 'Komisioni' },
     { path: '/aktet-normative', label: 'Aktet Normative' },
     { path: '/kombetarja', label: 'Kombetarja' },
@@ -67,7 +65,7 @@ const Header: React.FC = () => {
                     ? 'bg-[#1E6FF2] text-white'
                     : 'text-gray-300 hover:text-white hover:bg-white/10'
                 }`}
-                title="MÃ« shumÃ«"
+                title="Më shumë"
               >
                 <div className="space-y-1">
                   <span className="block w-5 h-0.5 bg-current rounded-full"></span>
@@ -160,7 +158,7 @@ const Header: React.FC = () => {
               className="p-2 text-gray-300 hover:text-white"
             >
               {menuOpen ? (
-                <span className="text-xl font-bold">âœ•</span>
+                <span className="text-xl font-bold">✕</span>
               ) : (
                 <div className="space-y-1.5">
                   <span className="block w-6 h-0.5 bg-white rounded-full"></span>
@@ -188,7 +186,7 @@ const Header: React.FC = () => {
               </Link>
             ))}
             <div className="mt-2 pt-2 border-t border-white/10">
-              <span className="block px-3 py-1 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">MÃ« shumÃ«</span>
+              <span className="block px-3 py-1 text-[10px] uppercase tracking-wider text-gray-400 font-semibold">Më shumë</span>
               {moreLinks.map(link => (
                 <Link
                   key={link.path}
