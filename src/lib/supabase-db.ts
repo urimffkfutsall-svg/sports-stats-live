@@ -1,16 +1,16 @@
-// ============================================================
-// Klient i të dhënave — MongoDB Atlas (nëpërmjet /api/data, /api/visitors,
+ï»¿// ============================================================
+// Klient i tÃ« dhÃ«nave â€” MongoDB Atlas (nÃ«pÃ«rmjet /api/data, /api/visitors,
 // /api/notifications si funksione Vercel Serverless).
 // ------------------------------------------------------------
-// I gjithë state-i i aplikacionit ruhet si NJË dokument i vetëm në
-// koleksionin "app_data" (key: 'main'). Çdo shtim/ndryshim/fshirje bën:
-//   1) GET /api/data  ? merr kopjen më të freskët nga serveri
-//   2) ndryshon array-in përkatës lokalisht
-//   3) PUT /api/data  ? ruan GJITHË dokumentin e përditësuar
-// Kjo siguron që "shto ? refresh" TË MOS humbasë kurrë të dhëna, sepse
-// çdo shkrim shkon vërtet te MongoDB (jo te një URL placeholder që s'ekziston).
-// Emrat e eksportuar janë njësoj si më parë, që asnjë skedar tjetër
-// (DataContext, faqet admin) të mos ketë nevojë të ndryshojë import-et.
+// I gjithÃ« state-i i aplikacionit ruhet si NJÃ‹ dokument i vetÃ«m nÃ«
+// koleksionin "app_data" (key: 'main'). Ã‡do shtim/ndryshim/fshirje bÃ«n:
+//   1) GET /api/data  ? merr kopjen mÃ« tÃ« freskÃ«t nga serveri
+//   2) ndryshon array-in pÃ«rkatÃ«s lokalisht
+//   3) PUT /api/data  ? ruan GJITHÃ‹ dokumentin e pÃ«rditÃ«suar
+// Kjo siguron qÃ« "shto ? refresh" TÃ‹ MOS humbasÃ« kurrÃ« tÃ« dhÃ«na, sepse
+// Ã§do shkrim shkon vÃ«rtet te MongoDB (jo te njÃ« URL placeholder qÃ« s'ekziston).
+// Emrat e eksportuar janÃ« njÃ«soj si mÃ« parÃ«, qÃ« asnjÃ« skedar tjetÃ«r
+// (DataContext, faqet admin) tÃ« mos ketÃ« nevojÃ« tÃ« ndryshojÃ« import-et.
 // ============================================================
 import {
   Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek,
@@ -23,7 +23,7 @@ async function apiGet(path: string) {
   const res = await fetch(`${API_BASE}${path}`);
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || `GET ${path} dështoi (${res.status})`);
+    throw new Error(err.error || `GET ${path} dÃ«shtoi (${res.status})`);
   }
   return res.json();
 }
@@ -36,7 +36,7 @@ async function apiSend(method: 'POST' | 'PUT', path: string, body?: any) {
   });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
-    throw new Error(err.error || `${method} ${path} dështoi (${res.status})`);
+    throw new Error(err.error || `${method} ${path} dÃ«shtoi (${res.status})`);
   }
   return res.json().catch(() => ({}));
 }
@@ -54,15 +54,15 @@ const BLOB_DEFAULTS: Record<string, any> = {
 };
 
 /**
- * E rëndësishme: gjithmonë marrim kopjen më të fundit nga serveri PARA se të
- * ndryshojmë diçka (jo një kopje lokale të "ndenjur"), që dy admin që punojnë
- * njëkohësisht të mos fshijnë ndryshimet e njëri-tjetrit.
+ * E rÃ«ndÃ«sishme: gjithmonÃ« marrim kopjen mÃ« tÃ« fundit nga serveri PARA se tÃ«
+ * ndryshojmÃ« diÃ§ka (jo njÃ« kopje lokale tÃ« "ndenjur"), qÃ« dy admin qÃ« punojnÃ«
+ * njÃ«kohÃ«sisht tÃ« mos fshijnÃ« ndryshimet e njÃ«ri-tjetrit.
  */
-// RADHA E SHKRIMEVE (write queue): nëse admin-i shton disa skuadra shpejt
-// njëra pas tjetrës, çdo mutateBlob() do të priste në radhë derisa i
-// mëparshmi të MBAROJË plotësisht (GET + PUT), në vend që të "garojnë" — kjo
-// eliminon rastin kur shtimi #2 fillon GET-in e vet PARA se shtimi #1 të ketë
-// mbaruar PUT-in, gjë që më parë bënte që #2 të mbishkruante mbi #1 (skuadra
+// RADHA E SHKRIMEVE (write queue): nÃ«se admin-i shton disa skuadra shpejt
+// njÃ«ra pas tjetrÃ«s, Ã§do mutateBlob() do tÃ« priste nÃ« radhÃ« derisa i
+// mÃ«parshmi tÃ« MBAROJÃ‹ plotÃ«sisht (GET + PUT), nÃ« vend qÃ« tÃ« "garojnÃ«" â€” kjo
+// eliminon rastin kur shtimi #2 fillon GET-in e vet PARA se shtimi #1 tÃ« ketÃ«
+// mbaruar PUT-in, gjÃ« qÃ« mÃ« parÃ« bÃ«nte qÃ« #2 tÃ« mbishkruante mbi #1 (skuadra
 // "humbur" e heshtur).
 let _writeQueue: Promise<void> = Promise.resolve();
 
@@ -74,8 +74,8 @@ async function mutateBlob(mutator: (blob: Record<string, any>) => void): Promise
     await apiSend('PUT', '/data', blob);
   };
   const result = _writeQueue.then(run, run);
-  // Mbaje radhën "të gjallë" edhe nëse ky shkrim dështon — shkrimet e tjera
-  // në radhë duhet të vazhdojnë; gabimi ende del te thirrësi i mutateBlob.
+  // Mbaje radhÃ«n "tÃ« gjallÃ«" edhe nÃ«se ky shkrim dÃ«shton â€” shkrimet e tjera
+  // nÃ« radhÃ« duhet tÃ« vazhdojnÃ«; gabimi ende del te thirrÃ«si i mutateBlob.
   _writeQueue = result.catch(() => {});
   return result;
 }
@@ -104,7 +104,7 @@ export async function fetchAllData() {
   };
 }
 
-// ============ GENERIC CRUD BUILDERS (mbi "blob"-in e vetëm) ============
+// ============ GENERIC CRUD BUILDERS (mbi "blob"-in e vetÃ«m) ============
 
 function makeUpsertCrud(arrKey: string) {
   return {
@@ -130,18 +130,18 @@ function makeUpsertCrud(arrKey: string) {
 }
 
 // ============ "CORE" ENTITETET (seasons, teams, matches, etj.) ============
-// KJO ËSHTË TASHMË RRUGA E VETME (autoritative) drejt MongoDB. Çdo add/update/
-// delete: (1) merr kopjen MË TË FUNDIT nga serveri, (2) ndryshon VETËM array-in
-// përkatës, (3) shkruan gjithë dokumentin mbrapsht. Kjo eliminon bug-un ku një
-// tab i hapur prej kohësh shkruan mbi shtesat e reja të bëra nga dikush tjetër
-// ndërkohë — dritarja e "garës" tani është vetëm koha e një kërkese rrjeti,
-// jo sa ka qëndruar hapur browser-i.
+// KJO Ã‹SHTÃ‹ TASHMÃ‹ RRUGA E VETME (autoritative) drejt MongoDB. Ã‡do add/update/
+// delete: (1) merr kopjen MÃ‹ TÃ‹ FUNDIT nga serveri, (2) ndryshon VETÃ‹M array-in
+// pÃ«rkatÃ«s, (3) shkruan gjithÃ« dokumentin mbrapsht. Kjo eliminon bug-un ku njÃ«
+// tab i hapur prej kohÃ«sh shkruan mbi shtesat e reja tÃ« bÃ«ra nga dikush tjetÃ«r
+// ndÃ«rkohÃ« â€” dritarja e "garÃ«s" tani Ã«shtÃ« vetÃ«m koha e njÃ« kÃ«rkese rrjeti,
+// jo sa ka qÃ«ndruar hapur browser-i.
 function makeSimpleCrud<T extends { id: string }>(arrKey: string) {
   return {
     add: async (item: T) => {
       await mutateBlob(blob => {
         const arr: T[] = blob[arrKey] || [];
-        // Mbrojtje shtesë kundër dublikimit nëse thirret dy herë (p.sh. retry).
+        // Mbrojtje shtesÃ« kundÃ«r dublikimit nÃ«se thirret dy herÃ« (p.sh. retry).
         blob[arrKey] = arr.some(x => x.id === item.id) ? arr.map(x => (x.id === item.id ? item : x)) : [...arr, item];
       });
       return true;
@@ -242,15 +242,15 @@ export async function uploadPlayerPhoto(file: File, _playerId: string): Promise<
 }
 
 // ============ POLLING-BASED "REAL-TIME" (emulon Supabase Realtime) ============
-// RISHIKUAR PËR BANDWIDTH: më parë çdo "subscribe" (matches, goals, dhe 8
-// tabela të tjera) fillonte TIMER-in E VET, secili duke shkarkuar GJITHË
-// dokumentin (/api/data) — përfshi çdo foto/logo si base64 — çdo 4-8 sekonda,
-// PËR ÇDO vizitor. Kjo shkaktoi ~52GB trafik brenda muajit dhe pezullimin e
-// projektit në Vercel. Tani:
-//   • matches/goals përdorin /api/live (projeksion i lehtë, PA foto) dhe
-//     interval më të gjatë (8s).
-//   • 8 "tabelat" e tjera (teams, players, etj.) ndajnë NJË poller të
-//     vetëm, që bën NJË fetch të plotë çdo 45s (jo 8 fetch të veçanta çdo 8s).
+// RISHIKUAR PÃ‹R BANDWIDTH: mÃ« parÃ« Ã§do "subscribe" (matches, goals, dhe 8
+// tabela tÃ« tjera) fillonte TIMER-in E VET, secili duke shkarkuar GJITHÃ‹
+// dokumentin (/api/data) â€” pÃ«rfshi Ã§do foto/logo si base64 â€” Ã§do 4-8 sekonda,
+// PÃ‹R Ã‡DO vizitor. Kjo shkaktoi ~52GB trafik brenda muajit dhe pezullimin e
+// projektit nÃ« Vercel. Tani:
+//   â€¢ matches/goals pÃ«rdorin /api/live (projeksion i lehtÃ«, PA foto) dhe
+//     interval mÃ« tÃ« gjatÃ« (8s).
+//   â€¢ 8 "tabelat" e tjera (teams, players, etj.) ndajnÃ« NJÃ‹ poller tÃ«
+//     vetÃ«m, qÃ« bÃ«n NJÃ‹ fetch tÃ« plotÃ« Ã§do 45s (jo 8 fetch tÃ« veÃ§anta Ã§do 8s).
 
 function diffAndEmit(arrKey: string, rows: any[], prevMaps: Map<string, Map<string, any>>, callback: (payload: any) => void, isFirst: boolean) {
   const prevMap = prevMaps.get(arrKey) || new Map<string, any>();
@@ -268,7 +268,7 @@ function diffAndEmit(arrKey: string, rows: any[], prevMaps: Map<string, Map<stri
   prevMaps.set(arrKey, newMap);
 }
 
-// --- E shpejtë (matches/goals): endpoint i lehtë, pa foto ---
+// --- E shpejtÃ« (matches/goals): endpoint i lehtÃ«, pa foto ---
 function pollLightField(arrKey: string, callback: (payload: any) => void, intervalMs: number) {
   const prevMaps = new Map<string, Map<string, any>>();
   let first = true;
@@ -280,7 +280,7 @@ function pollLightField(arrKey: string, callback: (payload: any) => void, interv
       const rows: any[] = await apiGet(`/live?field=${arrKey}`);
       diffAndEmit(arrKey, rows || [], prevMaps, callback, first);
       first = false;
-    } catch { /* transient network hiccup — provo sërish në tick-un tjetër */ }
+    } catch { /* transient network hiccup â€” provo sÃ«rish nÃ« tick-un tjetÃ«r */ }
   };
 
   tick();
@@ -288,7 +288,7 @@ function pollLightField(arrKey: string, callback: (payload: any) => void, interv
   return { unsubscribe() { stopped = true; clearInterval(timer); } };
 }
 
-// --- E ngadaltë (teams, players, etj.): NJË fetch i ndarë mes gjithë tabelave ---
+// --- E ngadaltÃ« (teams, players, etj.): NJÃ‹ fetch i ndarÃ« mes gjithÃ« tabelave ---
 type SlowListener = { arrKey: string; callback: (payload: any) => void };
 const _slowListeners: SlowListener[] = [];
 const _slowPrevMaps = new Map<string, Map<string, any>>();
@@ -308,7 +308,7 @@ async function slowPollTick() {
 function ensureSlowPolling() {
   if (_slowTimer) return;
   slowPollTick();
-  _slowTimer = setInterval(slowPollTick, 45000);
+  _slowTimer = setInterval(slowPollTick, 120000); // rritur nga 45s ne 2 min per te kursyer egress
 }
 
 function subscribeSlowField(arrKey: string, callback: (payload: any) => void) {
@@ -334,18 +334,18 @@ const TABLE_TO_BLOB_KEY: Record<string, string> = {
 };
 
 export function subscribeToMatches(callback: (payload: any) => void) {
-  return pollLightField('matches', callback, 8000);
+  return pollLightField('matches', callback, 15000);
 }
 
 export function subscribeToGoals(callback: (payload: any) => void) {
-  return pollLightField('goals', callback, 8000);
+  return pollLightField('goals', callback, 15000);
 }
 
 export function subscribeToTable(table: string, callback: (payload: any) => void) {
   return subscribeSlowField(TABLE_TO_BLOB_KEY[table] || table, callback);
 }
 
-// ============ NOTIFICATIONS (cross-client, bazuar në polling) ============
+// ============ NOTIFICATIONS (cross-client, bazuar nÃ« polling) ============
 type NotifCallback = (payload: any) => void;
 const _notifListeners = new Map<string, NotifCallback[]>();
 let _notifPollStarted = false;
@@ -364,7 +364,7 @@ function ensureNotificationPolling() {
     } catch { /* ignore, retry next tick */ }
   };
   tick();
-  setInterval(tick, 2500);
+  setInterval(tick, 20000); // rritur nga 2.5s ne 20s per te kursyer egress
 }
 
 export function getNotificationChannel() {
@@ -417,7 +417,7 @@ export const dbVisitors = {
   },
 };
 
-// ============ NATIONAL TEAM (legacy — jo aktualisht të përdorura nga UI) ============
+// ============ NATIONAL TEAM (legacy â€” jo aktualisht tÃ« pÃ«rdorura nga UI) ============
 export const dbNationalPlayers = makeUpsertCrud('nationalPlayers');
 export const dbNationalMatches = makeUpsertCrud('nationalMatches');
 export const dbNationalStaff = makeUpsertCrud('nationalStaff');
@@ -441,7 +441,7 @@ export const dbLiveStreams = makeUpsertCrud('liveStreams');
 export const dbPlayoffSeries = makeUpsertCrud('playoffSeries');
 export const dbPlayoffMatches = makeUpsertCrud('playoffMatches');
 
-// ============ NORMATIVE ACTS (endpoint i veçantë — PDF base64 shumë i madh për blob kryesor) ============
+// ============ NORMATIVE ACTS (endpoint i veÃ§antÃ« â€” PDF base64 shumÃ« i madh pÃ«r blob kryesor) ============
 export const dbNormativeActs = {
   getAll: async () => {
     try {
@@ -465,3 +465,5 @@ export const dbNormativeActs = {
     return true;
   },
 };
+
+
