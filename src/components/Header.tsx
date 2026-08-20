@@ -10,6 +10,8 @@ const Header: React.FC = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [moreOpen, setMoreOpen] = useState(false);
   const moreRef = useRef<HTMLDivElement>(null);
+  // Auto-close dropdown on navigation
+  useEffect(() => { setMoreOpen(false); }, [location.pathname]);
   const { isAuthenticated, logout } = useAuth();
   const { settings } = useData();
   const location = useLocation();
