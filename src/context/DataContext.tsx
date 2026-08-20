@@ -250,6 +250,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   // ============ INITIAL LOAD ============
   const loadData = useCallback(async () => {
+    const CACHE_VER = 'v3'; if (localStorage.getItem('ffk_cache_ver') !== CACHE_VER) { localStorage.removeItem('ffk_cache_v2'); localStorage.removeItem('ffk_futsall_data'); localStorage.setItem('ffk_cache_ver', CACHE_VER); }
     // Start timer for minimum loading duration (2 seconds)
     const startTime = Date.now();
     const minLoadingTime = 2000; // 2 seconds minimum
@@ -271,6 +272,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
             playersOfWeek: parsed.playersOfWeek || [],
             users: parsed.users || [],
             decisions: parsed.decisions || [],
+          normativeActs: [],
             videos: parsed.videos || [],
             news: parsed.news || [],
             settings: parsed.settings || defaultSettings,
@@ -300,6 +302,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
               playersOfWeek: remoteData.playersOfWeek || [],
               users: remoteData.users || [],
               decisions: remoteData.decisions || [],
+            normativeActs: [],
               videos: remoteData.videos || [],
               news: remoteData.news || [],
               settings: remoteData.settings || defaultSettings,
