@@ -176,6 +176,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
     return; // DISABLED: cache too large, data comes from Supabase
+    return; // DISABLED: cache too large, data comes from Supabase
+    return; // DISABLED: cache too large, data comes from Supabase
     // VETÃ‹M cache lokale (pÃ«r ngarkim tÃ« shpejtÃ«) â€” JO push nÃ« MongoDB kÃ«tu.
     //
     // PSE: kjo funksion pÃ«rdor state-in LOKAL tÃ« React-it (`snapshot`), i cili
