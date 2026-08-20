@@ -1,4 +1,4 @@
-ï»¿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Trophy, PlayCircle, BarChart3, Menu, X, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -52,6 +52,16 @@ const BottomNav: React.FC = () => {
               </Link>
             ))}
             <div className="border-t border-gray-100 mt-1 pt-1">
+              {!isAuthenticated && (
+                <Link
+                  to="/login"
+                  onClick={() => setMoreOpen(false)}
+                  className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
+                >
+                  <User size={16} className="text-[#1E6FF2]" />
+                  Kyçu
+                </Link>
+              )}
               {isAuthenticated && (
                 <>
                   <Link
