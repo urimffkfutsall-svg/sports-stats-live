@@ -36,19 +36,16 @@ const queryClient = new QueryClient();
 
 const GoldRingSpinner: React.FC<{ size?: number }> = ({ size = 64 }) => (
   <div
-    className="rounded-full"
+    className="rounded-full animate-spin"
     style={{
       width: size,
       height: size,
-      border: `${Math.max(3, size * 0.09)}px solid rgba(208,166,80,0.2)`,
+      borderWidth: Math.max(3, size * 0.09),
+      borderStyle: 'solid',
+      borderColor: 'rgba(208,166,80,0.2)',
       borderTopColor: '#d0a650',
-      animation: 'ffkRingSpin 0.8s linear infinite',
     }}
-  >
-    <style>{`
-      @keyframes ffkRingSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    `}</style>
-  </div>
+  />
 );
 const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useData();
@@ -72,16 +69,16 @@ const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (isLoading) {
     if (isPhoneOrTablet) {
       return (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 bg-[#0B1226]">
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-10 bg-[#0B1226]">
           <GoldRingSpinner size={64} />
-          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-32 h-32 opacity-90" />
+          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-32 h-32 opacity-90 mt-4" />
         </div>
       );
     }
     return (
-      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-6 bg-[#0B1226]">
+      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-10 bg-[#0B1226]">
         <GoldRingSpinner size={56} />
-        <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-28 h-28 opacity-90" />
+        <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-28 h-28 opacity-90 mt-4" />
       </div>
     );
   }
@@ -144,6 +141,7 @@ const App = () => (
 );
 
 export default App;
+
 
 
 
