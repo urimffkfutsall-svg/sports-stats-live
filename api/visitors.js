@@ -1,10 +1,21 @@
-import { supabase } from './_supabaseClient.js';
+﻿import { supabase } from './_supabaseClient.js';
+
+const ALLOWED_FIELDS = ['ip', 'city', 'region', 'country', 'visited_at'];
+
+function pickAllowed(body) {
+  const out = {};
+  for (const key of ALLOWED_FIELDS) {
+    if (body[key] !== undefined) out[key] = body[key];
+  }
+  return out;
+}
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const { error } = await supabase.from('visitors')
-        .insert({ ...req.body, visited_at: req.body.visited_at || new Date().toISOString() });
+      const payload = pickAllowed(req.body || {});
+      payload.visited_at = payload.visited_at || new Date().toISOString();
+      const { error } = await supabase.from('visitors').insert(payload);
       if (error) throw error;
       res.status(200).json({ ok: true });
     } catch (e) {
@@ -18,7 +29,6 @@ export default async function handler(req, res) {
       const { data: all, error } = await supabase
         .from('visitors').select('*').order('visited_at', { ascending: false }).limit(500);
       if (error) throw error;
-
       if (req.query.stats) {
         const today = new Date().toISOString().split('T')[0];
         const todayV = all.filter((v) => (v.visited_at || '').startsWith(today));
@@ -33,7 +43,6 @@ export default async function handler(req, res) {
         });
         return;
       }
-
       res.status(200).json(all);
     } catch (e) {
       res.status(500).json({ error: e.message });
