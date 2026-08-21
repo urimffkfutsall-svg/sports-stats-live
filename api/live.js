@@ -1,4 +1,4 @@
-﻿import { supabase } from './_supabaseClient.js';
+﻿import { getAppData } from './_supabaseClient.js';
 
 const LIGHT_FIELDS = new Set([
   'matches', 'goals', 'seasons', 'competitions', 'scorers', 'playersOfWeek', 'users', 'decisions',
@@ -11,18 +11,15 @@ export default async function handler(req, res) {
   }
 
   const field = String(req.query.field || 'matches');
-
   if (!LIGHT_FIELDS.has(field)) {
     res.status(400).json({ error: `Fusha "${field}" nuk lejohet` });
     return;
   }
 
   try {
-    const { data, error } = await supabase
-      .from('app_data').select('data').eq('key', 'main').single();
-    if (error && error.code !== 'PGRST116') throw error;
+    const data = await getAppData();
     res.setHeader('Cache-Control', 'no-store');
-    res.status(200).json(data?.data?.[field] || []);
+    res.status(200).json(data?.[field] || []);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }
