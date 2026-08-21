@@ -18,7 +18,7 @@ const Header: React.FC = () => {
 
   const isActive = (path: string) => location.pathname === path;
 
-  const navLinks = [
+  const allNavLinks = [
     { path: '/', label: 'Ballina' },
     { path: '/live', label: 'Live' },
     { path: '/superliga', label: 'Superliga' },
@@ -31,6 +31,8 @@ const Header: React.FC = () => {
     { path: '/kombetarja', label: 'Kombetarja' },
     { path: '/playoff', label: 'PlayOff' },
   ];
+  const hiddenPaths = (settings as any)?.hiddenNavPaths || [];
+  const navLinks = allNavLinks.filter(l => !hiddenPaths.includes(l.path));
 
   const mainPaths = ['/', '/superliga', '/liga-pare'];
   const mainLinks = navLinks.filter(l => mainPaths.includes(l.path));

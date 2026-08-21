@@ -142,6 +142,7 @@ export interface AppSettings {
   appName: string;
   logo: string;
   contact: string;
+  hiddenNavPaths?: string[];
 }
 
 export interface Decision {
@@ -315,3 +316,5 @@ export interface NormativeAct {
   order?: number;
   createdAt?: string;
 }
+
+
