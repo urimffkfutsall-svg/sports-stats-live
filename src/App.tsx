@@ -34,6 +34,34 @@ import BottomNav from "./components/BottomNav";
 
 const queryClient = new QueryClient();
 
+const FootballSpinner: React.FC<{ size?: number }> = ({ size = 64 }) => (
+  <div className="flex flex-col items-center justify-center" style={{ width: size, height: size + 20 }}>
+    <div
+      className="rounded-full shadow-lg relative overflow-hidden"
+      style={{
+        width: size,
+        height: size,
+        background: 'radial-gradient(circle at 35% 30%, #ffffff 0%, #ffffff 38%, #d0a650 39%, #d0a650 100%)',
+        animation: 'ffkSpin 0.9s linear infinite',
+      }}
+    >
+      <svg viewBox="0 0 100 100" width={size} height={size} style={{ position: 'absolute', inset: 0 }}>
+        <polygon points="50,14 66,25 61,43 39,43 34,25" fill="#2a499a" />
+        <polygon points="50,57 66,68 61,86 39,86 34,68" fill="#2a499a" opacity="0.85" />
+        <polygon points="18,44 34,42 39,58 27,69 13,60" fill="#2a499a" opacity="0.7" />
+        <polygon points="82,44 66,42 61,58 73,69 87,60" fill="#2a499a" opacity="0.7" />
+      </svg>
+    </div>
+    <div
+      className="mt-2 rounded-full bg-[#0B1226]/25 blur-[2px]"
+      style={{ width: size * 0.5, height: Math.max(4, size * 0.1), animation: 'ffkShadow 0.9s ease-in-out infinite' }}
+    />
+    <style>{`
+      @keyframes ffkSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+      @keyframes ffkShadow { 0%, 100% { transform: scaleX(1); opacity: 0.5; } 50% { transform: scaleX(0.65); opacity: 0.25; } }
+    `}</style>
+  </div>
+);
 const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { isLoading } = useData();
   const [showContent, setShowContent] = useState(false);
@@ -56,39 +84,14 @@ const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (isLoading) {
     if (isPhoneOrTablet) {
       return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 left-1/2 -translate-x-1/2 w-24 h-24 z-10 opacity-90" />
-          <div className="relative w-16 h-16">
-            {Array.from({ length: 8 }).map((_, i) => (
-              <span
-                key={i}
-                className="absolute top-1/2 left-1/2 rounded-full bg-white"
-                style={{
-                  width: '11px',
-                  height: '11px',
-                  marginTop: '-5.5px',
-                  marginLeft: '-5.5px',
-                  transform: `rotate(${i * 45}deg) translate(26px)`,
-                  animation: 'dotFade 1s linear infinite',
-                  animationDelay: `${i * 0.125}s`,
-                }}
-              />
-            ))}
-          </div>
-          <style>{`
-            @keyframes dotFade {
-              0% { opacity: 1; }
-              100% { opacity: 0.15; }
-            }
-          `}</style>
+        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#0B1226]">
+          <FootballSpinner size={72} />
         </div>
       );
     }
     return (
       <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-white">
-        <div className="relative w-14 h-14">
-          <div className="absolute inset-0 rounded-full border-4 border-[#1E6FF2]/15" />
-          <div className="absolute inset-0 rounded-full border-4 border-[#1E6FF2] border-t-transparent animate-spin" />
-        </div>
+        <FootballSpinner size={56} />
       </div>
     );
   }
@@ -151,5 +154,7 @@ const App = () => (
 );
 
 export default App;
+
+
 
 
