@@ -1,39 +1,30 @@
-﻿// ============================================================
-// "supabase" compatibility shim — MongoDB është baza reale (shih
-// supabase-db.ts). Ky skedar ekziston vetëm sepse AdminNews.tsx ende
-// importon `{ supabase }` direkt për upload fotosh. E emulojmë storage-in
-// duke konvertuar file-in në base64 (data-URI) — asnjë URL/kredencial
-// Supabase s'përdoret më askund.
-// ============================================================
+﻿import { supabaseClient } from './supabaseClient';
 
-const _uploadCache = new Map<string, string>();
+const MEDIA_BUCKET = 'media';
 
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => resolve((e.target?.result as string) || '');
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-function makeBucket(bucket: string) {
+function makeBucket(bucketName: string) {
   return {
-    async upload(path: string, file: File, _opts?: any) {
-      try {
-        const dataUrl = await fileToBase64(file);
-        _uploadCache.set(`${bucket}/${path}`, dataUrl);
-        return { data: { path }, error: null };
-      } catch (e: any) {
-        return { data: null, error: e };
-      }
+    async upload(path: string, file: File, opts?: any) {
+      const fullPath = `${bucketName}/${path}`;
+      const { data, error } = await supabaseClient.storage
+        .from(MEDIA_BUCKET)
+        .upload(fullPath, file, {
+          cacheControl: opts?.cacheControl || '3600',
+          upsert: opts?.upsert ?? true,
+          contentType: file.type || undefined,
+        });
+      if (error) return { data: null, error };
+      return { data: { path }, error: null };
     },
     async remove(paths: string[]) {
-      paths.forEach(p => _uploadCache.delete(`${bucket}/${p}`));
-      return { data: null, error: null };
+      const fullPaths = paths.map(p => `${bucketName}/${p}`);
+      const { error } = await supabaseClient.storage.from(MEDIA_BUCKET).remove(fullPaths);
+      return { data: null, error };
     },
     getPublicUrl(path: string) {
-      return { data: { publicUrl: _uploadCache.get(`${bucket}/${path}`) || '' } };
+      const fullPath = `${bucketName}/${path}`;
+      const { data } = supabaseClient.storage.from(MEDIA_BUCKET).getPublicUrl(fullPath);
+      return { data: { publicUrl: data.publicUrl } };
     },
   };
 }
@@ -44,7 +35,7 @@ export const supabase = {
   },
   from(table: string) {
     const notSupported = () => {
-      throw new Error(`supabase.from('${table}') nuk mbështetet më (baza është MongoDB). Përdor modulet dbXxx nga '@/lib/supabase-db'.`);
+      throw new Error(`supabase.from('${table}') nuk mbeshtetet me (baza eshte MongoDB). Perdor modulet dbXxx nga '@/lib/supabase-db'.`);
     };
     return { select: notSupported, insert: notSupported, update: notSupported, delete: notSupported };
   },

@@ -206,6 +206,7 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       settings: snapshot.settings,
       videos: snapshot.videos,
       news: snapshot.news,
+      normativeActs: snapshot.normativeActs,
       shortiSuperliga: snapshot.shortiSuperliga,
       shortiLigaPare: snapshot.shortiLigaPare,
     };
@@ -292,23 +293,8 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
 
 
-      const hasValidSupabase = Boolean(
-        import.meta.env.VITE_SUPABASE_URL &&
-        import.meta.env.VITE_SUPABASE_ANON_KEY &&
-        String(import.meta.env.VITE_SUPABASE_URL).includes('supabase.co') &&
-        String(import.meta.env.VITE_SUPABASE_ANON_KEY).length > 20
-      );
+      // Backend eshte MongoDB nepermjet /api (jo Supabase) - gjithmone marrim te dhena te fresketa nga serveri.
 
-      if (!hasValidSupabase) {
-        hasHydratedRef.current = true;
-        // Wait for minimum loading time before showing content
-        const elapsed = Date.now() - startTime;
-        if (elapsed < minLoadingTime) {
-          await new Promise(resolve => setTimeout(resolve, minLoadingTime - elapsed));
-        }
-        setIsLoading(false);
-        return;
-      }
 
       const [data, videosData, newsData, normativeActsData] = await Promise.all([
         fetchAllData(),
@@ -887,15 +873,15 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   // ============ NORMATIVE ACTS ============
   const addNormativeAct = (a: Omit<NormativeAct, 'id'>) => {
     const item = { ...a, id: uuidv4(), createdAt: new Date().toISOString() };
-    setState(p => ({ ...p, normativeActs: [item, ...p.normativeActs] }));
+    update(p => ({ ...p, normativeActs: [item, ...p.normativeActs] }));
     dbNormativeActs.upsert(item).catch(console.error);
   };
   const updateNormativeAct = (a: NormativeAct) => {
-    setState(p => ({ ...p, normativeActs: p.normativeActs.map(x => x.id === a.id ? a : x) }));
+    update(p => ({ ...p, normativeActs: p.normativeActs.map(x => x.id === a.id ? a : x) }));
     dbNormativeActs.upsert(a).catch(console.error);
   };
   const deleteNormativeAct = (id: string) => {
-    setState(p => ({ ...p, normativeActs: p.normativeActs.filter(x => x.id !== id) }));
+    update(p => ({ ...p, normativeActs: p.normativeActs.filter(x => x.id !== id) }));
     dbNormativeActs.remove(id).catch(console.error);
   };
 
@@ -903,18 +889,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addVideo = (v: Omit<Video, 'id'>) => {
     const id = uuidv4();
     const item = { ...v, id } as Video;
-    setState(p => ({ ...p, videos: [item, ...p.videos] }));
+    update(p => ({ ...p, videos: [item, ...p.videos] }));
     dbVideos.upsert(item).catch(console.error);
     // Send notification
     notificationService.notifyNewVideo(item.title);
     return id;
   };
   const updateVideo = (v: Video) => {
-    setState(p => ({ ...p, videos: p.videos.map(x => x.id === v.id ? v : x) }));
+    update(p => ({ ...p, videos: p.videos.map(x => x.id === v.id ? v : x) }));
     dbVideos.upsert(v).catch(console.error);
   };
   const deleteVideo = (id: string) => {
-    setState(p => ({ ...p, videos: p.videos.filter(x => x.id !== id) }));
+    update(p => ({ ...p, videos: p.videos.filter(x => x.id !== id) }));
     dbVideos.remove(id).catch(console.error);
   };
 
@@ -922,18 +908,18 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addNews = (n: Omit<News, 'id'>) => {
     const id = uuidv4();
     const item = { ...n, id } as News;
-    setState(p => ({ ...p, news: [item, ...p.news] }));
+    update(p => ({ ...p, news: [item, ...p.news] }));
     dbNews.upsert(item).catch(console.error);
     // Send notification
     notificationService.notifyNewNews(item.title, item.description);
     return id;
   };
   const updateNews = (n: News) => {
-    setState(p => ({ ...p, news: p.news.map(x => x.id === n.id ? n : x) }));
+    update(p => ({ ...p, news: p.news.map(x => x.id === n.id ? n : x) }));
     dbNews.upsert(n).catch(console.error);
   };
   const deleteNews = (id: string) => {
-    setState(p => ({ ...p, news: p.news.filter(x => x.id !== id) }));
+    update(p => ({ ...p, news: p.news.filter(x => x.id !== id) }));
     dbNews.remove(id).catch(console.error);
   };
 
@@ -965,6 +951,9 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   return <DataContext.Provider value={value}>{children}</DataContext.Provider>;
 };
+
+
+
 
 
 
