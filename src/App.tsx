@@ -69,16 +69,16 @@ const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (isLoading) {
     if (isPhoneOrTablet) {
       return (
-        <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-10 bg-[#0B1226]">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">
           <GoldRingSpinner size={64} />
-          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-32 h-32 opacity-90 mt-4" />
+          <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 w-28 h-28 opacity-90" />
         </div>
       );
     }
     return (
-      <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center gap-10 bg-[#0B1226]">
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">
         <GoldRingSpinner size={56} />
-        <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="w-28 h-28 opacity-90 mt-4" />
+        <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 w-24 h-24 opacity-90" />
       </div>
     );
   }
@@ -141,6 +141,7 @@ const App = () => (
 );
 
 export default App;
+
 
 
 
