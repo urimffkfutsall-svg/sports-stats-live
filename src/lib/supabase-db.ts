@@ -474,3 +474,21 @@ export const dbNormativeActs = {
 
 
 
+
+// ============ MATCH VOTES ============
+export const dbVotes = {
+  getCounts: async (matchId: string) => {
+    const res = await fetch(`${API_BASE}/votes?matchId=${encodeURIComponent(matchId)}`);
+    if (!res.ok) return { home: 0, draw: 0, away: 0 };
+    return res.json();
+  },
+  vote: async (matchId: string, choice: 'home' | 'draw' | 'away', voterId: string) => {
+    const res = await fetch(`${API_BASE}/votes`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ matchId, choice, voterId }),
+    });
+    if (!res.ok) throw new Error('Vote failed');
+    return res.json();
+  },
+};

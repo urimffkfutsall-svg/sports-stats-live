@@ -1,6 +1,7 @@
 ﻿import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import MatchDetailModal from './MatchDetailModal';
+import MatchVoteWidget from './MatchVoteWidget';
 import { Match } from '@/types';
 type TabType = 'upcoming' | 'live' | 'finished';
 
@@ -16,7 +17,7 @@ interface LandingMatchesProps {
 }
 
 const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming' }) => {
-  const { matches, competitions, getActiveSeason, getTeamById } = useData();
+  const { matches, competitions, getActiveSeason, getTeamById, settings } = useData();
   const [selectedMatch, setSelectedMatch] = useState<Match | null>(null);
   const [activeTab, setActiveTab] = useState<TabType>(initialTab);
   const activeSeason = getActiveSeason();
@@ -172,13 +173,7 @@ const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming'
           </div>
         </div>
 
-        {/* Footer button */}
-        <div className="pl-4 pr-3 pb-3">
-          <div className="w-full flex items-center justify-center gap-1.5 py-2 bg-gray-50 hover:bg-gray-100 text-gray-500 text-[10px] font-bold rounded-lg transition-colors uppercase tracking-wider">
-            Shiko detajet
-            ›
-          </div>
-        </div>
+PLACEHOLDER_NOT_USED
       </div>
     );
   };

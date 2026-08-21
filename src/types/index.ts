@@ -143,6 +143,7 @@ export interface AppSettings {
   logo: string;
   contact: string;
   hiddenNavPaths?: string[];
+  votingEnabled?: boolean;
 }
 
 export interface Decision {
