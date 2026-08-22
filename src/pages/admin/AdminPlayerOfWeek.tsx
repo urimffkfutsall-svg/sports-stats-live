@@ -57,7 +57,7 @@ const AdminPlayerOfWeek: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-800">Lojtari i JavÃ«s</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
           + Shto Lojtarin e JavÃ«s
         </button>
       </div>
@@ -106,7 +106,7 @@ const AdminPlayerOfWeek: React.FC = () => {
               )}
             </div>
             <div className="flex items-end">
-              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
+              <button type="submit" className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
                 {editId ? 'Ruaj' : 'Shto'}
               </button>
             </div>
@@ -132,12 +132,12 @@ const AdminPlayerOfWeek: React.FC = () => {
                       <div className="flex items-center gap-2 text-xs text-gray-400">
                         <span>Java {p.week}</span>
                         <span>{team?.name || '-'}</span>
-                        {p.isScorer && <span className="text-[#2a499a]">GolashÃ«nues ({p.goalsCount})</span>}
+                        {p.isScorer && <span className="text-[#0f1830]">GolashÃ«nues ({p.goalsCount})</span>}
                       </div>
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#2a499a]">âœŽ</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]">âœŽ</button>
                     <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">âœ—</button>
                   </div>
                 </div>

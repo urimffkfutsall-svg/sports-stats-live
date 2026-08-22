@@ -80,23 +80,23 @@ var PlayerStatsSection: React.FC = function() {
       </div>
 
       <div className="flex flex-wrap gap-3 mb-6">
-        <select value={compFilter} onChange={function(e) { setCompFilter(e.target.value); setTeamFilter('all'); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100">
+        <select value={compFilter} onChange={function(e) { setCompFilter(e.target.value); setTeamFilter('all'); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100">
           <option value="all">Te gjitha kompeticionet</option>
           {superligaComp && <option value={superligaComp.id}>Superliga</option>}
           {ligaPareComp && <option value={ligaPareComp.id}>Liga e Pare</option>}
           {kupaComp && <option value={kupaComp.id}>Kupa</option>}
         </select>
-        <select value={teamFilter} onChange={function(e) { setTeamFilter(e.target.value); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100">
+        <select value={teamFilter} onChange={function(e) { setTeamFilter(e.target.value); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100">
           <option value="all">Te gjitha skuadrat</option>
           {filteredTeams.map(function(t) { return <option key={t.id} value={t.id}>{t.name}</option>; })}
         </select>
-        <select value={weekFilter} onChange={function(e) { setWeekFilter(e.target.value); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100">
+        <select value={weekFilter} onChange={function(e) { setWeekFilter(e.target.value); }} className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100">
           <option value="all">Te gjitha javet</option>
           {weeks.map(function(w) { return <option key={w} value={String(w)}>Java {w}</option>; })}
         </select>
         <div className="relative flex-1 min-w-[200px]">
           âš²
-          <input type="text" value={search} onChange={function(e) { setSearch(e.target.value); }} placeholder="Kerko lojtar..." className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" />
+          <input type="text" value={search} onChange={function(e) { setSearch(e.target.value); }} placeholder="Kerko lojtar..." className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" />
         </div>
       </div>
 

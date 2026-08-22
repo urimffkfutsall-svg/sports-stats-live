@@ -68,7 +68,7 @@ const AdminPlayers: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-800">LojtarÃ«t</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
           + Shto Lojtar
         </button>
       </div>
@@ -124,7 +124,7 @@ const AdminPlayers: React.FC = () => {
               {form.photo && <img src={form.photo} alt="preview" className="w-8 h-8 mt-1 rounded-full object-cover" />}
             </div>
             <div className="flex items-end gap-2">
-              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
+              <button type="submit" className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
                 {editId ? 'Ruaj' : 'Shto'}
               </button>
             </div>
@@ -151,7 +151,7 @@ const AdminPlayers: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#2a499a]">âœŽ</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]">âœŽ</button>
                     <button onClick={() => { if (confirm('Fshi lojtarin?')) deletePlayer(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">âœ—</button>
                   </div>
                 </div>

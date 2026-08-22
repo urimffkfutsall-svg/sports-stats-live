@@ -100,7 +100,7 @@ const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming'
         <div className={`pl-4 pr-3 py-1.5 flex items-center justify-between text-[10px] ${
           isLive
             ? 'bg-gradient-to-r from-red-500 to-red-600 text-white/90'
-            : 'bg-gradient-to-r from-[#2a499a] to-[#2a499a] text-white/80'
+            : 'bg-gradient-to-r from-[#0f1830] to-[#0f1830] text-white/80'
         }`}>
           <div className="flex items-center gap-2">
             {match.date && (
@@ -156,7 +156,7 @@ const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming'
                 <span className={`text-2xl font-black tabular-nums w-7 text-left ${isLive ? 'text-red-500' : 'text-gray-900'}`}>{match.awayScore ?? 0}</span>
               </>
             ) : (
-              <span className="text-sm font-bold text-[#2a499a] bg-[#2a499a]/10 px-2.5 py-1 rounded-lg">{match.time || 'VS'}</span>
+              <span className="text-sm font-bold text-[#0f1830] bg-[#0f1830]/10 px-2.5 py-1 rounded-lg">{match.time || 'VS'}</span>
             )}
           </div>
 
@@ -186,9 +186,9 @@ PLACEHOLDER_NOT_USED
       return (
         <div className="mb-6">
           <h3 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
-            <span className="w-1 h-5 bg-[#2a499a] rounded-full" />
+            <span className="w-1 h-5 bg-[#0f1830] rounded-full" />
             {title}
-            {weekLabel && <span className="text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2.5 py-0.5 rounded-full border border-[#2a499a]/15">{weekLabel}</span>}
+            {weekLabel && <span className="text-[10px] font-bold text-[#0f1830] bg-[#0f1830]/10 px-2.5 py-0.5 rounded-full border border-[#0f1830]/15">{weekLabel}</span>}
           </h3>
           <p className="text-gray-400 text-xs text-center py-6 bg-white rounded-xl border border-gray-100">
             Nuk ka ndeshje per kete kategori.
@@ -199,9 +199,9 @@ PLACEHOLDER_NOT_USED
     return (
       <div className="mb-6">
         <h3 className="text-base font-bold text-gray-800 mb-3 flex items-center gap-2">
-          <span className="w-1 h-5 bg-[#2a499a] rounded-full" />
+          <span className="w-1 h-5 bg-[#0f1830] rounded-full" />
           {title}
-          {weekLabel && <span className="text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2.5 py-0.5 rounded-full border border-[#2a499a]/15">{weekLabel}</span>}
+          {weekLabel && <span className="text-[10px] font-bold text-[#0f1830] bg-[#0f1830]/10 px-2.5 py-0.5 rounded-full border border-[#0f1830]/15">{weekLabel}</span>}
         <span className="ml-auto text-[10px] font-semibold text-gray-400 bg-gray-100 px-2.5 py-0.5 rounded-full">{matchList.length}</span>
         </h3>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
@@ -229,7 +229,7 @@ PLACEHOLDER_NOT_USED
                     isActive
                       ? t.key === 'live'
                         ? 'bg-red-500 text-white shadow-md shadow-red-200'
-                        : 'bg-[#2a499a] text-white shadow-md'
+                        : 'bg-[#0f1830] text-white shadow-md'
                       : 'text-gray-400 hover:text-gray-600'
                   }`}
                 >

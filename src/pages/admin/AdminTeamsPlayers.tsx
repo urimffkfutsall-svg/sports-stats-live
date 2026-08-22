@@ -87,7 +87,7 @@ var AdminTeamsPlayers: React.FC = function() {
   if (view === 'player' && selectedPlayer) {
     return (
       <div className="space-y-6">
-        <button onClick={function() { setView('team'); setSelectedPlayerId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#2a499a] transition-colors">
+        <button onClick={function() { setView('team'); setSelectedPlayerId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] transition-colors">
           â† Kthehu te {selectedTeam?.name}
         </button>
 
@@ -104,25 +104,25 @@ var AdminTeamsPlayers: React.FC = function() {
         <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-gray-800 mb-4 flex items-center gap-2">+ Shto Statistike</h3>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            <select className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a] bg-white" value={sf.competitionId} onChange={function(e) { setSf(Object.assign({}, sf, { competitionId: e.target.value })); }}>
+            <select className="px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830] bg-white" value={sf.competitionId} onChange={function(e) { setSf(Object.assign({}, sf, { competitionId: e.target.value })); }}>
               <option value="">-- Kompeticioni --</option>
               {superligaComp && <option value={superligaComp.id}>Superliga</option>}
               {ligaPareComp && <option value={ligaPareComp.id}>Liga e Pare</option>}
             </select>
             <div>
-              <input type="number" min="1" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Java" value={sf.week} onChange={function(e) { setSf(Object.assign({}, sf, { week: parseInt(e.target.value) || 1 })); }} />
+              <input type="number" min="1" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]" placeholder="Java" value={sf.week} onChange={function(e) { setSf(Object.assign({}, sf, { week: parseInt(e.target.value) || 1 })); }} />
             </div>
             <div className="flex items-center gap-2">
               <span className="text-yellow-500 text-lg">??</span>
-              <input type="number" min="0" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Kartona V." value={sf.yellowCards} onChange={function(e) { setSf(Object.assign({}, sf, { yellowCards: parseInt(e.target.value) || 0 })); }} />
+              <input type="number" min="0" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]" placeholder="Kartona V." value={sf.yellowCards} onChange={function(e) { setSf(Object.assign({}, sf, { yellowCards: parseInt(e.target.value) || 0 })); }} />
             </div>
             <div className="flex items-center gap-2">
               <span className="text-red-500 text-lg">??</span>
-              <input type="number" min="0" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Kartona K." value={sf.redCards} onChange={function(e) { setSf(Object.assign({}, sf, { redCards: parseInt(e.target.value) || 0 })); }} />
+              <input type="number" min="0" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]" placeholder="Kartona K." value={sf.redCards} onChange={function(e) { setSf(Object.assign({}, sf, { redCards: parseInt(e.target.value) || 0 })); }} />
             </div>
-            <button onClick={handleAddStat} className="px-5 py-2.5 bg-gradient-to-r from-[#2a499a] to-[#2a499a] text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Shto</button>
+            <button onClick={handleAddStat} className="px-5 py-2.5 bg-gradient-to-r from-[#0f1830] to-[#0f1830] text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Shto</button>
           </div>
-          <input className="w-full mt-3 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Shenime shtese (opsionale)" value={sf.extraNotes} onChange={function(e) { setSf(Object.assign({}, sf, { extraNotes: e.target.value })); }} />
+          <input className="w-full mt-3 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]" placeholder="Shenime shtese (opsionale)" value={sf.extraNotes} onChange={function(e) { setSf(Object.assign({}, sf, { extraNotes: e.target.value })); }} />
         </div>
 
         <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-sm">
@@ -164,11 +164,11 @@ var AdminTeamsPlayers: React.FC = function() {
   if (view === 'team' && selectedTeam) {
     return (
       <div className="space-y-6">
-        <button onClick={function() { setView('list'); setSelectedTeamId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#2a499a] transition-colors">
+        <button onClick={function() { setView('list'); setSelectedTeamId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] transition-colors">
           â† Kthehu te Skuadrat
         </button>
 
-        <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-6 text-white flex items-center gap-4">
+        <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] rounded-2xl p-6 text-white flex items-center gap-4">
           {selectedTeam.logo && <img src={selectedTeam.logo} alt="" className="w-14 h-14 rounded-xl bg-white/10 p-1" />}
           <div>
             <h2 className="text-xl font-bold">{selectedTeam.name}</h2>
@@ -185,7 +185,7 @@ var AdminTeamsPlayers: React.FC = function() {
             var totalYellow = pStats.reduce(function(sum, s) { return sum + s.yellowCards; }, 0);
             var totalRed = pStats.reduce(function(sum, s) { return sum + s.redCards; }, 0);
             return (
-              <div key={p.id} onClick={function() { setSelectedPlayerId(p.id); setView('player'); }} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3 hover:shadow-md hover:border-[#2a499a]/30 transition-all cursor-pointer">
+              <div key={p.id} onClick={function() { setSelectedPlayerId(p.id); setView('player'); }} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center gap-3 hover:shadow-md hover:border-[#0f1830]/30 transition-all cursor-pointer">
                 <div className="w-11 h-11 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
                   {p.photo ? <img src={p.photo} alt="" className="w-full h-full object-cover" /> : null}
                 </div>
@@ -231,7 +231,7 @@ var AdminTeamsPlayers: React.FC = function() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a] to-[#2a499a] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#0f1830] to-[#0f1830] rounded-xl flex items-center justify-center shadow-lg">
             
           </div>
           <div>
@@ -245,7 +245,7 @@ var AdminTeamsPlayers: React.FC = function() {
         {['all', 'superliga', 'liga_pare'].map(function(f) {
           var label = f === 'all' ? 'Te gjitha' : f === 'superliga' ? 'Superliga' : 'Liga e Pare';
           return (
-            <button key={f} onClick={function() { setCompFilter(f as any); }} className={'px-4 py-2 rounded-xl text-sm font-medium transition-all ' + (compFilter === f ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+            <button key={f} onClick={function() { setCompFilter(f as any); }} className={'px-4 py-2 rounded-xl text-sm font-medium transition-all ' + (compFilter === f ? 'bg-[#0f1830] text-white shadow-lg shadow-[#0f1830]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
               {label}
             </button>
           );
@@ -259,7 +259,7 @@ var AdminTeamsPlayers: React.FC = function() {
           var tPlayers = players.filter(function(p) { return p.teamId === t.id && (activeSeason ? p.seasonId === activeSeason.id : true); });
           var comp = competitions.find(function(c) { return c.id === t.competitionId; });
           return (
-            <div key={t.id} onClick={function() { setSelectedTeamId(t.id); setView('team'); }} className="bg-white border border-gray-200 rounded-xl p-5 flex items-center gap-4 hover:shadow-lg hover:border-[#2a499a]/30 transition-all cursor-pointer">
+            <div key={t.id} onClick={function() { setSelectedTeamId(t.id); setView('team'); }} className="bg-white border border-gray-200 rounded-xl p-5 flex items-center gap-4 hover:shadow-lg hover:border-[#0f1830]/30 transition-all cursor-pointer">
               <div className="w-14 h-14 rounded-xl bg-gray-50 flex items-center justify-center overflow-hidden flex-shrink-0 p-1">
                 {t.logo ? <img src={t.logo} alt="" className="w-full h-full object-contain" /> : null}
               </div>

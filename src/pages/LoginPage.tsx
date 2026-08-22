@@ -121,11 +121,11 @@ var LoginPage: React.FC = function() {
             <p className="text-gray-500 text-sm mb-4 leading-relaxed">
               Ju lutem prisni deri ne aprovimin e llogarise tuaj.
             </p>
-            <div className="bg-[#2a499a]/10 border border-[#2a499a]/15 rounded-xl p-4 mb-6">
+            <div className="bg-[#0f1830]/10 border border-[#0f1830]/15 rounded-xl p-4 mb-6">
               <p className="text-sm text-[#1c3570] font-medium">Per informata shtese kontaktoni:</p>
               <p className="text-lg font-bold text-[#1c3570] mt-1">+383 45 278 279</p>
             </div>
-            <button onClick={function() { setMode('login'); setReg({ firstName: '', lastName: '', username: '', password: '', phone: '', email: '', teamId: '' }); }} className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
+            <button onClick={function() { setMode('login'); setReg({ firstName: '', lastName: '', username: '', password: '', phone: '', email: '', teamId: '' }); }} className="w-full py-2.5 bg-[#0f1830] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
               Kthehu ne Hyrje
             </button>
           </div>
@@ -140,7 +140,7 @@ var LoginPage: React.FC = function() {
         <Header />
         <div className="flex items-center justify-center px-4 py-10">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 w-full max-w-lg">
-            <button onClick={function() { setMode('login'); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#2a499a] mb-4 transition-colors">
+            <button onClick={function() { setMode('login'); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] mb-4 transition-colors">
               â† Kthehu ne Hyrje
             </button>
             <div className="flex items-center justify-center mb-6">
@@ -155,34 +155,34 @@ var LoginPage: React.FC = function() {
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Emri</label>
-                  <input type="text" value={reg.firstName} onChange={function(e) { setReg(Object.assign({}, reg, { firstName: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="Emri..." />
+                  <input type="text" value={reg.firstName} onChange={function(e) { setReg(Object.assign({}, reg, { firstName: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="Emri..." />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Mbiemri</label>
-                  <input type="text" value={reg.lastName} onChange={function(e) { setReg(Object.assign({}, reg, { lastName: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="Mbiemri..." />
+                  <input type="text" value={reg.lastName} onChange={function(e) { setReg(Object.assign({}, reg, { lastName: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="Mbiemri..." />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Username</label>
-                <input type="text" value={reg.username} onChange={function(e) { setReg(Object.assign({}, reg, { username: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="Username..." />
+                <input type="text" value={reg.username} onChange={function(e) { setReg(Object.assign({}, reg, { username: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="Username..." />
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Fjalekalimi</label>
-                <input type="password" value={reg.password} onChange={function(e) { setReg(Object.assign({}, reg, { password: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="Fjalekalimi..." />
+                <input type="password" value={reg.password} onChange={function(e) { setReg(Object.assign({}, reg, { password: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="Fjalekalimi..." />
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Nr. Telefonit</label>
-                  <input type="tel" value={reg.phone} onChange={function(e) { setReg(Object.assign({}, reg, { phone: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="+383..." />
+                  <input type="tel" value={reg.phone} onChange={function(e) { setReg(Object.assign({}, reg, { phone: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="+383..." />
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">Email</label>
-                  <input type="email" value={reg.email} onChange={function(e) { setReg(Object.assign({}, reg, { email: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="email@..." />
+                  <input type="email" value={reg.email} onChange={function(e) { setReg(Object.assign({}, reg, { email: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="email@..." />
                 </div>
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">Zgjedh Skuadren</label>
-                <select value={reg.teamId} onChange={function(e) { setReg(Object.assign({}, reg, { teamId: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none bg-white">
+                <select value={reg.teamId} onChange={function(e) { setReg(Object.assign({}, reg, { teamId: e.target.value })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none bg-white">
                   <option value="">-- Zgjedh skuadren --</option>
                   {superligaTeams.length > 0 && <optgroup label="Superliga">
                     {superligaTeams.map(function(t) { return <option key={t.id} value={t.id}>{t.name}</option>; })}
@@ -213,7 +213,7 @@ var LoginPage: React.FC = function() {
       <div className="flex items-center justify-center px-4 py-16">
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 w-full max-w-md">
           <div className="flex items-center justify-center mb-6">
-            <div className="w-14 h-14 bg-[#2a499a]/10 rounded-2xl flex items-center justify-center">
+            <div className="w-14 h-14 bg-[#0f1830]/10 rounded-2xl flex items-center justify-center">
               
             </div>
           </div>
@@ -223,12 +223,12 @@ var LoginPage: React.FC = function() {
           <form onSubmit={handleLogin} className="space-y-4">
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Emri i Perdoruesit</label>
-              <input type="text" value={username} onChange={function(e) { setUsername(e.target.value); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" placeholder="Shkruaj emrin..." />
+              <input type="text" value={username} onChange={function(e) { setUsername(e.target.value); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" placeholder="Shkruaj emrin..." />
             </div>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Fjalekalimi</label>
               <div className="relative">
-                <input type={showPassword ? 'text' : 'password'} value={password} onChange={function(e) { setPassword(e.target.value); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none pr-10" placeholder="Shkruaj fjalekalimin..." />
+                <input type={showPassword ? 'text' : 'password'} value={password} onChange={function(e) { setPassword(e.target.value); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none pr-10" placeholder="Shkruaj fjalekalimin..." />
                 <button type="button" onClick={function() { setShowPassword(!showPassword); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
                   {showPassword ? null : "â—‹"}
                 </button>
@@ -239,7 +239,7 @@ var LoginPage: React.FC = function() {
               <p className="text-red-500 text-sm bg-red-50 px-3 py-2 rounded-lg">{error}</p>
             )}
 
-            <button type="submit" className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
+            <button type="submit" className="w-full py-2.5 bg-[#0f1830] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
               Hyr
             </button>
           </form>

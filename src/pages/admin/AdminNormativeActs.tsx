@@ -80,13 +80,13 @@ const AdminNormativeActs: React.FC = () => {
           value={form.title}
           onChange={e => setForm({ ...form, title: e.target.value })}
           placeholder="Titulli i aktit normativ"
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] outline-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] outline-none"
         />
         <input
           value={form.description}
           onChange={e => setForm({ ...form, description: e.target.value })}
           placeholder="Pershkrimi i shkurter (opsional)"
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] outline-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] outline-none"
         />
         <div>
           <label className="block text-xs font-semibold text-gray-500 mb-1">
@@ -97,15 +97,15 @@ const AdminNormativeActs: React.FC = () => {
             type="file"
             accept="application/pdf"
             onChange={handleFile}
-            className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#2a499a] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
+            className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#0f1830] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
           />
-          {uploading && <p className="text-xs text-[#2a499a]/100 mt-1">Duke ngarkuar...</p>}
+          {uploading && <p className="text-xs text-[#0f1830]/100 mt-1">Duke ngarkuar...</p>}
           {fileName && !uploading && <p className="text-xs text-green-600 mt-1">? {fileName}</p>}
         </div>
         <div className="flex gap-2">
           <button
             onClick={handleSubmit}
-            className="px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors"
+            className="px-5 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors"
           >
             {editId ? 'Ruaj Ndryshimet' : 'Shto Aktin'}
           </button>
@@ -123,7 +123,7 @@ const AdminNormativeActs: React.FC = () => {
           <p className="text-gray-400 text-center py-8 bg-white rounded-xl border border-gray-100">Nuk ka akte normative.</p>
         ) : sorted.map((a: NormativeAct, i: number) => (
           <div key={a.id} className="bg-white rounded-xl border border-gray-200 p-4 flex items-center gap-3">
-            <span className="w-7 h-7 rounded-full bg-[#2a499a] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
+            <span className="w-7 h-7 rounded-full bg-[#0f1830] text-white text-xs font-bold flex items-center justify-center flex-shrink-0">
               {i + 1}
             </span>
             <div className="flex-1 min-w-0">
@@ -139,7 +139,7 @@ const AdminNormativeActs: React.FC = () => {
               </button>
               <button
                 onClick={() => startEdit(a)}
-                className="px-3 py-1.5 bg-[#2a499a]/10 text-[#1c3570] rounded-lg text-xs font-semibold hover:bg-[#2a499a]/15"
+                className="px-3 py-1.5 bg-[#0f1830]/10 text-[#1c3570] rounded-lg text-xs font-semibold hover:bg-[#0f1830]/15"
               >
                 Ndrysho
               </button>

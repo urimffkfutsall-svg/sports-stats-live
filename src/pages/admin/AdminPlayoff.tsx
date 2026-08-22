@@ -223,7 +223,7 @@ const AdminPlayoff: React.FC = () => {
                     <span className="font-bold text-gray-700">{getTeamName(m.awayTeamId)}</span>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEditMatch(m)} className="text-[#2a499a] hover:underline">Edito</button>
+                    <button onClick={() => handleEditMatch(m)} className="text-[#0f1830] hover:underline">Edito</button>
                     <button onClick={() => handleDeleteMatch(m.id)} className="text-red-400 hover:text-red-600">Fshi</button>
                   </div>
                 </div>
@@ -239,14 +239,14 @@ const AdminPlayoff: React.FC = () => {
     );
   };
 
-  if (loading) return <div className="flex justify-center py-16"><div className="w-10 h-10 border-4 border-[#2a499a]/20 border-t-[#2a499a] rounded-full animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-16"><div className="w-10 h-10 border-4 border-[#0f1830]/20 border-t-[#0f1830] rounded-full animate-spin" /></div>;
 
   return (
     <div className="space-y-6">
       {/* Type Selector */}
       <div className="flex gap-2 bg-gray-100 rounded-xl p-1">
-        <button onClick={() => setPlayoffType('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'superliga' ? "bg-[#2a499a] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
-        <button onClick={() => setPlayoffType('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'liga_pare' ? "bg-[#2a499a] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
+        <button onClick={() => setPlayoffType('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'superliga' ? "bg-[#0f1830] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
+        <button onClick={() => setPlayoffType('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'liga_pare' ? "bg-[#0f1830] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
       </div>
 
       {/* Add Series Form */}
@@ -289,7 +289,7 @@ const AdminPlayoff: React.FC = () => {
             <input type="number" value={formSeed2} onChange={e => setFormSeed2(e.target.value)} placeholder="6" className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl text-sm" />
           </div>
         </div>
-        <button onClick={handleSaveSeries} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingSeriesId ? 'Ruaj' : 'Shto Seri'}</button>
+        <button onClick={handleSaveSeries} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingSeriesId ? 'Ruaj' : 'Shto Seri'}</button>
       </div>
 
       {/* Add Match to Series */}
@@ -388,7 +388,7 @@ const AdminPlayoff: React.FC = () => {
           {semiSeries.length > 0 && (
             <div>
               <h3 className="font-black text-gray-900 mb-3 flex items-center gap-2">
-                <span className="w-1 h-5 bg-[#2a499a]/100 rounded-full"></span>Gjysmefinale
+                <span className="w-1 h-5 bg-[#0f1830]/100 rounded-full"></span>Gjysmefinale
                 <span className="text-xs text-gray-400 font-normal">(Vendi 1 & 2 presin fituesit e cerekfinaleve)</span>
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

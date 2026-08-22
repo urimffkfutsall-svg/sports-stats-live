@@ -35,7 +35,7 @@ function InstallAppBanner() {
 
   if (dismissed) return null;
 
-  var bannerStyle = { background: 'linear-gradient(135deg, #2a499a 0%, #2a499a 100%)' };
+  var bannerStyle = { background: 'linear-gradient(135deg, #0f1830 0%, #0f1830 100%)' };
 
   return (
     <div className="mx-4 my-4 rounded-xl overflow-hidden" style={bannerStyle}>
@@ -43,14 +43,14 @@ function InstallAppBanner() {
         <img src="/ffk-logo-192.png" alt="FFK" className="w-14 h-14 rounded-xl shadow-lg" />
         <div className="flex-1 min-w-0">
           <h3 className="text-white font-bold text-sm">Vendos Aplikacionin</h3>
-          <p className="text-[#2a499a]/25 text-xs mt-0.5">Shto FFK Futsal ne telefonin tuaj</p>
+          <p className="text-[#0f1830]/25 text-xs mt-0.5">Shto FFK Futsal ne telefonin tuaj</p>
         </div>
-        <button onClick={function() { setDismissed(true); }} className="text-[#2a499a]/40 hover:text-white text-xl leading-none p-1">x</button>
+        <button onClick={function() { setDismissed(true); }} className="text-[#0f1830]/40 hover:text-white text-xl leading-none p-1">x</button>
       </div>
 
       {showInstall ? (
         <div className="px-4 pb-4">
-          <button onClick={handleInstall} className="w-full py-2.5 bg-white text-[#0B1226] font-bold rounded-lg text-sm hover:bg-[#2a499a]/10 transition-colors">
+          <button onClick={handleInstall} className="w-full py-2.5 bg-white text-[#0f1830] font-bold rounded-lg text-sm hover:bg-[#0f1830]/10 transition-colors">
             Instalo Tani
           </button>
         </div>
@@ -61,11 +61,11 @@ function InstallAppBanner() {
             <div className="space-y-2">
               <div className="flex items-start gap-2">
                 <span className="bg-white/20 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">1</span>
-                <p className="text-[#2a499a]/15 text-xs"><strong>Android (Chrome):</strong> Kliko menyne (3 pika lart djathtas) dhe zgjidh "Add to Home screen"</p>
+                <p className="text-[#0f1830]/15 text-xs"><strong>Android (Chrome):</strong> Kliko menyne (3 pika lart djathtas) dhe zgjidh "Add to Home screen"</p>
               </div>
               <div className="flex items-start gap-2">
                 <span className="bg-white/20 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center flex-shrink-0 mt-0.5">2</span>
-                <p className="text-[#2a499a]/15 text-xs"><strong>iPhone (Safari):</strong> Kliko butonin Share (katrori me shigjet lart) dhe zgjidh "Add to Home Screen"</p>
+                <p className="text-[#0f1830]/15 text-xs"><strong>iPhone (Safari):</strong> Kliko butonin Share (katrori me shigjet lart) dhe zgjidh "Add to Home Screen"</p>
               </div>
             </div>
           </div>

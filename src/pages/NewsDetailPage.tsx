@@ -33,7 +33,7 @@ const NewsDetailPage: React.FC = () => {
         <Header />
         <div className="max-w-3xl mx-auto px-4 py-16 text-center">
           <p className="text-gray-400 text-lg">Lajmi nuk u gjet.</p>
-          <button onClick={() => navigate('/')} className="mt-4 px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold">Kthehu ne Ballina</button>
+          <button onClick={() => navigate('/')} className="mt-4 px-5 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-semibold">Kthehu ne Ballina</button>
         </div>
         <Footer />
       </div>
@@ -46,7 +46,7 @@ const NewsDetailPage: React.FC = () => {
     <div className="min-h-screen bg-[#F1F5F9]">
       <Header />
       <article className="max-w-3xl mx-auto px-4 py-8">
-        <button onClick={() => navigate(-1)} className="text-sm text-[#2a499a] font-semibold mb-4 hover:underline flex items-center gap-1">
+        <button onClick={() => navigate(-1)} className="text-sm text-[#0f1830] font-semibold mb-4 hover:underline flex items-center gap-1">
           â† Kthehu
         </button>
 
@@ -105,7 +105,7 @@ const NewsDetailPage: React.FC = () => {
             {photos.length > 4 && (
               <div className="flex gap-2 mt-2 overflow-x-auto pb-2">
                 {photos.slice(4).map((p, i) => (
-                  <img key={i} src={p} alt="" onClick={() => setLightbox(p)} className="w-20 h-20 rounded-xl object-cover cursor-pointer border-2 border-gray-200 hover:border-[#2a499a] transition-colors flex-shrink-0" />
+                  <img key={i} src={p} alt="" onClick={() => setLightbox(p)} className="w-20 h-20 rounded-xl object-cover cursor-pointer border-2 border-gray-200 hover:border-[#0f1830] transition-colors flex-shrink-0" />
                 ))}
               </div>
             )}
@@ -127,7 +127,7 @@ const NewsDetailPage: React.FC = () => {
           </div>
         )}
 
-        <span className="inline-block px-2.5 py-0.5 bg-[#2a499a] text-white text-[10px] font-bold rounded-md uppercase tracking-wider mb-3">Lajm</span>
+        <span className="inline-block px-2.5 py-0.5 bg-[#0f1830] text-white text-[10px] font-bold rounded-md uppercase tracking-wider mb-3">Lajm</span>
         <h1 className="text-3xl font-black text-gray-900 leading-tight mb-3">{item.title}</h1>
         {item.description && <p className="text-lg text-gray-500 mb-6">{item.description}</p>}
         <div className="prose prose-gray max-w-none">
@@ -154,7 +154,7 @@ const NewsDetailPage: React.FC = () => {
                   <button
                     key={i}
                     onClick={() => setLightbox(p)}
-                    className={`rounded-lg overflow-hidden border-2 transition-all ${lightbox === p ? 'border-[#2a499a] scale-110 shadow-lg' : 'border-white/20 opacity-60 hover:opacity-100'}`}
+                    className={`rounded-lg overflow-hidden border-2 transition-all ${lightbox === p ? 'border-[#0f1830] scale-110 shadow-lg' : 'border-white/20 opacity-60 hover:opacity-100'}`}
                   >
                     <img src={p} alt="" className="w-14 h-14 object-cover" />
                   </button>

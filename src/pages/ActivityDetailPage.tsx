@@ -31,7 +31,7 @@ export default function ActivityDetailPage() {
       <div className="min-h-screen bg-[#F1F5F9]">
         <Header />
         <div className="flex items-center justify-center py-32">
-          <div className="w-12 h-12 rounded-full border-4 border-[#2a499a]/20 border-t-[#2a499a] animate-spin" />
+          <div className="w-12 h-12 rounded-full border-4 border-[#0f1830]/20 border-t-[#0f1830] animate-spin" />
         </div>
         <Footer />
       </div>
@@ -44,7 +44,7 @@ export default function ActivityDetailPage() {
         <Header />
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-black text-gray-900 mb-4">Aktiviteti nuk u gjet</h1>
-          <Link to="/kombetarja" className="text-[#2a499a] font-bold hover:underline">Kthehu te Kombetarja</Link>
+          <Link to="/kombetarja" className="text-[#0f1830] font-bold hover:underline">Kthehu te Kombetarja</Link>
         </div>
         <Footer />
       </div>
@@ -59,9 +59,9 @@ export default function ActivityDetailPage() {
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center gap-2 text-sm text-gray-400 mb-6">
-          <Link to="/" className="hover:text-[#2a499a]">Ballina</Link>
+          <Link to="/" className="hover:text-[#0f1830]">Ballina</Link>
           <span>/</span>
-          <Link to="/kombetarja" className="hover:text-[#2a499a]">Kombetarja</Link>
+          <Link to="/kombetarja" className="hover:text-[#0f1830]">Kombetarja</Link>
           <span>/</span>
           <span className="text-gray-600">{activity.title}</span>
         </div>
@@ -75,7 +75,7 @@ export default function ActivityDetailPage() {
           )}
           <div className="p-6 md:p-8">
             <div className="flex items-center gap-3 mb-4">
-              <span className="text-[10px] font-bold text-white bg-[#2a499a] px-2.5 py-1 rounded-full uppercase">Kombetarja</span>
+              <span className="text-[10px] font-bold text-white bg-[#0f1830] px-2.5 py-1 rounded-full uppercase">Kombetarja</span>
               {activity.date && <span className="text-xs text-gray-400">{formatDate(activity.date)}</span>}
             </div>
             <h1 className="text-2xl md:text-3xl font-black text-gray-900 leading-tight mb-6">{activity.title}</h1>

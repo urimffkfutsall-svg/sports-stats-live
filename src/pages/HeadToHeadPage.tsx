@@ -45,7 +45,7 @@ const HeadToHeadPage: React.FC = () => {
             <select
               value={teamAId}
               onChange={e => setTeamAId(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent"
             >
               <option value="">Zgjedh skuadrÃ«n</option>
               {activeTeams.map(t => (
@@ -58,7 +58,7 @@ const HeadToHeadPage: React.FC = () => {
             <select
               value={teamBId}
               onChange={e => setTeamBId(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent"
             >
               <option value="">Zgjedh skuadrÃ«n</option>
               {activeTeams.filter(t => t.id !== teamAId).map(t => (
@@ -71,7 +71,7 @@ const HeadToHeadPage: React.FC = () => {
         {h2h && teamA && teamB && (
           <>
             {/* VS Header */}
-            <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-8 text-white mb-8 shadow-xl">
+            <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] rounded-2xl p-8 text-white mb-8 shadow-xl">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col items-center flex-1">
                   <div className="w-20 h-20 rounded-full bg-white/10 overflow-hidden">
@@ -81,7 +81,7 @@ const HeadToHeadPage: React.FC = () => {
                 </div>
                 <div className="text-center px-6">
                   <span className="text-3xl font-bold">{h2h.teamAWins} - {h2h.draws} - {h2h.teamBWins}</span>
-                  <p className="text-xs text-[#2a499a]/25 mt-1">{h2h.matches.length} ndeshje totale</p>
+                  <p className="text-xs text-[#0f1830]/25 mt-1">{h2h.matches.length} ndeshje totale</p>
                 </div>
                 <div className="flex flex-col items-center flex-1">
                   <div className="w-20 h-20 rounded-full bg-white/10 overflow-hidden">
@@ -95,7 +95,7 @@ const HeadToHeadPage: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 text-center">
-                <p className="text-2xl font-bold text-[#2a499a]">{h2h.teamAGoals}</p>
+                <p className="text-2xl font-bold text-[#0f1830]">{h2h.teamAGoals}</p>
                 <p className="text-xs text-gray-500">Gola {teamA.name}</p>
               </div>
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 text-center">
@@ -118,7 +118,7 @@ const HeadToHeadPage: React.FC = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey={teamA.name} fill="#2a499a" />
+                    <Bar dataKey={teamA.name} fill="#0f1830" />
                     <Bar dataKey={teamB.name} fill="#FF6B35" />
                   </BarChart>
                 </ResponsiveContainer>

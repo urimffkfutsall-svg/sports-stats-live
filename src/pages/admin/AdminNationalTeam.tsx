@@ -314,7 +314,7 @@ const AdminNationalTeam: React.FC = () => {
             <label className="block text-xs font-bold text-gray-500 mb-1">Viti</label>
             <input value={compYear} onChange={e => setCompYear(e.target.value)} placeholder="2028" className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl text-sm" />
           </div>
-          <button onClick={handleAddComp} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8] shadow-md">Shto</button>
+          <button onClick={handleAddComp} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8] shadow-md">Shto</button>
         </div>
       </div>
 
@@ -323,11 +323,11 @@ const AdminNationalTeam: React.FC = () => {
         <div key={c.id} className="bg-white rounded-2xl border-2 border-gray-100 p-5 shadow-sm">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
-              <span className="w-1.5 h-6 bg-[#2a499a] rounded-full"></span>
+              <span className="w-1.5 h-6 bg-[#0f1830] rounded-full"></span>
               <h3 className="font-black text-gray-900">{c.name} {c.year && <span className="text-gray-400 text-sm font-medium">({c.year})</span>}</h3>
             </div>
             <div className="flex gap-2">
-              <button onClick={() => { setSelectedCompId(c.id); setSelectedGroupId(''); }} className={"px-3 py-1 rounded-lg text-xs font-bold " + (selectedCompId === c.id ? "bg-[#2a499a] text-white" : "bg-gray-100 text-gray-600")}>Menaxho</button>
+              <button onClick={() => { setSelectedCompId(c.id); setSelectedGroupId(''); }} className={"px-3 py-1 rounded-lg text-xs font-bold " + (selectedCompId === c.id ? "bg-[#0f1830] text-white" : "bg-gray-100 text-gray-600")}>Menaxho</button>
               <button onClick={() => handleDeleteComp(c.id)} className="px-3 py-1 rounded-lg text-xs font-bold bg-red-50 text-red-500 hover:bg-red-100">Fshi</button>
             </div>
           </div>
@@ -340,7 +340,7 @@ const AdminNationalTeam: React.FC = () => {
                   <label className="block text-xs font-bold text-gray-500 mb-1">Emri i Grupit</label>
                   <input value={groupName} onChange={e => setGroupName(e.target.value)} placeholder="Grupi A" className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl text-sm" />
                 </div>
-                <button onClick={handleAddGroup} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">Shto Grup</button>
+                <button onClick={handleAddGroup} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">Shto Grup</button>
               </div>
 
               {/* Groups */}
@@ -349,7 +349,7 @@ const AdminNationalTeam: React.FC = () => {
                   <div className="flex items-center justify-between mb-3">
                     <h4 className="font-bold text-gray-800">{g.name}</h4>
                     <div className="flex gap-2">
-                      <button onClick={() => setSelectedGroupId(g.id)} className={"px-3 py-1 rounded-lg text-xs font-bold " + (selectedGroupId === g.id ? "bg-[#2a499a] text-white" : "bg-white text-gray-600 border border-gray-200")}>Menaxho</button>
+                      <button onClick={() => setSelectedGroupId(g.id)} className={"px-3 py-1 rounded-lg text-xs font-bold " + (selectedGroupId === g.id ? "bg-[#0f1830] text-white" : "bg-white text-gray-600 border border-gray-200")}>Menaxho</button>
                       <button onClick={() => handleDeleteGroup(g.id)} className="px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-600">x</button>
                     </div>
                   </div>
@@ -374,12 +374,12 @@ const AdminNationalTeam: React.FC = () => {
                         </thead>
                         <tbody>
                           {getRanking(g.id).map((t, i) => (
-                            <tr key={t.id} className={"border-b border-gray-100 " + (t.isKosova ? "bg-[#2a499a]/10/50" : "")}>
+                            <tr key={t.id} className={"border-b border-gray-100 " + (t.isKosova ? "bg-[#0f1830]/10/50" : "")}>
                               <td className="py-2 px-1 text-xs font-bold text-gray-400">{i+1}</td>
                               <td className="py-2">
                                 <div className="flex items-center gap-2">
                                   {t.teamLogo && <img src={t.teamLogo} alt="" className="w-5 h-5 rounded object-contain" />}
-                                  <span className={"text-sm " + (t.isKosova ? "font-black text-[#2a499a]" : "font-medium text-gray-800")}>{t.teamName}</span>
+                                  <span className={"text-sm " + (t.isKosova ? "font-black text-[#0f1830]" : "font-medium text-gray-800")}>{t.teamName}</span>
                                 </div>
                               </td>
                               <td className="text-center text-xs">{t.played}</td>
@@ -389,7 +389,7 @@ const AdminNationalTeam: React.FC = () => {
                               <td className="text-center text-xs">{t.gf}</td>
                               <td className="text-center text-xs">{t.ga}</td>
                               <td className="text-center text-xs font-medium">{t.gd > 0 ? '+' : ''}{t.gd}</td>
-                              <td className="text-center text-sm font-black text-[#2a499a]">{t.pts}</td>
+                              <td className="text-center text-sm font-black text-[#0f1830]">{t.pts}</td>
                             </tr>
                           ))}
                         </tbody>
@@ -413,17 +413,17 @@ const AdminNationalTeam: React.FC = () => {
                           <input type="checkbox" checked={isKosova} onChange={e => setIsKosova(e.target.checked)} className="w-4 h-4 rounded" />
                           <span className="text-xs font-bold text-gray-600">Kosova</span>
                         </label>
-                        <button onClick={handleSaveTeam} className="px-4 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingTeamId ? 'Ruaj' : 'Shto'}</button>
+                        <button onClick={handleSaveTeam} className="px-4 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingTeamId ? 'Ruaj' : 'Shto'}</button>
                         {editingTeamId && <button onClick={() => { setEditingTeamId(''); setTeamName(''); setTeamLogo(''); setIsKosova(false); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-sm font-bold">Anulo</button>}
                       </div>
 
                       {/* Teams list */}
                       <div className="flex flex-wrap gap-2">
                         {selectedGroupTeamsList.filter(t => t.groupId === g.id).map(t => (
-                          <div key={t.id} className={"flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border " + (t.isKosova ? "bg-[#2a499a]/10 border-[#2a499a]/25 text-[#2a499a]" : "bg-white border-gray-200 text-gray-700")}>
+                          <div key={t.id} className={"flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border " + (t.isKosova ? "bg-[#0f1830]/10 border-[#0f1830]/25 text-[#0f1830]" : "bg-white border-gray-200 text-gray-700")}>
                             {t.teamLogo && <img src={t.teamLogo} alt="" className="w-4 h-4 rounded object-contain" />}
                             {t.teamName}
-                            <button onClick={() => handleEditTeam(t)} className="text-[#2a499a]/60 hover:text-[#2a499a] ml-1" title="Edito">&#9998;</button>
+                            <button onClick={() => handleEditTeam(t)} className="text-[#0f1830]/60 hover:text-[#0f1830] ml-1" title="Edito">&#9998;</button>
                             <button onClick={() => handleDeleteTeam(t.id)} className="text-red-400 hover:text-red-600 ml-1">x</button>
                           </div>
                         ))}
@@ -483,7 +483,7 @@ const AdminNationalTeam: React.FC = () => {
                             )}
                           </div>
                           <div className="flex gap-2">
-                            <button onClick={handleSaveMatch} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingMatchId ? 'Ruaj' : 'Shto Ndeshje'}</button>
+                            <button onClick={handleSaveMatch} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingMatchId ? 'Ruaj' : 'Shto Ndeshje'}</button>
                             {editingMatchId && <button onClick={() => { setEditingMatchId(''); setMatchHomeId(''); setMatchAwayId(''); setMatchStatus('planned'); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-sm font-bold">Anulo</button>}
                           </div>
                         </div>
@@ -498,15 +498,15 @@ const AdminNationalTeam: React.FC = () => {
                               <div className="flex items-center gap-2 text-sm">
                                 <span className="font-medium text-gray-800">{getTeamName(m.homeTeamId)}</span>
                                 {m.status === 'finished' ? (
-                                  <span className="font-black text-[#2a499a]">{m.homeScore} : {m.awayScore}</span>
+                                  <span className="font-black text-[#0f1830]">{m.homeScore} : {m.awayScore}</span>
                                 ) : (
                                   <span className="text-gray-400 text-xs">vs</span>
                                 )}
                                 <span className="font-medium text-gray-800">{getTeamName(m.awayTeamId)}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <span className={"text-[10px] font-bold px-2 py-0.5 rounded-full " + (m.status === 'finished' ? "bg-green-50 text-green-600" : "bg-[#2a499a]/10 text-[#2a499a]")}>{m.status === 'finished' ? 'Perfunduar' : 'Planifikuar'}</span>
-                                <button onClick={() => handleEditMatch(m)} className="text-xs text-[#2a499a] hover:underline">Edito</button>
+                                <span className={"text-[10px] font-bold px-2 py-0.5 rounded-full " + (m.status === 'finished' ? "bg-green-50 text-green-600" : "bg-[#0f1830]/10 text-[#0f1830]")}>{m.status === 'finished' ? 'Perfunduar' : 'Planifikuar'}</span>
+                                <button onClick={() => handleEditMatch(m)} className="text-xs text-[#0f1830] hover:underline">Edito</button>
                                 <button onClick={() => handleDeleteMatch(m.id)} className="text-xs text-red-400 hover:text-red-600">Fshi</button>
                               </div>
                             </div>
@@ -559,7 +559,7 @@ const AdminNationalTeam: React.FC = () => {
             </div>
           </div>
           <div className="flex gap-2">
-            <button onClick={handleSaveActivity} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingActId ? 'Ruaj' : 'Shto Aktivitet'}</button>
+            <button onClick={handleSaveActivity} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingActId ? 'Ruaj' : 'Shto Aktivitet'}</button>
             {editingActId && <button onClick={() => { setEditingActId(''); setActTitle(''); setActDesc(''); setActPhoto(''); setActDate(''); setActShowHome(false); setActSortOrder('0'); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-sm font-bold">Anulo</button>}
           </div>
         </div>
@@ -579,7 +579,7 @@ const AdminNationalTeam: React.FC = () => {
                   {a.date && <p className="text-[10px] text-gray-400 mt-0.5">{a.date}</p>}
                 </div>
                 <div className="flex gap-1 flex-shrink-0">
-                  <button onClick={() => handleEditActivity(a)} className="text-xs text-[#2a499a] hover:underline">Edito</button>
+                  <button onClick={() => handleEditActivity(a)} className="text-xs text-[#0f1830] hover:underline">Edito</button>
                   <button onClick={() => handleDeleteActivity(a.id)} className="text-xs text-red-400 hover:text-red-600">Fshi</button>
                 </div>
               </div>
@@ -591,7 +591,7 @@ const AdminNationalTeam: React.FC = () => {
       {/* ====== FFK FUTSAL MOMENTS ====== */}
       <div className="bg-white rounded-2xl border-2 border-gray-100 p-5 shadow-sm mt-8">
         <h3 className="font-black text-gray-900 mb-4 text-lg flex items-center gap-2">
-          <span className="w-1.5 h-6 bg-[#2a499a] rounded-full"></span>
+          <span className="w-1.5 h-6 bg-[#0f1830] rounded-full"></span>
           FFK Futsal Moments
         </h3>
         <div className="space-y-3 mb-4">
@@ -611,7 +611,7 @@ const AdminNationalTeam: React.FC = () => {
           </div>
           {momentPhoto && <img src={momentPhoto} alt="" className="w-24 h-32 rounded-lg object-cover border border-gray-200" />}
           <div className="flex gap-2">
-            <button onClick={handleSaveMoment} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingMomentId ? 'Ruaj' : 'Shto Moment'}</button>
+            <button onClick={handleSaveMoment} className="px-5 py-2 bg-[#0f1830] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingMomentId ? 'Ruaj' : 'Shto Moment'}</button>
             {editingMomentId && <button onClick={() => { setEditingMomentId(''); setMomentPhoto(''); setMomentCaption(''); setMomentOrder('0'); }} className="px-4 py-2 bg-gray-100 text-gray-600 rounded-xl text-sm font-bold">Anulo</button>}
           </div>
         </div>
@@ -623,7 +623,7 @@ const AdminNationalTeam: React.FC = () => {
               <div key={m.id} className="relative group">
                 {m.photo && <img src={m.photo} alt="" className="w-full aspect-[3/4] rounded-lg object-cover border border-gray-200" />}
                 <div className="absolute inset-0 bg-black/50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center gap-2">
-                  <button onClick={() => handleEditMoment(m)} className="text-xs text-white bg-[#2a499a] px-2 py-1 rounded">Edito</button>
+                  <button onClick={() => handleEditMoment(m)} className="text-xs text-white bg-[#0f1830] px-2 py-1 rounded">Edito</button>
                   <button onClick={() => handleDeleteMoment(m.id)} className="text-xs text-white bg-red-500 px-2 py-1 rounded">Fshi</button>
                 </div>
                 {m.caption && <p className="text-[10px] text-gray-500 mt-1 truncate">{m.caption}</p>}

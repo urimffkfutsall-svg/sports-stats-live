@@ -24,8 +24,8 @@ const KomisioniPage: React.FC = () => {
       <Header />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
-            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Komisioni</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0f1830]/5 rounded-full mb-3">
+            <span className="text-xs font-semibold text-[#0f1830] uppercase tracking-wider">Komisioni</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Komisioni i Garave</h1>
           <p className="text-gray-400 text-sm mt-1">
@@ -42,7 +42,7 @@ const KomisioniPage: React.FC = () => {
             {weeks.map(week => (
               <div key={week}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2a499a] to-[#2a499a] flex items-center justify-center shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0f1830] to-[#0f1830] flex items-center justify-center shadow-md">
                     <span className="text-white text-sm font-bold">{week}</span>
                   </div>
                   <div>
@@ -52,24 +52,24 @@ const KomisioniPage: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <div className="space-y-3 ml-5 border-l-2 border-[#2a499a]/20 pl-6">
+                <div className="space-y-3 ml-5 border-l-2 border-[#0f1830]/20 pl-6">
                   {grouped[week].map(d => (
                     <div
                       key={d.id}
                       onClick={() => setSelected(d)}
-                      className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-[#2a499a]/30 transition-all cursor-pointer group"
+                      className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-[#0f1830]/30 transition-all cursor-pointer group"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#2a499a]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <span className="text-[#2a499a] text-xs font-bold">V</span>
+                        <div className="w-8 h-8 rounded-lg bg-[#0f1830]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-[#0f1830] text-xs font-bold">V</span>
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-[#2a499a] transition-colors">
+                          <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-[#0f1830] transition-colors">
                             {d.title}
                           </h3>
                           <p className="text-sm text-gray-500 line-clamp-2">{d.description}</p>
                         </div>
-                        <span className="text-xs text-[#2a499a] font-semibold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap mt-1">
+                        <span className="text-xs text-[#0f1830] font-semibold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap mt-1">
                           Lexo →
                         </span>
                       </div>
@@ -94,7 +94,7 @@ const KomisioniPage: React.FC = () => {
           >
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div>
-                <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">
+                <span className="text-xs font-semibold text-[#0f1830] uppercase tracking-wider">
                   Java {selected.week}
                 </span>
                 <h3 className="text-lg font-bold text-gray-900 mt-0.5">{selected.title}</h3>

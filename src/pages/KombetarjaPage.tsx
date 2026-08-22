@@ -88,7 +88,7 @@ export default function KombetarjaPage() {
       <div className="min-h-screen bg-[#F1F5F9]">
         <Header />
         <div className="flex items-center justify-center py-32">
-          <div className="w-12 h-12 rounded-full border-4 border-[#2a499a]/20 border-t-[#2a499a] animate-spin" />
+          <div className="w-12 h-12 rounded-full border-4 border-[#0f1830]/20 border-t-[#0f1830] animate-spin" />
         </div>
         <Footer />
       </div>
@@ -101,7 +101,7 @@ export default function KombetarjaPage() {
       <div className="max-w-6xl mx-auto px-4 py-8">
 
         {/* Hero */}
-        <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10">
             <div className="absolute top-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" />
           </div>
@@ -142,7 +142,7 @@ export default function KombetarjaPage() {
         {competitions.length > 1 && (
           <div className="flex gap-2 bg-white rounded-xl p-1 mb-6 border border-gray-100 shadow-sm overflow-x-auto">
             {competitions.map(c => (
-              <button key={c.id} onClick={() => setSelectedCompId(c.id)} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap " + (selectedCompId === c.id ? "bg-[#2a499a] text-white shadow-md shadow-[#2a499a]/25" : "text-gray-500 hover:text-gray-800 hover:bg-gray-50")}>
+              <button key={c.id} onClick={() => setSelectedCompId(c.id)} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap " + (selectedCompId === c.id ? "bg-[#0f1830] text-white shadow-md shadow-[#0f1830]/25" : "text-gray-500 hover:text-gray-800 hover:bg-gray-50")}>
                 {c.name} {c.year && '(' + c.year + ')'}
               </button>
             ))}
@@ -159,7 +159,7 @@ export default function KombetarjaPage() {
           return (
             <div key={g.id} className="bg-white rounded-2xl border border-gray-100 shadow-sm mb-6 overflow-hidden">
               {/* Group Header */}
-              <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] px-5 py-3">
+              <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] px-5 py-3">
                 <h2 className="text-white font-black text-lg">{g.name}</h2>
               </div>
 
@@ -183,12 +183,12 @@ export default function KombetarjaPage() {
                     </thead>
                     <tbody>
                       {ranking.map((t, i) => (
-                        <tr key={t.id} className={"border-b border-gray-50 hover:bg-gray-50/50 transition-colors " + (t.isKosova ? "bg-[#2a499a]/10/40" : "")}>
+                        <tr key={t.id} className={"border-b border-gray-50 hover:bg-gray-50/50 transition-colors " + (t.isKosova ? "bg-[#0f1830]/10/40" : "")}>
                           <td className="py-3 px-3 text-xs font-bold text-gray-400">{i + 1}</td>
                           <td className="py-3">
                             <div className="flex items-center gap-2.5">
                               {t.teamLogo ? <img src={t.teamLogo} alt="" className="w-6 h-6 rounded object-contain" /> : <div className="w-6 h-6 rounded bg-gray-100 flex items-center justify-center text-[9px] font-bold text-gray-400">{t.teamName?.charAt(0)}</div>}
-                              <span className={"text-sm " + (t.isKosova ? "font-black text-[#2a499a]" : "font-semibold text-gray-800")}>{t.teamName}</span>
+                              <span className={"text-sm " + (t.isKosova ? "font-black text-[#0f1830]" : "font-semibold text-gray-800")}>{t.teamName}</span>
                             </div>
                           </td>
                           <td className="text-center text-xs font-medium text-gray-600">{t.played}</td>
@@ -198,7 +198,7 @@ export default function KombetarjaPage() {
                           <td className="text-center text-xs text-gray-600">{t.gf}</td>
                           <td className="text-center text-xs text-gray-600">{t.ga}</td>
                           <td className="text-center text-xs font-semibold">{t.gd > 0 ? '+' : ''}{t.gd}</td>
-                          <td className="text-center text-sm font-black text-[#2a499a]">{t.pts}</td>
+                          <td className="text-center text-sm font-black text-[#0f1830]">{t.pts}</td>
                         </tr>
                       ))}
                     </tbody>
@@ -212,7 +212,7 @@ export default function KombetarjaPage() {
                 {upcomingM.length > 0 && (
                   <div>
                     <h3 className="text-xs font-black uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
-                      <span className="w-1 h-4 bg-[#2a499a] rounded-full"></span>Ndeshjet e Ardhshme
+                      <span className="w-1 h-4 bg-[#0f1830] rounded-full"></span>Ndeshjet e Ardhshme
                     </h3>
                     <div className="space-y-2">
                       {upcomingM.map(m => {
@@ -222,14 +222,14 @@ export default function KombetarjaPage() {
                           <div key={m.id} className="flex items-center justify-between bg-[#F8FAFC] rounded-xl px-4 py-3 border border-gray-100">
                             <div className="flex items-center gap-2 flex-1">
                               {homeLogo ? <img src={homeLogo} alt="" className="w-6 h-6 rounded object-contain" /> : <div className="w-6 h-6 rounded bg-gray-200"></div>}
-                              <span className={"text-sm font-bold " + (isKosovaTeam(m.homeTeamId) ? "text-[#2a499a]" : "text-gray-800")}>{getTeamName(m.homeTeamId)}</span>
+                              <span className={"text-sm font-bold " + (isKosovaTeam(m.homeTeamId) ? "text-[#0f1830]" : "text-gray-800")}>{getTeamName(m.homeTeamId)}</span>
                             </div>
                             <div className="text-center px-4">
                               <span className="text-xs text-gray-400 font-bold">vs</span>
                               {m.date && <p className="text-[10px] text-gray-400 mt-0.5">{formatDate(m.date)} {m.time || ''}</p>}
                             </div>
                             <div className="flex items-center gap-2 flex-1 justify-end">
-                              <span className={"text-sm font-bold " + (isKosovaTeam(m.awayTeamId) ? "text-[#2a499a]" : "text-gray-800")}>{getTeamName(m.awayTeamId)}</span>
+                              <span className={"text-sm font-bold " + (isKosovaTeam(m.awayTeamId) ? "text-[#0f1830]" : "text-gray-800")}>{getTeamName(m.awayTeamId)}</span>
                               {awayLogo ? <img src={awayLogo} alt="" className="w-6 h-6 rounded object-contain" /> : <div className="w-6 h-6 rounded bg-gray-200"></div>}
                             </div>
                           </div>
@@ -255,7 +255,7 @@ export default function KombetarjaPage() {
                           <div key={m.id} className="flex items-center justify-between bg-[#F8FAFC] rounded-xl px-4 py-3 border border-gray-100">
                             <div className="flex items-center gap-2 flex-1">
                               {homeLogo ? <img src={homeLogo} alt="" className="w-6 h-6 rounded object-contain" /> : <div className="w-6 h-6 rounded bg-gray-200"></div>}
-                              <span className={"text-sm font-bold " + (isKosovaTeam(m.homeTeamId) ? "text-[#2a499a]" : "text-gray-800")}>{getTeamName(m.homeTeamId)}</span>
+                              <span className={"text-sm font-bold " + (isKosovaTeam(m.homeTeamId) ? "text-[#0f1830]" : "text-gray-800")}>{getTeamName(m.homeTeamId)}</span>
                             </div>
                             <div className="text-center px-4">
                               <div className="flex items-center gap-2">
@@ -266,7 +266,7 @@ export default function KombetarjaPage() {
                               {m.date && <p className="text-[10px] text-gray-400 mt-0.5">{formatDate(m.date)}</p>}
                             </div>
                             <div className="flex items-center gap-2 flex-1 justify-end">
-                              <span className={"text-sm font-bold " + (isKosovaTeam(m.awayTeamId) ? "text-[#2a499a]" : "text-gray-800")}>{getTeamName(m.awayTeamId)}</span>
+                              <span className={"text-sm font-bold " + (isKosovaTeam(m.awayTeamId) ? "text-[#0f1830]" : "text-gray-800")}>{getTeamName(m.awayTeamId)}</span>
                               {awayLogo ? <img src={awayLogo} alt="" className="w-6 h-6 rounded object-contain" /> : <div className="w-6 h-6 rounded bg-gray-200"></div>}
                             </div>
                           </div>
@@ -308,14 +308,14 @@ export default function KombetarjaPage() {
         {/* Kosova Statistics */}
         {kosovaMatches.length > 0 && (
           <div className="bg-white rounded-2xl border border-gray-100 shadow-sm overflow-hidden">
-            <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] px-5 py-3">
+            <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] px-5 py-3">
               <h2 className="text-white font-black text-lg">Statistikat e Kosoves</h2>
             </div>
             <div className="p-5 space-y-6">
               {/* Overview Cards */}
               <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
                 <div className="bg-[#F8FAFC] rounded-xl p-4 text-center border border-gray-100">
-                  <p className="text-3xl font-black text-[#2a499a]">{kosovaMatches.length}</p>
+                  <p className="text-3xl font-black text-[#0f1830]">{kosovaMatches.length}</p>
                   <p className="text-xs text-gray-400 font-medium mt-1">Ndeshje</p>
                 </div>
                 <div className="bg-[#F8FAFC] rounded-xl p-4 text-center border border-gray-100">
@@ -342,7 +342,7 @@ export default function KombetarjaPage() {
                   <h3 className="font-black text-gray-900 mb-4 text-sm">Gola</h3>
                   <div className="flex justify-between items-center">
                     <div className="text-center">
-                      <p className="text-4xl font-black text-[#2a499a]">{kGF}</p>
+                      <p className="text-4xl font-black text-[#0f1830]">{kGF}</p>
                       <p className="text-xs text-gray-400 mt-1">Te shenuar</p>
                     </div>
                     <div className="text-2xl font-light text-gray-200">-</div>
@@ -352,7 +352,7 @@ export default function KombetarjaPage() {
                     </div>
                   </div>
                   <div className="mt-4 bg-gray-200 rounded-full h-2.5 overflow-hidden">
-                    <div className="bg-[#2a499a] h-full rounded-full" style={{ width: (kGF + kGA > 0 ? (kGF / (kGF + kGA) * 100) : 50) + '%' }}></div>
+                    <div className="bg-[#0f1830] h-full rounded-full" style={{ width: (kGF + kGA > 0 ? (kGF / (kGF + kGA) * 100) : 50) + '%' }}></div>
                   </div>
                 </div>
 
@@ -362,7 +362,7 @@ export default function KombetarjaPage() {
                     <div className="relative w-24 h-24">
                       <svg className="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
                         <circle cx="50" cy="50" r="42" fill="none" stroke="#E2E8F0" strokeWidth="10" />
-                        <circle cx="50" cy="50" r="42" fill="none" stroke="#2a499a" strokeWidth="10" strokeDasharray="264" strokeDashoffset={kosovaMatches.length > 0 ? 264 - (kWins / kosovaMatches.length * 264) : 264} strokeLinecap="round" />
+                        <circle cx="50" cy="50" r="42" fill="none" stroke="#0f1830" strokeWidth="10" strokeDasharray="264" strokeDashoffset={kosovaMatches.length > 0 ? 264 - (kWins / kosovaMatches.length * 264) : 264} strokeLinecap="round" />
                       </svg>
                       <span className="absolute inset-0 flex items-center justify-center text-lg font-black text-gray-900">{kosovaMatches.length > 0 ? Math.round(kWins / kosovaMatches.length * 100) : 0}%</span>
                     </div>

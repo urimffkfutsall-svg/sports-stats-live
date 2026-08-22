@@ -40,9 +40,9 @@ const AdminVideos: React.FC = () => {
 
       {/* Form */}
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6 space-y-3">
-        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
-        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
-        <input value={form.url} onChange={e => setForm({...form, url: e.target.value})} placeholder="Video URL (YouTube, Facebook, etj.)" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
+        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
+        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
+        <input value={form.url} onChange={e => setForm({...form, url: e.target.value})} placeholder="Video URL (YouTube, Facebook, etj.)" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
           <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm({...form, isFeaturedLanding: e.target.checked})} className="rounded" />
           Shfaq ne Ballina
@@ -56,7 +56,7 @@ const AdminVideos: React.FC = () => {
           Shfaq te Liga e Pare
         </label>
         <div className="flex gap-2">
-          <button onClick={handleSubmit} className="px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
+          <button onClick={handleSubmit} className="px-5 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
             {editId ? 'Ruaj Ndryshimet' : 'Shto Video'}
           </button>
           {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', url: '', isFeaturedLanding: false, isFeaturedSuperliga: false, isFeaturedLigaPare: false }); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
@@ -73,7 +73,7 @@ const AdminVideos: React.FC = () => {
                 <p className="text-sm text-gray-500 mt-0.5">{v.description}</p>
                 <p className="text-xs text-gray-400 mt-1 truncate">{v.url}</p>
                 {v.isFeaturedLanding && <span className="inline-block mt-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
-                {(v as any).isFeaturedSuperliga && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2 py-0.5 rounded-full">SUPERLIGA</span>}
+                {(v as any).isFeaturedSuperliga && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-[#0f1830] bg-[#0f1830]/10 px-2 py-0.5 rounded-full">SUPERLIGA</span>}
                 {(v as any).isFeaturedLigaPare && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">LIGA E PARE</span>}
               </div>
               <div className="flex gap-2 flex-shrink-0">

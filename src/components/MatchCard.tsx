@@ -30,7 +30,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
     >
       {/* Gradient Header â€” Date, Time, Venue */}
       {!compact && (match.date || match.time || match.venue) && (
-        <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] px-4 py-2.5">
+        <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] px-4 py-2.5">
           <div className="flex items-center justify-between flex-wrap gap-2">
             <div className="flex items-center gap-3">
               {match.date && (
@@ -60,7 +60,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
         {/* Competition & Week badge */}
         {!compact && comp && (
           <div className="text-center mb-4">
-            <span className="text-[10px] font-semibold text-[#2a499a] bg-[#2a499a]/8 px-3 py-1 rounded-full uppercase tracking-wider">
+            <span className="text-[10px] font-semibold text-[#0f1830] bg-[#0f1830]/8 px-3 py-1 rounded-full uppercase tracking-wider">
               {comp.name} â€” Java {match.week}
             </span>
           </div>
@@ -128,7 +128,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
 
         {/* "Shiko detajet" Button */}
         {!compact && (
-          <div className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#2a499a] to-[#2a499a] text-white text-[11px] font-semibold rounded-xl hover:shadow-md hover:shadow-[#2a499a]/25 transition-all duration-200 uppercase tracking-wider">
+          <div className="mt-5 w-full flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#0f1830] to-[#0f1830] text-white text-[11px] font-semibold rounded-xl hover:shadow-md hover:shadow-[#0f1830]/25 transition-all duration-200 uppercase tracking-wider">
             Shiko detajet
             â€º
           </div>

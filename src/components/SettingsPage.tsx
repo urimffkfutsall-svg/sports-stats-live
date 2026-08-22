@@ -45,7 +45,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#2a499a]/10 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#0f1830]/10 to-white">
       {/* Header */}
       <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
         <div className="flex items-center gap-4 p-4 max-w-md mx-auto">
@@ -53,7 +53,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
             onClick={onBack}
             className="p-2 hover:bg-gray-100 rounded-lg transition"
           >
-            <ArrowLeft size={24} className="text-[#2a499a]" />
+            <ArrowLeft size={24} className="text-[#0f1830]" />
           </button>
           <h1 className="text-xl font-bold text-gray-900">Cilesimet</h1>
         </div>
@@ -66,7 +66,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {notificationsEnabled ? (
-                <Bell size={24} className="text-[#2a499a]" />
+                <Bell size={24} className="text-[#0f1830]" />
               ) : (
                 <BellOff size={24} className="text-gray-400" />
               )}
@@ -85,7 +85,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
               className={`px-4 py-2 rounded-lg font-medium transition ${
                 notificationsEnabled
                   ? "bg-red-100 text-red-600 hover:bg-red-200"
-                  : "bg-[#2a499a] text-white hover:bg-[#1c3570]"
+                  : "bg-[#0f1830] text-white hover:bg-[#1c3570]"
               } ${!notificationSupported ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {notificationsEnabled ? "Ndal" : "Aktivizo"}
@@ -121,8 +121,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
         </div>
 
         {/* Notification Info */}
-        <div className="bg-[#2a499a]/10 rounded-lg p-4 border border-[#2a499a]/25">
-          <h3 className="font-semibold text-[#0B1226] mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
+        <div className="bg-[#0f1830]/10 rounded-lg p-4 border border-[#0f1830]/25">
+          <h3 className="font-semibold text-[#0f1830] mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
           <ul className="text-sm text-[#1c3570] space-y-1">
             <li>âœ“ Notifjikimet pÃ«r ndeshjet e pÃ«rfunduara</li>
             <li>âœ“ Lajmet e reja tÃ« postuara</li>

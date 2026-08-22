@@ -20,9 +20,9 @@ const PlayerOfWeekPage: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Page Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0f1830]/5 rounded-full mb-3">
             
-            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Cmimi Javor</span>
+            <span className="text-xs font-semibold text-[#0f1830] uppercase tracking-wider">Cmimi Javor</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Lojtari i Javes</h1>
           <p className="text-gray-400 text-sm mt-1">Sezoni {activeSeason?.name || ''}</p>
@@ -37,9 +37,9 @@ const PlayerOfWeekPage: React.FC = () => {
               const team = getTeamById(latest.teamId);
               return (
                 <div className="mb-10">
-                  <div className="relative bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#2a499a] rounded-3xl overflow-hidden shadow-2xl">
+                  <div className="relative bg-gradient-to-br from-[#0f1830] via-[#0F2D5E] to-[#0f1830] rounded-3xl overflow-hidden shadow-2xl">
                     <div className="absolute inset-0">
-                      <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#2a499a]/20 rounded-full blur-3xl" />
+                      <div className="absolute -top-32 -right-32 w-80 h-80 bg-[#0f1830]/20 rounded-full blur-3xl" />
                       <div className="absolute -bottom-20 -left-20 w-60 h-60 bg-amber-500/10 rounded-full blur-3xl" />
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-white/[0.02] rounded-full" />
                     </div>
@@ -53,8 +53,8 @@ const PlayerOfWeekPage: React.FC = () => {
                           </div>
                         </div>
                         <div className="relative">
-                          <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#2a499a] rounded-2xl rotate-6 opacity-40 blur-sm scale-105" />
-                          <div className="absolute inset-0 bg-gradient-to-br from-[#2a499a] to-amber-400 rounded-2xl -rotate-3 opacity-25 scale-105" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#0f1830] rounded-2xl rotate-6 opacity-40 blur-sm scale-105" />
+                          <div className="absolute inset-0 bg-gradient-to-br from-[#0f1830] to-amber-400 rounded-2xl -rotate-3 opacity-25 scale-105" />
                           <div className="relative w-40 h-40 md:w-48 md:h-48 rounded-2xl overflow-hidden border-3 border-white/30 shadow-2xl">
                             {latest.photo ? (
                               <img src={latest.photo} alt="" className="w-full h-full object-cover" />
@@ -112,7 +112,7 @@ const PlayerOfWeekPage: React.FC = () => {
                         className="bg-white rounded-2xl border border-gray-100 overflow-hidden shadow-sm hover:shadow-lg transition-all duration-200 hover:-translate-y-0.5 group"
                       >
                         {/* Top gradient bar */}
-                        <div className="h-1.5 bg-gradient-to-r from-[#2a499a] to-[#2a499a]" />
+                        <div className="h-1.5 bg-gradient-to-r from-[#0f1830] to-[#0f1830]" />
 
                         <div className="p-5">
                           <div className="flex items-center gap-4">
@@ -127,7 +127,7 @@ const PlayerOfWeekPage: React.FC = () => {
                                   </div>
                                 )}
                               </div>
-                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#2a499a] flex items-center justify-center shadow-sm">
+                              <div className="absolute -top-1.5 -right-1.5 w-6 h-6 rounded-full bg-[#0f1830] flex items-center justify-center shadow-sm">
                                 
                               </div>
                             </div>
@@ -135,9 +135,9 @@ const PlayerOfWeekPage: React.FC = () => {
                             {/* Info */}
                             <div className="flex-1 min-w-0">
                               <div className="flex items-center gap-2 mb-1">
-                                <span className="px-2 py-0.5 bg-[#2a499a]/10 rounded-md text-[10px] font-bold text-[#2a499a] uppercase tracking-wider">Java {pow.week}</span>
+                                <span className="px-2 py-0.5 bg-[#0f1830]/10 rounded-md text-[10px] font-bold text-[#0f1830] uppercase tracking-wider">Java {pow.week}</span>
                               </div>
-                              <h3 className="text-base font-bold text-gray-900 truncate group-hover:text-[#2a499a] transition-colors">{pow.firstName} {pow.lastName}</h3>
+                              <h3 className="text-base font-bold text-gray-900 truncate group-hover:text-[#0f1830] transition-colors">{pow.firstName} {pow.lastName}</h3>
                               <div className="flex items-center gap-1.5 mt-1">
                                 {team?.logo && <img src={team.logo} alt="" className="w-4 h-4 rounded-full" />}
                                 <span className="text-xs text-gray-500 font-medium">{team?.name || '-'}</span>
@@ -152,7 +152,7 @@ const PlayerOfWeekPage: React.FC = () => {
                                 
                                 <span className="text-xs font-semibold text-gray-600">Golashenues</span>
                               </div>
-                              <span className="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-[#2a499a]/10 text-[#2a499a] text-sm font-bold">{pow.goalsCount} gola</span>
+                              <span className="inline-flex items-center justify-center px-3 py-1 rounded-lg bg-[#0f1830]/10 text-[#0f1830] text-sm font-bold">{pow.goalsCount} gola</span>
                             </div>
                           )}
                         </div>

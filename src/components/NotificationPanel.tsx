@@ -239,14 +239,14 @@ const NotificationPanel: React.FC = () => {
             <div className="flex items-center gap-1">
               <button
                 onClick={() => setShowSettings(!showSettings)}
-                className={`p-1.5 rounded-lg transition-colors ${showSettings ? 'bg-[#2a499a] text-white' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`}
+                className={`p-1.5 rounded-lg transition-colors ${showSettings ? 'bg-[#0f1830] text-white' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`}
                 title="CilÃ«simet"
               >
                 
               </button>
               {notifications.length > 0 && (
                 <>
-                  <button onClick={markAllRead} className="p-1.5 text-gray-400 hover:text-[#2a499a] hover:bg-gray-100 rounded-lg" title="Lexo tÃ« gjitha">
+                  <button onClick={markAllRead} className="p-1.5 text-gray-400 hover:text-[#0f1830] hover:bg-gray-100 rounded-lg" title="Lexo tÃ« gjitha">
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="9 11 12 14 22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
@@ -261,7 +261,7 @@ const NotificationPanel: React.FC = () => {
 
           {/* Settings Panel */}
           {showSettings && (
-            <div className="p-4 border-b border-gray-100 bg-[#2a499a]/10/50 space-y-2">
+            <div className="p-4 border-b border-gray-100 bg-[#0f1830]/10/50 space-y-2">
               <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">Preferencat e Njoftime</p>
               {[
                 { key: 'goals' as const, label: 'Golat', icon: "â—Ž" },
@@ -277,7 +277,7 @@ const NotificationPanel: React.FC = () => {
                   </div>
                   <div
                     onClick={() => updatePref(item.key, !prefs[item.key])}
-                    className={`w-9 h-5 rounded-full transition-colors cursor-pointer flex items-center ${prefs[item.key] ? 'bg-[#2a499a]' : 'bg-gray-300'}`}
+                    className={`w-9 h-5 rounded-full transition-colors cursor-pointer flex items-center ${prefs[item.key] ? 'bg-[#0f1830]' : 'bg-gray-300'}`}
                   >
                     <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${prefs[item.key] ? 'translate-x-4.5 ml-[18px]' : 'translate-x-0.5 ml-[2px]'}`} />
                   </div>
@@ -290,7 +290,7 @@ const NotificationPanel: React.FC = () => {
                 </div>
                 <div
                   onClick={() => updatePref('soundEnabled', !prefs.soundEnabled)}
-                  className={`w-9 h-5 rounded-full transition-colors cursor-pointer flex items-center ${prefs.soundEnabled ? 'bg-[#2a499a]' : 'bg-gray-300'}`}
+                  className={`w-9 h-5 rounded-full transition-colors cursor-pointer flex items-center ${prefs.soundEnabled ? 'bg-[#0f1830]' : 'bg-gray-300'}`}
                 >
                   <div className={`w-4 h-4 rounded-full bg-white shadow transition-transform ${prefs.soundEnabled ? 'translate-x-4.5 ml-[18px]' : 'translate-x-0.5 ml-[2px]'}`} />
                 </div>
@@ -311,7 +311,7 @@ const NotificationPanel: React.FC = () => {
                 <div
                   key={n.id}
                   className={`flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
-                    !n.read ? 'bg-[#2a499a]/10/30' : ''
+                    !n.read ? 'bg-[#0f1830]/10/30' : ''
                   }`}
                   onClick={() => setNotifications(prev => prev.map(x => x.id === n.id ? { ...x, read: true } : x))}
                 >
@@ -321,7 +321,7 @@ const NotificationPanel: React.FC = () => {
                     <p className="text-xs text-gray-500 mt-0.5">{n.message}</p>
                   </div>
                   <span className="text-[10px] text-gray-400 flex-shrink-0 mt-0.5">{formatTime(n.timestamp)}</span>
-                  {!n.read && <span className="w-2 h-2 bg-[#2a499a] rounded-full flex-shrink-0 mt-1.5" />}
+                  {!n.read && <span className="w-2 h-2 bg-[#0f1830] rounded-full flex-shrink-0 mt-1.5" />}
                 </div>
               ))
             )}

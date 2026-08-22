@@ -69,9 +69,9 @@ const AdminNews: React.FC = () => {
       <h2 className="text-xl font-bold text-gray-800 mb-4">Menaxho Lajmet</h2>
 
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6 space-y-3">
-        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli i lajmit" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
-        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi i shkurter" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
-        <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})} placeholder="Permbajtja e plote e lajmit..." rows={6} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none resize-y" />
+        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli i lajmit" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
+        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi i shkurter" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
+        <textarea value={form.content} onChange={e => setForm({...form, content: e.target.value})} placeholder="Permbajtja e plote e lajmit..." rows={6} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none resize-y" />
 
         {/* Photo upload */}
         <div>
@@ -88,7 +88,7 @@ const AdminNews: React.FC = () => {
                 <div key={i} className="relative group">
                   <img src={p} alt="" className="w-20 h-20 rounded-lg object-cover border border-gray-200" />
                   <button onClick={() => removePhoto(i)} className="absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-red-500 text-white text-[10px] font-bold flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity shadow-md">x</button>
-                  {i === 0 && <span className="absolute bottom-0 left-0 right-0 bg-[#2a499a]/80 text-white text-[8px] font-bold text-center py-0.5 rounded-b-lg">KRYESORE</span>}
+                  {i === 0 && <span className="absolute bottom-0 left-0 right-0 bg-[#0f1830]/80 text-white text-[8px] font-bold text-center py-0.5 rounded-b-lg">KRYESORE</span>}
                 </div>
               ))}
             </div>
@@ -98,7 +98,7 @@ const AdminNews: React.FC = () => {
         {/* Video URL */}
         <div>
           <label className="block text-xs font-medium text-gray-500 mb-1">Video URL (YouTube ose Facebook)</label>
-          <input value={form.videoUrl} onChange={e => setForm({...form, videoUrl: e.target.value})} placeholder="https://youtube.com/watch?v=... ose https://facebook.com/..." className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
+          <input value={form.videoUrl} onChange={e => setForm({...form, videoUrl: e.target.value})} placeholder="https://youtube.com/watch?v=... ose https://facebook.com/..." className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none" />
         </div>
 
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
@@ -106,7 +106,7 @@ const AdminNews: React.FC = () => {
           Shfaq ne Ballina
         </label>
         <div className="flex gap-2">
-          <button onClick={handleSubmit} className="px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
+          <button onClick={handleSubmit} className="px-5 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
             {editId ? 'Ruaj Ndryshimet' : 'Shto Lajmin'}
           </button>
           {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', content: '', photo: '', videoUrl: '', isFeaturedLanding: false }); setPhotos([]); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}
@@ -133,7 +133,7 @@ const AdminNews: React.FC = () => {
                   <div className="flex items-center gap-2 mt-1">
                     {n.isFeaturedLanding && <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
                     {np.length > 0 && <span className="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">{np.length} foto</span>}
-                    {(n as any).videoUrl && <span className="text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2 py-0.5 rounded-full">VIDEO</span>}
+                    {(n as any).videoUrl && <span className="text-[10px] font-bold text-[#0f1830] bg-[#0f1830]/10 px-2 py-0.5 rounded-full">VIDEO</span>}
                   </div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">

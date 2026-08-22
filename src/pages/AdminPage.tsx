@@ -95,7 +95,7 @@ const AdminPage: React.FC = () => {
             <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
             <p className="text-sm text-gray-500">
               {currentUser?.username} ({isAdmin ? 'Administrator' : 'Editor'})
-              {activeSeason && <span className="ml-2 text-[#2a499a]">Sezoni: {activeSeason.name}</span>}
+              {activeSeason && <span className="ml-2 text-[#0f1830]">Sezoni: {activeSeason.name}</span>}
             </p>
           </div>
           {liveMatches.length > 0 && activeTab !== 'live' && (
@@ -121,7 +121,7 @@ const AdminPage: React.FC = () => {
                   activeTab === tab.key
                     ? isLive
                       ? 'bg-red-600 text-white shadow-lg shadow-red-200'
-                      : 'bg-[#2a499a] text-white shadow-sm'
+                      : 'bg-[#0f1830] text-white shadow-sm'
                     : isLive
                       ? 'text-red-600 bg-red-50 hover:bg-red-100 border border-red-200'
                       : 'text-gray-600 hover:bg-white hover:shadow-sm'
@@ -143,7 +143,7 @@ const AdminPage: React.FC = () => {
         {activeTab === 'dashboard' && (
           <div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <DashCard label="Skuadra" value={activeTeams.length} color="bg-[#2a499a]/10 text-[#2a499a]" />
+              <DashCard label="Skuadra" value={activeTeams.length} color="bg-[#0f1830]/10 text-[#0f1830]" />
               <DashCard label="Ndeshje" value={activeMatches.length} color="bg-green-50 text-green-600" />
               <DashCard label="Lojtarë" value={players.filter(p => activeSeason ? p.seasonId === activeSeason.id : true).length} color="bg-purple-50 text-purple-600" />
               <DashCard label="LIVE" value={liveMatches.length} color="bg-red-50 text-red-600" />

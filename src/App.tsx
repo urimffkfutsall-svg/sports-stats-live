@@ -69,14 +69,14 @@ const AppLoader: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   if (isLoading) {
     if (isPhoneOrTablet) {
       return (
-        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">
+        <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0f1830]">
           <GoldRingSpinner size={64} />
           <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 w-28 h-28 opacity-90" />
         </div>
       );
     }
     return (
-      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0B1226]">
+      <div className="fixed inset-0 z-[9999] flex items-center justify-center bg-[#0f1830]">
         <GoldRingSpinner size={56} />
         <img src="https://img.uefa.com/imgml/uefacom/elements/logos/ma/KOS.svg" alt="FFK" className="absolute bottom-10 w-24 h-24 opacity-90" />
       </div>

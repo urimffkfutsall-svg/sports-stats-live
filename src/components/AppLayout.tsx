@@ -17,7 +17,7 @@ var AppLayout: React.FC = function() {
   if (isLoading) {
     const dots = Array.from({ length: 8 });
     return (
-      <div style={{ minHeight: '100vh', background: '#2a499a', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <div style={{ minHeight: '100vh', background: '#0f1830', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <style>{`
           @keyframes ffkDot {
             0%, 80%, 100% { transform: translate(-50%,-50%) scale(0.4); opacity: 0.25; }

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useData } from '@/context/DataContext';
 import TeamMarquee from './TeamMarquee';
 
@@ -8,7 +8,7 @@ const Footer: React.FC = () => {
   return (
     <>
     <TeamMarquee />
-    <footer className="bg-[#2a499a] border-t-[3px] border-[#d0a650] text-white">
+    <footer className="bg-[#0f1830] border-t-[3px] border-[#d0a650] text-white">
       <div className="max-w-7xl mx-auto px-4 py-10">
         <div className="flex flex-col items-center text-center gap-4">
           {/* Logo */}

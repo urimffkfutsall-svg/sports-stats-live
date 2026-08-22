@@ -213,23 +213,23 @@ var AdminEditors: React.FC = function() {
       )}
 
       {editingId && (
-        <div className="bg-white border border-[#2a499a]/25 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#0f1830]/25 rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-gray-800 mb-4">Edito Editorin</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Emri" value={form.firstName} onChange={function(e) { setForm(Object.assign({}, form, { firstName: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Mbiemri" value={form.lastName} onChange={function(e) { setForm(Object.assign({}, form, { lastName: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Username" value={form.username} onChange={function(e) { setForm(Object.assign({}, form, { username: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Password" value={form.password} onChange={function(e) { setForm(Object.assign({}, form, { password: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Nr. Telefonit" value={form.phone} onChange={function(e) { setForm(Object.assign({}, form, { phone: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Email" value={form.email} onChange={function(e) { setForm(Object.assign({}, form, { email: e.target.value })); }} />
-            <select className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100 bg-white md:col-span-2" value={form.teamId} onChange={function(e) { setForm(Object.assign({}, form, { teamId: e.target.value })); }}>
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Emri" value={form.firstName} onChange={function(e) { setForm(Object.assign({}, form, { firstName: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Mbiemri" value={form.lastName} onChange={function(e) { setForm(Object.assign({}, form, { lastName: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Username" value={form.username} onChange={function(e) { setForm(Object.assign({}, form, { username: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Password" value={form.password} onChange={function(e) { setForm(Object.assign({}, form, { password: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Nr. Telefonit" value={form.phone} onChange={function(e) { setForm(Object.assign({}, form, { phone: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" placeholder="Email" value={form.email} onChange={function(e) { setForm(Object.assign({}, form, { email: e.target.value })); }} />
+            <select className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100 bg-white md:col-span-2" value={form.teamId} onChange={function(e) { setForm(Object.assign({}, form, { teamId: e.target.value })); }}>
               <option value="">-- Zgjedh skuadren --</option>
               {superligaTeams.length > 0 && <optgroup label="Superliga">{superligaTeams.map(function(t) { return <option key={t.id} value={t.id}>{t.name}</option>; })}</optgroup>}
               {ligaPareTeams.length > 0 && <optgroup label="Liga e Pare">{ligaPareTeams.map(function(t) { return <option key={t.id} value={t.id}>{t.name}</option>; })}</optgroup>}
             </select>
           </div>
           <div className="flex gap-3 mt-4">
-            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#2a499a]/100 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">âœ“ Ruaj Ndryshimet</button>
+            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#0f1830]/100 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">âœ“ Ruaj Ndryshimet</button>
             <button onClick={function() { setEditingId(null); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-all">Anulo</button>
           </div>
         </div>
@@ -294,7 +294,7 @@ var AdminEditors: React.FC = function() {
                       {ed.status === 'approved' && (
                         <button onClick={function() { handleReject(ed.id); }} className="p-1.5 text-amber-500 hover:bg-amber-50 rounded-lg transition-colors" title="Pezullo">âœ•</button>
                       )}
-                      <button onClick={function() { handleEdit(ed); }} className="p-1.5 text-gray-400 hover:text-[#2a499a] hover:bg-[#2a499a]/10 rounded-lg transition-colors" title="Edito"></button>
+                      <button onClick={function() { handleEdit(ed); }} className="p-1.5 text-gray-400 hover:text-[#0f1830] hover:bg-[#0f1830]/10 rounded-lg transition-colors" title="Edito"></button>
                       <button onClick={function() { handleDelete(ed.id); }} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors" title="Fshi">âœ—</button>
                     </div>
                   </td>

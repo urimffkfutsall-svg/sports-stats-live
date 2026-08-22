@@ -26,8 +26,8 @@ const AktetNormativePage: React.FC = () => {
       <Header />
       <div className="max-w-4xl mx-auto px-4 py-10">
         <div className="text-center mb-10">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/5 rounded-full mb-3">
-            <span className="text-xs font-semibold text-[#2a499a] uppercase tracking-wider">Dokumentet Zyrtare</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0f1830]/5 rounded-full mb-3">
+            <span className="text-xs font-semibold text-[#0f1830] uppercase tracking-wider">Dokumentet Zyrtare</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Aktet Normative</h1>
           <p className="text-gray-400 text-sm mt-1">Dokumentet dhe rregulloret zyrtare te FFK Futsall</p>

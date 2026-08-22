@@ -63,7 +63,7 @@ var DecisionsSection: React.FC = function() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-[#2a499a]/25">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#0f1830]/100 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-[#0f1830]/25">
               
             </div>
             <div>
@@ -85,11 +85,11 @@ var DecisionsSection: React.FC = function() {
                   </span>
                   <span className="text-[10px] text-gray-400 font-semibold bg-gray-50 px-2 py-1 rounded-lg">{d.java}</span>
                 </div>
-                <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[#2a499a] transition-colors">{d.vendimi}</h3>
+                <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[#0f1830] transition-colors">{d.vendimi}</h3>
                 <p className="text-sm text-gray-500 line-clamp-2 mb-3">{d.pershkrimi || 'Nuk ka pershkrim.'}</p>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                   <span className="text-[11px] text-gray-400">{d.data}</span>
-                  <span className="flex items-center gap-1 text-[11px] text-[#2a499a] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="flex items-center gap-1 text-[11px] text-[#0f1830] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
                     Shiko detajet â€º
                   </span>
                 </div>
@@ -104,7 +104,7 @@ var DecisionsSection: React.FC = function() {
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={function(e) { e.stopPropagation(); }}>
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-[#0f1830]/100 to-indigo-600 rounded-xl flex items-center justify-center">
                   
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>

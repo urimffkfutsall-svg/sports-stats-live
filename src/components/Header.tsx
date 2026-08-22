@@ -50,7 +50,7 @@ const Header: React.FC = () => {
 
   return (
     <>
-      <header className="bg-[#0B1226] text-white sticky top-0 z-50 shadow-lg">
+      <header className="bg-[#0f1830] text-white sticky top-0 z-50 shadow-lg">
         {/* Top row: logo + utility icons */}
         <div className="border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
@@ -70,7 +70,7 @@ const Header: React.FC = () => {
               </button>
               {isAuthenticated ? (
                 <>
-                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#2a499a] rounded-lg text-sm font-medium hover:bg-[#1c3570] transition-colors">
+                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#0f1830] rounded-lg text-sm font-medium hover:bg-[#1c3570] transition-colors">
                     Admin
                   </Link>
                   <button onClick={logout} className="hidden sm:flex items-center gap-1 px-3 py-2 text-gray-300 hover:text-white text-sm transition-colors">
@@ -92,7 +92,7 @@ const Header: React.FC = () => {
             <div className="relative" ref={menuRef}>
               <button
                 onClick={() => setMenuOpen(o => !o)}
-                className="flex items-center gap-2 h-12 px-5 bg-[#d0a650] text-[#0B1226] font-bold text-sm uppercase tracking-wide hover:bg-[#e0b660] transition-colors"
+                className="flex items-center gap-2 h-12 px-5 bg-[#d0a650] text-[#0f1830] font-bold text-sm uppercase tracking-wide hover:bg-[#e0b660] transition-colors"
               >
                 {menuOpen ? <X size={18} /> : <Menu size={18} />}
                 Menu
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
                       className={`block px-5 py-2.5 text-sm font-semibold uppercase tracking-wide transition-colors ${
-                        isActive(link.path) ? 'bg-[#2a499a]/10 text-[#2a499a]' : 'text-gray-700 hover:bg-gray-50'
+                        isActive(link.path) ? 'bg-[#0f1830]/10 text-[#0f1830]' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       {link.label}
@@ -123,7 +123,7 @@ const Header: React.FC = () => {
                   key={link.path}
                   to={link.path}
                   className={`px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide whitespace-nowrap transition-colors ${
-                    isActive(link.path) ? 'bg-[#2a499a] text-white' : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    isActive(link.path) ? 'bg-[#0f1830] text-white' : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {link.label}
