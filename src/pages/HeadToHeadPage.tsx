@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+�import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
@@ -47,7 +47,7 @@ const HeadToHeadPage: React.FC = () => {
               onChange={e => setTeamAId(e.target.value)}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent"
             >
-              <option value="">Zgjedh skuadrÃ«n</option>
+              <option value="">Zgjedh skuadrën</option>
               {activeTeams.map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -60,7 +60,7 @@ const HeadToHeadPage: React.FC = () => {
               onChange={e => setTeamBId(e.target.value)}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent"
             >
-              <option value="">Zgjedh skuadrÃ«n</option>
+              <option value="">Zgjedh skuadrën</option>
               {activeTeams.filter(t => t.id !== teamAId).map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -140,11 +140,11 @@ const HeadToHeadPage: React.FC = () => {
         )}
 
         {(!teamAId || !teamBId) && (
-          <p className="text-gray-500 text-center py-12">Zgjedh dy skuadra pÃ«r tÃ« parÃ« krahasimin head-to-head.</p>
+          <p className="text-gray-500 text-center py-12">Zgjedh dy skuadra për të parë krahasimin head-to-head.</p>
         )}
 
         {teamAId && teamBId && h2h && h2h.matches.length === 0 && (
-          <p className="text-gray-500 text-center py-12">Nuk ka ndeshje direkte mes kÃ«tyre dy skuadrave.</p>
+          <p className="text-gray-500 text-center py-12">Nuk ka ndeshje direkte mes këtyre dy skuadrave.</p>
         )}
       </div>
       <div className="mt-auto"><Footer /></div>

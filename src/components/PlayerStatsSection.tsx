@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+�import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { PlayerStats } from '@/types';
 import { getSuspensionRules, getSuspensionStatus } from '@/lib/suspensions';
@@ -98,7 +98,7 @@ var PlayerStatsSection: React.FC = function() {
           {weeks.map(function(w) { return <option key={w} value={String(w)}>Java {w}</option>; })}
         </select>
         <div className="relative flex-1 min-w-[200px]">
-          âš²
+          �a�
           <input type="text" value={search} onChange={function(e) { setSearch(e.target.value); }} placeholder="Kerko lojtar..." className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]/100" />
         </div>
       </div>

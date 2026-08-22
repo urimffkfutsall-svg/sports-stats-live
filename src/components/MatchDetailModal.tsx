@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+�import React, { useState } from 'react';
 import { Match } from '@/types';
 import { useData } from '@/context/DataContext';
 
@@ -61,7 +61,7 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
           <div className="relative z-20 flex items-center justify-between px-5 pt-4">
             <div className="w-9" />
             <div className="w-10 h-1 rounded-full bg-gray-300" />
-            <button onClick={onClose} className="w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">Ã—</button>
+            <button onClick={onClose} className="w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">�</button>
           </div>
 
           <div className="relative z-10 px-6 pt-3 pb-6">
@@ -69,7 +69,7 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
             {comp && (
               <div className="flex justify-center mb-5">
                 <span className="px-4 py-1.5 bg-white/80 backdrop-blur-sm rounded-lg text-[10px] font-bold text-[#0f1830] uppercase tracking-[0.15em] border border-[#0f1830]/15 shadow-sm">
-                  {comp.name} â€¢ Java {match.week}
+                  {comp.name} ⬢ Java {match.week}
                 </span>
               </div>
             )}
@@ -212,7 +212,7 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
                               <p className="text-sm font-bold text-gray-800 truncate">{getPlayerName(g.playerId)}</p>
                               <p className={`text-[10px] font-medium ${g.isOwnGoal ? 'text-red-400' : 'text-gray-400'}`}>
                                 {g.isOwnGoal ? 'Autogol' : 'Gol'}
-                                {team?.name ? ` â€¢ ${team.name}` : ''}
+                                {team?.name ? ` ⬢ ${team.name}` : ''}
                               </p>
                             </div>
                           </div>

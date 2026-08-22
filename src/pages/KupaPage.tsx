@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo } from 'react';
+�import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match } from '@/types';
 import Header from '@/components/Header';
@@ -160,7 +160,7 @@ const KupaPage: React.FC = () => {
             </span>
           </div>
           <div className="mt-1 text-center">
-            <span className="text-[10px] text-[#0f1830] font-semibold cursor-pointer hover:underline">Shiko detajet â€º</span>
+            <span className="text-[10px] text-[#0f1830] font-semibold cursor-pointer hover:underline">Shiko detajet ⬺</span>
           </div>
         </div>
       </div>

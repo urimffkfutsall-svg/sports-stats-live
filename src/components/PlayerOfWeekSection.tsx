@@ -1,4 +1,4 @@
-﻿import React from 'react';
+�import React from 'react';
 import { useData } from '@/context/DataContext';
 import { Link } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ const PlayerOfWeekSection: React.FC = () => {
   return (
     <section className="py-12 px-4">
       <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Lojtari i JavÃ«s</h2>
+        <h2 className="text-2xl font-bold text-gray-800 mb-6 text-center">Lojtari i Javës</h2>
         <div className="max-w-md mx-auto">
           <Link to="/lojtari-javes" className="block">
             <div className="bg-gradient-to-br from-[#0f1830] to-[#0f1830] rounded-2xl p-6 text-white shadow-xl hover:shadow-2xl transition-shadow cursor-pointer">
@@ -36,7 +36,7 @@ const PlayerOfWeekSection: React.FC = () => {
                   </div>
                   {pow.isScorer && (
                     <span className="inline-block mt-2 px-3 py-0.5 bg-white/20 rounded-full text-xs font-medium">
-                      GolashÃ«nues - {pow.goalsCount} gola
+                      Golashënues - {pow.goalsCount} gola
                     </span>
                   )}
                 </div>

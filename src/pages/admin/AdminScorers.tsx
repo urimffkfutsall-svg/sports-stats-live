@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+�import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -64,15 +64,15 @@ const AdminScorers: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">GolashÃ«nuesit</h2>
+        <h2 className="text-xl font-bold text-gray-800">Golashënuesit</h2>
         <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
-          + Shto GolashÃ«nues
+          + Shto Golashënues
         </button>
       </div>
 
       <div className="flex gap-2 mb-4">
         <select value={filterComp} onChange={e => setFilterComp(e.target.value)} className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
-          <option value="all">TÃ« gjitha</option>
+          <option value="all">Të gjitha</option>
           {activeComps.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
       </div>
@@ -80,8 +80,8 @@ const AdminScorers: React.FC = () => {
       {showForm && (
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto GolashÃ«nues Manual'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
+            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto Golashënues Manual'}</h3>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">�S"</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
@@ -130,7 +130,7 @@ const AdminScorers: React.FC = () => {
           <span>#</span><span></span><span>Lojtari</span><span>Skuadra</span><span className="text-right">Gola</span>
         </div>
         {aggregated.length === 0 ? (
-          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka golashÃ«nues.</p>
+          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka golashënues.</p>
         ) : (
           aggregated.map((s, i) => {
             const team = getTeamById(s.teamId);
@@ -145,8 +145,8 @@ const AdminScorers: React.FC = () => {
                   <span className="text-sm font-medium text-gray-800">{s.firstName} {s.lastName}</span>
                   {manualScorer && (
                     <div className="hidden group-hover:flex gap-1">
-                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#0f1830]">âœŽ</button>
-                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500">âœ—</button>
+                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#0f1830]">�S}</button>
+                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500">�S</button>
                     </div>
                   )}
                 </div>

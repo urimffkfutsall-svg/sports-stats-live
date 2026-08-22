@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useRef, useCallback } from 'react';
+�import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { onNotification, getNotificationChannel } from '@/lib/supabase-db';
 import { toast } from 'sonner';
 
@@ -132,7 +132,7 @@ const NotificationPanel: React.FC = () => {
       if (!p.matchEnd) return null;
       addNotification({
         type: 'match_end',
-        title: 'Ndeshja pÃ«rfundoi!',
+        title: 'Ndeshja përfundoi!',
         message: `${payload.homeTeam} ${payload.homeScore} - ${payload.awayScore} ${payload.awayTeam}`,
         timestamp: payload.timestamp || Date.now(),
       });
@@ -156,8 +156,8 @@ const NotificationPanel: React.FC = () => {
       if (!p.playerOfWeek) return null;
       addNotification({
         type: 'player_of_week',
-        title: 'Lojtari i JavÃ«s!',
-        message: payload.playerName || 'Lojtari i ri i javÃ«s u zgjodh.',
+        title: 'Lojtari i Javës!',
+        message: payload.playerName || 'Lojtari i ri i javës u zgjodh.',
         timestamp: payload.timestamp || Date.now(),
       });
     });
@@ -193,7 +193,7 @@ const NotificationPanel: React.FC = () => {
     switch (type) {
       case 'goal':
       case 'goal_scorer':
-        return "â—Ž";
+        return "�}";
       case 'match_start':
         return null;
       case 'match_end':
@@ -240,19 +240,19 @@ const NotificationPanel: React.FC = () => {
               <button
                 onClick={() => setShowSettings(!showSettings)}
                 className={`p-1.5 rounded-lg transition-colors ${showSettings ? 'bg-[#0f1830] text-white' : 'text-gray-400 hover:text-gray-600 hover:bg-gray-100'}`}
-                title="CilÃ«simet"
+                title="Cilësimet"
               >
                 
               </button>
               {notifications.length > 0 && (
                 <>
-                  <button onClick={markAllRead} className="p-1.5 text-gray-400 hover:text-[#0f1830] hover:bg-gray-100 rounded-lg" title="Lexo tÃ« gjitha">
+                  <button onClick={markAllRead} className="p-1.5 text-gray-400 hover:text-[#0f1830] hover:bg-gray-100 rounded-lg" title="Lexo të gjitha">
                     <svg className="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="9 11 12 14 22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
                     </svg>
                   </button>
                   <button onClick={clearAll} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-gray-100 rounded-lg" title="Pastro">
-                    âœ—
+                    �S
                   </button>
                 </>
               )}
@@ -264,11 +264,11 @@ const NotificationPanel: React.FC = () => {
             <div className="p-4 border-b border-gray-100 bg-[#0f1830]/10/50 space-y-2">
               <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">Preferencat e Njoftime</p>
               {[
-                { key: 'goals' as const, label: 'Golat', icon: "â—Ž" },
+                { key: 'goals' as const, label: 'Golat', icon: "�}" },
                 { key: 'matchStart' as const, label: 'Fillimi i ndeshjes', icon:  null },
                 { key: 'matchEnd' as const, label: 'Fundi i ndeshjes', icon:  null },
                 { key: 'halfTime' as const, label: 'Pushimi', icon: <div className="w-3.5 h-3.5 rounded-full border border-orange-500" /> },
-                { key: 'playerOfWeek' as const, label: 'Lojtari i javÃ«s', icon:  null },
+                { key: 'playerOfWeek' as const, label: 'Lojtari i javës', icon:  null },
               ].map(item => (
                 <label key={item.key} className="flex items-center justify-between py-1 cursor-pointer">
                   <div className="flex items-center gap-2">
@@ -304,7 +304,7 @@ const NotificationPanel: React.FC = () => {
               <div className="py-12 text-center">
                 
                 <p className="text-sm text-gray-400">Nuk ka njoftime.</p>
-                <p className="text-xs text-gray-300 mt-1">Njoftimet do tÃ« shfaqen kur ndeshjet janÃ« LIVE.</p>
+                <p className="text-xs text-gray-300 mt-1">Njoftimet do të shfaqen kur ndeshjet janë LIVE.</p>
               </div>
             ) : (
               notifications.map(n => (

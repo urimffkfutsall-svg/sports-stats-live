@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+�import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadTeamLogo } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -87,7 +87,7 @@ const AdminTeams: React.FC = () => {
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-gray-800">{editId ? 'Edito Skuadren' : 'Shto Skuader te Re'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">�S"</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
@@ -116,7 +116,7 @@ const AdminTeams: React.FC = () => {
             </div>
             <div className="flex items-end">
               <button type="submit" disabled={saving} className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570] disabled:opacity-60 disabled:cursor-not-allowed">
-                {saving ? 'Duke ruajturâ€¦' : (editId ? 'Ruaj Ndryshimet' : 'Shto')}
+                {saving ? 'Duke ruajtur⬦' : (editId ? 'Ruaj Ndryshimet' : 'Shto')}
               </button>
             </div>
           </form>
@@ -142,8 +142,8 @@ const AdminTeams: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#0f1830] rounded">âœŽ</button>
-                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded">âœ—</button>
+                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#0f1830] rounded">�S}</button>
+                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded">�S</button>
                   </div>
                 </div>
               );

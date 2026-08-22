@@ -1,4 +1,4 @@
-﻿import React from 'react';
+�import React from 'react';
 import { useData } from '@/context/DataContext';
 const TopScorersSection: React.FC = () => {
   const { getAggregatedScorers, getTeamById } = useData();
@@ -12,7 +12,7 @@ const TopScorersSection: React.FC = () => {
         {/* Header */}
         <div className="text-center mb-8">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#0f1830]/5 rounded-full mb-3">
-            â—Ž
+            �}
             <span className="text-xs font-semibold text-[#0f1830] uppercase tracking-wider">Golashenuesit</span>
           </div>
           <h2 className="text-2xl font-bold text-gray-900">Golashenuesit Kryesore</h2>

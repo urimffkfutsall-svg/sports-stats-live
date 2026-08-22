@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from "react";
+�import React, { useState, useEffect } from "react";
 import { ArrowLeft, Bell, BellOff } from "lucide-react";
 import { notificationPermissions } from "@/lib/notifications";
 
@@ -74,7 +74,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
                 <h2 className="font-semibold text-gray-900">Notifjikimet</h2>
                 <p className="text-sm text-gray-600">
                   {notificationsEnabled
-                    ? "Notifikimet janÃ« tÃ« aktivizuara"
+                    ? "Notifikimet janë të aktivizuara"
                     : "Aktivizo notifjikimet"}
                 </p>
               </div>
@@ -96,16 +96,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           {notificationSupported && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-xs text-gray-600 mb-2">
-                Statusi i lejÃ«s: <span className="font-semibold">{permissionStatus}</span>
+                Statusi i lejës: <span className="font-semibold">{permissionStatus}</span>
               </p>
               {permissionStatus === "granted" && (
                 <p className="text-xs text-green-600">
-                  âœ“ Ju do tÃ« merrni njoftimet pÃ«rmes shfletuesit
+                  �S Ju do të merrni njoftimet përmes shfletuesit
                 </p>
               )}
               {permissionStatus === "denied" && (
                 <p className="text-xs text-red-600">
-                  âœ— Lejet e notifjikimeve janÃ« refuzuar. Kontrolloni cilÃ«simet e shfletuesit.
+                  �S Lejet e notifjikimeve janë refuzuar. Kontrolloni cilësimet e shfletuesit.
                 </p>
               )}
             </div>
@@ -114,7 +114,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           {!notificationSupported && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-xs text-amber-600">
-                âš  Shfletuesit juaj nuk suporton notifjikimet
+                �a� Shfletuesit juaj nuk suporton notifjikimet
               </p>
             </div>
           )}
@@ -122,13 +122,13 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
 
         {/* Notification Info */}
         <div className="bg-[#0f1830]/10 rounded-lg p-4 border border-[#0f1830]/25">
-          <h3 className="font-semibold text-[#0f1830] mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
+          <h3 className="font-semibold text-[#0f1830] mb-2">�!farë do të merrni?</h3>
           <ul className="text-sm text-[#1c3570] space-y-1">
-            <li>âœ“ Notifjikimet pÃ«r ndeshjet e pÃ«rfunduara</li>
-            <li>âœ“ Lajmet e reja tÃ« postuara</li>
-            <li>âœ“ Videot e reja</li>
-            <li>âœ“ Skuadrat e reja tÃ« shtuara</li>
-            <li>âœ“ Ndeshjat e reja tÃ« planifikuara</li>
+            <li>�S Notifjikimet për ndeshjet e përfunduara</li>
+            <li>�S Lajmet e reja të postuara</li>
+            <li>�S Videot e reja</li>
+            <li>�S Skuadrat e reja të shtuara</li>
+            <li>�S Ndeshjat e reja të planifikuara</li>
           </ul>
         </div>
 

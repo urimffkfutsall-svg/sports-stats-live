@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
+�import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match, Player } from '@/types';
 import { broadcastNotification, dbLiveStreams } from '@/lib/supabase-db';
@@ -239,7 +239,7 @@ const AdminLiveControl: React.FC = () => {
 
   const handleEndMatch = () => {
     if (!selectedMatch) return null;
-    if (!confirm(`PÃ«rfundo ndeshjen ${homeTeam?.name} ${selectedMatch.homeScore ?? 0} - ${selectedMatch.awayScore ?? 0} ${awayTeam?.name}?`)) return null;
+    if (!confirm(`Përfundo ndeshjen ${homeTeam?.name} ${selectedMatch.homeScore ?? 0} - ${selectedMatch.awayScore ?? 0} ${awayTeam?.name}?`)) return null;
     
     updateMatch({
       ...selectedMatch,
@@ -284,17 +284,17 @@ const AdminLiveControl: React.FC = () => {
           
         </div>
         <h3 className="text-lg font-semibold text-gray-700 mb-2">Nuk ka ndeshje LIVE</h3>
-        <p className="text-sm text-gray-500 mb-6">Fillo njÃ« ndeshje tÃ« planifikuar pÃ«r tÃ« pÃ«rdorur kontrollin LIVE.</p>
+        <p className="text-sm text-gray-500 mb-6">Fillo një ndeshje të planifikuar për të përdorur kontrollin LIVE.</p>
         {plannedMatches.length > 0 ? (
           <button
             onClick={() => setShowStartMatch(true)}
             className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-colors shadow-lg shadow-green-200"
           >
             
-            Fillo Ndeshje ({plannedMatches.length} tÃ« planifikuara)
+            Fillo Ndeshje ({plannedMatches.length} të planifikuara)
           </button>
         ) : (
-          <p className="text-sm text-gray-400">Nuk ka ndeshje tÃ« planifikuara. Shto ndeshje nga tab-i "Ndeshjet".</p>
+          <p className="text-sm text-gray-400">Nuk ka ndeshje të planifikuara. Shto ndeshje nga tab-i "Ndeshjet".</p>
         )}
       {/* ====== LIVE STREAMS (shown always) ====== */}
       <div className="bg-white rounded-2xl border-2 border-gray-100 p-5 shadow-sm mt-8 text-left">
@@ -350,7 +350,7 @@ const AdminLiveControl: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-gray-800">Fillo Ndeshje</h2>
           <button onClick={() => setShowStartMatch(false)} className="text-gray-400 hover:text-gray-600">
-            âœ•
+            �S"
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -384,7 +384,7 @@ const AdminLiveControl: React.FC = () => {
           })}
         </div>
         {plannedMatches.length === 0 && (
-          <p className="text-center text-gray-500 py-8">Nuk ka ndeshje tÃ« planifikuara.</p>
+          <p className="text-center text-gray-500 py-8">Nuk ka ndeshje të planifikuara.</p>
         )}
       </div>
     );
@@ -419,7 +419,7 @@ const AdminLiveControl: React.FC = () => {
 
       {plannedMatches.length > 0 && (
         <button onClick={() => setShowStartMatch(true)} className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[#0f1830] bg-[#0f1830]/5 border border-[#0f1830]/20 rounded-xl font-bold hover:bg-[#0f1830]/10 transition-colors">
-          + Fillo ndeshje tjetÃ«r
+          + Fillo ndeshje tjetër
         </button>
       )}
 

@@ -1,4 +1,4 @@
-﻿import React, { useState, useMemo, useEffect } from 'react';
+�import React, { useState, useMemo, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
 import { Link } from 'react-router-dom';
 interface ScorerModalData {
@@ -41,7 +41,7 @@ const ScorerModal: React.FC<{ scorer: ScorerModalData; onClose: () => void }> = 
 
         {/* Close */}
         <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 z-[110] w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">
-          Ãƒâ€”
+          Ò�
         </button>
 
         {/* Player Header */}
@@ -147,7 +147,7 @@ const LeagueTablesSection: React.FC = () => {
     <section className="py-10 px-4 flex justify-center items-center min-h-[200px]">
       <div className="flex flex-col items-center gap-3">
         <div className="w-10 h-10 rounded-full border-4 border-[#0f1830] border-t-transparent animate-spin" />
-        <span className="text-sm text-gray-400 font-medium">Duke ngarkuar tabelÃ«n...</span>
+        <span className="text-sm text-gray-400 font-medium">Duke ngarkuar tabelën...</span>
       </div>
     </section>
   );

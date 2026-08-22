@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+�import React, { useState, useEffect } from 'react';
 interface Decision {
   id: string;
   vendimi: string;
@@ -90,7 +90,7 @@ var DecisionsSection: React.FC = function() {
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                   <span className="text-[11px] text-gray-400">{d.data}</span>
                   <span className="flex items-center gap-1 text-[11px] text-[#0f1830] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Shiko detajet â€º
+                    Shiko detajet ⬺
                   </span>
                 </div>
               </div>
@@ -109,7 +109,7 @@ var DecisionsSection: React.FC = function() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>
               </div>
-              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">âœ•</button>
+              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">�S"</button>
             </div>
             <div className="p-6 space-y-4">
               <div>

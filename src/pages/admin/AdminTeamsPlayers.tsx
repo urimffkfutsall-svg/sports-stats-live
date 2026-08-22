@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+�import React, { useState, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
 import { Official, PlayerStats } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
@@ -88,7 +88,7 @@ var AdminTeamsPlayers: React.FC = function() {
     return (
       <div className="space-y-6">
         <button onClick={function() { setView('team'); setSelectedPlayerId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] transition-colors">
-          â† Kthehu te {selectedTeam?.name}
+          � � Kthehu te {selectedTeam?.name}
         </button>
 
         <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm flex items-center gap-4">
@@ -149,7 +149,7 @@ var AdminTeamsPlayers: React.FC = function() {
                     <td className="px-4 py-3 text-sm text-center font-semibold text-red-600">{s.redCards}</td>
                     <td className="px-4 py-3 text-sm text-gray-500">{s.extraNotes || '-'}</td>
                     <td className="px-4 py-3 text-right">
-                      <button onClick={function() { handleDeleteStat(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg">âœ—</button>
+                      <button onClick={function() { handleDeleteStat(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg">�S</button>
                     </td>
                   </tr>
                 );
@@ -165,7 +165,7 @@ var AdminTeamsPlayers: React.FC = function() {
     return (
       <div className="space-y-6">
         <button onClick={function() { setView('list'); setSelectedTeamId(''); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] transition-colors">
-          â† Kthehu te Skuadrat
+          � � Kthehu te Skuadrat
         </button>
 
         <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] rounded-2xl p-6 text-white flex items-center gap-4">
@@ -197,7 +197,7 @@ var AdminTeamsPlayers: React.FC = function() {
                     {totalRed > 0 && <span className="text-xs text-red-600">?? {totalRed}</span>}
                   </div>
                 </div>
-                â€º
+                ⬺
               </div>
             );
           })}
@@ -267,7 +267,7 @@ var AdminTeamsPlayers: React.FC = function() {
                 <p className="text-sm font-bold text-gray-800 truncate">{t.name}</p>
                 <p className="text-xs text-gray-400 mt-0.5">{comp ? comp.name : ''} | {tPlayers.length} lojtare</p>
               </div>
-              â€º
+              ⬺
             </div>
           );
         })}
