@@ -142,7 +142,7 @@ export default function KombetarjaPage() {
         {competitions.length > 1 && (
           <div className="flex gap-2 bg-white rounded-xl p-1 mb-6 border border-gray-100 shadow-sm overflow-x-auto">
             {competitions.map(c => (
-              <button key={c.id} onClick={() => setSelectedCompId(c.id)} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap " + (selectedCompId === c.id ? "bg-[#2a499a] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800 hover:bg-gray-50")}>
+              <button key={c.id} onClick={() => setSelectedCompId(c.id)} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all whitespace-nowrap " + (selectedCompId === c.id ? "bg-[#2a499a] text-white shadow-md shadow-[#2a499a]/25" : "text-gray-500 hover:text-gray-800 hover:bg-gray-50")}>
                 {c.name} {c.year && '(' + c.year + ')'}
               </button>
             ))}
@@ -183,7 +183,7 @@ export default function KombetarjaPage() {
                     </thead>
                     <tbody>
                       {ranking.map((t, i) => (
-                        <tr key={t.id} className={"border-b border-gray-50 hover:bg-gray-50/50 transition-colors " + (t.isKosova ? "bg-blue-50/40" : "")}>
+                        <tr key={t.id} className={"border-b border-gray-50 hover:bg-gray-50/50 transition-colors " + (t.isKosova ? "bg-[#2a499a]/10/40" : "")}>
                           <td className="py-3 px-3 text-xs font-bold text-gray-400">{i + 1}</td>
                           <td className="py-3">
                             <div className="flex items-center gap-2.5">

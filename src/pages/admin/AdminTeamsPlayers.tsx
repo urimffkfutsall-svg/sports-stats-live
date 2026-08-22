@@ -120,7 +120,7 @@ var AdminTeamsPlayers: React.FC = function() {
               <span className="text-red-500 text-lg">??</span>
               <input type="number" min="0" className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Kartona K." value={sf.redCards} onChange={function(e) { setSf(Object.assign({}, sf, { redCards: parseInt(e.target.value) || 0 })); }} />
             </div>
-            <button onClick={handleAddStat} className="px-5 py-2.5 bg-gradient-to-r from-[#2a499a] to-blue-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Shto</button>
+            <button onClick={handleAddStat} className="px-5 py-2.5 bg-gradient-to-r from-[#2a499a] to-[#2a499a] text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Shto</button>
           </div>
           <input className="w-full mt-3 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Shenime shtese (opsionale)" value={sf.extraNotes} onChange={function(e) { setSf(Object.assign({}, sf, { extraNotes: e.target.value })); }} />
         </div>
@@ -245,7 +245,7 @@ var AdminTeamsPlayers: React.FC = function() {
         {['all', 'superliga', 'liga_pare'].map(function(f) {
           var label = f === 'all' ? 'Te gjitha' : f === 'superliga' ? 'Superliga' : 'Liga e Pare';
           return (
-            <button key={f} onClick={function() { setCompFilter(f as any); }} className={'px-4 py-2 rounded-xl text-sm font-medium transition-all ' + (compFilter === f ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+            <button key={f} onClick={function() { setCompFilter(f as any); }} className={'px-4 py-2 rounded-xl text-sm font-medium transition-all ' + (compFilter === f ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
               {label}
             </button>
           );

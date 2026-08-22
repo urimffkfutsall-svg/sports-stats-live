@@ -171,8 +171,8 @@ export default function PlayoffPage() {
 
         {/* Tab Selector */}
         <div className="flex gap-2 bg-white rounded-xl p-1 mb-8 border border-gray-100 shadow-sm">
-          <button onClick={() => setTab('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'superliga' ? "bg-[#2a499a] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
-          <button onClick={() => setTab('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'liga_pare' ? "bg-[#2a499a] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
+          <button onClick={() => setTab('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'superliga' ? "bg-[#2a499a] text-white shadow-md shadow-[#2a499a]/25" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
+          <button onClick={() => setTab('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'liga_pare' ? "bg-[#2a499a] text-white shadow-md shadow-[#2a499a]/25" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
         </div>
 
         {tab === 'superliga' ? (
@@ -189,7 +189,7 @@ export default function PlayoffPage() {
             {semiSeries.length > 0 && (
               <div>
                 <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-                  <span className="w-1.5 h-6 bg-blue-500 rounded-full"></span>Gjysmefinale
+                  <span className="w-1.5 h-6 bg-[#2a499a]/100 rounded-full"></span>Gjysmefinale
                   <span className="text-xs text-gray-400 font-normal ml-2">Vendi 1 & 2 presin fituesit</span>
                 </h2>
                 <div className="space-y-4">{semiSeries.map(s => renderSeries(s))}</div>

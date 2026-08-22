@@ -261,7 +261,7 @@ const NotificationPanel: React.FC = () => {
 
           {/* Settings Panel */}
           {showSettings && (
-            <div className="p-4 border-b border-gray-100 bg-blue-50/50 space-y-2">
+            <div className="p-4 border-b border-gray-100 bg-[#2a499a]/10/50 space-y-2">
               <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">Preferencat e Njoftime</p>
               {[
                 { key: 'goals' as const, label: 'Golat', icon: "â—Ž" },
@@ -311,7 +311,7 @@ const NotificationPanel: React.FC = () => {
                 <div
                   key={n.id}
                   className={`flex items-start gap-3 px-4 py-3 border-b border-gray-50 hover:bg-gray-50 transition-colors ${
-                    !n.read ? 'bg-blue-50/30' : ''
+                    !n.read ? 'bg-[#2a499a]/10/30' : ''
                   }`}
                   onClick={() => setNotifications(prev => prev.map(x => x.id === n.id ? { ...x, read: true } : x))}
                 >

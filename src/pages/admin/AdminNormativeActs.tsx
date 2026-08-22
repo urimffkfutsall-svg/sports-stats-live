@@ -99,7 +99,7 @@ const AdminNormativeActs: React.FC = () => {
             onChange={handleFile}
             className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#2a499a] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
           />
-          {uploading && <p className="text-xs text-blue-500 mt-1">Duke ngarkuar...</p>}
+          {uploading && <p className="text-xs text-[#2a499a]/100 mt-1">Duke ngarkuar...</p>}
           {fileName && !uploading && <p className="text-xs text-green-600 mt-1">? {fileName}</p>}
         </div>
         <div className="flex gap-2">
@@ -139,7 +139,7 @@ const AdminNormativeActs: React.FC = () => {
               </button>
               <button
                 onClick={() => startEdit(a)}
-                className="px-3 py-1.5 bg-blue-50 text-blue-700 rounded-lg text-xs font-semibold hover:bg-blue-100"
+                className="px-3 py-1.5 bg-[#2a499a]/10 text-[#1c3570] rounded-lg text-xs font-semibold hover:bg-[#2a499a]/15"
               >
                 Ndrysho
               </button>

@@ -63,7 +63,7 @@ var DecisionsSection: React.FC = function() {
       <div className="max-w-7xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-[#2a499a]/25">
               
             </div>
             <div>
@@ -104,7 +104,7 @@ var DecisionsSection: React.FC = function() {
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={function(e) { e.stopPropagation(); }}>
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center">
                   
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>

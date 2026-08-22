@@ -193,7 +193,7 @@ const AdminMatches: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-800">Ndeshjet</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
           <Plus className="w-4 h-4" /> Shto Ndeshje
         </button>
       </div>
@@ -420,7 +420,7 @@ const AdminMatches: React.FC = () => {
                 <div><label className="block text-xs text-gray-600 mb-1">Faull-et Jashtë</label><input type="number" min="0" value={form.fouls_away} onChange={e => setForm(p => ({ ...p, fouls_away: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" /></div>
               </div>
             </details>
-            <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+            <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
               {editId ? 'Ruaj Ndryshimet' : 'Shto Ndeshjen'}
             </button>
           </form>
@@ -481,7 +481,7 @@ const AdminMatches: React.FC = () => {
                   </label>
                 </div>
               </div>
-              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1c3570]">
                 Shto Gol
               </button>
             </form>

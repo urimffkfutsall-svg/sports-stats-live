@@ -248,7 +248,7 @@ const LeagueTablesSection: React.FC = () => {
                     {standings.map((row, i) => (
                       <tr
                         key={row.teamId}
-                        className={`${getRowBg(i + 1)} hover:bg-blue-50/30 transition-colors border-b border-gray-100 last:border-0`}
+                        className={`${getRowBg(i + 1)} hover:bg-[#2a499a]/10/30 transition-colors border-b border-gray-100 last:border-0`}
                       >
                         <td className={`px-3 py-2.5 sticky left-0 z-10 ${getRowBg(i + 1)}`}>
                           <div className="flex items-center">

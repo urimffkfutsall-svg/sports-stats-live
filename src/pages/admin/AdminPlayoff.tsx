@@ -388,7 +388,7 @@ const AdminPlayoff: React.FC = () => {
           {semiSeries.length > 0 && (
             <div>
               <h3 className="font-black text-gray-900 mb-3 flex items-center gap-2">
-                <span className="w-1 h-5 bg-blue-500 rounded-full"></span>Gjysmefinale
+                <span className="w-1 h-5 bg-[#2a499a]/100 rounded-full"></span>Gjysmefinale
                 <span className="text-xs text-gray-400 font-normal">(Vendi 1 & 2 presin fituesit e cerekfinaleve)</span>
               </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

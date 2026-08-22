@@ -143,7 +143,7 @@ const AdminKombetarja: React.FC = () => {
         <div>
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-800">Lojtaret e Kombetares</h3>
-            <button onClick={() => { setEditPlayer(null); setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 }); setShowPlayerForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+            <button onClick={() => { setEditPlayer(null); setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 }); setShowPlayerForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1c3570]">
               + Shto Lojtar
             </button>
           </div>
@@ -177,7 +177,7 @@ const AdminKombetarja: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1c3570]">
                   ✓ Ruaj
                 </button>
                 <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
@@ -213,7 +213,7 @@ const AdminKombetarja: React.FC = () => {
         <div>
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-800">Ndeshjet e Kombetares</h3>
-            <button onClick={() => { setEditMatch(null); setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' }); setShowMatchForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+            <button onClick={() => { setEditMatch(null); setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' }); setShowMatchForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1c3570]">
               + Shto Ndeshje
             </button>
           </div>
@@ -239,7 +239,7 @@ const AdminKombetarja: React.FC = () => {
                 <input placeholder="Link LIVE (URL)" value={mForm.liveUrl} onChange={e => setMForm({...mForm, liveUrl:e.target.value})} className="border rounded-lg px-3 py-2 text-sm col-span-2" />
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1c3570]">
                   ✓ Ruaj
                 </button>
                 <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
@@ -258,7 +258,7 @@ const AdminKombetarja: React.FC = () => {
                     <p className="font-medium text-sm text-gray-800">
                       {m.isHome ? 'Kosova' : m.opponent} {m.status !== 'planned' ? (m.homeScore??0)+' - '+(m.awayScore??0) : 'vs'} {m.isHome ? m.opponent : 'Kosova'}
                     </p>
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${m.status==='live' ? 'bg-red-100 text-red-600' : m.status==='finished' ? 'bg-gray-100 text-gray-500' : 'bg-blue-50 text-blue-600'}`}>
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${m.status==='live' ? 'bg-red-100 text-red-600' : m.status==='finished' ? 'bg-gray-100 text-gray-500' : 'bg-[#2a499a]/10 text-[#2a499a]'}`}>
                       {m.status==='live' ? 'LIVE' : m.status==='finished' ? 'Perfunduar' : 'Planifikuar'}
                     </span>
                   </div>

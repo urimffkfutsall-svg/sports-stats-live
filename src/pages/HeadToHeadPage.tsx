@@ -81,7 +81,7 @@ const HeadToHeadPage: React.FC = () => {
                 </div>
                 <div className="text-center px-6">
                   <span className="text-3xl font-bold">{h2h.teamAWins} - {h2h.draws} - {h2h.teamBWins}</span>
-                  <p className="text-xs text-blue-200 mt-1">{h2h.matches.length} ndeshje totale</p>
+                  <p className="text-xs text-[#2a499a]/25 mt-1">{h2h.matches.length} ndeshje totale</p>
                 </div>
                 <div className="flex flex-col items-center flex-1">
                   <div className="w-20 h-20 rounded-full bg-white/10 overflow-hidden">

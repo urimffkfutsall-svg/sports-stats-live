@@ -374,7 +374,7 @@ const AdminNationalTeam: React.FC = () => {
                         </thead>
                         <tbody>
                           {getRanking(g.id).map((t, i) => (
-                            <tr key={t.id} className={"border-b border-gray-100 " + (t.isKosova ? "bg-blue-50/50" : "")}>
+                            <tr key={t.id} className={"border-b border-gray-100 " + (t.isKosova ? "bg-[#2a499a]/10/50" : "")}>
                               <td className="py-2 px-1 text-xs font-bold text-gray-400">{i+1}</td>
                               <td className="py-2">
                                 <div className="flex items-center gap-2">
@@ -420,10 +420,10 @@ const AdminNationalTeam: React.FC = () => {
                       {/* Teams list */}
                       <div className="flex flex-wrap gap-2">
                         {selectedGroupTeamsList.filter(t => t.groupId === g.id).map(t => (
-                          <div key={t.id} className={"flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border " + (t.isKosova ? "bg-blue-50 border-blue-200 text-[#2a499a]" : "bg-white border-gray-200 text-gray-700")}>
+                          <div key={t.id} className={"flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border " + (t.isKosova ? "bg-[#2a499a]/10 border-[#2a499a]/25 text-[#2a499a]" : "bg-white border-gray-200 text-gray-700")}>
                             {t.teamLogo && <img src={t.teamLogo} alt="" className="w-4 h-4 rounded object-contain" />}
                             {t.teamName}
-                            <button onClick={() => handleEditTeam(t)} className="text-blue-400 hover:text-blue-600 ml-1" title="Edito">&#9998;</button>
+                            <button onClick={() => handleEditTeam(t)} className="text-[#2a499a]/60 hover:text-[#2a499a] ml-1" title="Edito">&#9998;</button>
                             <button onClick={() => handleDeleteTeam(t.id)} className="text-red-400 hover:text-red-600 ml-1">x</button>
                           </div>
                         ))}
@@ -505,7 +505,7 @@ const AdminNationalTeam: React.FC = () => {
                                 <span className="font-medium text-gray-800">{getTeamName(m.awayTeamId)}</span>
                               </div>
                               <div className="flex items-center gap-2">
-                                <span className={"text-[10px] font-bold px-2 py-0.5 rounded-full " + (m.status === 'finished' ? "bg-green-50 text-green-600" : "bg-blue-50 text-blue-600")}>{m.status === 'finished' ? 'Perfunduar' : 'Planifikuar'}</span>
+                                <span className={"text-[10px] font-bold px-2 py-0.5 rounded-full " + (m.status === 'finished' ? "bg-green-50 text-green-600" : "bg-[#2a499a]/10 text-[#2a499a]")}>{m.status === 'finished' ? 'Perfunduar' : 'Planifikuar'}</span>
                                 <button onClick={() => handleEditMatch(m)} className="text-xs text-[#2a499a] hover:underline">Edito</button>
                                 <button onClick={() => handleDeleteMatch(m.id)} className="text-xs text-red-400 hover:text-red-600">Fshi</button>
                               </div>

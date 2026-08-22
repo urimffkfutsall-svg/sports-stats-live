@@ -83,7 +83,7 @@ const MatchVoteWidget: React.FC<MatchVoteWidgetProps> = ({ matchId, homeTeamName
               <button
                 onClick={e => handleVote('home', e)}
                 disabled={loading}
-                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-blue-50 transition-colors disabled:opacity-50"
+                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-[#2a499a]/10 transition-colors disabled:opacity-50"
               >
                 <span className="truncate">{homeTeamName}</span>
                 <span className="text-gray-300">circ</span>
@@ -91,7 +91,7 @@ const MatchVoteWidget: React.FC<MatchVoteWidgetProps> = ({ matchId, homeTeamName
               <button
                 onClick={e => handleVote('draw', e)}
                 disabled={loading}
-                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-blue-50 transition-colors disabled:opacity-50"
+                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-[#2a499a]/10 transition-colors disabled:opacity-50"
               >
                 <span>Barazim</span>
                 <span className="text-gray-300">circ</span>
@@ -99,7 +99,7 @@ const MatchVoteWidget: React.FC<MatchVoteWidgetProps> = ({ matchId, homeTeamName
               <button
                 onClick={e => handleVote('away', e)}
                 disabled={loading}
-                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-blue-50 transition-colors disabled:opacity-50"
+                className="w-full flex items-center justify-between px-3 py-2 bg-white border border-gray-200 rounded-lg text-xs font-medium text-gray-700 hover:border-[#2a499a] hover:bg-[#2a499a]/10 transition-colors disabled:opacity-50"
               >
                 <span className="truncate">{awayTeamName}</span>
                 <span className="text-gray-300">circ</span>

@@ -133,7 +133,7 @@ const AdminNews: React.FC = () => {
                   <div className="flex items-center gap-2 mt-1">
                     {n.isFeaturedLanding && <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
                     {np.length > 0 && <span className="text-[10px] font-bold text-gray-400 bg-gray-50 px-2 py-0.5 rounded-full">{np.length} foto</span>}
-                    {(n as any).videoUrl && <span className="text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">VIDEO</span>}
+                    {(n as any).videoUrl && <span className="text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2 py-0.5 rounded-full">VIDEO</span>}
                   </div>
                 </div>
                 <div className="flex gap-2 flex-shrink-0">

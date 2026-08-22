@@ -143,7 +143,7 @@ const AdminPage: React.FC = () => {
         {activeTab === 'dashboard' && (
           <div>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
-              <DashCard label="Skuadra" value={activeTeams.length} color="bg-blue-50 text-blue-600" />
+              <DashCard label="Skuadra" value={activeTeams.length} color="bg-[#2a499a]/10 text-[#2a499a]" />
               <DashCard label="Ndeshje" value={activeMatches.length} color="bg-green-50 text-green-600" />
               <DashCard label="Lojtarë" value={players.filter(p => activeSeason ? p.seasonId === activeSeason.id : true).length} color="bg-purple-50 text-purple-600" />
               <DashCard label="LIVE" value={liveMatches.length} color="bg-red-50 text-red-600" />

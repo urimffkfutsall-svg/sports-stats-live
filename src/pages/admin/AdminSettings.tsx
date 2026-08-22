@@ -200,7 +200,7 @@ const AdminSettings: React.FC = () => {
               <button onClick={() => { setShowWizard(true); setActiveSection('wizard'); }} className="flex items-center gap-1 px-3 py-1.5 bg-green-600 text-white rounded-lg text-sm hover:bg-green-700">
                  Wizard
               </button>
-              <button onClick={() => { setSeasonForm({ name: '', startDate: '', endDate: '', isActive: false }); setEditSeasonId(null); setShowSeasonForm(true); }} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">
+              <button onClick={() => { setSeasonForm({ name: '', startDate: '', endDate: '', isActive: false }); setEditSeasonId(null); setShowSeasonForm(true); }} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">
                 + Shto Sezon
               </button>
             </div>
@@ -224,7 +224,7 @@ const AdminSettings: React.FC = () => {
                 <span className="text-sm">Aktiv</span>
               </label>
               <div className="flex gap-2">
-                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">{editSeasonId ? 'Ruaj' : 'Shto'}</button>
+                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">{editSeasonId ? 'Ruaj' : 'Shto'}</button>
                 <button type="button" onClick={() => { setShowSeasonForm(false); setEditSeasonId(null); }} className="text-gray-400 hover:text-gray-600">âœ•</button>
               </div>
             </form>
@@ -261,7 +261,7 @@ const AdminSettings: React.FC = () => {
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-gray-700">Kompeticionet</h3>
-            <button onClick={() => { setCompForm(p => ({ ...p, seasonId: activeSeason?.id || '' })); setShowCompForm(true); }} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">
+            <button onClick={() => { setCompForm(p => ({ ...p, seasonId: activeSeason?.id || '' })); setShowCompForm(true); }} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">
               + Shto
             </button>
           </div>
@@ -291,7 +291,7 @@ const AdminSettings: React.FC = () => {
                 <span className="text-xs">Landing Page</span>
               </label>
               <div className="flex gap-2">
-                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">Shto</button>
+                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">Shto</button>
                 <button type="button" onClick={() => setShowCompForm(false)} className="text-gray-400">âœ•</button>
               </div>
             </form>
@@ -307,10 +307,10 @@ const AdminSettings: React.FC = () => {
                     <div>
                       <span className="text-sm font-medium text-gray-800">{c.name}</span>
                       <span className="text-xs text-gray-400 ml-2">{season?.name || ''}</span>
-                      {c.isActiveLanding && <span className="ml-2 text-xs bg-blue-50 text-blue-600 px-2 py-0.5 rounded-full">Landing</span>}
+                      {c.isActiveLanding && <span className="ml-2 text-xs bg-[#2a499a]/10 text-[#2a499a] px-2 py-0.5 rounded-full">Landing</span>}
                     </div>
                     <div className="flex gap-1">
-                      <button onClick={() => updateCompetition({ ...c, isActiveLanding: !c.isActiveLanding })} className={`px-2 py-1 text-xs rounded ${c.isActiveLanding ? 'bg-blue-50 text-blue-600' : 'bg-gray-50 text-gray-500'}`}>
+                      <button onClick={() => updateCompetition({ ...c, isActiveLanding: !c.isActiveLanding })} className={`px-2 py-1 text-xs rounded ${c.isActiveLanding ? 'bg-[#2a499a]/10 text-[#2a499a]' : 'bg-gray-50 text-gray-500'}`}>
                         {c.isActiveLanding ? 'Fshih nga LP' : 'Shfaq nÃ« LP'}
                       </button>
                       <button onClick={() => { if (confirm('Fshi kompeticionin?')) deleteCompetition(c.id); }} className="p-1.5 text-gray-400 hover:text-red-500">âœ—</button>
@@ -327,7 +327,7 @@ const AdminSettings: React.FC = () => {
         <div>
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-gray-700">EditorÃ«t</h3>
-            <button onClick={() => setShowEditorForm(true)} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">
+            <button onClick={() => setShowEditorForm(true)} className="flex items-center gap-1 px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">
               + Shto Editor
             </button>
           </div>
@@ -342,7 +342,7 @@ const AdminSettings: React.FC = () => {
                 <input type="password" value={editorForm.password} onChange={e => setEditorForm(p => ({ ...p, password: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" required />
               </div>
               <div className="flex gap-2">
-                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">Shto</button>
+                <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">Shto</button>
                 <button type="button" onClick={() => setShowEditorForm(false)} className="text-gray-400">âœ•</button>
               </div>
             </form>
@@ -495,7 +495,7 @@ const AdminSettings: React.FC = () => {
             <button
               onClick={handleMigration}
               disabled={!copyFrom || !copyTo || (!copyTeams && !copyComps && !copyScorers)}
-              className="flex items-center gap-2 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex items-center gap-2 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
                Ekzekuto Migracionin
             </button>

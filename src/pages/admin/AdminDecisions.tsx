@@ -99,7 +99,7 @@ var AdminDecisions: React.FC = function() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-blue-200">
+          <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center shadow-lg shadow-[#2a499a]/25">
             
           </div>
           <div>
@@ -107,16 +107,16 @@ var AdminDecisions: React.FC = function() {
             <p className="text-sm text-gray-500">{sorted.length} vendime gjithsej</p>
           </div>
         </div>
-        <button onClick={resetForm} className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-blue-200 transition-all duration-200">
+        <button onClick={resetForm} className="flex items-center gap-2 px-4 py-2.5 bg-gradient-to-r from-[#2a499a]/100 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg hover:shadow-[#2a499a]/25 transition-all duration-200">
           +
           Shto Vendim
         </button>
       </div>
 
       <div className="grid grid-cols-2 gap-4">
-        <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 text-center">
-          <p className="text-2xl font-bold text-blue-600">{sorted.length}</p>
-          <p className="text-xs text-blue-600 font-medium mt-1">Gjithsej</p>
+        <div className="bg-[#2a499a]/10 border border-[#2a499a]/15 rounded-xl p-4 text-center">
+          <p className="text-2xl font-bold text-[#2a499a]">{sorted.length}</p>
+          <p className="text-xs text-[#2a499a] font-medium mt-1">Gjithsej</p>
         </div>
         <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
           <p className="text-2xl font-bold text-emerald-600">{sorted.filter(function(d) { return d.isFeatured; }).length}</p>
@@ -128,35 +128,35 @@ var AdminDecisions: React.FC = function() {
         <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-gray-800 mb-4">Vendim i Ri</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Titulli i vendimit" value={form.title} onChange={function(e) { setForm(Object.assign({}, form, { title: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Java (numri, p.sh. 15)" value={form.week} onChange={function(e) { setForm(Object.assign({}, form, { week: e.target.value })); }} />
-            <textarea className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-2" rows={4} placeholder="Pershkrimi i plote i vendimit..." value={form.description} onChange={function(e) { setForm(Object.assign({}, form, { description: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Titulli i vendimit" value={form.title} onChange={function(e) { setForm(Object.assign({}, form, { title: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Java (numri, p.sh. 15)" value={form.week} onChange={function(e) { setForm(Object.assign({}, form, { week: e.target.value })); }} />
+            <textarea className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100 md:col-span-2" rows={4} placeholder="Pershkrimi i plote i vendimit..." value={form.description} onChange={function(e) { setForm(Object.assign({}, form, { description: e.target.value })); }} />
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.isFeatured} onChange={function(e) { setForm(Object.assign({}, form, { isFeatured: e.target.checked })); }} className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500" />
+              <input type="checkbox" checked={form.isFeatured} onChange={function(e) { setForm(Object.assign({}, form, { isFeatured: e.target.checked })); }} className="w-4 h-4 text-[#2a499a] rounded border-gray-300 focus:ring-[#2a499a]/100" />
               <span className="text-sm text-gray-700 font-medium">Shfaq ne Ballina</span>
             </label>
           </div>
           <div className="flex gap-3 mt-4">
-            <button onClick={handleAdd} className="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Ruaj Vendimin</button>
+            <button onClick={handleAdd} className="px-5 py-2.5 bg-gradient-to-r from-[#2a499a]/100 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">Ruaj Vendimin</button>
             <button onClick={function() { setShowForm(false); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-all">Anulo</button>
           </div>
         </div>
       )}
 
       {editingId && (
-        <div className="bg-white border border-blue-200 rounded-2xl p-6 shadow-sm">
+        <div className="bg-white border border-[#2a499a]/25 rounded-2xl p-6 shadow-sm">
           <h3 className="font-semibold text-gray-800 mb-4">Edito Vendimin</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Titulli i vendimit" value={form.title} onChange={function(e) { setForm(Object.assign({}, form, { title: e.target.value })); }} />
-            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Java (numri)" value={form.week} onChange={function(e) { setForm(Object.assign({}, form, { week: e.target.value })); }} />
-            <textarea className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 md:col-span-2" rows={4} placeholder="Pershkrimi..." value={form.description} onChange={function(e) { setForm(Object.assign({}, form, { description: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Titulli i vendimit" value={form.title} onChange={function(e) { setForm(Object.assign({}, form, { title: e.target.value })); }} />
+            <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100" placeholder="Java (numri)" value={form.week} onChange={function(e) { setForm(Object.assign({}, form, { week: e.target.value })); }} />
+            <textarea className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]/100 md:col-span-2" rows={4} placeholder="Pershkrimi..." value={form.description} onChange={function(e) { setForm(Object.assign({}, form, { description: e.target.value })); }} />
             <label className="flex items-center gap-2 cursor-pointer">
-              <input type="checkbox" checked={form.isFeatured} onChange={function(e) { setForm(Object.assign({}, form, { isFeatured: e.target.checked })); }} className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500" />
+              <input type="checkbox" checked={form.isFeatured} onChange={function(e) { setForm(Object.assign({}, form, { isFeatured: e.target.checked })); }} className="w-4 h-4 text-[#2a499a] rounded border-gray-300 focus:ring-[#2a499a]/100" />
               <span className="text-sm text-gray-700 font-medium">Shfaq ne Ballina</span>
             </label>
           </div>
           <div className="flex gap-3 mt-4">
-            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">âœ“ Ruaj Ndryshimet</button>
+            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-[#2a499a]/100 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">âœ“ Ruaj Ndryshimet</button>
             <button onClick={function() { setEditingId(null); setForm({ title: '', description: '', week: '', isFeatured: false }); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-all">Anulo</button>
           </div>
         </div>
@@ -185,11 +185,11 @@ var AdminDecisions: React.FC = function() {
                     <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#2a499a]/10 text-[#2a499a] font-bold text-sm">{d.week}</span>
                   </td>
                   <td className="px-4 py-4 text-center">
-                    <input type="checkbox" checked={d.isFeatured} onChange={function() { toggleFeatured(d); }} className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer" title="Shfaq ne Ballina" />
+                    <input type="checkbox" checked={d.isFeatured} onChange={function() { toggleFeatured(d); }} className="w-4 h-4 text-[#2a499a] rounded border-gray-300 focus:ring-[#2a499a]/100 cursor-pointer" title="Shfaq ne Ballina" />
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button onClick={function() { setSelectedId(d.id); }} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">â—‹</button>
+                      <button onClick={function() { setSelectedId(d.id); }} className="p-1.5 text-gray-400 hover:text-[#2a499a] hover:bg-[#2a499a]/10 rounded-lg transition-colors">â—‹</button>
                       <button onClick={function() { handleEdit(d); }} className="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"></button>
                       <button onClick={function() { handleDelete(d.id); }} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">âœ—</button>
                     </div>
@@ -206,7 +206,7 @@ var AdminDecisions: React.FC = function() {
           <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full max-h-[80vh] overflow-y-auto" onClick={function(e) { e.stopPropagation(); }}>
             <div className="p-6 border-b border-gray-100 flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-br from-blue-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-br from-[#2a499a]/100 to-indigo-600 rounded-xl flex items-center justify-center">
                   
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>

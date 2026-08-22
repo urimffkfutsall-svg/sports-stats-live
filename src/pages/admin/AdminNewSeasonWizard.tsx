@@ -234,9 +234,9 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         <h3 className="text-xl font-bold text-gray-800 mb-2">Sezoni u krijua me sukses!</h3>
         <p className="text-sm text-gray-500 mb-6">{state.seasonName}</p>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3 max-w-md mx-auto mb-6">
-          <div className="bg-blue-50 rounded-lg p-3 text-center">
-            <p className="text-2xl font-bold text-blue-600">{results.comps}</p>
-            <p className="text-xs text-blue-500">Kompeticione</p>
+          <div className="bg-[#2a499a]/10 rounded-lg p-3 text-center">
+            <p className="text-2xl font-bold text-[#2a499a]">{results.comps}</p>
+            <p className="text-xs text-[#2a499a]/100">Kompeticione</p>
           </div>
           <div className="bg-green-50 rounded-lg p-3 text-center">
             <p className="text-2xl font-bold text-green-600">{results.teams}</p>
@@ -253,7 +253,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         </div>
         <button
           onClick={onClose}
-          className="px-6 py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1558CC] transition-colors"
+          className="px-6 py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors"
         >
           Mbyll
         </button>
@@ -342,7 +342,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                 <h3 className="text-lg font-bold text-gray-800">Kompeticionet</h3>
                 <p className="text-sm text-gray-500">Shto kompeticionet pÃ«r sezonin e ri.</p>
               </div>
-              <button onClick={handleAddComp} className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">
+              <button onClick={handleAddComp} className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1c3570]">
                 + Shto
               </button>
             </div>
@@ -413,8 +413,8 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                   ))}
                 </select>
                 {state.sourceSeasonId && (
-                  <div className="mt-3 p-3 bg-blue-50 rounded-lg">
-                    <p className="text-sm text-blue-700 font-medium">
+                  <div className="mt-3 p-3 bg-[#2a499a]/10 rounded-lg">
+                    <p className="text-sm text-[#1c3570] font-medium">
                       {sourceSeasonTeams.length} skuadra do tÃ« kopjohen nga "{sourceSeason?.name}"
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-2">
@@ -425,7 +425,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                         </span>
                       ))}
                       {sourceSeasonTeams.length > 20 && (
-                        <span className="text-xs text-blue-500">+{sourceSeasonTeams.length - 20} tÃ« tjera</span>
+                        <span className="text-xs text-[#2a499a]/100">+{sourceSeasonTeams.length - 20} tÃ« tjera</span>
                       )}
                     </div>
                   </div>
@@ -564,7 +564,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           <button
             onClick={() => setState(p => ({ ...p, step: p.step + 1 }))}
             disabled={!canProceed()}
-            className="flex items-center gap-1 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Vazhdo
             â€º

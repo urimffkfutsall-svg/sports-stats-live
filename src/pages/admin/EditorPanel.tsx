@@ -162,10 +162,10 @@ var EditorPanel: React.FC = function() {
       </div>
 
       <div className="flex gap-3">
-        <button onClick={function() { setTab('players'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'players' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+        <button onClick={function() { setTab('players'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'players' ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
            Lojtaret ({teamPlayers.length})
         </button>
-        <button onClick={function() { setTab('officials'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'officials' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+        <button onClick={function() { setTab('officials'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'officials' ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
            Zyrtaret ({teamOfficials.length})
         </button>
       </div>
@@ -174,7 +174,7 @@ var EditorPanel: React.FC = function() {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-gray-800">Lojtaret e Skuadres</h3>
-            <button onClick={function() { setShowPlayerForm(!showPlayerForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
+            <button onClick={function() { setShowPlayerForm(!showPlayerForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors">
                Shto Lojtar
             </button>
           </div>
@@ -189,7 +189,7 @@ var EditorPanel: React.FC = function() {
                 <FileUploadField file={playerFile} setFile={setPlayerFile} photoUrl={pf.photo} setPhotoUrl={function(url) { setPf(Object.assign({}, pf, { photo: url })); }} />
               </div>
               <div className="flex gap-3 mt-4">
-                <button onClick={handleAddPlayer} disabled={playerUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
+                <button onClick={handleAddPlayer} disabled={playerUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors disabled:opacity-50">
                   {playerUploading ? 'Duke ngarkuar...' : 'Ruaj Lojtarin'}
                 </button>
                 <button onClick={function() { setShowPlayerForm(false); setPlayerFile(null); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">Anulo</button>
@@ -227,7 +227,7 @@ var EditorPanel: React.FC = function() {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-gray-800">Zyrtaret e Skuadres</h3>
-            <button onClick={function() { setShowOfficialForm(!showOfficialForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
+            <button onClick={function() { setShowOfficialForm(!showOfficialForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors">
                Shto Zyrtar
             </button>
           </div>
@@ -242,7 +242,7 @@ var EditorPanel: React.FC = function() {
                 <FileUploadField file={officialFile} setFile={setOfficialFile} photoUrl={of_.photo} setPhotoUrl={function(url) { setOf(Object.assign({}, of_, { photo: url })); }} />
               </div>
               <div className="flex gap-3 mt-4">
-                <button onClick={handleAddOfficial} disabled={officialUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
+                <button onClick={handleAddOfficial} disabled={officialUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors disabled:opacity-50">
                   {officialUploading ? 'Duke ngarkuar...' : 'Ruaj Zyrtarin'}
                 </button>
                 <button onClick={function() { setShowOfficialForm(false); setOfficialFile(null); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">Anulo</button>

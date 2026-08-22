@@ -43,10 +43,10 @@ var SkuadratPage: React.FC = function() {
         </div>
 
         <div className="flex gap-3 mb-6">
-          <button onClick={function() { setTab('superliga'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'superliga' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+          <button onClick={function() { setTab('superliga'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'superliga' ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
             Superliga
           </button>
-          <button onClick={function() { setTab('liga_pare'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'liga_pare' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+          <button onClick={function() { setTab('liga_pare'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'liga_pare' ? 'bg-[#2a499a] text-white shadow-lg shadow-[#2a499a]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
             Liga e Pare
           </button>
         </div>

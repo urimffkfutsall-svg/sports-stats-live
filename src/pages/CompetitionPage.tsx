@@ -363,7 +363,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                     </thead>
                     <tbody>
                       {standings.map((row, i) => (
-                        <tr key={row.teamId} className={`${getRowBg(i + 1)} hover:bg-blue-50/30 transition-colors border-b border-gray-100 last:border-0`}>
+                        <tr key={row.teamId} className={`${getRowBg(i + 1)} hover:bg-[#2a499a]/10/30 transition-colors border-b border-gray-100 last:border-0`}>
                           <td className={`px-3 py-2.5 sticky left-0 z-10 ${getRowBg(i + 1)}`}>
                             <div className="flex items-center">
                               <span className="w-1 h-6 rounded-sm mr-2 flex-shrink-0" style={Object.assign({}, { backgroundColor: getRowBorder(i + 1) })} />

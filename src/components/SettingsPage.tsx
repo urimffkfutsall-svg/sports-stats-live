@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+﻿import React, { useState, useEffect } from "react";
 import { ArrowLeft, Bell, BellOff } from "lucide-react";
 import { notificationPermissions } from "@/lib/notifications";
 
@@ -45,7 +45,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-[#2a499a]/10 to-white">
       {/* Header */}
       <div className="sticky top-0 bg-white border-b border-gray-200 z-10">
         <div className="flex items-center gap-4 p-4 max-w-md mx-auto">
@@ -53,7 +53,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
             onClick={onBack}
             className="p-2 hover:bg-gray-100 rounded-lg transition"
           >
-            <ArrowLeft size={24} className="text-blue-600" />
+            <ArrowLeft size={24} className="text-[#2a499a]" />
           </button>
           <h1 className="text-xl font-bold text-gray-900">Cilesimet</h1>
         </div>
@@ -66,7 +66,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               {notificationsEnabled ? (
-                <Bell size={24} className="text-blue-600" />
+                <Bell size={24} className="text-[#2a499a]" />
               ) : (
                 <BellOff size={24} className="text-gray-400" />
               )}
@@ -74,7 +74,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
                 <h2 className="font-semibold text-gray-900">Notifjikimet</h2>
                 <p className="text-sm text-gray-600">
                   {notificationsEnabled
-                    ? "Notifikimet janë të aktivizuara"
+                    ? "Notifikimet janÃ« tÃ« aktivizuara"
                     : "Aktivizo notifjikimet"}
                 </p>
               </div>
@@ -85,7 +85,7 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
               className={`px-4 py-2 rounded-lg font-medium transition ${
                 notificationsEnabled
                   ? "bg-red-100 text-red-600 hover:bg-red-200"
-                  : "bg-blue-600 text-white hover:bg-blue-700"
+                  : "bg-[#2a499a] text-white hover:bg-[#1c3570]"
               } ${!notificationSupported ? "opacity-50 cursor-not-allowed" : ""}`}
             >
               {notificationsEnabled ? "Ndal" : "Aktivizo"}
@@ -96,16 +96,16 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           {notificationSupported && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-xs text-gray-600 mb-2">
-                Statusi i lejës: <span className="font-semibold">{permissionStatus}</span>
+                Statusi i lejÃ«s: <span className="font-semibold">{permissionStatus}</span>
               </p>
               {permissionStatus === "granted" && (
                 <p className="text-xs text-green-600">
-                  ✓ Ju do të merrni njoftimet përmes shfletuesit
+                  âœ“ Ju do tÃ« merrni njoftimet pÃ«rmes shfletuesit
                 </p>
               )}
               {permissionStatus === "denied" && (
                 <p className="text-xs text-red-600">
-                  ✗ Lejet e notifjikimeve janë refuzuar. Kontrolloni cilësimet e shfletuesit.
+                  âœ— Lejet e notifjikimeve janÃ« refuzuar. Kontrolloni cilÃ«simet e shfletuesit.
                 </p>
               )}
             </div>
@@ -114,21 +114,21 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
           {!notificationSupported && (
             <div className="mt-4 pt-4 border-t border-gray-200">
               <p className="text-xs text-amber-600">
-                ⚠ Shfletuesit juaj nuk suporton notifjikimet
+                âš  Shfletuesit juaj nuk suporton notifjikimet
               </p>
             </div>
           )}
         </div>
 
         {/* Notification Info */}
-        <div className="bg-blue-50 rounded-lg p-4 border border-blue-200">
-          <h3 className="font-semibold text-blue-900 mb-2">Çfarë do të merrni?</h3>
+        <div className="bg-[#2a499a]/10 rounded-lg p-4 border border-[#2a499a]/25">
+          <h3 className="font-semibold text-blue-900 mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
           <ul className="text-sm text-blue-800 space-y-1">
-            <li>✓ Notifjikimet për ndeshjet e përfunduara</li>
-            <li>✓ Lajmet e reja të postuara</li>
-            <li>✓ Videot e reja</li>
-            <li>✓ Skuadrat e reja të shtuara</li>
-            <li>✓ Ndeshjat e reja të planifikuara</li>
+            <li>âœ“ Notifjikimet pÃ«r ndeshjet e pÃ«rfunduara</li>
+            <li>âœ“ Lajmet e reja tÃ« postuara</li>
+            <li>âœ“ Videot e reja</li>
+            <li>âœ“ Skuadrat e reja tÃ« shtuara</li>
+            <li>âœ“ Ndeshjat e reja tÃ« planifikuara</li>
           </ul>
         </div>
 

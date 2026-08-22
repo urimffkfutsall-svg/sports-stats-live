@@ -121,11 +121,11 @@ var LoginPage: React.FC = function() {
             <p className="text-gray-500 text-sm mb-4 leading-relaxed">
               Ju lutem prisni deri ne aprovimin e llogarise tuaj.
             </p>
-            <div className="bg-blue-50 border border-blue-100 rounded-xl p-4 mb-6">
-              <p className="text-sm text-blue-700 font-medium">Per informata shtese kontaktoni:</p>
+            <div className="bg-[#2a499a]/10 border border-[#2a499a]/15 rounded-xl p-4 mb-6">
+              <p className="text-sm text-[#1c3570] font-medium">Per informata shtese kontaktoni:</p>
               <p className="text-lg font-bold text-blue-800 mt-1">+383 45 278 279</p>
             </div>
-            <button onClick={function() { setMode('login'); setReg({ firstName: '', lastName: '', username: '', password: '', phone: '', email: '', teamId: '' }); }} className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1558CC] transition-colors">
+            <button onClick={function() { setMode('login'); setReg({ firstName: '', lastName: '', username: '', password: '', phone: '', email: '', teamId: '' }); }} className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
               Kthehu ne Hyrje
             </button>
           </div>
@@ -239,7 +239,7 @@ var LoginPage: React.FC = function() {
               <p className="text-red-500 text-sm bg-red-50 px-3 py-2 rounded-lg">{error}</p>
             )}
 
-            <button type="submit" className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1558CC] transition-colors">
+            <button type="submit" className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
               Hyr
             </button>
           </form>

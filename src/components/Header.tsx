@@ -70,7 +70,7 @@ const Header: React.FC = () => {
               </button>
               {isAuthenticated ? (
                 <>
-                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#2a499a] rounded-lg text-sm font-medium hover:bg-[#1558CC] transition-colors">
+                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#2a499a] rounded-lg text-sm font-medium hover:bg-[#1c3570] transition-colors">
                     Admin
                   </Link>
                   <button onClick={logout} className="hidden sm:flex items-center gap-1 px-3 py-2 text-gray-300 hover:text-white text-sm transition-colors">
@@ -87,7 +87,7 @@ const Header: React.FC = () => {
         </div>
 
         {/* Bottom row: gold Menu button + horizontal nav (desktop) */}
-        <div className="bg-[#0f1830]">
+        <div className="hidden lg:block bg-[#0f1830]">
           <div className="max-w-7xl mx-auto px-4 flex items-center h-12">
             <div className="relative" ref={menuRef}>
               <button
@@ -138,4 +138,5 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
 

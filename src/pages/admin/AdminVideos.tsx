@@ -73,7 +73,7 @@ const AdminVideos: React.FC = () => {
                 <p className="text-sm text-gray-500 mt-0.5">{v.description}</p>
                 <p className="text-xs text-gray-400 mt-1 truncate">{v.url}</p>
                 {v.isFeaturedLanding && <span className="inline-block mt-1 text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">NE BALLINA</span>}
-                {(v as any).isFeaturedSuperliga && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-blue-600 bg-blue-50 px-2 py-0.5 rounded-full">SUPERLIGA</span>}
+                {(v as any).isFeaturedSuperliga && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-[#2a499a] bg-[#2a499a]/10 px-2 py-0.5 rounded-full">SUPERLIGA</span>}
                 {(v as any).isFeaturedLigaPare && <span className="inline-block mt-1 ml-1 text-[10px] font-bold text-orange-600 bg-orange-50 px-2 py-0.5 rounded-full">LIGA E PARE</span>}
               </div>
               <div className="flex gap-2 flex-shrink-0">

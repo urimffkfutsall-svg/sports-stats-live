@@ -49,7 +49,7 @@ const LiveMatchPage = () => {
     const homeGoals = matchGoals.filter(g => g.teamId === match.homeTeamId);
     const awayGoals = matchGoals.filter(g => g.teamId === match.awayTeamId);
     return (
-      <div onClick={() => setSelectedMatch(match)} className="relative bg-white rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 border-2 border-[#2a499a]/30 shadow-lg shadow-blue-100">
+      <div onClick={() => setSelectedMatch(match)} className="relative bg-white rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 border-2 border-[#2a499a]/30 shadow-lg shadow-[#2a499a]/15">
         <div className="bg-gradient-to-r from-[#2a499a] to-[#3B82F6] px-5 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span></span>

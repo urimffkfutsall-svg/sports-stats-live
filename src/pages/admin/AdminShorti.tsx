@@ -173,7 +173,7 @@ const AdminShorti: React.FC = () => {
           <h3 className="font-semibold text-gray-800">Rubrikat — {COMP_LABEL[activeComp]}</h3>
           <button
             onClick={handleAddRubrik}
-            className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-xs font-medium hover:bg-blue-600"
+            className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-xs font-medium hover:bg-[#2a499a]"
           >
             + Shto Rubrikë
           </button>
@@ -192,7 +192,7 @@ const AdminShorti: React.FC = () => {
                   <select
                     value={r.teamId || ''}
                     onChange={e => handleAssign(r.id, e.target.value)}
-                    className="w-full text-sm border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-blue-200"
+                    className="w-full text-sm border border-gray-200 rounded-lg px-2 py-1.5 focus:outline-none focus:ring-2 focus:ring-[#2a499a]/25"
                   >
                     <option value="">— Zgjedh Skuadrën —</option>
                     {availableTeams.map(t => (
