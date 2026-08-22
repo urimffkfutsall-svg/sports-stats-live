@@ -144,6 +144,11 @@ export interface AppSettings {
   contact: string;
   hiddenNavPaths?: string[];
   votingEnabled?: boolean;
+  suspensionRules?: {
+    yellowThreshold: number;
+    yellowSuspensionMatches: number;
+    redSuspensionMatches: number;
+  };
 }
 
 export interface Decision {
@@ -316,6 +321,35 @@ export interface NormativeAct {
   pdfUrl: string;
   order?: number;
   createdAt?: string;
+}
+
+// ============ PROTOKOLLI ELEKTRONIK I NDESHJES (Match Sheet) ============
+export interface MatchSheet {
+  id: string;
+  matchId: string;
+  teamId: string;
+  seasonId: string;
+  playerIds: string[];
+  captainId?: string;
+  goalkeeperId?: string;
+  notes?: string;
+  submittedBy?: string;
+  createdAt: string;
+}
+
+// ============ DOCUMENT CENTER ============
+export type ClubDocumentCategory = 'licence' | 'raport' | 'njoftim' | 'ndeshje' | 'tjeter';
+
+export interface ClubDocument {
+  id: string;
+  // '' / 'all' = dokument i dukshem per te GJITHA klubet (p.sh. njoftim i FFK-se)
+  teamId: string;
+  title: string;
+  category: ClubDocumentCategory;
+  url: string;
+  seasonId?: string;
+  uploadedBy?: string;
+  createdAt: string;
 }
 
 

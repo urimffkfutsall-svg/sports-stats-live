@@ -1,9 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
-import { Editor, Player, Official } from '@/types';
+import { Editor, Player, Official, MatchSheet, ClubDocument, ClubDocumentCategory } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
+import { loadMatchSheets, upsertMatchSheet, loadClubDocuments, saveClubDocuments, getDocumentsForTeam } from '@/lib/clubPortalStorage';
+import { generateMatchSheetPdf } from '@/lib/matchSheetPdf';
 
 function loadOfficials(): Official[] {
   try { var s = localStorage.getItem('ffk_officials'); if (s) return JSON.parse(s); } catch(e) {}
@@ -32,8 +34,114 @@ var EditorPanel: React.FC = function() {
   }
   var team = teamId ? getTeamById(teamId) : undefined;
 
-  var _tab = useState<'players' | 'officials'>('players');
+  var _tab = useState<'players' | 'officials' | 'protokolli' | 'dokumentet'>('players');
   var tab = _tab[0]; var setTab = _tab[1];
+
+  var dataMatches = data.matches;
+  var getTeamById2 = data.getTeamById;
+  var teamMatches = dataMatches.filter(function(m) { return (m.homeTeamId === teamId || m.awayTeamId === teamId) && (activeSeason ? m.seasonId === activeSeason.id : true); })
+    .sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
+
+  var _selectedMatchId = useState('');
+  var selectedMatchId = _selectedMatchId[0]; var setSelectedMatchId = _selectedMatchId[1];
+  var _selectedPlayerIds = useState<string[]>([]);
+  var selectedPlayerIds = _selectedPlayerIds[0]; var setSelectedPlayerIds = _selectedPlayerIds[1];
+  var _captainId = useState('');
+  var captainId = _captainId[0]; var setCaptainId = _captainId[1];
+  var _goalkeeperId = useState('');
+  var goalkeeperId = _goalkeeperId[0]; var setGoalkeeperId = _goalkeeperId[1];
+  var _sheetSaved = useState(false);
+  var sheetSaved = _sheetSaved[0]; var setSheetSaved = _sheetSaved[1];
+
+  var selectedMatch = teamMatches.find(function(m) { return m.id === selectedMatchId; });
+
+  useEffect(function() {
+    if (!selectedMatch) { setSelectedPlayerIds([]); setCaptainId(''); setGoalkeeperId(''); setSheetSaved(false); return; }
+    var existing = loadMatchSheets().find(function(s) { return s.matchId === selectedMatch.id && s.teamId === teamId; });
+    if (existing) {
+      setSelectedPlayerIds(existing.playerIds || []);
+      setCaptainId(existing.captainId || '');
+      setGoalkeeperId(existing.goalkeeperId || '');
+      setSheetSaved(true);
+    } else {
+      setSelectedPlayerIds([]);
+      setCaptainId('');
+      setGoalkeeperId('');
+      setSheetSaved(false);
+    }
+  }, [selectedMatchId]);
+
+  var togglePlayerSelected = function(pid: string) {
+    setSheetSaved(false);
+    setSelectedPlayerIds(function(prev) {
+      return prev.includes(pid) ? prev.filter(function(x) { return x !== pid; }) : prev.concat([pid]);
+    });
+  };
+
+  var handleSaveMatchSheet = function() {
+    if (!selectedMatch) return null;
+    var sheet: MatchSheet = {
+      id: uuidv4(),
+      matchId: selectedMatch.id,
+      teamId: teamId,
+      seasonId: activeSeason ? activeSeason.id : '',
+      playerIds: selectedPlayerIds,
+      captainId: captainId || undefined,
+      goalkeeperId: goalkeeperId || undefined,
+      submittedBy: currentUser ? (currentUser as any).username : undefined,
+      createdAt: new Date().toISOString(),
+    };
+    upsertMatchSheet(sheet);
+    setSheetSaved(true);
+  };
+
+  var handleGenerateMatchSheetPdf = function() {
+    if (!selectedMatch || !team) return null;
+    var opponentId = selectedMatch.homeTeamId === teamId ? selectedMatch.awayTeamId : selectedMatch.homeTeamId;
+    var opponent = getTeamById2(opponentId);
+    generateMatchSheetPdf({
+      match: selectedMatch,
+      team: team,
+      opponentName: opponent ? opponent.name : 'Kundershtari',
+      players: teamPlayers,
+      selectedPlayerIds: selectedPlayerIds,
+      captainId: captainId || undefined,
+      goalkeeperId: goalkeeperId || undefined,
+    });
+  };
+
+  // ---- Document Center (klubi shikon vetem dokumentet e veta + ato te FFK-se) ----
+  var _teamDocuments = useState<ClubDocument[]>(function() { return getDocumentsForTeam(teamId); });
+  var teamDocuments = _teamDocuments[0]; var setTeamDocuments = _teamDocuments[1];
+  var _docForm = useState({ title: '', url: '', category: 'tjeter' as ClubDocumentCategory });
+  var docForm = _docForm[0]; var setDocForm = _docForm[1];
+  var _showDocForm = useState(false);
+  var showDocForm = _showDocForm[0]; var setShowDocForm = _showDocForm[1];
+
+  var handleAddDocument = function() {
+    if (!docForm.title || !docForm.url) return null;
+    var newDoc: ClubDocument = {
+      id: uuidv4(),
+      teamId: teamId,
+      title: docForm.title,
+      url: docForm.url,
+      category: docForm.category,
+      seasonId: activeSeason ? activeSeason.id : '',
+      uploadedBy: currentUser ? (currentUser as any).username : undefined,
+      createdAt: new Date().toISOString(),
+    };
+    var all = loadClubDocuments().concat([newDoc]);
+    saveClubDocuments(all);
+    setTeamDocuments(getDocumentsForTeam(teamId));
+    setDocForm({ title: '', url: '', category: 'tjeter' });
+    setShowDocForm(false);
+  };
+
+  var handleDeleteDocument = function(id: string) {
+    var all = loadClubDocuments().filter(function(d) { return d.id !== id; });
+    saveClubDocuments(all);
+    setTeamDocuments(getDocumentsForTeam(teamId));
+  };
 
   var teamPlayers = data.players.filter(function(p) { return p.teamId === teamId && (activeSeason ? p.seasonId === activeSeason.id : true); });
 
@@ -168,6 +276,12 @@ var EditorPanel: React.FC = function() {
         <button onClick={function() { setTab('officials'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'officials' ? 'bg-[#0f1830] text-white shadow-lg shadow-[#0f1830]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
            Zyrtaret ({teamOfficials.length})
         </button>
+        <button onClick={function() { setTab('protokolli'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'protokolli' ? 'bg-[#0f1830] text-white shadow-lg shadow-[#0f1830]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+           Protokolli Elektronik
+        </button>
+        <button onClick={function() { setTab('dokumentet'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'dokumentet' ? 'bg-[#0f1830] text-white shadow-lg shadow-[#0f1830]/25' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+           Dokumentet ({teamDocuments.length})
+        </button>
       </div>
 
       {tab === 'players' && (
@@ -269,6 +383,128 @@ var EditorPanel: React.FC = function() {
                   <button onClick={function() { handleDeleteOfficial(o.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                     âœ—
                   </button>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      )}
+
+      {tab === 'protokolli' && (
+        <div className="space-y-4">
+          <h3 className="text-lg font-bold text-gray-800">Protokolli Elektronik i Ndeshjes</h3>
+          <p className="text-sm text-gray-500">Zgjidh nje ndeshje, shëno lojtaret pjesemarres, kapitenin dhe portierin, pastaj gjenero PDF-ne.</p>
+
+          <select
+            value={selectedMatchId}
+            onChange={function(e) { setSelectedMatchId(e.target.value); }}
+            className="w-full md:w-96 px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#0f1830]"
+          >
+            <option value="">-- Zgjidh ndeshjen --</option>
+            {teamMatches.map(function(m) {
+              var opponentId = m.homeTeamId === teamId ? m.awayTeamId : m.homeTeamId;
+              var opponent = getTeamById2(opponentId);
+              return <option key={m.id} value={m.id}>{m.date || 'Pa date'} — vs {opponent ? opponent.name : 'N/A'}</option>;
+            })}
+          </select>
+
+          {!selectedMatch ? (
+            <div className="text-center py-12 text-gray-400 text-sm">Zgjidh nje ndeshje per te vazhduar</div>
+          ) : (
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 space-y-4">
+              {sheetSaved && (
+                <div className="px-4 py-2.5 bg-emerald-50 text-emerald-700 rounded-xl text-sm font-medium">
+                  Protokolli per kete ndeshje eshte ruajtur.
+                </div>
+              )}
+
+              {teamPlayers.length === 0 ? (
+                <p className="text-sm text-gray-400">Nuk ka lojtare te regjistruar per kete skuadre.</p>
+              ) : (
+                <div className="divide-y divide-gray-100">
+                  {teamPlayers.map(function(p) {
+                    var checked = selectedPlayerIds.includes(p.id);
+                    return (
+                      <div key={p.id} className="flex items-center gap-3 py-2.5">
+                        <input type="checkbox" checked={checked} onChange={function() { togglePlayerSelected(p.id); }} className="w-4 h-4 rounded text-[#0f1830]" />
+                        <div className="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
+                          {p.photo ? <img src={p.photo} alt="" className="w-full h-full object-cover" /> : null}
+                        </div>
+                        <span className="text-sm font-medium text-gray-800 flex-1">{p.firstName} {p.lastName}</span>
+                        <label className="flex items-center gap-1 text-xs text-gray-500">
+                          <input type="radio" name="captain" checked={captainId === p.id} onChange={function() { setSheetSaved(false); setCaptainId(p.id); }} />
+                          Kapiten
+                        </label>
+                        <label className="flex items-center gap-1 text-xs text-gray-500">
+                          <input type="radio" name="goalkeeper" checked={goalkeeperId === p.id} onChange={function() { setSheetSaved(false); setGoalkeeperId(p.id); }} />
+                          Portier
+                        </label>
+                      </div>
+                    );
+                  })}
+                </div>
+              )}
+
+              <div className="flex gap-3 pt-2">
+                <button onClick={handleSaveMatchSheet} className="px-5 py-2.5 bg-[#0f1830] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors">
+                  Ruaj Protokollin
+                </button>
+                <button onClick={handleGenerateMatchSheetPdf} className="px-5 py-2.5 bg-emerald-600 text-white rounded-xl text-sm font-medium hover:bg-emerald-700 transition-colors">
+                  Gjenero PDF
+                </button>
+              </div>
+            </div>
+          )}
+        </div>
+      )}
+
+      {tab === 'dokumentet' && (
+        <div className="space-y-4">
+          <div className="flex justify-between items-center">
+            <div>
+              <h3 className="text-lg font-bold text-gray-800">Dokumentet e Klubit</h3>
+              <p className="text-sm text-gray-500">Shihni vetem dokumentet e skuadres tuaj dhe njoftimet e pergjithshme te FFK-se.</p>
+            </div>
+            <button onClick={function() { setShowDocForm(!showDocForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#0f1830] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors">
+              Shto Dokument
+            </button>
+          </div>
+
+          {showDocForm && (
+            <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm" placeholder="Titulli i dokumentit" value={docForm.title} onChange={function(e) { setDocForm(Object.assign({}, docForm, { title: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm" placeholder="Linku (PDF/Google Drive/etj.)" value={docForm.url} onChange={function(e) { setDocForm(Object.assign({}, docForm, { url: e.target.value })); }} />
+                <select value={docForm.category} onChange={function(e) { setDocForm(Object.assign({}, docForm, { category: e.target.value as ClubDocumentCategory })); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm">
+                  <option value="licence">Licence</option>
+                  <option value="raport">Raport</option>
+                  <option value="njoftim">Njoftim</option>
+                  <option value="ndeshje">Ndeshje</option>
+                  <option value="tjeter">Tjeter</option>
+                </select>
+              </div>
+              <div className="flex gap-3 mt-4">
+                <button onClick={handleAddDocument} className="px-5 py-2.5 bg-[#0f1830] text-white rounded-xl text-sm font-medium hover:bg-[#1c3570] transition-colors">Ruaj</button>
+                <button onClick={function() { setShowDocForm(false); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">Anulo</button>
+              </div>
+            </div>
+          )}
+
+          <div className="space-y-2">
+            {teamDocuments.length === 0 ? (
+              <div className="text-center py-12 text-gray-400 text-sm">Nuk ka dokumente te disponueshme</div>
+            ) : teamDocuments.map(function(d) {
+              return (
+                <div key={d.id} className="bg-white border border-gray-200 rounded-xl p-4 flex items-center justify-between">
+                  <div>
+                    <a href={d.url} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-[#0f1830] hover:underline">{d.title}</a>
+                    <p className="text-xs text-gray-400 mt-0.5 uppercase">{d.category}</p>
+                  </div>
+                  {d.teamId === teamId && (
+                    <button onClick={function() { handleDeleteDocument(d.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
+                      Fshi
+                    </button>
+                  )}
                 </div>
               );
             })}

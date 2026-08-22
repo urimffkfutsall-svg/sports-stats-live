@@ -29,6 +29,7 @@ import LiveStreamsPage from "./pages/LiveStreamsPage";
 import NotFound from "./pages/NotFound";
 import KomisioniPage from "./pages/KomisioniPage";
 import AktetNormativePage from "./pages/AktetNormativePage";
+import CalendarPage from "./pages/CalendarPage";
 import WhatsAppButton from "./components/WhatsAppButton";
 import BottomNav from "./components/BottomNav";
 
@@ -126,6 +127,7 @@ const App = () => (
                     <Route path="/live-streams" element={<LiveStreamsPage />} />
                     <Route path="/komisioni" element={<KomisioniPage />} />
                     <Route path="/aktet-normative" element={<AktetNormativePage />} />
+                    <Route path="/kalendari" element={<CalendarPage />} />
                     <Route path="*" element={<NotFound />} />
                   </Routes>
                   <WhatsAppButton />

@@ -21,6 +21,7 @@ import AdminNews from './admin/AdminNews';
 import AdminPlayoff from './admin/AdminPlayoff';
 import AdminNormativeActs from './admin/AdminNormativeActs';
 import AdminShorti from './admin/AdminShorti';
+import AdminDocuments from './admin/AdminDocuments';
 const AdminPage: React.FC = () => {
   const { isAuthenticated, isAdmin, isEditor, currentUser } = useAuth();
   const navigate = useNavigate();
@@ -82,6 +83,7 @@ const AdminPage: React.FC = () => {
     { key: 'shorti', label: 'Shorti', icon: null, editorAccess: false },
     { key: 'videos', label: 'Video', icon: null, editorAccess: false },
     { key: 'news', label: 'Lajme', icon: null, editorAccess: false },
+    { key: 'documents', label: 'Dokumentet', icon: null, editorAccess: false },
   ];
 
   const visibleTabs = isAdmin ? tabs : tabs.filter(t => t.editorAccess);
@@ -267,6 +269,7 @@ const AdminPage: React.FC = () => {
         {activeTab === 'shorti' && isAdmin && <AdminShorti />}
         {activeTab === 'videos' && isAdmin && <AdminVideos />}
         {activeTab === 'news' && isAdmin && <AdminNews />}
+        {activeTab === 'documents' && isAdmin && <AdminDocuments />}
       </div>
     </div>
   );

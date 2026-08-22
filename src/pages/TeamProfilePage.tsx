@@ -2,6 +2,7 @@
 import { useParams, useNavigate } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, RadialBarChart, RadialBar, BarChart, Bar } from 'recharts';
+import FavoriteTeamButton from '@/components/FavoriteTeamButton';
 
 const DONUT_COLORS = ['#6366F1', '#F59E0B', '#22C55E', '#EF4444', '#8B5CF6', '#EC4899', '#14B8A6'];
 const FORM_COLORS: Record<string, { bg: string; text: string }> = {
@@ -160,7 +161,10 @@ const TeamProfilePage: React.FC = () => {
                 </div>
               )}
               <div>
-                <h1 style={Object.assign({}, { fontSize: '26px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.5px' })}>{team.name}</h1>
+                <div style={Object.assign({}, { display: 'flex', alignItems: 'center', gap: '10px' })}>
+                  <h1 style={Object.assign({}, { fontSize: '26px', fontWeight: 800, color: '#FFFFFF', margin: 0, letterSpacing: '-0.5px' })}>{team.name}</h1>
+                  <FavoriteTeamButton teamId={team.id} size={22} />
+                </div>
                 <p style={Object.assign({}, { fontSize: '13px', color: 'rgba(255,255,255,0.6)', margin: '4px 0 0 0' })}>
                   {team.stadium || 'Statistikat e detajuara'}
                   {team.foundedYear ? ' Â· Est. ' + team.foundedYear : ''}

@@ -1,6 +1,7 @@
 ﻿import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { PlayerStats } from '@/types';
+import { getSuspensionRules, getSuspensionStatus } from '@/lib/suspensions';
 function loadPlayerStats(): PlayerStats[] {
   try { var s = localStorage.getItem('ffk_player_stats'); if (s) return JSON.parse(s); } catch(e) {}
   return [];
@@ -14,6 +15,8 @@ var PlayerStatsSection: React.FC = function() {
   var getActiveSeason = data.getActiveSeason;
   var getTeamById = data.getTeamById;
   var activeSeason = getActiveSeason();
+  var settings = data.settings;
+  var suspensionRules = getSuspensionRules(settings);
 
   var stats = loadPlayerStats();
 
@@ -109,13 +112,15 @@ var PlayerStatsSection: React.FC = function() {
               <th className="text-left px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Skuadra</th>
               <th className="text-center px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kartona te Verdha</th>
               <th className="text-center px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Kartona te Kuqe</th>
+              <th className="text-center px-4 py-3.5 text-xs font-semibold text-gray-500 uppercase tracking-wider">Statusi</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-gray-100">
             {aggregated.length === 0 ? (
-              <tr><td colSpan={5} className="text-center py-12 text-gray-400 text-sm">Nuk ka statistika individuale</td></tr>
+              <tr><td colSpan={6} className="text-center py-12 text-gray-400 text-sm">Nuk ka statistika individuale</td></tr>
             ) : aggregated.map(function(p, i) {
               var team = getTeamById(p.teamId);
+              var suspension = getSuspensionStatus(stats, p.playerId, suspensionRules);
               return (
                 <tr key={p.playerId} className="hover:bg-gray-50 transition-colors">
                   <td className="px-4 py-3 text-sm text-gray-500 font-medium">{i + 1}</td>
@@ -142,6 +147,17 @@ var PlayerStatsSection: React.FC = function() {
                     <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-50 text-red-700 text-sm font-semibold">
                       {p.redCards}
                     </span>
+                  </td>
+                  <td className="px-4 py-3 text-center">
+                    {suspension.suspended ? (
+                      <span title={suspension.reason} className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-red-100 text-red-700 text-xs font-bold uppercase">
+                        I Pezulluar
+                      </span>
+                    ) : (
+                      <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold uppercase">
+                        I Disponueshem
+                      </span>
+                    )}
                   </td>
                 </tr>
               );

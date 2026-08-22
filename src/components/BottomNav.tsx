@@ -9,6 +9,7 @@ const ALL_NAV_LINKS = [
   { path: '/kupa', label: 'Kupa e Kosoves' },
   { path: '/lojtari-javes', label: 'Lojtari i Javes' },
   { path: '/statistikat', label: 'Statistikat' },
+  { path: '/kalendari', label: 'Kalendari' },
   { path: '/komisioni', label: 'Komisioni' },
   { path: '/aktet-normative', label: 'Aktet Normative' },
   { path: '/kombetarja', label: 'Kombetarja' },

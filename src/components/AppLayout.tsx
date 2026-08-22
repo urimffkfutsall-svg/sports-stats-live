@@ -8,6 +8,7 @@ import Footer from './Footer';
 import NtActivitiesSection from './NtActivitiesSection';
 import FfkMomentsSection from './FfkMomentsSection';
 import DecisionsSection from './DecisionsSection';
+import FavoritesSection from './FavoritesSection';
 import { useData } from '@/context/DataContext';
 
 var AppLayout: React.FC = function() {
@@ -56,6 +57,7 @@ var AppLayout: React.FC = function() {
   return (
     <div className="min-h-screen bg-[#F1F5F9] pb-20 lg:pb-0">
       <Header />
+      <FavoritesSection />
       <LandingNews />
       <LandingMatches />
       <LeagueTablesSection />

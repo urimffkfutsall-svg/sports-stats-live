@@ -5,6 +5,7 @@ import { useData } from '@/context/DataContext';
 import { Settings, Menu, X } from 'lucide-react';
 import NotificationPanel from './NotificationPanel';
 import SettingsPage from './SettingsPage';
+import GlobalSearch from './GlobalSearch';
 
 const Header: React.FC = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -25,6 +26,7 @@ const Header: React.FC = () => {
     { path: '/kupa', label: 'Kupa e Kosoves' },
     { path: '/lojtari-javes', label: 'Lojtari i Javes' },
     { path: '/statistikat', label: 'Statistikat' },
+    { path: '/kalendari', label: 'Kalendari' },
     { path: '/komisioni', label: 'Komisioni' },
     { path: '/aktet-normative', label: 'Aktet Normative' },
     { path: '/kombetarja', label: 'Kombetarja' },
@@ -60,6 +62,7 @@ const Header: React.FC = () => {
             </Link>
 
             <div className="flex items-center gap-1">
+              <GlobalSearch />
               <NotificationPanel />
               <button
                 onClick={() => setSettingsOpen(true)}

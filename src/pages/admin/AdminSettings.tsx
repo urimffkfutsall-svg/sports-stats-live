@@ -160,6 +160,7 @@ const AdminSettings: React.FC = () => {
     { key: 'editors', label: 'EditorÃ«t' },
     { key: 'general', label: 'PÃ«rgjithshme' },
     { key: 'header', label: 'Header' },
+    { key: 'suspensions', label: 'Kartona & Pezullime' },
     { key: 'migration', label: 'Migracioni' },
     { key: 'wizard', label: 'Sezon i Ri' },
   ];
@@ -419,6 +420,70 @@ const AdminSettings: React.FC = () => {
                 </label>
               );
             })}
+          </div>
+        </div>
+      )}
+
+      {activeSection === 'suspensions' && (
+        <div className="bg-white rounded-xl border border-gray-200 p-6">
+          <h3 className="font-semibold text-gray-700 mb-2">Rregullat e Kartonave & Pezullimeve</h3>
+          <p className="text-sm text-gray-500 mb-4">
+            Kto rregulla perdoren per te llogaritur automatikisht statusin AVAILABLE / SUSPENDED
+            te lojtareve ne bazë te kartonave te akumuluara (Statistikat Individuale, Profili i Skuadres).
+            Nuk jane hard-coded ne kod — mund t'i ndryshosh kurdo qe deshiron.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl">
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Prag i kartonave te verdha</label>
+              <input
+                type="number"
+                min={1}
+                value={(settings as any)?.suspensionRules?.yellowThreshold ?? 3}
+                onChange={e => updateSettings({
+                  ...settings,
+                  suspensionRules: {
+                    yellowThreshold: parseInt(e.target.value) || 1,
+                    yellowSuspensionMatches: (settings as any)?.suspensionRules?.yellowSuspensionMatches ?? 1,
+                    redSuspensionMatches: (settings as any)?.suspensionRules?.redSuspensionMatches ?? 1,
+                  },
+                } as any)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Ndeshje pezullim (per te verdha)</label>
+              <input
+                type="number"
+                min={1}
+                value={(settings as any)?.suspensionRules?.yellowSuspensionMatches ?? 1}
+                onChange={e => updateSettings({
+                  ...settings,
+                  suspensionRules: {
+                    yellowThreshold: (settings as any)?.suspensionRules?.yellowThreshold ?? 3,
+                    yellowSuspensionMatches: parseInt(e.target.value) || 1,
+                    redSuspensionMatches: (settings as any)?.suspensionRules?.redSuspensionMatches ?? 1,
+                  },
+                } as any)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-medium text-gray-600 mb-1">Ndeshje pezullim (per te kuq)</label>
+              <input
+                type="number"
+                min={1}
+                value={(settings as any)?.suspensionRules?.redSuspensionMatches ?? 1}
+                onChange={e => updateSettings({
+                  ...settings,
+                  suspensionRules: {
+                    yellowThreshold: (settings as any)?.suspensionRules?.yellowThreshold ?? 3,
+                    yellowSuspensionMatches: (settings as any)?.suspensionRules?.yellowSuspensionMatches ?? 1,
+                    redSuspensionMatches: parseInt(e.target.value) || 1,
+                  },
+                } as any)}
+                className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm"
+              />
+            </div>
           </div>
         </div>
       )}
