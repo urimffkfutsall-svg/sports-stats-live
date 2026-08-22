@@ -6,6 +6,7 @@ import Footer from '@/components/Footer';
 import MatchDetailModal from '@/components/MatchDetailModal';
 import MatchCard from '@/components/MatchCard';
 import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 interface Props {
   type: CompetitionType;
@@ -311,12 +312,12 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
             {weeks.length === 0 ? <p className="text-gray-400 text-center py-8">Nuk ka ndeshje te regjistruara.</p> : (
               <>
                 <div className="flex items-center justify-between mb-6 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <button onClick={() => weekIdx > 0 && setSelectedWeek(weeks[weekIdx - 1])} disabled={weekIdx <= 0} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">â¬¹</button>
+                  <button onClick={() => weekIdx > 0 && setSelectedWeek(weeks[weekIdx - 1])} disabled={weekIdx <= 0} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors"><ChevronLeft className="w-4 h-4" /></button>
                   <div className="flex items-center gap-3">
                     <select value={selectedWeek} onChange={e => setSelectedWeek(Number(e.target.value))} className="text-lg font-bold text-gray-800 bg-transparent border-none focus:ring-0 cursor-pointer">{weeks.map(w => <option key={w} value={w}>Java {w}</option>)}</select>
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-lg">{weekIdx + 1} / {weeks.length}</span>
                   </div>
-                  <button onClick={() => weekIdx < weeks.length - 1 && setSelectedWeek(weeks[weekIdx + 1])} disabled={weekIdx >= weeks.length - 1} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">â¬º</button>
+                  <button onClick={() => weekIdx < weeks.length - 1 && setSelectedWeek(weeks[weekIdx + 1])} disabled={weekIdx >= weeks.length - 1} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors"><ChevronRight className="w-4 h-4" /></button>
                 </div>
                 <div className="flex gap-2 mb-6">
                   {[{ value: 'all', label: 'Te gjitha' }, { value: 'finished', label: 'Perfunduara' }, { value: 'planned', label: 'Ardhshme' }, { value: 'live', label: 'Live' }].map(f => (

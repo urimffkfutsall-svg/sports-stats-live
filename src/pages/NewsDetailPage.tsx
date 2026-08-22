@@ -4,6 +4,7 @@ import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { News } from '@/types';
+import { ArrowLeft, X } from 'lucide-react';
 
 function getPhotos(photo: string): string[] {
   if (!photo) return [];
@@ -47,7 +48,7 @@ const NewsDetailPage: React.FC = () => {
       <Header />
       <article className="max-w-3xl mx-auto px-4 py-8">
         <button onClick={() => navigate(-1)} className="text-sm text-[#0f1830] font-semibold mb-4 hover:underline flex items-center gap-1">
-          ï¿½ ï¿½ Kthehu
+          <ArrowLeft className="w-4 h-4" /> Kthehu
         </button>
 
         {/* Photo Collage */}
@@ -144,7 +145,7 @@ const NewsDetailPage: React.FC = () => {
           <div className="absolute inset-0 bg-black/90 backdrop-blur-sm" />
           <div className="relative z-10 max-w-5xl w-full" onClick={e => e.stopPropagation()}>
             <button onClick={() => setLightbox(null)} className="absolute -top-12 right-0 w-10 h-10 rounded-xl bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors text-lg font-bold">
-              ï¿½
+              <X className="w-5 h-5" />
             </button>
             <img src={lightbox} alt="" className="w-full max-h-[85vh] object-contain rounded-xl shadow-2xl" />
             {/* Photo navigation dots */}
