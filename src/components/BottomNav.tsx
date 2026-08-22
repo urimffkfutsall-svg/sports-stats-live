@@ -1,6 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Home, Trophy, PlayCircle, BarChart3, Menu, X, LogOut, User } from 'lucide-react';
+import { Home, Trophy, Radio, TrendingUp, MoreHorizontal, X, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
 const ALL_NAV_LINKS = [
@@ -8,7 +8,6 @@ const ALL_NAV_LINKS = [
   { path: '/liga-pare', label: 'Liga e Pare' },
   { path: '/kupa', label: 'Kupa e Kosoves' },
   { path: '/lojtari-javes', label: 'Lojtari i Javes' },
-  { path: '/statistikat', label: 'Statistikat' },
   { path: '/kalendari', label: 'Kalendari' },
   { path: '/komisioni', label: 'Komisioni' },
   { path: '/aktet-normative', label: 'Aktet Normative' },
@@ -27,8 +26,8 @@ const BottomNav: React.FC = () => {
   const items = [
     { path: '/', label: 'Ballina', icon: Home },
     { path: '/superliga', label: 'Superliga', icon: Trophy },
-    { path: '/live', label: 'Live', icon: PlayCircle },
-    { path: '/statistikat', label: 'Stat.', icon: BarChart3 },
+    { path: '/live', label: 'Live', icon: Radio },
+    { path: '/statistikat', label: 'Stat.', icon: TrendingUp },
   ];
 
   const isMoreActive = ALL_NAV_LINKS.some(l => isActive(l.path));
@@ -120,7 +119,7 @@ const BottomNav: React.FC = () => {
             >
               {moreOpen
                 ? <X className="w-6 h-6 text-white" strokeWidth={2.2} />
-                : <Menu className={(moreOpen || isMoreActive) ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />}
+                : <MoreHorizontal className={(moreOpen || isMoreActive) ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />}
             </span>
             <span className={`text-[10px] font-semibold mt-1 ${(moreOpen || isMoreActive) ? 'text-[#0f1830]' : 'text-gray-400'}`}>Me shume</span>
           </button>
@@ -131,4 +130,8 @@ const BottomNav: React.FC = () => {
 };
 
 export default BottomNav;
+
+
+
+
 
