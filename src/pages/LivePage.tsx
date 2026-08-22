@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import Header from '@/components/Header';
 import LandingMatches from '@/components/LandingMatches';
 import Footer from '@/components/Footer';

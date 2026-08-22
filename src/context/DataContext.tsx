@@ -1,4 +1,4 @@
-�import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
+import React, { createContext, useContext, useState, useEffect, useCallback, useRef } from 'react';
 import { Season, Competition, Team, Player, Match, Goal, Scorer, PlayerOfWeek, User, StandingsRow, AppSettings, Decision, Video, News, ShortiRubrik, NormativeAct } from '@/types';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -182,16 +182,16 @@ export const DataProvider: React.FC<{ children: React.ReactNode }> = ({ children
   stateRef.current = state;
 
   const persistCache = useCallback(async (snapshot: DataState = stateRef.current) => {
-    // VET��cM cache lokale (p�,�r ngarkim t�,� shpejt�,�) �鼓ǥ JO push n�,� MongoDB k�,�tu.
+    // VETcM cache lokale (p,r ngarkim t, shpejt,) 鼓ǥ JO push n, MongoDB k,tu.
     //
-    // PSE: kjo funksion p�,�rdor state-in LOKAL t�,� React-it (`snapshot`), i cili
-    // mund t�,� jet�,� "i vjetruar" n�,�se ky tab/browser ka q�,�ndruar hapur p�,�r nj�,�
-    // koh�,� dhe nd�,�rkoh�,� dikush tjet�,�r (ose nj�,� pajisje tjet�,�r) ka shtuar di�,�ka
-    // te MongoDB. N�,�se do t�,� b�,�nim PUT me k�,�t�,� snapshot t�,� vjet�,�r, do t�,�
-    // FSHINim/mbishkruanim ndryshimet e reja t�,� b�,�ra nd�,�rkoh�,� �鼓ǥ pik�,�risht bug-u
-    // "shtoj di�,�ka dhe pas nj�,� kohe zhduket". Prandaj push-i real n�,� MongoDB
-    // b�,�het VET��cM te modulet dbXxx (supabase-db.ts), t�,� cilat GJITHMON��c marrin
-    // kopjen m�,� t�,� fundit nga serveri PARA se t�,� shkruajn�,�.
+    // PSE: kjo funksion p,rdor state-in LOKAL t, React-it (`snapshot`), i cili
+    // mund t, jet, "i vjetruar" n,se ky tab/browser ka q,ndruar hapur p,r nj,
+    // koh, dhe nd,rkoh, dikush tjet,r (ose nj, pajisje tjet,r) ka shtuar di,ka
+    // te MongoDB. N,se do t, b,nim PUT me k,t, snapshot t, vjet,r, do t,
+    // FSHINim/mbishkruanim ndryshimet e reja t, b,ra nd,rkoh, 鼓ǥ pik,risht bug-u
+    // "shtoj di,ka dhe pas nj, kohe zhduket". Prandaj push-i real n, MongoDB
+    // b,het VETcM te modulet dbXxx (supabase-db.ts), t, cilat GJITHMONc marrin
+    // kopjen m, t, fundit nga serveri PARA se t, shkruajn,.
     const payload = {
       seasons: snapshot.seasons,
       competitions: snapshot.competitions,

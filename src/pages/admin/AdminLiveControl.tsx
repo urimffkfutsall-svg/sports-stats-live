@@ -1,4 +1,4 @@
-�import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match, Player } from '@/types';
 import { broadcastNotification, dbLiveStreams } from '@/lib/supabase-db';
@@ -350,7 +350,7 @@ const AdminLiveControl: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-gray-800">Fillo Ndeshje</h2>
           <button onClick={() => setShowStartMatch(false)} className="text-gray-400 hover:text-gray-600">
-            �S"
+            S"
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

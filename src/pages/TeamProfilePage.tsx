@@ -1,4 +1,4 @@
-�import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import { AreaChart, Area, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, PieChart, Pie, Cell, RadialBarChart, RadialBar, BarChart, Bar } from 'recharts';
@@ -130,7 +130,7 @@ const TeamProfilePage: React.FC = () => {
     <div style={Object.assign({}, { overflowX: "hidden" as const, minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', background: 'linear-gradient(135deg, #0f1830 0%, #1a3a5c 100%)' })}>
         <div style={Object.assign({}, { textAlign: 'center' as const, color: '#FFFFFF' })}>
           <p style={Object.assign({}, { fontSize: '18px', marginBottom: '16px' })}>Skuadra nuk u gjet.</p>
-          <button onClick={() => navigate(-1)} style={Object.assign({}, { color: '#60A5FA', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' })}>� � Kthehu</button>
+          <button onClick={() => navigate(-1)} style={Object.assign({}, { color: '#60A5FA', fontWeight: 600, background: 'none', border: 'none', cursor: 'pointer', fontSize: '14px' })}>  Kthehu</button>
         </div>
       </div>
     );
@@ -148,7 +148,7 @@ const TeamProfilePage: React.FC = () => {
         <div style={Object.assign({}, { display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', position: 'relative' as const, zIndex: 1 })}>
           <div style={Object.assign({}, { display: 'flex', alignItems: 'center', gap: '20px' })}>
             <button onClick={() => navigate(-1)} style={Object.assign({}, { background: 'rgba(255,255,255,0.1)', backdropFilter: 'blur(10px)', border: '1px solid rgba(255,255,255,0.15)', borderRadius: '14px', padding: '12px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', transition: 'all 0.2s' })}>
-              � �
+               
             </button>
             <div style={Object.assign({}, { display: 'flex', alignItems: 'center', gap: '16px' })}>
               {team.logo ? (
@@ -428,7 +428,7 @@ const TeamProfilePage: React.FC = () => {
                 <h3 style={Object.assign({}, { fontSize: '14px', fontWeight: 700, color: '#0F172A', margin: 0 })}>Skuadra ({teamPlayers.length} lojtar)</h3>
               </div>
               <div style={Object.assign({}, { position: 'relative' as const })}>
-                �a�
+                a
                 <input
                   value={searchPlayer}
                   onChange={e => setSearchPlayer(e.target.value)}

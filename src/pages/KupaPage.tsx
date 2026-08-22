@@ -1,4 +1,4 @@
-�import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match } from '@/types';
 import Header from '@/components/Header';

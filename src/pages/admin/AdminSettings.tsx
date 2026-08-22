@@ -1,4 +1,4 @@
-�import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { useAuth } from '@/context/AuthContext';
 import AdminNewSeasonWizard from './AdminNewSeasonWizard';
@@ -226,7 +226,7 @@ const AdminSettings: React.FC = () => {
               </label>
               <div className="flex gap-2">
                 <button type="submit" className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm hover:bg-[#1c3570]">{editSeasonId ? 'Ruaj' : 'Shto'}</button>
-                <button type="button" onClick={() => { setShowSeasonForm(false); setEditSeasonId(null); }} className="text-gray-400 hover:text-gray-600">�S"</button>
+                <button type="button" onClick={() => { setShowSeasonForm(false); setEditSeasonId(null); }} className="text-gray-400 hover:text-gray-600">S"</button>
               </div>
             </form>
           )}
@@ -248,8 +248,8 @@ const AdminSettings: React.FC = () => {
                     {!s.isActive && (
                       <button onClick={() => updateSeason({ ...s, isActive: true })} className="px-2 py-1 text-xs bg-green-50 text-green-700 rounded hover:bg-green-100">Aktivizo</button>
                     )}
-                    <button onClick={() => { setSeasonForm({ name: s.name, startDate: s.startDate, endDate: s.endDate, isActive: s.isActive }); setEditSeasonId(s.id); setShowSeasonForm(true); }} className="p-1.5 text-gray-400 hover:text-[#0f1830]">�S}</button>
-                    <button onClick={() => { if (confirm('Fshi sezonin?')) deleteSeason(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500">�S</button>
+                    <button onClick={() => { setSeasonForm({ name: s.name, startDate: s.startDate, endDate: s.endDate, isActive: s.isActive }); setEditSeasonId(s.id); setShowSeasonForm(true); }} className="p-1.5 text-gray-400 hover:text-[#0f1830]">S}</button>
+                    <button onClick={() => { if (confirm('Fshi sezonin?')) deleteSeason(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
                   </div>
                 </div>
               ))
@@ -293,7 +293,7 @@ const AdminSettings: React.FC = () => {
               </label>
               <div className="flex gap-2">
                 <button type="submit" className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm hover:bg-[#1c3570]">Shto</button>
-                <button type="button" onClick={() => setShowCompForm(false)} className="text-gray-400">�S"</button>
+                <button type="button" onClick={() => setShowCompForm(false)} className="text-gray-400">S"</button>
               </div>
             </form>
           )}
@@ -314,7 +314,7 @@ const AdminSettings: React.FC = () => {
                       <button onClick={() => updateCompetition({ ...c, isActiveLanding: !c.isActiveLanding })} className={`px-2 py-1 text-xs rounded ${c.isActiveLanding ? 'bg-[#0f1830]/10 text-[#0f1830]' : 'bg-gray-50 text-gray-500'}`}>
                         {c.isActiveLanding ? 'Fshih nga LP' : 'Shfaq në LP'}
                       </button>
-                      <button onClick={() => { if (confirm('Fshi kompeticionin?')) deleteCompetition(c.id); }} className="p-1.5 text-gray-400 hover:text-red-500">�S</button>
+                      <button onClick={() => { if (confirm('Fshi kompeticionin?')) deleteCompetition(c.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
                     </div>
                   </div>
                 );
@@ -344,7 +344,7 @@ const AdminSettings: React.FC = () => {
               </div>
               <div className="flex gap-2">
                 <button type="submit" className="px-4 py-2 bg-[#0f1830] text-white rounded-lg text-sm hover:bg-[#1c3570]">Shto</button>
-                <button type="button" onClick={() => setShowEditorForm(false)} className="text-gray-400">�S"</button>
+                <button type="button" onClick={() => setShowEditorForm(false)} className="text-gray-400">S"</button>
               </div>
             </form>
           )}
@@ -355,7 +355,7 @@ const AdminSettings: React.FC = () => {
               users.filter(u => u.role === 'editor').map(u => (
                 <div key={u.id} className="flex items-center justify-between px-4 py-3 hover:bg-gray-50">
                   <span className="text-sm font-medium text-gray-800">{u.username} <span className="text-xs text-gray-400">(editor)</span></span>
-                  <button onClick={() => { if (confirm('Fshi editorin?')) deleteUser(u.id); }} className="p-1.5 text-gray-400 hover:text-red-500">�S</button>
+                  <button onClick={() => { if (confirm('Fshi editorin?')) deleteUser(u.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
                 </div>
               ))
             )}
@@ -429,7 +429,7 @@ const AdminSettings: React.FC = () => {
           <h3 className="font-semibold text-gray-700 mb-2">Rregullat e Kartonave & Pezullimeve</h3>
           <p className="text-sm text-gray-500 mb-4">
             Kto rregulla perdoren per te llogaritur automatikisht statusin AVAILABLE / SUSPENDED
-            te lojtareve ne baz� te kartonave te akumuluara (Statistikat Individuale, Profili i Skuadres).
+            te lojtareve ne baz te kartonave te akumuluara (Statistikat Individuale, Profili i Skuadres).
             Nuk jane hard-coded ne kod  mund t'i ndryshosh kurdo qe deshiron.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-2xl">
@@ -526,7 +526,7 @@ const AdminSettings: React.FC = () => {
             )}
 
             <div className="space-y-2 mb-4">
-              <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider">�!farë të kopjohet:</p>
+              <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider">!farë të kopjohet:</p>
               <label className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg cursor-pointer hover:bg-gray-100">
                 <input type="checkbox" checked={copyComps} onChange={e => setCopyComps(e.target.checked)} className="w-4 h-4 rounded text-[#0f1830]" />
                 <div>

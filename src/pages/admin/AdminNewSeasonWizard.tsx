@@ -1,4 +1,4 @@
-�import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { CompetitionType } from '@/types';
 interface WizardState {
@@ -229,7 +229,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
     return (
       <div className="text-center py-8">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          �S
+          S
         </div>
         <h3 className="text-xl font-bold text-gray-800 mb-2">Sezoni u krijua me sukses!</h3>
         <p className="text-sm text-gray-500 mb-6">{state.seasonName}</p>
@@ -283,7 +283,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
                   isDone ? 'bg-green-500 text-white' : isActive ? 'bg-[#0f1830] text-white' : 'bg-gray-100 text-gray-400'
                 }`}>
-                  {isDone ? "�S" : null}
+                  {isDone ? "S" : null}
                 </div>
                 <span className={`text-[10px] font-medium ${isActive ? 'text-[#0f1830]' : 'text-gray-400'}`}>{s.label}</span>
               </div>

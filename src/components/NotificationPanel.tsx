@@ -1,4 +1,4 @@
-�import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { onNotification, getNotificationChannel } from '@/lib/supabase-db';
 import { toast } from 'sonner';
 
@@ -193,7 +193,7 @@ const NotificationPanel: React.FC = () => {
     switch (type) {
       case 'goal':
       case 'goal_scorer':
-        return "�}";
+        return "}";
       case 'match_start':
         return null;
       case 'match_end':
@@ -252,7 +252,7 @@ const NotificationPanel: React.FC = () => {
                     </svg>
                   </button>
                   <button onClick={clearAll} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-gray-100 rounded-lg" title="Pastro">
-                    �S
+                    S
                   </button>
                 </>
               )}
@@ -264,7 +264,7 @@ const NotificationPanel: React.FC = () => {
             <div className="p-4 border-b border-gray-100 bg-[#0f1830]/10/50 space-y-2">
               <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">Preferencat e Njoftime</p>
               {[
-                { key: 'goals' as const, label: 'Golat', icon: "�}" },
+                { key: 'goals' as const, label: 'Golat', icon: "}" },
                 { key: 'matchStart' as const, label: 'Fillimi i ndeshjes', icon:  null },
                 { key: 'matchEnd' as const, label: 'Fundi i ndeshjes', icon:  null },
                 { key: 'halfTime' as const, label: 'Pushimi', icon: <div className="w-3.5 h-3.5 rounded-full border border-orange-500" /> },

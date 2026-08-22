@@ -1,4 +1,4 @@
-�import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
@@ -141,7 +141,7 @@ var LoginPage: React.FC = function() {
         <div className="flex items-center justify-center px-4 py-10">
           <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 w-full max-w-lg">
             <button onClick={function() { setMode('login'); }} className="flex items-center gap-2 text-sm text-gray-500 hover:text-[#0f1830] mb-4 transition-colors">
-              � � Kthehu ne Hyrje
+                Kthehu ne Hyrje
             </button>
             <div className="flex items-center justify-center mb-6">
               <div className="w-14 h-14 bg-emerald-50 rounded-2xl flex items-center justify-center">
@@ -230,7 +230,7 @@ var LoginPage: React.FC = function() {
               <div className="relative">
                 <input type={showPassword ? 'text' : 'password'} value={password} onChange={function(e) { setPassword(e.target.value); }} className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#0f1830] focus:border-transparent outline-none pr-10" placeholder="Shkruaj fjalekalimin..." />
                 <button type="button" onClick={function() { setShowPassword(!showPassword); }} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600">
-                  {showPassword ? null : "�9"}
+                  {showPassword ? null : "9"}
                 </button>
               </div>
             </div>

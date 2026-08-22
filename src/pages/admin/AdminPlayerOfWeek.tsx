@@ -1,4 +1,4 @@
-�import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -66,7 +66,7 @@ const AdminPlayerOfWeek: React.FC = () => {
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto Lojtarin e Javës'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">�S"</button>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">S"</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
@@ -96,7 +96,7 @@ const AdminPlayerOfWeek: React.FC = () => {
             <div className="space-y-2">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.isScorer} onChange={e => setForm(p => ({ ...p, isScorer: e.target.checked, goalsCount: e.target.checked ? p.goalsCount : 0 }))} className="w-4 h-4 rounded" />
-                <span className="text-sm text-gray-700">�9shtë golashënues?</span>
+                <span className="text-sm text-gray-700">9shtë golashënues?</span>
               </label>
               {form.isScorer && (
                 <div>
@@ -137,8 +137,8 @@ const AdminPlayerOfWeek: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]">�S}</button>
-                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">�S</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]">S}</button>
+                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
                   </div>
                 </div>
               );

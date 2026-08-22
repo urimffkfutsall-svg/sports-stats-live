@@ -1,4 +1,4 @@
-�import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useData } from '@/context/DataContext';
 import { useNavigate } from 'react-router-dom';
 import { News } from '@/types';
@@ -92,7 +92,7 @@ const LandingNews: React.FC = () => {
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <div className="flex items-center gap-2 mb-2">
 <span className="inline-block px-2.5 py-0.5 bg-[#0f1830] text-white text-[10px] font-bold rounded-md uppercase tracking-wider">Lajm</span>
-{(item as any).videoUrl && <span className="inline-block px-2.5 py-0.5 bg-red-500 text-white text-[10px] font-bold rounded-md uppercase tracking-wider">�� Video</span>}
+{(item as any).videoUrl && <span className="inline-block px-2.5 py-0.5 bg-red-500 text-white text-[10px] font-bold rounded-md uppercase tracking-wider"> Video</span>}
 </div>
             <h3 className="text-2xl md:text-3xl font-black text-white leading-tight mb-2">{item.title}</h3>
             <p className="text-sm md:text-base text-white/70 line-clamp-2">{item.description}</p>

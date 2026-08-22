@@ -1,4 +1,4 @@
-�import React from 'react';
+import React from 'react';
 import { Match } from '@/types';
 import { useData } from '@/context/DataContext';
 interface MatchCardProps {
@@ -28,7 +28,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
       className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden hover:shadow-lg transition-all duration-300 cursor-pointer"
       onClick={() => onClick(match)}
     >
-      {/* Gradient Header � Date, Time, Venue */}
+      {/* Gradient Header  Date, Time, Venue */}
       {!compact && (match.date || match.time || match.venue) && (
         <div className="bg-gradient-to-r from-[#0f1830] to-[#0f1830] px-4 py-2.5">
           <div className="flex items-center justify-between flex-wrap gap-2">
@@ -61,7 +61,7 @@ const MatchCard: React.FC<MatchCardProps> = ({ match, onClick, compact }) => {
         {!compact && comp && (
           <div className="text-center mb-4">
             <span className="text-[10px] font-semibold text-[#0f1830] bg-[#0f1830]/8 px-3 py-1 rounded-full uppercase tracking-wider">
-              {comp.name} � Java {match.week}
+              {comp.name}  Java {match.week}
             </span>
           </div>
         )}

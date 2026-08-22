@@ -1,4 +1,4 @@
-�import React, { useState, useMemo, useEffect } from 'react';
+﻿import React, { useState, useMemo, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match, CompetitionType } from '@/types';
 import Header from '@/components/Header';
@@ -48,7 +48,7 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/20 rounded-full blur-3xl" />
           </div>
           <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 z-[110] w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors">
-            �S"
+            S"
           </button>
           <div className="relative z-10 text-center">
             <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-amber-400/20 backdrop-blur-sm rounded-full mb-4">
@@ -82,7 +82,6 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
               <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Ndeshje</span>
             </div>
             <div className="bg-gradient-to-br from-amber-50 to-amber-100/50 rounded-2xl p-4 text-center border border-amber-100">
-              �}
               <span className="block text-2xl font-black text-gray-900">{goalsPerMatch}</span>
               <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Mesatare</span>
             </div>
@@ -312,12 +311,12 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
             {weeks.length === 0 ? <p className="text-gray-400 text-center py-8">Nuk ka ndeshje te regjistruara.</p> : (
               <>
                 <div className="flex items-center justify-between mb-6 bg-white rounded-2xl p-4 shadow-sm border border-gray-100">
-                  <button onClick={() => weekIdx > 0 && setSelectedWeek(weeks[weekIdx - 1])} disabled={weekIdx <= 0} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">⬹</button>
+                  <button onClick={() => weekIdx > 0 && setSelectedWeek(weeks[weekIdx - 1])} disabled={weekIdx <= 0} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">â¬¹</button>
                   <div className="flex items-center gap-3">
                     <select value={selectedWeek} onChange={e => setSelectedWeek(Number(e.target.value))} className="text-lg font-bold text-gray-800 bg-transparent border-none focus:ring-0 cursor-pointer">{weeks.map(w => <option key={w} value={w}>Java {w}</option>)}</select>
                     <span className="text-xs text-gray-400 bg-gray-100 px-2 py-1 rounded-lg">{weekIdx + 1} / {weeks.length}</span>
                   </div>
-                  <button onClick={() => weekIdx < weeks.length - 1 && setSelectedWeek(weeks[weekIdx + 1])} disabled={weekIdx >= weeks.length - 1} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">⬺</button>
+                  <button onClick={() => weekIdx < weeks.length - 1 && setSelectedWeek(weeks[weekIdx + 1])} disabled={weekIdx >= weeks.length - 1} className="p-2 rounded-xl hover:bg-gray-100 disabled:opacity-30 transition-colors">â¬º</button>
                 </div>
                 <div className="flex gap-2 mb-6">
                   {[{ value: 'all', label: 'Te gjitha' }, { value: 'finished', label: 'Perfunduara' }, { value: 'planned', label: 'Ardhshme' }, { value: 'live', label: 'Live' }].map(f => (

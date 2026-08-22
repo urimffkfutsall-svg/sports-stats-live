@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useData } from '@/context/DataContext';
 import { NormativeAct } from '@/types';
 import Header from '@/components/Header';

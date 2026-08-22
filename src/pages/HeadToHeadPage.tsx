@@ -1,4 +1,4 @@
-�import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';

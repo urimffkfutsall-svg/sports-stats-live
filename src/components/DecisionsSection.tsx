@@ -1,4 +1,4 @@
-�import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 interface Decision {
   id: string;
   vendimi: string;
@@ -109,7 +109,7 @@ var DecisionsSection: React.FC = function() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>
               </div>
-              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">�S"</button>
+              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">S"</button>
             </div>
             <div className="p-6 space-y-4">
               <div>
