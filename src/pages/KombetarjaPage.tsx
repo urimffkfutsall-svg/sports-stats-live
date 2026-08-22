@@ -85,18 +85,18 @@ export default function KombetarjaPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F1F5F9]">
+      <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
         <Header />
         <div className="flex items-center justify-center py-32">
           <div className="w-12 h-12 rounded-full border-4 border-[#0f1830]/20 border-t-[#0f1830] animate-spin" />
         </div>
-        <Footer />
+        <div className="mt-auto"><Footer /></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-6xl mx-auto px-4 py-8">
 
@@ -385,7 +385,9 @@ export default function KombetarjaPage() {
         )}
 
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
     </div>
   );
 }
+
+

@@ -20,7 +20,7 @@ const KomisioniPage: React.FC = () => {
   const weeks = Object.keys(grouped).map(Number).sort((a, b) => b - a);
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-4xl mx-auto px-4 py-8">
         <div className="text-center mb-10">
@@ -81,7 +81,7 @@ const KomisioniPage: React.FC = () => {
           </div>
         )}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
 
       {selected && (
         <div
@@ -128,3 +128,4 @@ const KomisioniPage: React.FC = () => {
 };
 
 export default KomisioniPage;
+

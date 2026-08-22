@@ -150,7 +150,7 @@ const LiveMatchPage = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-6xl mx-auto px-4 pt-6">
         <Link to="/live/streams" className="inline-flex items-center gap-2 px-5 py-2.5 bg-red-500 hover:bg-red-600 text-white rounded-xl font-bold text-sm shadow-lg shadow-red-500/25 transition-all hover:scale-105">
@@ -187,9 +187,11 @@ const LiveMatchPage = () => {
         <CompSection name="Kupa e Kosoves" compId={kupaComp?.id} />
       </div>
       {selectedMatch && <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />}
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
     </div>
   );
 };
 
 export default LiveMatchPage;
+
+

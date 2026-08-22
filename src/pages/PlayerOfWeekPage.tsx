@@ -15,7 +15,7 @@ const PlayerOfWeekPage: React.FC = () => {
   const rest = sorted.slice(1);
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-5xl mx-auto px-4 py-8">
         {/* Page Header */}
@@ -165,9 +165,10 @@ const PlayerOfWeekPage: React.FC = () => {
           </>
         )}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
     </div>
   );
 };
 
 export default PlayerOfWeekPage;
+

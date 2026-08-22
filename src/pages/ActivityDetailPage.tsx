@@ -28,25 +28,25 @@ export default function ActivityDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#F1F5F9]">
+      <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
         <Header />
         <div className="flex items-center justify-center py-32">
           <div className="w-12 h-12 rounded-full border-4 border-[#0f1830]/20 border-t-[#0f1830] animate-spin" />
         </div>
-        <Footer />
+        <div className="mt-auto"><Footer /></div>
       </div>
     );
   }
 
   if (!activity) {
     return (
-      <div className="min-h-screen bg-[#F1F5F9]">
+      <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
         <Header />
         <div className="max-w-4xl mx-auto px-4 py-16 text-center">
           <h1 className="text-2xl font-black text-gray-900 mb-4">Aktiviteti nuk u gjet</h1>
           <Link to="/kombetarja" className="text-[#0f1830] font-bold hover:underline">Kthehu te Kombetarja</Link>
         </div>
-        <Footer />
+        <div className="mt-auto"><Footer /></div>
       </div>
     );
   }
@@ -54,7 +54,7 @@ export default function ActivityDetailPage() {
   const others = allActivities.filter(a => a.id !== id).slice(0, 3);
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Breadcrumb */}
@@ -109,7 +109,9 @@ export default function ActivityDetailPage() {
           </div>
         )}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
     </div>
   );
 }
+
+

@@ -292,7 +292,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
   const medalColors = ['from-amber-300 to-amber-500', 'from-gray-300 to-gray-500', 'from-amber-600 to-amber-800'];
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-8">
         <div className="mb-8">
@@ -535,7 +535,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
           );
         })()}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
       <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />
       {selectedScorer && <ScorerPopup scorer={selectedScorer} onClose={() => setSelectedScorer(null)} />}
     </div>
@@ -543,3 +543,4 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
 };
 
 export default CompetitionPage;
+

@@ -29,13 +29,13 @@ const NewsDetailPage: React.FC = () => {
 
   if (!item) {
     return (
-      <div className="min-h-screen bg-[#F1F5F9]">
+      <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
         <Header />
         <div className="max-w-3xl mx-auto px-4 py-16 text-center">
           <p className="text-gray-400 text-lg">Lajmi nuk u gjet.</p>
           <button onClick={() => navigate('/')} className="mt-4 px-5 py-2 bg-[#0f1830] text-white rounded-lg text-sm font-semibold">Kthehu ne Ballina</button>
         </div>
-        <Footer />
+        <div className="mt-auto"><Footer /></div>
       </div>
     );
   }
@@ -43,7 +43,7 @@ const NewsDetailPage: React.FC = () => {
   const photos = getPhotos(item.photo);
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <article className="max-w-3xl mx-auto px-4 py-8">
         <button onClick={() => navigate(-1)} className="text-sm text-[#0f1830] font-semibold mb-4 hover:underline flex items-center gap-1">
@@ -136,7 +136,7 @@ const NewsDetailPage: React.FC = () => {
           ))}
         </div>
       </article>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
 
       {/* Lightbox */}
       {lightbox && (
@@ -169,3 +169,5 @@ const NewsDetailPage: React.FC = () => {
 };
 
 export default NewsDetailPage;
+
+

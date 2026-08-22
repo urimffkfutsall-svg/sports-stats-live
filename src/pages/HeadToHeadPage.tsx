@@ -33,7 +33,7 @@ const HeadToHeadPage: React.FC = () => {
   ] : [];
 
   return (
-    <div className="min-h-screen bg-[#FAF9F6]">
+    <div className="min-h-screen bg-[#FAF9F6] flex flex-col">
       <Header />
       <div className="max-w-5xl mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-gray-800 mb-6">Krahasimi Head-to-Head</h1>
@@ -147,10 +147,12 @@ const HeadToHeadPage: React.FC = () => {
           <p className="text-gray-500 text-center py-12">Nuk ka ndeshje direkte mes kÃ«tyre dy skuadrave.</p>
         )}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
       <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />
     </div>
   );
 };
 
 export default HeadToHeadPage;
+
+

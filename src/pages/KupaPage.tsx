@@ -168,7 +168,7 @@ const KupaPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#F1F5F9]">
+    <div className="min-h-screen bg-[#F1F5F9] flex flex-col">
       <Header />
       <div className="max-w-7xl mx-auto px-4 py-5">
         <div className="mb-8">
@@ -312,10 +312,12 @@ const KupaPage: React.FC = () => {
           </div>
         )}
       </div>
-      <Footer />
+      <div className="mt-auto"><Footer /></div>
       <MatchDetailModal match={selectedMatch} onClose={() => setSelectedMatch(null)} />
     </div>
   );
 };
 
 export default KupaPage;
+
+
