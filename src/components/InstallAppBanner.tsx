@@ -50,7 +50,7 @@ function InstallAppBanner() {
 
       {showInstall ? (
         <div className="px-4 pb-4">
-          <button onClick={handleInstall} className="w-full py-2.5 bg-white text-blue-900 font-bold rounded-lg text-sm hover:bg-[#2a499a]/10 transition-colors">
+          <button onClick={handleInstall} className="w-full py-2.5 bg-white text-[#0B1226] font-bold rounded-lg text-sm hover:bg-[#2a499a]/10 transition-colors">
             Instalo Tani
           </button>
         </div>

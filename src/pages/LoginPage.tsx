@@ -123,7 +123,7 @@ var LoginPage: React.FC = function() {
             </p>
             <div className="bg-[#2a499a]/10 border border-[#2a499a]/15 rounded-xl p-4 mb-6">
               <p className="text-sm text-[#1c3570] font-medium">Per informata shtese kontaktoni:</p>
-              <p className="text-lg font-bold text-blue-800 mt-1">+383 45 278 279</p>
+              <p className="text-lg font-bold text-[#1c3570] mt-1">+383 45 278 279</p>
             </div>
             <button onClick={function() { setMode('login'); setReg({ firstName: '', lastName: '', username: '', password: '', phone: '', email: '', teamId: '' }); }} className="w-full py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1c3570] transition-colors">
               Kthehu ne Hyrje

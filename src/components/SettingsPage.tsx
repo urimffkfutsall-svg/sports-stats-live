@@ -122,8 +122,8 @@ const SettingsPage: React.FC<SettingsPageProps> = ({ onBack }) => {
 
         {/* Notification Info */}
         <div className="bg-[#2a499a]/10 rounded-lg p-4 border border-[#2a499a]/25">
-          <h3 className="font-semibold text-blue-900 mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
-          <ul className="text-sm text-blue-800 space-y-1">
+          <h3 className="font-semibold text-[#0B1226] mb-2">Ã‡farÃ« do tÃ« merrni?</h3>
+          <ul className="text-sm text-[#1c3570] space-y-1">
             <li>âœ“ Notifjikimet pÃ«r ndeshjet e pÃ«rfunduara</li>
             <li>âœ“ Lajmet e reja tÃ« postuara</li>
             <li>âœ“ Videot e reja</li>
