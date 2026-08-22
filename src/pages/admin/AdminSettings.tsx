@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { useAuth } from '@/context/AuthContext';
 import AdminNewSeasonWizard from './AdminNewSeasonWizard';
+import { Trash2, Pencil } from 'lucide-react';
 
 const AdminSettings: React.FC = () => {
   const {
@@ -248,8 +249,8 @@ const AdminSettings: React.FC = () => {
                     {!s.isActive && (
                       <button onClick={() => updateSeason({ ...s, isActive: true })} className="px-2 py-1 text-xs bg-green-50 text-green-700 rounded hover:bg-green-100">Aktivizo</button>
                     )}
-                    <button onClick={() => { setSeasonForm({ name: s.name, startDate: s.startDate, endDate: s.endDate, isActive: s.isActive }); setEditSeasonId(s.id); setShowSeasonForm(true); }} className="p-1.5 text-gray-400 hover:text-[#0f1830]">S}</button>
-                    <button onClick={() => { if (confirm('Fshi sezonin?')) deleteSeason(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
+                    <button onClick={() => { setSeasonForm({ name: s.name, startDate: s.startDate, endDate: s.endDate, isActive: s.isActive }); setEditSeasonId(s.id); setShowSeasonForm(true); }} className="p-1.5 text-gray-400 hover:text-[#0f1830]"><Pencil className="w-4 h-4" /></button>
+                    <button onClick={() => { if (confirm('Fshi sezonin?')) deleteSeason(s.id); }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
               ))
@@ -314,7 +315,7 @@ const AdminSettings: React.FC = () => {
                       <button onClick={() => updateCompetition({ ...c, isActiveLanding: !c.isActiveLanding })} className={`px-2 py-1 text-xs rounded ${c.isActiveLanding ? 'bg-[#0f1830]/10 text-[#0f1830]' : 'bg-gray-50 text-gray-500'}`}>
                         {c.isActiveLanding ? 'Fshih nga LP' : 'Shfaq në LP'}
                       </button>
-                      <button onClick={() => { if (confirm('Fshi kompeticionin?')) deleteCompetition(c.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
+                      <button onClick={() => { if (confirm('Fshi kompeticionin?')) deleteCompetition(c.id); }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>
                 );
@@ -355,7 +356,7 @@ const AdminSettings: React.FC = () => {
               users.filter(u => u.role === 'editor').map(u => (
                 <div key={u.id} className="flex items-center justify-between px-4 py-3 hover:bg-gray-50">
                   <span className="text-sm font-medium text-gray-800">{u.username} <span className="text-xs text-gray-400">(editor)</span></span>
-                  <button onClick={() => { if (confirm('Fshi editorin?')) deleteUser(u.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
+                  <button onClick={() => { if (confirm('Fshi editorin?')) deleteUser(u.id); }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                 </div>
               ))
             )}

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match, Player } from '@/types';
 import { broadcastNotification, dbLiveStreams } from '@/lib/supabase-db';
+import { Trash2 } from 'lucide-react';
 const AdminLiveControl: React.FC = () => {
   const { 
     matches, teams, players, competitions, goals,
@@ -578,7 +579,7 @@ const AdminLiveControl: React.FC = () => {
                         {g.isOwnGoal && <span className="text-red-500 ml-1 text-xs font-black">(AG)</span>}
                       </span>
                       <span className="text-xs text-gray-400 font-medium">{isHome ? homeTeam?.name : awayTeam?.name}</span>
-                      <button onClick={() => { if (confirm('Fshi golin?')) { deleteGoal(g.id); if (isHome) { updateMatch({ ...selectedMatch, homeScore: Math.max(0, (selectedMatch.homeScore ?? 0) - 1) }); } else { updateMatch({ ...selectedMatch, awayScore: Math.max(0, (selectedMatch.awayScore ?? 0) - 1) }); } } }} className="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-600 flex items-center justify-center transition-colors text-xs">x</button>
+                      <button onClick={() => { if (confirm('Fshi golin?')) { deleteGoal(g.id); if (isHome) { updateMatch({ ...selectedMatch, homeScore: Math.max(0, (selectedMatch.homeScore ?? 0) - 1) }); } else { updateMatch({ ...selectedMatch, awayScore: Math.max(0, (selectedMatch.awayScore ?? 0) - 1) }); } } }} className="w-7 h-7 rounded-lg bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-600 flex items-center justify-center transition-colors text-xs"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   );
                 })}

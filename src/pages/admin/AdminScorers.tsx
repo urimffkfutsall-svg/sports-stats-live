@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const AdminScorers: React.FC = () => {
   const { scorers, teams, competitions, getActiveSeason, addScorer, updateScorer, deleteScorer, getAggregatedScorers, getTeamById } = useData();
@@ -145,8 +146,8 @@ const AdminScorers: React.FC = () => {
                   <span className="text-sm font-medium text-gray-800">{s.firstName} {s.lastName}</span>
                   {manualScorer && (
                     <div className="hidden group-hover:flex gap-1">
-                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#0f1830]">S}</button>
-                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500">S</button>
+                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#0f1830]"><Pencil className="w-4 h-4" /></button>
+                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   )}
                 </div>

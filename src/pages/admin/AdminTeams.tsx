@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadTeamLogo } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const AdminTeams: React.FC = () => {
   const { teams, competitions, getActiveSeason, addTeam, updateTeam, deleteTeam } = useData();
@@ -142,8 +143,8 @@ const AdminTeams: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#0f1830] rounded">S}</button>
-                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded">S</button>
+                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#0f1830] rounded"><Pencil className="w-4 h-4" /></button>
+                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
               );

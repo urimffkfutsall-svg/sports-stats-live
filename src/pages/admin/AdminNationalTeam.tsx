@@ -1,5 +1,6 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { dbNtCompetitions, dbNtGroups, dbNtGroupTeams, dbNtGroupMatches, dbNtActivities, dbFfkMoments } from '@/lib/supabase-db';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const AdminNationalTeam: React.FC = () => {
   const [competitions, setCompetitions] = useState<any[]>([]);
@@ -350,7 +351,7 @@ const AdminNationalTeam: React.FC = () => {
                     <h4 className="font-bold text-gray-800">{g.name}</h4>
                     <div className="flex gap-2">
                       <button onClick={() => setSelectedGroupId(g.id)} className={"px-3 py-1 rounded-lg text-xs font-bold " + (selectedGroupId === g.id ? "bg-[#0f1830] text-white" : "bg-white text-gray-600 border border-gray-200")}>Menaxho</button>
-                      <button onClick={() => handleDeleteGroup(g.id)} className="px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-600">x</button>
+                      <button onClick={() => handleDeleteGroup(g.id)} className="px-2 py-1 rounded-lg text-xs text-red-400 hover:text-red-600"><Trash2 className="w-4 h-4" /></button>
                     </div>
                   </div>
 
@@ -423,8 +424,8 @@ const AdminNationalTeam: React.FC = () => {
                           <div key={t.id} className={"flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-bold border " + (t.isKosova ? "bg-[#0f1830]/10 border-[#0f1830]/25 text-[#0f1830]" : "bg-white border-gray-200 text-gray-700")}>
                             {t.teamLogo && <img src={t.teamLogo} alt="" className="w-4 h-4 rounded object-contain" />}
                             {t.teamName}
-                            <button onClick={() => handleEditTeam(t)} className="text-[#0f1830]/60 hover:text-[#0f1830] ml-1" title="Edito">&#9998;</button>
-                            <button onClick={() => handleDeleteTeam(t.id)} className="text-red-400 hover:text-red-600 ml-1">x</button>
+                            <button onClick={() => handleEditTeam(t)} className="text-[#0f1830]/60 hover:text-[#0f1830] ml-1" title="Edito"><Pencil className="w-4 h-4" /></button>
+                            <button onClick={() => handleDeleteTeam(t.id)} className="text-red-400 hover:text-red-600 ml-1"><Trash2 className="w-4 h-4" /></button>
                           </div>
                         ))}
                       </div>

@@ -3,6 +3,7 @@ import { useData } from '@/context/DataContext';
 import { ShortiRubrik, Match } from '@/types';
 import { generateRoundRobin } from '@/lib/shorti';
 import { v4 as uuidv4 } from 'uuid';
+import { Trash2 } from 'lucide-react';
 
 type CompKey = 'superliga' | 'liga_pare';
 
@@ -212,9 +213,7 @@ const AdminShorti: React.FC = () => {
                   onClick={() => handleDeleteRubrik(r.id)}
                   className="text-gray-400 hover:text-red-600 text-xs font-medium shrink-0"
                   title="Fshij Rubrikën"
-                >
-                  ✕
-                </button>
+                ><Trash2 className="w-4 h-4" /></button>
               </div>
             );
           })}

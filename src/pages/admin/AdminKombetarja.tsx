@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { supabase } from '@/lib/supabase';
 import { v4 as uuidv4 } from 'uuid';
+import { Pencil, Trash2 } from 'lucide-react';
 
 interface NationalPlayer {
   id: string; firstName: string; lastName: string; photo: string;
@@ -180,9 +181,7 @@ const AdminKombetarja: React.FC = () => {
                 <button onClick={savePlayer} className="flex items-center gap-2 bg-[#0f1830] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1c3570]">
                   ✓ Ruaj
                 </button>
-                <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
-                  ✕ Anulo
-                </button>
+                <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100"><Pencil className="w-4 h-4" /></button>
               </div>
             </div>
           )}
@@ -198,8 +197,8 @@ const AdminKombetarja: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#0f1830]"></button>
-                  <button onClick={() => deletePlayer(p.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
+                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#0f1830]"><Pencil className="w-4 h-4" /></button>
+                  <button onClick={() => deletePlayer(p.id)} className="p-2 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                 </div>
               </div>
             ))}
@@ -242,9 +241,7 @@ const AdminKombetarja: React.FC = () => {
                 <button onClick={saveMatch} className="flex items-center gap-2 bg-[#0f1830] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1c3570]">
                   ✓ Ruaj
                 </button>
-                <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
-                  ✕ Anulo
-                </button>
+                <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100"><Pencil className="w-4 h-4" /></button>
               </div>
             </div>
           )}
@@ -266,8 +263,8 @@ const AdminKombetarja: React.FC = () => {
                   {m.liveUrl && <p className="text-xs text-[#0f1830] mt-1 truncate max-w-xs">{m.liveUrl}</p>}
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#0f1830]"></button>
-                  <button onClick={() => deleteMatch(m.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
+                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#0f1830]"><Pencil className="w-4 h-4" /></button>
+                  <button onClick={() => deleteMatch(m.id)} className="p-2 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                 </div>
               </div>
             ))}

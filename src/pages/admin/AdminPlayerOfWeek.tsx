@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
+import { Pencil, Trash2 } from 'lucide-react';
 
 const AdminPlayerOfWeek: React.FC = () => {
   const { playersOfWeek, teams, getActiveSeason, addPlayerOfWeek, updatePlayerOfWeek, deletePlayerOfWeek, getTeamById } = useData();
@@ -137,8 +138,8 @@ const AdminPlayerOfWeek: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]">S}</button>
-                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">S</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#0f1830]"><Pencil className="w-4 h-4" /></button>
+                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>
               );

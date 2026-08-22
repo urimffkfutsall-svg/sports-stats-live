@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Heart } from 'lucide-react';
 import { isFavoriteTeam, toggleFavoriteTeam, FAVORITES_EVENT } from '@/lib/favorites';
 
@@ -32,7 +32,7 @@ const FavoriteTeamButton: React.FC<Props> = ({ teamId, size = 20, className = ''
         e.stopPropagation();
         setFav(toggleFavoriteTeam(teamId));
       }}
-      className={`inline-flex items-center justify-center rounded-full transition-colors ${fav ? 'text-red-500' : 'text-gray-300 hover:text-red-400'} ${className}`}
+      className={`inline-flex items-center justify-center rounded-full transition-colors ${fav ? 'text-red-500' : 'text-white hover:text-red-400'} ${className}`}
     >
       <Heart size={size} fill={fav ? 'currentColor' : 'none'} strokeWidth={2} />
     </button>
