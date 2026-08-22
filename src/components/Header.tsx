@@ -118,7 +118,7 @@ const Header: React.FC = () => {
 
             {/* Desktop inline nav */}
             <nav className="hidden lg:flex items-center gap-1 ml-4 overflow-x-auto">
-              {navLinks.filter(l => ['/', '/superliga', '/kupa'].includes(l.path)).map(link => (
+              {navLinks.filter(l => ['/', '/superliga', '/liga-pare'].includes(l.path)).map(link => (
                 <Link
                   key={link.path}
                   to={link.path}
@@ -138,5 +138,6 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+
 
 
