@@ -31,6 +31,7 @@ import KomisioniPage from "./pages/KomisioniPage";
 import AktetNormativePage from "./pages/AktetNormativePage";
 import CalendarPage from "./pages/CalendarPage";
 import WhatsAppButton from "./components/WhatsAppButton";
+import InstallPrompt from "./components/InstallPrompt";
 import BottomNav from "./components/BottomNav";
 
 const queryClient = new QueryClient();
@@ -102,6 +103,7 @@ const App = () => (
         <DataProvider>
           <AppLoader>
             <AuthProvider>
+              <InstallPrompt />
               <Toaster />
               <Sonner />
               <BrowserRouter>
@@ -143,6 +145,7 @@ const App = () => (
 );
 
 export default App;
+
 
 
 
