@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { Video } from '@/types';
 
@@ -40,9 +40,9 @@ const AdminVideos: React.FC = () => {
 
       {/* Form */}
       <div className="bg-white rounded-xl border border-gray-200 p-5 mb-6 space-y-3">
-        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent outline-none" />
-        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent outline-none" />
-        <input value={form.url} onChange={e => setForm({...form, url: e.target.value})} placeholder="Video URL (YouTube, Facebook, etj.)" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent outline-none" />
+        <input value={form.title} onChange={e => setForm({...form, title: e.target.value})} placeholder="Titulli" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
+        <input value={form.description} onChange={e => setForm({...form, description: e.target.value})} placeholder="Pershkrimi" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
+        <input value={form.url} onChange={e => setForm({...form, url: e.target.value})} placeholder="Video URL (YouTube, Facebook, etj.)" className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent outline-none" />
         <label className="flex items-center gap-2 text-sm text-gray-600 cursor-pointer">
           <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm({...form, isFeaturedLanding: e.target.checked})} className="rounded" />
           Shfaq ne Ballina
@@ -56,7 +56,7 @@ const AdminVideos: React.FC = () => {
           Shfaq te Liga e Pare
         </label>
         <div className="flex gap-2">
-          <button onClick={handleSubmit} className="px-5 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
+          <button onClick={handleSubmit} className="px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors">
             {editId ? 'Ruaj Ndryshimet' : 'Shto Video'}
           </button>
           {editId && <button onClick={() => { setEditId(null); setForm({ title: '', description: '', url: '', isFeaturedLanding: false, isFeaturedSuperliga: false, isFeaturedLigaPare: false }); }} className="px-5 py-2 bg-gray-200 text-gray-600 rounded-lg text-sm">Anulo</button>}

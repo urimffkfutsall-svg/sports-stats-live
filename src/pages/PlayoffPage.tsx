@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
@@ -148,7 +148,7 @@ export default function PlayoffPage() {
   if (loading) return (
     <div className="min-h-screen bg-[#F1F5F9]">
       <Header />
-      <div className="flex items-center justify-center py-32"><div className="w-12 h-12 rounded-full border-4 border-[#1E6FF2]/20 border-t-[#1E6FF2] animate-spin" /></div>
+      <div className="flex items-center justify-center py-32"><div className="w-12 h-12 rounded-full border-4 border-[#2a499a]/20 border-t-[#2a499a] animate-spin" /></div>
       <Footer />
     </div>
   );
@@ -158,7 +158,7 @@ export default function PlayoffPage() {
       <Header />
       <div className="max-w-6xl mx-auto px-4 py-8">
         {/* Hero */}
-        <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
+        <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
           <div className="absolute inset-0 opacity-10"><div className="absolute top-0 right-0 w-60 h-60 bg-white rounded-full blur-3xl translate-x-1/2 -translate-y-1/2" /></div>
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 bg-white/10 px-3 py-1 rounded-full mb-4 text-xs font-bold uppercase tracking-wider">
@@ -171,8 +171,8 @@ export default function PlayoffPage() {
 
         {/* Tab Selector */}
         <div className="flex gap-2 bg-white rounded-xl p-1 mb-8 border border-gray-100 shadow-sm">
-          <button onClick={() => setTab('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'superliga' ? "bg-[#1E6FF2] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
-          <button onClick={() => setTab('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'liga_pare' ? "bg-[#1E6FF2] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
+          <button onClick={() => setTab('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'superliga' ? "bg-[#2a499a] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
+          <button onClick={() => setTab('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (tab === 'liga_pare' ? "bg-[#2a499a] text-white shadow-md shadow-blue-200" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
         </div>
 
         {tab === 'superliga' ? (

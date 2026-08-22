@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -56,17 +56,17 @@ const AdminPlayerOfWeek: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Lojtari i Javës</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
-          + Shto Lojtarin e Javës
+        <h2 className="text-xl font-bold text-gray-800">Lojtari i JavÃ«s</h2>
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+          + Shto Lojtarin e JavÃ«s
         </button>
       </div>
 
       {showForm && (
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto Lojtarin e Javës'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">✕</button>
+            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto Lojtarin e JavÃ«s'}</h3>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
@@ -96,7 +96,7 @@ const AdminPlayerOfWeek: React.FC = () => {
             <div className="space-y-2">
               <label className="flex items-center gap-2 cursor-pointer">
                 <input type="checkbox" checked={form.isScorer} onChange={e => setForm(p => ({ ...p, isScorer: e.target.checked, goalsCount: e.target.checked ? p.goalsCount : 0 }))} className="w-4 h-4 rounded" />
-                <span className="text-sm text-gray-700">Është golashënues?</span>
+                <span className="text-sm text-gray-700">Ã‹shtÃ« golashÃ«nues?</span>
               </label>
               {form.isScorer && (
                 <div>
@@ -106,7 +106,7 @@ const AdminPlayerOfWeek: React.FC = () => {
               )}
             </div>
             <div className="flex items-end">
-              <button type="submit" className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
                 {editId ? 'Ruaj' : 'Shto'}
               </button>
             </div>
@@ -116,7 +116,7 @@ const AdminPlayerOfWeek: React.FC = () => {
 
       <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
         {filtered.length === 0 ? (
-          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka Lojtar të Javës.</p>
+          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka Lojtar tÃ« JavÃ«s.</p>
         ) : (
           <div className="divide-y divide-gray-50">
             {filtered.map(p => {
@@ -132,13 +132,13 @@ const AdminPlayerOfWeek: React.FC = () => {
                       <div className="flex items-center gap-2 text-xs text-gray-400">
                         <span>Java {p.week}</span>
                         <span>{team?.name || '-'}</span>
-                        {p.isScorer && <span className="text-[#1E6FF2]">Golashënues ({p.goalsCount})</span>}
+                        {p.isScorer && <span className="text-[#2a499a]">GolashÃ«nues ({p.goalsCount})</span>}
                       </div>
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#1E6FF2]">✎</button>
-                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">✗</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#2a499a]">âœŽ</button>
+                    <button onClick={() => { if (confirm('Fshi?')) deletePlayerOfWeek(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">âœ—</button>
                   </div>
                 </div>
               );

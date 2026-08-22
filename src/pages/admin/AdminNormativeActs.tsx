@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { NormativeAct } from '@/types';
 
@@ -14,7 +14,7 @@ const AdminNormativeActs: React.FC = () => {
   const handleFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (!file) return;
-    if (file.size > 10 * 1024 * 1024) { alert('PDF shum� i madh (max 10MB)'); return; }
+    if (file.size > 10 * 1024 * 1024) { alert('PDF shumë i madh (max 10MB)'); return; }
     setUploading(true);
     setFileName(file.name);
     const reader = new FileReader();
@@ -80,13 +80,13 @@ const AdminNormativeActs: React.FC = () => {
           value={form.title}
           onChange={e => setForm({ ...form, title: e.target.value })}
           placeholder="Titulli i aktit normativ"
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] outline-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] outline-none"
         />
         <input
           value={form.description}
           onChange={e => setForm({ ...form, description: e.target.value })}
           placeholder="Pershkrimi i shkurter (opsional)"
-          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#1E6FF2] outline-none"
+          className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-2 focus:ring-[#2a499a] outline-none"
         />
         <div>
           <label className="block text-xs font-semibold text-gray-500 mb-1">
@@ -97,7 +97,7 @@ const AdminNormativeActs: React.FC = () => {
             type="file"
             accept="application/pdf"
             onChange={handleFile}
-            className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#1E6FF2] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
+            className="w-full text-sm text-gray-600 file:mr-3 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-[#2a499a] file:text-white file:font-semibold file:cursor-pointer hover:file:bg-[#1858C8]"
           />
           {uploading && <p className="text-xs text-blue-500 mt-1">Duke ngarkuar...</p>}
           {fileName && !uploading && <p className="text-xs text-green-600 mt-1">? {fileName}</p>}
@@ -105,7 +105,7 @@ const AdminNormativeActs: React.FC = () => {
         <div className="flex gap-2">
           <button
             onClick={handleSubmit}
-            className="px-5 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors"
+            className="px-5 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-semibold hover:bg-[#1858C8] transition-colors"
           >
             {editId ? 'Ruaj Ndryshimet' : 'Shto Aktin'}
           </button>

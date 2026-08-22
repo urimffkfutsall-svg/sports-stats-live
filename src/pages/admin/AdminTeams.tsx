@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadTeamLogo } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -71,7 +71,7 @@ const AdminTeams: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-800">Skuadrat</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC] transition-colors">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC] transition-colors">
           + Shto Skuader
         </button>
       </div>
@@ -87,7 +87,7 @@ const AdminTeams: React.FC = () => {
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
             <h3 className="font-semibold text-gray-800">{editId ? 'Edito Skuadren' : 'Shto Skuader te Re'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">✕</button>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-3">
             <div>
@@ -115,8 +115,8 @@ const AdminTeams: React.FC = () => {
               <input value={form.foundedYear} onChange={e => setForm(p => ({ ...p, foundedYear: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
             </div>
             <div className="flex items-end">
-              <button type="submit" disabled={saving} className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC] disabled:opacity-60 disabled:cursor-not-allowed">
-                {saving ? 'Duke ruajtur…' : (editId ? 'Ruaj Ndryshimet' : 'Shto')}
+              <button type="submit" disabled={saving} className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC] disabled:opacity-60 disabled:cursor-not-allowed">
+                {saving ? 'Duke ruajturâ€¦' : (editId ? 'Ruaj Ndryshimet' : 'Shto')}
               </button>
             </div>
           </form>
@@ -142,8 +142,8 @@ const AdminTeams: React.FC = () => {
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#1E6FF2] rounded">✎</button>
-                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded">✗</button>
+                    <button onClick={() => handleEdit(t)} className="p-1.5 text-gray-400 hover:text-[#2a499a] rounded">âœŽ</button>
+                    <button onClick={() => { if (confirm('Fshi skuadren?')) deleteTeam(t.id); }} className="p-1.5 text-gray-400 hover:text-red-500 rounded">âœ—</button>
                   </div>
                 </div>
               );

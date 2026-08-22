@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { useData } from '@/context/DataContext';
 import { Editor, Player, Official } from '@/types';
@@ -122,7 +122,7 @@ var EditorPanel: React.FC = function() {
         <label className="block text-xs font-medium text-gray-600 mb-1">Foto (opsionale)</label>
         <div className="flex gap-2">
           <label className="flex items-center gap-2 px-4 py-2.5 border border-gray-200 rounded-xl text-sm cursor-pointer hover:bg-gray-50 transition-colors flex-1">
-            ▲
+            â–²
             <span className="text-gray-500 truncate">{props.file ? props.file.name : 'Ngarko foto nga PC'}</span>
             <input type="file" accept="image/*" className="hidden" onChange={function(e) { if (e.target.files && e.target.files[0]) { props.setFile(e.target.files[0]); props.setPhotoUrl(''); } }} />
           </label>
@@ -130,7 +130,7 @@ var EditorPanel: React.FC = function() {
         <div className="flex items-center gap-2">
           <span className="text-xs text-gray-400">ose</span>
         </div>
-        <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="URL e fotos" value={props.photoUrl} onChange={function(e) { props.setPhotoUrl(e.target.value); props.setFile(null); }} />
+        <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="URL e fotos" value={props.photoUrl} onChange={function(e) { props.setPhotoUrl(e.target.value); props.setFile(null); }} />
         {props.file && (
           <div className="flex items-center gap-2">
             <img src={URL.createObjectURL(props.file)} alt="" className="w-10 h-10 rounded-full object-cover border" />
@@ -153,7 +153,7 @@ var EditorPanel: React.FC = function() {
 
   return (
     <div className="space-y-6">
-      <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-6 text-white flex items-center gap-4">
+      <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-6 text-white flex items-center gap-4">
         {team.logo && <img src={team.logo} alt="" className="w-16 h-16 rounded-xl bg-white/10 p-1" />}
         <div>
           <h2 className="text-xl font-bold">{team.name}</h2>
@@ -162,10 +162,10 @@ var EditorPanel: React.FC = function() {
       </div>
 
       <div className="flex gap-3">
-        <button onClick={function() { setTab('players'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'players' ? 'bg-[#1E6FF2] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+        <button onClick={function() { setTab('players'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'players' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
            Lojtaret ({teamPlayers.length})
         </button>
-        <button onClick={function() { setTab('officials'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'officials' ? 'bg-[#1E6FF2] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+        <button onClick={function() { setTab('officials'); }} className={'flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'officials' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
            Zyrtaret ({teamOfficials.length})
         </button>
       </div>
@@ -174,7 +174,7 @@ var EditorPanel: React.FC = function() {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-gray-800">Lojtaret e Skuadres</h3>
-            <button onClick={function() { setShowPlayerForm(!showPlayerForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
+            <button onClick={function() { setShowPlayerForm(!showPlayerForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
                Shto Lojtar
             </button>
           </div>
@@ -183,13 +183,13 @@ var EditorPanel: React.FC = function() {
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
               <h4 className="font-semibold text-gray-800 mb-4">Lojtar i Ri</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Emri" value={pf.firstName} onChange={function(e) { setPf(Object.assign({}, pf, { firstName: e.target.value })); }} />
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Mbiemri" value={pf.lastName} onChange={function(e) { setPf(Object.assign({}, pf, { lastName: e.target.value })); }} />
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Nr. Fanelles" value={pf.jerseyNumber} onChange={function(e) { setPf(Object.assign({}, pf, { jerseyNumber: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Emri" value={pf.firstName} onChange={function(e) { setPf(Object.assign({}, pf, { firstName: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Mbiemri" value={pf.lastName} onChange={function(e) { setPf(Object.assign({}, pf, { lastName: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Nr. Fanelles" value={pf.jerseyNumber} onChange={function(e) { setPf(Object.assign({}, pf, { jerseyNumber: e.target.value })); }} />
                 <FileUploadField file={playerFile} setFile={setPlayerFile} photoUrl={pf.photo} setPhotoUrl={function(url) { setPf(Object.assign({}, pf, { photo: url })); }} />
               </div>
               <div className="flex gap-3 mt-4">
-                <button onClick={handleAddPlayer} disabled={playerUploading} className="px-5 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
+                <button onClick={handleAddPlayer} disabled={playerUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
                   {playerUploading ? 'Duke ngarkuar...' : 'Ruaj Lojtarin'}
                 </button>
                 <button onClick={function() { setShowPlayerForm(false); setPlayerFile(null); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">Anulo</button>
@@ -214,7 +214,7 @@ var EditorPanel: React.FC = function() {
                     {p.position && <p className="text-xs text-gray-500">Nr. {p.position}</p>}
                   </div>
                   <button onClick={function() { handleDeletePlayer(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                    ✗
+                    âœ—
                   </button>
                 </div>
               );
@@ -227,7 +227,7 @@ var EditorPanel: React.FC = function() {
         <div className="space-y-4">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-gray-800">Zyrtaret e Skuadres</h3>
-            <button onClick={function() { setShowOfficialForm(!showOfficialForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
+            <button onClick={function() { setShowOfficialForm(!showOfficialForm); }} className="flex items-center gap-2 px-4 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors">
                Shto Zyrtar
             </button>
           </div>
@@ -236,13 +236,13 @@ var EditorPanel: React.FC = function() {
             <div className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
               <h4 className="font-semibold text-gray-800 mb-4">Zyrtar i Ri</h4>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Emri" value={of_.firstName} onChange={function(e) { setOf(Object.assign({}, of_, { firstName: e.target.value })); }} />
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Mbiemri" value={of_.lastName} onChange={function(e) { setOf(Object.assign({}, of_, { lastName: e.target.value })); }} />
-                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#1E6FF2]" placeholder="Pozita (Trajner, Asistent, etj.)" value={of_.position} onChange={function(e) { setOf(Object.assign({}, of_, { position: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Emri" value={of_.firstName} onChange={function(e) { setOf(Object.assign({}, of_, { firstName: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Mbiemri" value={of_.lastName} onChange={function(e) { setOf(Object.assign({}, of_, { lastName: e.target.value })); }} />
+                <input className="w-full px-4 py-2.5 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#2a499a]" placeholder="Pozita (Trajner, Asistent, etj.)" value={of_.position} onChange={function(e) { setOf(Object.assign({}, of_, { position: e.target.value })); }} />
                 <FileUploadField file={officialFile} setFile={setOfficialFile} photoUrl={of_.photo} setPhotoUrl={function(url) { setOf(Object.assign({}, of_, { photo: url })); }} />
               </div>
               <div className="flex gap-3 mt-4">
-                <button onClick={handleAddOfficial} disabled={officialUploading} className="px-5 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
+                <button onClick={handleAddOfficial} disabled={officialUploading} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] transition-colors disabled:opacity-50">
                   {officialUploading ? 'Duke ngarkuar...' : 'Ruaj Zyrtarin'}
                 </button>
                 <button onClick={function() { setShowOfficialForm(false); setOfficialFile(null); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-colors">Anulo</button>
@@ -267,7 +267,7 @@ var EditorPanel: React.FC = function() {
                     <p className="text-xs text-gray-500">{o.position}</p>
                   </div>
                   <button onClick={function() { handleDeleteOfficial(o.id); }} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                    ✗
+                    âœ—
                   </button>
                 </div>
               );

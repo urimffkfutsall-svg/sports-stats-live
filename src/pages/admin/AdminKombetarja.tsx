@@ -130,10 +130,10 @@ const AdminKombetarja: React.FC = () => {
   return (
     <div>
       <div className="flex gap-2 mb-6">
-        <button onClick={() => setTab('players')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='players' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
+        <button onClick={() => setTab('players')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='players' ? 'bg-[#2a499a] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
            Lojtaret ({players.length})
         </button>
-        <button onClick={() => setTab('matches')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='matches' ? 'bg-[#1E6FF2] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
+        <button onClick={() => setTab('matches')} className={`flex items-center gap-2 px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${tab==='matches' ? 'bg-[#2a499a] text-white' : 'text-gray-600 hover:bg-white hover:shadow-sm'}`}>
            Ndeshjet ({matches.length})
         </button>
       </div>
@@ -143,7 +143,7 @@ const AdminKombetarja: React.FC = () => {
         <div>
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-800">Lojtaret e Kombetares</h3>
-            <button onClick={() => { setEditPlayer(null); setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 }); setShowPlayerForm(true); }} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+            <button onClick={() => { setEditPlayer(null); setPForm({ firstName:'', lastName:'', photo:'', position:'Mesfushor', number:0, birthDate:'', club:'', caps:0, goals:0 }); setShowPlayerForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
               + Shto Lojtar
             </button>
           </div>
@@ -164,7 +164,7 @@ const AdminKombetarja: React.FC = () => {
                 <input type="number" placeholder="Gola" value={pForm.goals||''} onChange={e => setPForm({...pForm, goals:+e.target.value})} className="border rounded-lg px-3 py-2 text-sm" />
                 <div>
                   <input placeholder="URL e fotos" value={pForm.photo} onChange={e => setPForm({...pForm, photo:e.target.value})} className="border rounded-lg px-3 py-2 text-sm w-full mb-1" />
-                  <label className="flex items-center gap-1 text-xs text-[#1E6FF2] cursor-pointer">
+                  <label className="flex items-center gap-1 text-xs text-[#2a499a] cursor-pointer">
                     ▲ Ngarko foto
                     <input type="file" accept="image/*" className="hidden" onChange={async e => {
                       const file = e.target.files?.[0];
@@ -177,7 +177,7 @@ const AdminKombetarja: React.FC = () => {
                 </div>
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                <button onClick={savePlayer} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
                   ✓ Ruaj
                 </button>
                 <button onClick={() => { setShowPlayerForm(false); setEditPlayer(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
@@ -198,7 +198,7 @@ const AdminKombetarja: React.FC = () => {
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => openEditPlayer(p)} className="p-2 text-gray-400 hover:text-[#2a499a]"></button>
                   <button onClick={() => deletePlayer(p.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
                 </div>
               </div>
@@ -213,7 +213,7 @@ const AdminKombetarja: React.FC = () => {
         <div>
           <div className="flex justify-between items-center mb-4">
             <h3 className="text-lg font-semibold text-gray-800">Ndeshjet e Kombetares</h3>
-            <button onClick={() => { setEditMatch(null); setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' }); setShowMatchForm(true); }} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
+            <button onClick={() => { setEditMatch(null); setMForm({ opponent:'', opponentLogo:'', date:'', time:'', venue:'', competition:'', homeScore:0, awayScore:0, isHome:true, status:'planned', liveUrl:'' }); setShowMatchForm(true); }} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#1558CC]">
               + Shto Ndeshje
             </button>
           </div>
@@ -239,7 +239,7 @@ const AdminKombetarja: React.FC = () => {
                 <input placeholder="Link LIVE (URL)" value={mForm.liveUrl} onChange={e => setMForm({...mForm, liveUrl:e.target.value})} className="border rounded-lg px-3 py-2 text-sm col-span-2" />
               </div>
               <div className="flex gap-2 mt-4">
-                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#1E6FF2] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
+                <button onClick={saveMatch} className="flex items-center gap-2 bg-[#2a499a] text-white px-4 py-2 rounded-lg text-sm hover:bg-[#1558CC]">
                   ✓ Ruaj
                 </button>
                 <button onClick={() => { setShowMatchForm(false); setEditMatch(null); }} className="flex items-center gap-2 text-gray-600 px-4 py-2 rounded-lg text-sm hover:bg-gray-100">
@@ -263,10 +263,10 @@ const AdminKombetarja: React.FC = () => {
                     </span>
                   </div>
                   <p className="text-xs text-gray-400 mt-1">{m.competition} | {m.date} {m.time} | {m.venue}</p>
-                  {m.liveUrl && <p className="text-xs text-[#1E6FF2] mt-1 truncate max-w-xs">{m.liveUrl}</p>}
+                  {m.liveUrl && <p className="text-xs text-[#2a499a] mt-1 truncate max-w-xs">{m.liveUrl}</p>}
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#1E6FF2]"></button>
+                  <button onClick={() => openEditMatch(m)} className="p-2 text-gray-400 hover:text-[#2a499a]"></button>
                   <button onClick={() => deleteMatch(m.id)} className="p-2 text-gray-400 hover:text-red-500">✗</button>
                 </div>
               </div>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 interface Decision {
   id: string;
   vendimi: string;
@@ -85,12 +85,12 @@ var DecisionsSection: React.FC = function() {
                   </span>
                   <span className="text-[10px] text-gray-400 font-semibold bg-gray-50 px-2 py-1 rounded-lg">{d.java}</span>
                 </div>
-                <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[#1E6FF2] transition-colors">{d.vendimi}</h3>
+                <h3 className="font-bold text-gray-800 mb-2 group-hover:text-[#2a499a] transition-colors">{d.vendimi}</h3>
                 <p className="text-sm text-gray-500 line-clamp-2 mb-3">{d.pershkrimi || 'Nuk ka pershkrim.'}</p>
                 <div className="flex items-center justify-between pt-3 border-t border-gray-100">
                   <span className="text-[11px] text-gray-400">{d.data}</span>
-                  <span className="flex items-center gap-1 text-[11px] text-[#1E6FF2] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
-                    Shiko detajet ›
+                  <span className="flex items-center gap-1 text-[11px] text-[#2a499a] font-semibold opacity-0 group-hover:opacity-100 transition-opacity">
+                    Shiko detajet â€º
                   </span>
                 </div>
               </div>
@@ -109,7 +109,7 @@ var DecisionsSection: React.FC = function() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>
               </div>
-              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">✕</button>
+              <button onClick={function() { setSelectedDecision(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">âœ•</button>
             </div>
             <div className="p-6 space-y-4">
               <div>

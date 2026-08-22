@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -67,15 +67,15 @@ const AdminPlayers: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Lojtarët</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+        <h2 className="text-xl font-bold text-gray-800">LojtarÃ«t</h2>
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
           + Shto Lojtar
         </button>
       </div>
 
       <div className="flex gap-2 mb-4">
         <select value={filterTeam} onChange={e => setFilterTeam(e.target.value)} className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
-          <option value="all">Të gjitha skuadrat</option>
+          <option value="all">TÃ« gjitha skuadrat</option>
           {activeTeams.map(t => <option key={t.id} value={t.id}>{t.name}</option>)}
         </select>
       </div>
@@ -83,8 +83,8 @@ const AdminPlayers: React.FC = () => {
       {showForm && (
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-gray-800">{editId ? 'Edito Lojtarin' : 'Shto Lojtar të Ri'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">✕</button>
+            <h3 className="font-semibold text-gray-800">{editId ? 'Edito Lojtarin' : 'Shto Lojtar tÃ« Ri'}</h3>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
@@ -107,7 +107,7 @@ const AdminPlayers: React.FC = () => {
               <select value={form.position} onChange={e => setForm(p => ({ ...p, position: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
                 <option value="">Zgjedh...</option>
                 <option value="Portier">Portier</option>
-                <option value="Mbrojtës">Mbrojtës</option>
+                <option value="MbrojtÃ«s">MbrojtÃ«s</option>
                 <option value="Mesfushor">Mesfushor</option>
                 <option value="Sulmues">Sulmues</option>
                 <option value="Pivot">Pivot</option>
@@ -115,7 +115,7 @@ const AdminPlayers: React.FC = () => {
               </select>
             </div>
             <div>
-              <label className="block text-xs font-medium text-gray-600 mb-1">Datëlindja</label>
+              <label className="block text-xs font-medium text-gray-600 mb-1">DatÃ«lindja</label>
               <input type="date" value={form.birthDate} onChange={e => setForm(p => ({ ...p, birthDate: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" />
             </div>
             <div>
@@ -124,7 +124,7 @@ const AdminPlayers: React.FC = () => {
               {form.photo && <img src={form.photo} alt="preview" className="w-8 h-8 mt-1 rounded-full object-cover" />}
             </div>
             <div className="flex items-end gap-2">
-              <button type="submit" className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
                 {editId ? 'Ruaj' : 'Shto'}
               </button>
             </div>
@@ -134,7 +134,7 @@ const AdminPlayers: React.FC = () => {
 
       <div className="bg-white rounded-xl border border-gray-100 overflow-hidden">
         {filtered.length === 0 ? (
-          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka lojtarë.</p>
+          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka lojtarÃ«.</p>
         ) : (
           <div className="divide-y divide-gray-50">
             {filtered.map(p => {
@@ -147,12 +147,12 @@ const AdminPlayers: React.FC = () => {
                     </div>
                     <div>
                       <p className="text-sm font-medium text-gray-800">{p.firstName} {p.lastName}</p>
-                      <p className="text-xs text-gray-400">{team?.name || '-'} {p.position ? `· ${p.position}` : ''}</p>
+                      <p className="text-xs text-gray-400">{team?.name || '-'} {p.position ? `Â· ${p.position}` : ''}</p>
                     </div>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#1E6FF2]">✎</button>
-                    <button onClick={() => { if (confirm('Fshi lojtarin?')) deletePlayer(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">✗</button>
+                    <button onClick={() => handleEdit(p)} className="p-1.5 text-gray-400 hover:text-[#2a499a]">âœŽ</button>
+                    <button onClick={() => { if (confirm('Fshi lojtarin?')) deletePlayer(p.id); }} className="p-1.5 text-gray-400 hover:text-red-500">âœ—</button>
                   </div>
                 </div>
               );

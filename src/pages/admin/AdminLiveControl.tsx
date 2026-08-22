@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+﻿import React, { useState, useEffect, useCallback, useRef } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match, Player } from '@/types';
 import { broadcastNotification, dbLiveStreams } from '@/lib/supabase-db';
@@ -239,7 +239,7 @@ const AdminLiveControl: React.FC = () => {
 
   const handleEndMatch = () => {
     if (!selectedMatch) return null;
-    if (!confirm(`Përfundo ndeshjen ${homeTeam?.name} ${selectedMatch.homeScore ?? 0} - ${selectedMatch.awayScore ?? 0} ${awayTeam?.name}?`)) return null;
+    if (!confirm(`PÃ«rfundo ndeshjen ${homeTeam?.name} ${selectedMatch.homeScore ?? 0} - ${selectedMatch.awayScore ?? 0} ${awayTeam?.name}?`)) return null;
     
     updateMatch({
       ...selectedMatch,
@@ -284,17 +284,17 @@ const AdminLiveControl: React.FC = () => {
           
         </div>
         <h3 className="text-lg font-semibold text-gray-700 mb-2">Nuk ka ndeshje LIVE</h3>
-        <p className="text-sm text-gray-500 mb-6">Fillo një ndeshje të planifikuar për të përdorur kontrollin LIVE.</p>
+        <p className="text-sm text-gray-500 mb-6">Fillo njÃ« ndeshje tÃ« planifikuar pÃ«r tÃ« pÃ«rdorur kontrollin LIVE.</p>
         {plannedMatches.length > 0 ? (
           <button
             onClick={() => setShowStartMatch(true)}
             className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 text-white rounded-xl font-medium hover:bg-green-700 transition-colors shadow-lg shadow-green-200"
           >
             
-            Fillo Ndeshje ({plannedMatches.length} të planifikuara)
+            Fillo Ndeshje ({plannedMatches.length} tÃ« planifikuara)
           </button>
         ) : (
-          <p className="text-sm text-gray-400">Nuk ka ndeshje të planifikuara. Shto ndeshje nga tab-i "Ndeshjet".</p>
+          <p className="text-sm text-gray-400">Nuk ka ndeshje tÃ« planifikuara. Shto ndeshje nga tab-i "Ndeshjet".</p>
         )}
       {/* ====== LIVE STREAMS (shown always) ====== */}
       <div className="bg-white rounded-2xl border-2 border-gray-100 p-5 shadow-sm mt-8 text-left">
@@ -331,7 +331,7 @@ const AdminLiveControl: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button onClick={() => handleToggleStream(s)} className={"text-xs font-bold px-3 py-1 rounded-full " + (s.isLive ? "bg-red-50 text-red-500" : "bg-green-50 text-green-600")}>{s.isLive ? 'Ndale' : 'Aktivizo'}</button>
-                  <button onClick={() => { setEditingStreamId(s.id); setStreamTitle(s.matchTitle || ''); setStreamUrl(s.streamUrl || ''); }} className="text-xs text-[#1E6FF2] hover:underline">Edito</button>
+                  <button onClick={() => { setEditingStreamId(s.id); setStreamTitle(s.matchTitle || ''); setStreamUrl(s.streamUrl || ''); }} className="text-xs text-[#2a499a] hover:underline">Edito</button>
                   <button onClick={() => handleDeleteStream(s.id)} className="text-xs text-red-400 hover:text-red-600">Fshi</button>
                 </div>
               </div>
@@ -350,7 +350,7 @@ const AdminLiveControl: React.FC = () => {
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-bold text-gray-800">Fillo Ndeshje</h2>
           <button onClick={() => setShowStartMatch(false)} className="text-gray-400 hover:text-gray-600">
-            ✕
+            âœ•
           </button>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -384,7 +384,7 @@ const AdminLiveControl: React.FC = () => {
           })}
         </div>
         {plannedMatches.length === 0 && (
-          <p className="text-center text-gray-500 py-8">Nuk ka ndeshje të planifikuara.</p>
+          <p className="text-center text-gray-500 py-8">Nuk ka ndeshje tÃ« planifikuara.</p>
         )}
       </div>
     );
@@ -405,8 +405,8 @@ const AdminLiveControl: React.FC = () => {
                 onClick={() => setSelectedMatchId(m.id)}
                 className={`flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-bold whitespace-nowrap transition-all ${
                   selectedMatchId === m.id
-                    ? 'bg-[#1E6FF2] text-white shadow-lg shadow-blue-200'
-                    : 'bg-white text-gray-600 border-2 border-gray-100 hover:border-[#1E6FF2]/30'
+                    ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200'
+                    : 'bg-white text-gray-600 border-2 border-gray-100 hover:border-[#2a499a]/30'
                 }`}
               >
                 <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
@@ -418,8 +418,8 @@ const AdminLiveControl: React.FC = () => {
       )}
 
       {plannedMatches.length > 0 && (
-        <button onClick={() => setShowStartMatch(true)} className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[#1E6FF2] bg-[#1E6FF2]/5 border border-[#1E6FF2]/20 rounded-xl font-bold hover:bg-[#1E6FF2]/10 transition-colors">
-          + Fillo ndeshje tjetër
+        <button onClick={() => setShowStartMatch(true)} className="inline-flex items-center gap-2 px-4 py-2 text-sm text-[#2a499a] bg-[#2a499a]/5 border border-[#2a499a]/20 rounded-xl font-bold hover:bg-[#2a499a]/10 transition-colors">
+          + Fillo ndeshje tjetÃ«r
         </button>
       )}
 
@@ -427,9 +427,9 @@ const AdminLiveControl: React.FC = () => {
         <div className="space-y-5">
 
           {/* ====== SCOREBOARD CARD ====== */}
-          <div className="bg-white rounded-2xl border-2 border-[#1E6FF2]/20 shadow-xl shadow-blue-50 overflow-hidden">
+          <div className="bg-white rounded-2xl border-2 border-[#2a499a]/20 shadow-xl shadow-blue-50 overflow-hidden">
             {/* Top bar */}
-            <div className="bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6] px-6 py-3 flex items-center justify-between">
+            <div className="bg-gradient-to-r from-[#2a499a] to-[#3B82F6] px-6 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2">
                 <span className="relative flex h-2.5 w-2.5">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
@@ -443,7 +443,7 @@ const AdminLiveControl: React.FC = () => {
             {/* Timer */}
             <div className="flex items-center justify-center py-4 bg-[#F8FAFC] border-b border-gray-100">
               <div className="inline-flex items-center gap-4 bg-white rounded-2xl px-8 py-3 shadow-sm border border-gray-100">
-                <button onClick={toggleTimer} className="w-10 h-10 rounded-xl bg-[#1E6FF2]/10 hover:bg-[#1E6FF2]/20 flex items-center justify-center transition-colors text-[#1E6FF2] font-bold text-lg">
+                <button onClick={toggleTimer} className="w-10 h-10 rounded-xl bg-[#2a499a]/10 hover:bg-[#2a499a]/20 flex items-center justify-center transition-colors text-[#2a499a] font-bold text-lg">
                   {timerRunning ? '||' : '\u25B6'}
                 </button>
                 <span className="text-4xl font-mono font-black text-gray-900 tracking-wider tabular-nums">{formatTimer(matchTimer)}</span>
@@ -463,15 +463,15 @@ const AdminLiveControl: React.FC = () => {
                 </div>
                 <div className="flex items-center justify-center gap-4">
                   <button onClick={() => handleUndoGoal('home')} className="w-10 h-10 rounded-xl bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-600 flex items-center justify-center transition-all text-xl font-bold border border-red-100">-</button>
-                  <span className="text-6xl font-black text-[#1E6FF2] tabular-nums">{selectedMatch.homeScore ?? 0}</span>
-                  <button onClick={() => handleQuickGoal('home')} className="w-14 h-14 rounded-xl bg-[#1E6FF2] hover:bg-[#1858C8] text-white flex items-center justify-center transition-all shadow-lg shadow-blue-200 hover:scale-105 active:scale-95 text-2xl font-bold">+</button>
+                  <span className="text-6xl font-black text-[#2a499a] tabular-nums">{selectedMatch.homeScore ?? 0}</span>
+                  <button onClick={() => handleQuickGoal('home')} className="w-14 h-14 rounded-xl bg-[#2a499a] hover:bg-[#1858C8] text-white flex items-center justify-center transition-all shadow-lg shadow-blue-200 hover:scale-105 active:scale-95 text-2xl font-bold">+</button>
                 </div>
               </div>
 
               <div className="flex flex-col items-center px-4">
-                <div className="w-1.5 h-1.5 bg-[#1E6FF2] rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-[#2a499a] rounded-full"></div>
                 <div className="w-0.5 h-6 bg-gray-200"></div>
-                <div className="w-1.5 h-1.5 bg-[#1E6FF2] rounded-full"></div>
+                <div className="w-1.5 h-1.5 bg-[#2a499a] rounded-full"></div>
               </div>
 
               {/* Away */}
@@ -481,8 +481,8 @@ const AdminLiveControl: React.FC = () => {
                   {awayTeam?.logo && <img src={awayTeam.logo} alt="" className="w-14 h-14 rounded-xl border-2 border-gray-100 p-1 bg-white shadow-sm" />}
                 </div>
                 <div className="flex items-center justify-center gap-4">
-                  <button onClick={() => handleQuickGoal('away')} className="w-14 h-14 rounded-xl bg-[#1E6FF2] hover:bg-[#1858C8] text-white flex items-center justify-center transition-all shadow-lg shadow-blue-200 hover:scale-105 active:scale-95 text-2xl font-bold">+</button>
-                  <span className="text-6xl font-black text-[#1E6FF2] tabular-nums">{selectedMatch.awayScore ?? 0}</span>
+                  <button onClick={() => handleQuickGoal('away')} className="w-14 h-14 rounded-xl bg-[#2a499a] hover:bg-[#1858C8] text-white flex items-center justify-center transition-all shadow-lg shadow-blue-200 hover:scale-105 active:scale-95 text-2xl font-bold">+</button>
+                  <span className="text-6xl font-black text-[#2a499a] tabular-nums">{selectedMatch.awayScore ?? 0}</span>
                   <button onClick={() => handleUndoGoal('away')} className="w-10 h-10 rounded-xl bg-red-50 hover:bg-red-100 text-red-400 hover:text-red-600 flex items-center justify-center transition-all text-xl font-bold border border-red-100">-</button>
                 </div>
               </div>
@@ -508,8 +508,8 @@ const AdminLiveControl: React.FC = () => {
                     onClick={() => setScorerPlayerId(p.id)}
                     className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
                       scorerPlayerId === p.id
-                        ? 'bg-[#1E6FF2] text-white shadow-md shadow-blue-200'
-                        : 'bg-gray-50 text-gray-700 border border-gray-200 hover:border-[#1E6FF2]/40'
+                        ? 'bg-[#2a499a] text-white shadow-md shadow-blue-200'
+                        : 'bg-gray-50 text-gray-700 border border-gray-200 hover:border-[#2a499a]/40'
                     }`}
                   >
                     {p.firstName.charAt(0)}. {p.lastName}
@@ -520,7 +520,7 @@ const AdminLiveControl: React.FC = () => {
               <div className="grid grid-cols-4 gap-3 items-end">
                 <div className="col-span-2">
                   <label className="block text-xs font-bold text-gray-500 mb-1">Lojtari</label>
-                  <select value={scorerPlayerId} onChange={e => setScorerPlayerId(e.target.value)} className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm bg-white focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent">
+                  <select value={scorerPlayerId} onChange={e => setScorerPlayerId(e.target.value)} className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm bg-white focus:ring-2 focus:ring-[#2a499a] focus:border-transparent">
                     <option value="">Zgjedh...</option>
                     {(scorerTeamSide === 'home' ? homePlayers : awayPlayers).map(p => (
                       <option key={p.id} value={p.id}>{p.firstName} {p.lastName} {p.position ? `(${p.position})` : ''}</option>
@@ -529,14 +529,14 @@ const AdminLiveControl: React.FC = () => {
                 </div>
                 <div>
                   <label className="block text-xs font-bold text-gray-500 mb-1">Minuta</label>
-                  <input type="number" min="1" value={scorerMinute} onChange={e => setScorerMinute(e.target.value)} className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm bg-white focus:ring-2 focus:ring-[#1E6FF2]" placeholder={String(Math.floor(matchTimer / 60) || 1)} />
+                  <input type="number" min="1" value={scorerMinute} onChange={e => setScorerMinute(e.target.value)} className="w-full px-3 py-2.5 border-2 border-gray-200 rounded-xl text-sm bg-white focus:ring-2 focus:ring-[#2a499a]" placeholder={String(Math.floor(matchTimer / 60) || 1)} />
                 </div>
                 <div className="flex gap-2 items-end">
                   <label className="flex items-center gap-1.5 cursor-pointer bg-gray-50 px-2 py-2.5 rounded-xl border border-gray-200">
                     <input type="checkbox" checked={isOwnGoal} onChange={e => setIsOwnGoal(e.target.checked)} className="w-4 h-4 rounded" />
                     <span className="text-xs font-bold text-gray-600">AG</span>
                   </label>
-                  <button onClick={handleAssignScorer} disabled={!scorerPlayerId || !scorerMinute} className="px-5 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8] disabled:opacity-40 disabled:cursor-not-allowed shadow-md shadow-blue-200 transition-all">Ruaj</button>
+                  <button onClick={handleAssignScorer} disabled={!scorerPlayerId || !scorerMinute} className="px-5 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8] disabled:opacity-40 disabled:cursor-not-allowed shadow-md shadow-blue-200 transition-all">Ruaj</button>
                 </div>
               </div>
             </div>
@@ -557,7 +557,7 @@ const AdminLiveControl: React.FC = () => {
           {/* ====== GOALS TIMELINE ====== */}
           <div className="bg-white rounded-2xl border-2 border-gray-100 p-5 shadow-sm">
             <h4 className="font-black text-gray-900 mb-4 flex items-center gap-2">
-              <span className="w-8 h-8 rounded-lg bg-[#1E6FF2]/10 flex items-center justify-center text-[#1E6FF2] text-sm">\u26BD</span>
+              <span className="w-8 h-8 rounded-lg bg-[#2a499a]/10 flex items-center justify-center text-[#2a499a] text-sm">\u26BD</span>
               Golat ({matchGoals.length})
             </h4>
             {matchGoals.length === 0 ? (
@@ -571,7 +571,7 @@ const AdminLiveControl: React.FC = () => {
                   const isHome = g.teamId === selectedMatch.homeTeamId;
                   return (
                     <div key={g.id} className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-colors ${isHome ? 'bg-blue-50/50 border border-blue-100' : 'bg-gray-50 border border-gray-100'}`}>
-                      <span className="text-sm font-black text-[#1E6FF2] w-10 text-center bg-white rounded-lg py-1 border border-gray-100 shadow-sm">{g.minute}'</span>
+                      <span className="text-sm font-black text-[#2a499a] w-10 text-center bg-white rounded-lg py-1 border border-gray-100 shadow-sm">{g.minute}'</span>
                       <span className="text-sm">\u26BD</span>
                       <span className="text-sm font-bold text-gray-800 flex-1">
                         {player ? `${player.firstName} ${player.lastName}` : 'I panjohur'}
@@ -660,7 +660,7 @@ const AdminLiveControl: React.FC = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <button onClick={() => handleToggleStream(s)} className={"text-xs font-bold px-3 py-1 rounded-full " + (s.isLive ? "bg-red-50 text-red-500" : "bg-green-50 text-green-600")}>{s.isLive ? 'Ndale' : 'Aktivizo'}</button>
-                  <button onClick={() => { setEditingStreamId(s.id); setStreamTitle(s.matchTitle || ''); setStreamUrl(s.streamUrl || ''); }} className="text-xs text-[#1E6FF2] hover:underline">Edito</button>
+                  <button onClick={() => { setEditingStreamId(s.id); setStreamTitle(s.matchTitle || ''); setStreamUrl(s.streamUrl || ''); }} className="text-xs text-[#2a499a] hover:underline">Edito</button>
                   <button onClick={() => handleDeleteStream(s.id)} className="text-xs text-red-400 hover:text-red-600">Fshi</button>
                 </div>
               </div>

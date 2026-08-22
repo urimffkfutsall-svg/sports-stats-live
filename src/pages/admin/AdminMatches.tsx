@@ -193,7 +193,7 @@ const AdminMatches: React.FC = () => {
     <div>
       <div className="flex items-center justify-between mb-4">
         <h2 className="text-xl font-bold text-gray-800">Ndeshjet</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
           <Plus className="w-4 h-4" /> Shto Ndeshje
         </button>
       </div>
@@ -306,9 +306,9 @@ const AdminMatches: React.FC = () => {
             </div>
             {/* === CUP MULTI-LEG SECTION === */}
             {selectedIsCup && !editId && form.week !== 4 && (
-              <div className="bg-[#1E6FF2]/5 border border-[#1E6FF2]/15 rounded-xl p-4 space-y-3">
+              <div className="bg-[#2a499a]/5 border border-[#2a499a]/15 rounded-xl p-4 space-y-3">
                 <div className="flex items-center gap-2 mb-1">
-                  <span className="text-sm font-bold text-[#1E6FF2]">Ndeshjet e Kupes</span>
+                  <span className="text-sm font-bold text-[#2a499a]">Ndeshjet e Kupes</span>
                   <span className="text-[10px] text-gray-400">Aktivizo ndeshjet qe deshiron te shtosh</span>
                 </div>
                 {[
@@ -324,7 +324,7 @@ const AdminMatches: React.FC = () => {
                           type="checkbox"
                           checked={data.enabled}
                           onChange={e => setCupLegs(prev => ({ ...prev, [leg.key]: { ...prev[leg.key as keyof typeof prev], enabled: e.target.checked } }))}
-                          className="w-4 h-4 text-[#1E6FF2] rounded"
+                          className="w-4 h-4 text-[#2a499a] rounded"
                         />
                         <div>
                           <span className="text-sm font-semibold text-gray-800">{leg.label}</span>
@@ -384,7 +384,7 @@ const AdminMatches: React.FC = () => {
               </div>
               <div className="flex items-end">
                 <label className="flex items-center gap-2 cursor-pointer">
-                  <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm(p => ({ ...p, isFeaturedLanding: e.target.checked }))} className="w-4 h-4 text-[#1E6FF2] rounded" />
+                  <input type="checkbox" checked={form.isFeaturedLanding} onChange={e => setForm(p => ({ ...p, isFeaturedLanding: e.target.checked }))} className="w-4 h-4 text-[#2a499a] rounded" />
                   <span className="text-sm text-gray-700">Shfaq në Landing Page</span>
                 </label>
               </div>
@@ -420,7 +420,7 @@ const AdminMatches: React.FC = () => {
                 <div><label className="block text-xs text-gray-600 mb-1">Faull-et Jashtë</label><input type="number" min="0" value={form.fouls_away} onChange={e => setForm(p => ({ ...p, fouls_away: e.target.value }))} className="w-full px-3 py-2 border border-gray-200 rounded-lg text-sm" /></div>
               </div>
             </details>
-            <button type="submit" className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+            <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
               {editId ? 'Ruaj Ndryshimet' : 'Shto Ndeshjen'}
             </button>
           </form>
@@ -481,7 +481,7 @@ const AdminMatches: React.FC = () => {
                   </label>
                 </div>
               </div>
-              <button type="submit" className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
                 Shto Gol
               </button>
             </form>
@@ -520,12 +520,12 @@ const AdminMatches: React.FC = () => {
                       <span>{isCupComp(m.competitionId) ? (cupRounds[m.week] || `R${m.week}`) : `J${m.week}`}</span>
                       {m.date && <span>{toDisplayDate(m.date)}</span>}
                       {m.status === 'live' && <span className="text-red-500 font-bold">LIVE</span>}
-                      {m.isFeaturedLanding && <span className="text-[#1E6FF2]">LP</span>}
+                      {m.isFeaturedLanding && <span className="text-[#2a499a]">LP</span>}
                     </div>
                   </div>
                   <div className="flex gap-1 flex-shrink-0">
                     <button onClick={() => setGoalsMatchId(m.id)} className="p-1.5 text-gray-400 hover:text-green-600" title="Golat"><Target className="w-4 h-4" /></button>
-                    <button onClick={() => handleEdit(m)} className="p-1.5 text-gray-400 hover:text-[#1E6FF2]"><Pencil className="w-4 h-4" /></button>
+                    <button onClick={() => handleEdit(m)} className="p-1.5 text-gray-400 hover:text-[#2a499a]"><Pencil className="w-4 h-4" /></button>
                     <button onClick={() => { if (confirm('Fshi ndeshjen?')) deleteMatch(m.id); }} className="p-1.5 text-gray-400 hover:text-red-500"><Trash2 className="w-4 h-4" /></button>
                   </div>
                 </div>

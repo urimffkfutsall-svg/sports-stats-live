@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { CompetitionType } from '@/types';
 interface WizardState {
@@ -21,8 +21,8 @@ interface WizardState {
 
 const defaultComps: { name: string; type: CompetitionType; isActiveLanding: boolean }[] = [
   { name: 'Superliga', type: 'superliga', isActiveLanding: true },
-  { name: 'Liga e Parë', type: 'liga_pare', isActiveLanding: true },
-  { name: 'Kupa e Kosovës', type: 'kupa', isActiveLanding: true },
+  { name: 'Liga e ParÃ«', type: 'liga_pare', isActiveLanding: true },
+  { name: 'Kupa e KosovÃ«s', type: 'kupa', isActiveLanding: true },
 ];
 
 const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) => {
@@ -218,7 +218,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
       setCompleted(true);
     } catch (err) {
       console.error('Season wizard error:', err);
-      alert('Gabim gjatë krijimit të sezonit. Provoni përsëri.');
+      alert('Gabim gjatÃ« krijimit tÃ« sezonit. Provoni pÃ«rsÃ«ri.');
     } finally {
       setIsExecuting(false);
     }
@@ -229,7 +229,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
     return (
       <div className="text-center py-8">
         <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-          ✓
+          âœ“
         </div>
         <h3 className="text-xl font-bold text-gray-800 mb-2">Sezoni u krijua me sukses!</h3>
         <p className="text-sm text-gray-500 mb-6">{state.seasonName}</p>
@@ -244,16 +244,16 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           </div>
           <div className="bg-purple-50 rounded-lg p-3 text-center">
             <p className="text-2xl font-bold text-purple-600">{results.players}</p>
-            <p className="text-xs text-purple-500">Lojtarë</p>
+            <p className="text-xs text-purple-500">LojtarÃ«</p>
           </div>
           <div className="bg-orange-50 rounded-lg p-3 text-center">
             <p className="text-2xl font-bold text-orange-600">{results.scorers}</p>
-            <p className="text-xs text-orange-500">Golashënues</p>
+            <p className="text-xs text-orange-500">GolashÃ«nues</p>
           </div>
         </div>
         <button
           onClick={onClose}
-          className="px-6 py-2.5 bg-[#1E6FF2] text-white rounded-xl font-medium hover:bg-[#1558CC] transition-colors"
+          className="px-6 py-2.5 bg-[#2a499a] text-white rounded-xl font-medium hover:bg-[#1558CC] transition-colors"
         >
           Mbyll
         </button>
@@ -266,7 +266,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
     { num: 1, label: 'Sezoni', icon: null },
     { num: 2, label: 'Kompeticionet', icon: null },
     { num: 3, label: 'Skuadrat', icon: null },
-    { num: 4, label: 'Lojtarët', icon: null },
+    { num: 4, label: 'LojtarÃ«t', icon: null },
     { num: 5, label: 'Konfirmo', icon: null },
   ];
 
@@ -281,11 +281,11 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
             <React.Fragment key={s.num}>
               <div className="flex flex-col items-center gap-1">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center transition-colors ${
-                  isDone ? 'bg-green-500 text-white' : isActive ? 'bg-[#1E6FF2] text-white' : 'bg-gray-100 text-gray-400'
+                  isDone ? 'bg-green-500 text-white' : isActive ? 'bg-[#2a499a] text-white' : 'bg-gray-100 text-gray-400'
                 }`}>
-                  {isDone ? "✓" : null}
+                  {isDone ? "âœ“" : null}
                 </div>
-                <span className={`text-[10px] font-medium ${isActive ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{s.label}</span>
+                <span className={`text-[10px] font-medium ${isActive ? 'text-[#2a499a]' : 'text-gray-400'}`}>{s.label}</span>
               </div>
               {i < steps.length - 1 && (
                 <div className={`flex-1 h-0.5 mx-2 ${state.step > s.num ? 'bg-green-500' : 'bg-gray-200'}`} />
@@ -300,14 +300,14 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         {/* Step 1: Season */}
         {state.step === 1 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-gray-800 mb-1">Krijo Sezon të Ri</h3>
-            <p className="text-sm text-gray-500 mb-4">Vendos emrin dhe datat e sezonit të ri.</p>
+            <h3 className="text-lg font-bold text-gray-800 mb-1">Krijo Sezon tÃ« Ri</h3>
+            <p className="text-sm text-gray-500 mb-4">Vendos emrin dhe datat e sezonit tÃ« ri.</p>
             <div>
               <label className="block text-sm font-medium text-gray-700 mb-1">Emri i Sezonit *</label>
               <input
                 value={state.seasonName}
                 onChange={e => setState(p => ({ ...p, seasonName: e.target.value }))}
-                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent"
+                className="w-full px-4 py-3 border border-gray-200 rounded-xl text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent"
                 placeholder="p.sh. 2026/2027"
               />
             </div>
@@ -340,9 +340,9 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
             <div className="flex items-center justify-between">
               <div>
                 <h3 className="text-lg font-bold text-gray-800">Kompeticionet</h3>
-                <p className="text-sm text-gray-500">Shto kompeticionet për sezonin e ri.</p>
+                <p className="text-sm text-gray-500">Shto kompeticionet pÃ«r sezonin e ri.</p>
               </div>
-              <button onClick={handleAddComp} className="px-3 py-1.5 bg-[#1E6FF2] text-white rounded-lg text-sm hover:bg-[#1558CC]">
+              <button onClick={handleAddComp} className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-sm hover:bg-[#1558CC]">
                 + Shto
               </button>
             </div>
@@ -361,7 +361,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                     className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white"
                   >
                     <option value="superliga">Superliga</option>
-                    <option value="liga_pare">Liga e Parë</option>
+                    <option value="liga_pare">Liga e ParÃ«</option>
                     <option value="kupa">Kupa</option>
                   </select>
                   <label className="flex items-center gap-2 cursor-pointer">
@@ -384,18 +384,18 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         {state.step === 3 && (
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-gray-800">Kopjo Skuadrat</h3>
-            <p className="text-sm text-gray-500">Kopjo skuadrat nga një sezon i mëparshëm.</p>
+            <p className="text-sm text-gray-500">Kopjo skuadrat nga njÃ« sezon i mÃ«parshÃ«m.</p>
             
             <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
               <input
                 type="checkbox"
                 checked={state.copyTeams}
                 onChange={e => setState(p => ({ ...p, copyTeams: e.target.checked }))}
-                className="w-5 h-5 rounded text-[#1E6FF2]"
+                className="w-5 h-5 rounded text-[#2a499a]"
               />
               <div>
                 <span className="font-medium text-gray-800">Kopjo skuadrat nga sezoni i kaluar</span>
-                <p className="text-xs text-gray-500">Skuadrat do të kopjohen në kompeticionet përkatëse bazuar në llojin.</p>
+                <p className="text-xs text-gray-500">Skuadrat do tÃ« kopjohen nÃ« kompeticionet pÃ«rkatÃ«se bazuar nÃ« llojin.</p>
               </div>
             </label>
 
@@ -415,7 +415,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                 {state.sourceSeasonId && (
                   <div className="mt-3 p-3 bg-blue-50 rounded-lg">
                     <p className="text-sm text-blue-700 font-medium">
-                      {sourceSeasonTeams.length} skuadra do të kopjohen nga "{sourceSeason?.name}"
+                      {sourceSeasonTeams.length} skuadra do tÃ« kopjohen nga "{sourceSeason?.name}"
                     </p>
                     <div className="flex flex-wrap gap-1.5 mt-2">
                       {sourceSeasonTeams.slice(0, 20).map(t => (
@@ -425,7 +425,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                         </span>
                       ))}
                       {sourceSeasonTeams.length > 20 && (
-                        <span className="text-xs text-blue-500">+{sourceSeasonTeams.length - 20} të tjera</span>
+                        <span className="text-xs text-blue-500">+{sourceSeasonTeams.length - 20} tÃ« tjera</span>
                       )}
                     </div>
                   </div>
@@ -438,23 +438,23 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         {/* Step 4: Copy Players & Scorers */}
         {state.step === 4 && (
           <div className="space-y-4">
-            <h3 className="text-lg font-bold text-gray-800">Kopjo Lojtarët & Golashënuesit</h3>
-            <p className="text-sm text-gray-500">Opsionale: kopjo rostat e lojtarëve dhe golashënuesit.</p>
+            <h3 className="text-lg font-bold text-gray-800">Kopjo LojtarÃ«t & GolashÃ«nuesit</h3>
+            <p className="text-sm text-gray-500">Opsionale: kopjo rostat e lojtarÃ«ve dhe golashÃ«nuesit.</p>
 
             <label className="flex items-center gap-3 p-4 bg-gray-50 rounded-xl cursor-pointer hover:bg-gray-100 transition-colors">
               <input
                 type="checkbox"
                 checked={state.copyPlayers}
                 onChange={e => setState(p => ({ ...p, copyPlayers: e.target.checked }))}
-                className="w-5 h-5 rounded text-[#1E6FF2]"
+                className="w-5 h-5 rounded text-[#2a499a]"
                 disabled={!state.copyTeams}
               />
               <div>
-                <span className={`font-medium ${!state.copyTeams ? 'text-gray-400' : 'text-gray-800'}`}>Kopjo lojtarët</span>
+                <span className={`font-medium ${!state.copyTeams ? 'text-gray-400' : 'text-gray-800'}`}>Kopjo lojtarÃ«t</span>
                 <p className="text-xs text-gray-500">
                   {state.copyTeams && state.sourceSeasonId
-                    ? `${sourceSeasonPlayers.length} lojtarë do të kopjohen`
-                    : 'Duhet të kopjoni skuadrat fillimisht'}
+                    ? `${sourceSeasonPlayers.length} lojtarÃ« do tÃ« kopjohen`
+                    : 'Duhet tÃ« kopjoni skuadrat fillimisht'}
                 </p>
               </div>
             </label>
@@ -464,14 +464,14 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                 type="checkbox"
                 checked={state.copyScorers}
                 onChange={e => setState(p => ({ ...p, copyScorers: e.target.checked }))}
-                className="w-5 h-5 rounded text-[#1E6FF2]"
+                className="w-5 h-5 rounded text-[#2a499a]"
               />
               <div>
-                <span className="font-medium text-gray-800">Kopjo golashënuesit (manual)</span>
+                <span className="font-medium text-gray-800">Kopjo golashÃ«nuesit (manual)</span>
                 <p className="text-xs text-gray-500">
                   {state.sourceSeasonId
-                    ? `${sourceSeasonScorers.filter(s => s.isManual).length} golashënues manual do të kopjohen (me 0 gola)`
-                    : 'Zgjedh sezonin burim në hapin e mëparshëm'}
+                    ? `${sourceSeasonScorers.filter(s => s.isManual).length} golashÃ«nues manual do tÃ« kopjohen (me 0 gola)`
+                    : 'Zgjedh sezonin burim nÃ« hapin e mÃ«parshÃ«m'}
                 </p>
               </div>
             </label>
@@ -479,7 +479,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
             {!state.copyTeams && (
               <div className="flex items-center gap-2 p-3 bg-yellow-50 rounded-lg text-yellow-700 text-sm">
                 
-                <span>Kopjimi i lojtarëve kërkon që edhe skuadrat të kopjohen.</span>
+                <span>Kopjimi i lojtarÃ«ve kÃ«rkon qÃ« edhe skuadrat tÃ« kopjohen.</span>
               </div>
             )}
           </div>
@@ -489,7 +489,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
         {state.step === 5 && (
           <div className="space-y-4">
             <h3 className="text-lg font-bold text-gray-800">Konfirmo & Ekzekuto</h3>
-            <p className="text-sm text-gray-500">Rishiko çka do të ndodhë:</p>
+            <p className="text-sm text-gray-500">Rishiko Ã§ka do tÃ« ndodhÃ«:</p>
 
             <div className="bg-gray-50 rounded-xl p-4 space-y-3">
               <div className="flex items-center gap-3">
@@ -508,28 +508,28 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
               {state.copyTeams && state.sourceSeasonId && (
                 <div className="flex items-center gap-3">
                   
-                  <span className="font-medium text-gray-800">{sourceSeasonTeams.length} skuadra do të kopjohen nga "{sourceSeason?.name}"</span>
+                  <span className="font-medium text-gray-800">{sourceSeasonTeams.length} skuadra do tÃ« kopjohen nga "{sourceSeason?.name}"</span>
                 </div>
               )}
 
               {state.copyPlayers && state.copyTeams && state.sourceSeasonId && (
                 <div className="flex items-center gap-3">
                   
-                  <span className="font-medium text-gray-800">{sourceSeasonPlayers.length} lojtarë do të kopjohen</span>
+                  <span className="font-medium text-gray-800">{sourceSeasonPlayers.length} lojtarÃ« do tÃ« kopjohen</span>
                 </div>
               )}
 
               {state.copyScorers && state.sourceSeasonId && (
                 <div className="flex items-center gap-3">
                   
-                  <span className="font-medium text-gray-800">{sourceSeasonScorers.filter(s => s.isManual).length} golashënues manual do të kopjohen</span>
+                  <span className="font-medium text-gray-800">{sourceSeasonScorers.filter(s => s.isManual).length} golashÃ«nues manual do tÃ« kopjohen</span>
                 </div>
               )}
 
               <div className="flex items-center gap-3">
                 
                 <span className="font-medium text-gray-800">
-                  {state.activateNow ? 'Sezoni do të aktivizohet menjëherë' : 'Sezoni nuk do të aktivizohet'}
+                  {state.activateNow ? 'Sezoni do tÃ« aktivizohet menjÃ«herÃ«' : 'Sezoni nuk do tÃ« aktivizohet'}
                 </span>
               </div>
             </div>
@@ -542,8 +542,8 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
                 className="w-5 h-5 rounded text-green-600"
               />
               <div>
-                <span className="font-medium text-green-800">Aktivizo sezonin menjëherë</span>
-                <p className="text-xs text-green-600">Sezoni aktual do të çaktivizohet.</p>
+                <span className="font-medium text-green-800">Aktivizo sezonin menjÃ«herÃ«</span>
+                <p className="text-xs text-green-600">Sezoni aktual do tÃ« Ã§aktivizohet.</p>
               </div>
             </label>
           </div>
@@ -556,7 +556,7 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           onClick={() => state.step === 1 ? onClose() : setState(p => ({ ...p, step: p.step - 1 }))}
           className="flex items-center gap-1 px-4 py-2 text-gray-600 hover:text-gray-800 text-sm font-medium"
         >
-          ‹
+          â€¹
           {state.step === 1 ? 'Anulo' : 'Kthehu'}
         </button>
 
@@ -564,10 +564,10 @@ const AdminNewSeasonWizard: React.FC<{ onClose: () => void }> = ({ onClose }) =>
           <button
             onClick={() => setState(p => ({ ...p, step: p.step + 1 }))}
             disabled={!canProceed()}
-            className="flex items-center gap-1 px-6 py-2.5 bg-[#1E6FF2] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex items-center gap-1 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl text-sm font-medium hover:bg-[#1558CC] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             Vazhdo
-            ›
+            â€º
           </button>
         ) : (
           <button

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { useData } from '@/context/DataContext';
 import { dbPlayoffSeries, dbPlayoffMatches } from '@/lib/supabase-db';
 
@@ -223,7 +223,7 @@ const AdminPlayoff: React.FC = () => {
                     <span className="font-bold text-gray-700">{getTeamName(m.awayTeamId)}</span>
                   </div>
                   <div className="flex gap-1">
-                    <button onClick={() => handleEditMatch(m)} className="text-[#1E6FF2] hover:underline">Edito</button>
+                    <button onClick={() => handleEditMatch(m)} className="text-[#2a499a] hover:underline">Edito</button>
                     <button onClick={() => handleDeleteMatch(m.id)} className="text-red-400 hover:text-red-600">Fshi</button>
                   </div>
                 </div>
@@ -239,14 +239,14 @@ const AdminPlayoff: React.FC = () => {
     );
   };
 
-  if (loading) return <div className="flex justify-center py-16"><div className="w-10 h-10 border-4 border-[#1E6FF2]/20 border-t-[#1E6FF2] rounded-full animate-spin" /></div>;
+  if (loading) return <div className="flex justify-center py-16"><div className="w-10 h-10 border-4 border-[#2a499a]/20 border-t-[#2a499a] rounded-full animate-spin" /></div>;
 
   return (
     <div className="space-y-6">
       {/* Type Selector */}
       <div className="flex gap-2 bg-gray-100 rounded-xl p-1">
-        <button onClick={() => setPlayoffType('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'superliga' ? "bg-[#1E6FF2] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
-        <button onClick={() => setPlayoffType('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'liga_pare' ? "bg-[#1E6FF2] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
+        <button onClick={() => setPlayoffType('superliga')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'superliga' ? "bg-[#2a499a] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Superliga</button>
+        <button onClick={() => setPlayoffType('liga_pare')} className={"flex-1 px-4 py-2.5 rounded-lg text-sm font-bold transition-all " + (playoffType === 'liga_pare' ? "bg-[#2a499a] text-white shadow-md" : "text-gray-500 hover:text-gray-800")}>PlayOff Liga e Pare</button>
       </div>
 
       {/* Add Series Form */}
@@ -289,7 +289,7 @@ const AdminPlayoff: React.FC = () => {
             <input type="number" value={formSeed2} onChange={e => setFormSeed2(e.target.value)} placeholder="6" className="w-full px-3 py-2 border-2 border-gray-200 rounded-xl text-sm" />
           </div>
         </div>
-        <button onClick={handleSaveSeries} className="px-5 py-2 bg-[#1E6FF2] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingSeriesId ? 'Ruaj' : 'Shto Seri'}</button>
+        <button onClick={handleSaveSeries} className="px-5 py-2 bg-[#2a499a] text-white rounded-xl text-sm font-bold hover:bg-[#1858C8]">{editingSeriesId ? 'Ruaj' : 'Shto Seri'}</button>
       </div>
 
       {/* Add Match to Series */}

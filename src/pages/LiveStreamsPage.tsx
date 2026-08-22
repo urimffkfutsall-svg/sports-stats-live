@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -53,7 +53,7 @@ export default function LiveStreamsPage() {
       <div className="min-h-screen bg-[#0a1628]">
         <Header />
         <div className="flex items-center justify-center py-32">
-          <div className="w-12 h-12 rounded-full border-4 border-[#1E6FF2]/20 border-t-[#1E6FF2] animate-spin" />
+          <div className="w-12 h-12 rounded-full border-4 border-[#2a499a]/20 border-t-[#2a499a] animate-spin" />
         </div>
       </div>
     );
@@ -78,11 +78,11 @@ export default function LiveStreamsPage() {
         {streams.length === 0 ? (
           <div className="text-center py-20">
             <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-gray-800 flex items-center justify-center">
-              <span className="text-3xl">📺</span>
+              <span className="text-3xl">ðŸ“º</span>
             </div>
             <h2 className="text-xl font-black text-white mb-2">Nuk ka transmetim live</h2>
             <p className="text-gray-500">Momentalisht nuk ka asnje ndeshje qe trasmetohet live</p>
-            <Link to="/live" className="inline-block mt-6 px-6 py-2.5 bg-[#1E6FF2] text-white rounded-xl font-bold text-sm hover:bg-[#1858C8]">Shiko ndeshjet</Link>
+            <Link to="/live" className="inline-block mt-6 px-6 py-2.5 bg-[#2a499a] text-white rounded-xl font-bold text-sm hover:bg-[#1858C8]">Shiko ndeshjet</Link>
           </div>
         ) : (
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
@@ -118,7 +118,7 @@ export default function LiveStreamsPage() {
                   <button
                     key={s.id}
                     onClick={() => setSelectedStream(s)}
-                    className={"w-full text-left rounded-xl border p-3 transition-all " + (selectedStream?.id === s.id ? "bg-[#1E6FF2]/10 border-[#1E6FF2]/40" : "bg-gray-900/50 border-gray-800 hover:border-gray-700")}
+                    className={"w-full text-left rounded-xl border p-3 transition-all " + (selectedStream?.id === s.id ? "bg-[#2a499a]/10 border-[#2a499a]/40" : "bg-gray-900/50 border-gray-800 hover:border-gray-700")}
                   >
                     <div className="flex items-center gap-2 mb-1">
                       <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>

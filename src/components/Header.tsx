@@ -70,7 +70,7 @@ const Header: React.FC = () => {
               </button>
               {isAuthenticated ? (
                 <>
-                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#1E6FF2] rounded-lg text-sm font-medium hover:bg-[#1558CC] transition-colors">
+                  <Link to="/admin" className="hidden sm:flex items-center gap-1 px-3 py-2 bg-[#2a499a] rounded-lg text-sm font-medium hover:bg-[#1558CC] transition-colors">
                     Admin
                   </Link>
                   <button onClick={logout} className="hidden sm:flex items-center gap-1 px-3 py-2 text-gray-300 hover:text-white text-sm transition-colors">
@@ -106,7 +106,7 @@ const Header: React.FC = () => {
                       to={link.path}
                       onClick={() => setMenuOpen(false)}
                       className={`block px-5 py-2.5 text-sm font-semibold uppercase tracking-wide transition-colors ${
-                        isActive(link.path) ? 'bg-[#1E6FF2]/10 text-[#1E6FF2]' : 'text-gray-700 hover:bg-gray-50'
+                        isActive(link.path) ? 'bg-[#2a499a]/10 text-[#2a499a]' : 'text-gray-700 hover:bg-gray-50'
                       }`}
                     >
                       {link.label}
@@ -118,12 +118,12 @@ const Header: React.FC = () => {
 
             {/* Desktop inline nav */}
             <nav className="hidden lg:flex items-center gap-1 ml-4 overflow-x-auto">
-              {navLinks.map(link => (
+              {navLinks.filter(l => ['/', '/superliga', '/kupa'].includes(l.path)).map(link => (
                 <Link
                   key={link.path}
                   to={link.path}
                   className={`px-3 py-2 rounded-lg text-xs font-semibold uppercase tracking-wide whitespace-nowrap transition-colors ${
-                    isActive(link.path) ? 'bg-[#1E6FF2] text-white' : 'text-gray-300 hover:text-white hover:bg-white/10'
+                    isActive(link.path) ? 'bg-[#2a499a] text-white' : 'text-gray-300 hover:text-white hover:bg-white/10'
                   }`}
                 >
                   {link.label}
@@ -138,3 +138,4 @@ const Header: React.FC = () => {
 };
 
 export default Header;
+

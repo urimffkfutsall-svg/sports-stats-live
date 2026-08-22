@@ -95,7 +95,7 @@ const AdminPage: React.FC = () => {
             <h1 className="text-2xl font-bold text-gray-800">Admin Panel</h1>
             <p className="text-sm text-gray-500">
               {currentUser?.username} ({isAdmin ? 'Administrator' : 'Editor'})
-              {activeSeason && <span className="ml-2 text-[#1E6FF2]">Sezoni: {activeSeason.name}</span>}
+              {activeSeason && <span className="ml-2 text-[#2a499a]">Sezoni: {activeSeason.name}</span>}
             </p>
           </div>
           {liveMatches.length > 0 && activeTab !== 'live' && (
@@ -121,7 +121,7 @@ const AdminPage: React.FC = () => {
                   activeTab === tab.key
                     ? isLive
                       ? 'bg-red-600 text-white shadow-lg shadow-red-200'
-                      : 'bg-[#1E6FF2] text-white shadow-sm'
+                      : 'bg-[#2a499a] text-white shadow-sm'
                     : isLive
                       ? 'text-red-600 bg-red-50 hover:bg-red-100 border border-red-200'
                       : 'text-gray-600 hover:bg-white hover:shadow-sm'

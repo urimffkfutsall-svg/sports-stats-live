@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
@@ -45,9 +45,9 @@ const HeadToHeadPage: React.FC = () => {
             <select
               value={teamAId}
               onChange={e => setTeamAId(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent"
             >
-              <option value="">Zgjedh skuadrën</option>
+              <option value="">Zgjedh skuadrÃ«n</option>
               {activeTeams.map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -58,9 +58,9 @@ const HeadToHeadPage: React.FC = () => {
             <select
               value={teamBId}
               onChange={e => setTeamBId(e.target.value)}
-              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#1E6FF2] focus:border-transparent"
+              className="w-full px-4 py-2.5 border border-gray-200 rounded-xl bg-white text-sm focus:ring-2 focus:ring-[#2a499a] focus:border-transparent"
             >
-              <option value="">Zgjedh skuadrën</option>
+              <option value="">Zgjedh skuadrÃ«n</option>
               {activeTeams.filter(t => t.id !== teamAId).map(t => (
                 <option key={t.id} value={t.id}>{t.name}</option>
               ))}
@@ -71,7 +71,7 @@ const HeadToHeadPage: React.FC = () => {
         {h2h && teamA && teamB && (
           <>
             {/* VS Header */}
-            <div className="bg-gradient-to-r from-[#2a499a] to-[#1E6FF2] rounded-2xl p-8 text-white mb-8 shadow-xl">
+            <div className="bg-gradient-to-r from-[#2a499a] to-[#2a499a] rounded-2xl p-8 text-white mb-8 shadow-xl">
               <div className="flex items-center justify-between">
                 <div className="flex flex-col items-center flex-1">
                   <div className="w-20 h-20 rounded-full bg-white/10 overflow-hidden">
@@ -95,7 +95,7 @@ const HeadToHeadPage: React.FC = () => {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 mb-8">
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 text-center">
-                <p className="text-2xl font-bold text-[#1E6FF2]">{h2h.teamAGoals}</p>
+                <p className="text-2xl font-bold text-[#2a499a]">{h2h.teamAGoals}</p>
                 <p className="text-xs text-gray-500">Gola {teamA.name}</p>
               </div>
               <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 text-center">
@@ -118,7 +118,7 @@ const HeadToHeadPage: React.FC = () => {
                     <XAxis dataKey="name" />
                     <YAxis />
                     <Tooltip />
-                    <Bar dataKey={teamA.name} fill="#1E6FF2" />
+                    <Bar dataKey={teamA.name} fill="#2a499a" />
                     <Bar dataKey={teamB.name} fill="#FF6B35" />
                   </BarChart>
                 </ResponsiveContainer>
@@ -140,11 +140,11 @@ const HeadToHeadPage: React.FC = () => {
         )}
 
         {(!teamAId || !teamBId) && (
-          <p className="text-gray-500 text-center py-12">Zgjedh dy skuadra për të parë krahasimin head-to-head.</p>
+          <p className="text-gray-500 text-center py-12">Zgjedh dy skuadra pÃ«r tÃ« parÃ« krahasimin head-to-head.</p>
         )}
 
         {teamAId && teamBId && h2h && h2h.matches.length === 0 && (
-          <p className="text-gray-500 text-center py-12">Nuk ka ndeshje direkte mes këtyre dy skuadrave.</p>
+          <p className="text-gray-500 text-center py-12">Nuk ka ndeshje direkte mes kÃ«tyre dy skuadrave.</p>
         )}
       </div>
       <Footer />

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Home, Trophy, PlayCircle, BarChart3, Menu, X, LogOut, User } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
@@ -46,7 +46,7 @@ const BottomNav: React.FC = () => {
                 key={link.path}
                 to={link.path}
                 onClick={() => setMoreOpen(false)}
-                className={`flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${isActive(link.path) ? 'bg-[#1E6FF2]/10 text-[#1E6FF2]' : 'text-gray-700 hover:bg-gray-50'}`}
+                className={`flex items-center px-4 py-3 rounded-xl text-sm font-semibold transition-colors ${isActive(link.path) ? 'bg-[#2a499a]/10 text-[#2a499a]' : 'text-gray-700 hover:bg-gray-50'}`}
               >
                 {link.label}
               </Link>
@@ -58,8 +58,8 @@ const BottomNav: React.FC = () => {
                   onClick={() => setMoreOpen(false)}
                   className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                 >
-                  <User size={16} className="text-[#1E6FF2]" />
-                  Ky�u
+                  <User size={16} className="text-[#2a499a]" />
+                  Kyçu
                 </Link>
               )}
               {isAuthenticated && (
@@ -69,7 +69,7 @@ const BottomNav: React.FC = () => {
                     onClick={() => setMoreOpen(false)}
                     className="flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-semibold text-gray-700 hover:bg-gray-50 transition-colors"
                   >
-                    <User size={16} className="text-[#1E6FF2]" />
+                    <User size={16} className="text-[#2a499a]" />
                     Admin Panel
                   </Link>
                   <button
@@ -99,12 +99,12 @@ const BottomNav: React.FC = () => {
                 style={{ transform: active ? 'translateY(-16px)' : 'translateY(0)', transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)' }}
               >
                 <span
-                  className={`flex items-center justify-center rounded-full transition-all ${active ? 'bg-[#1E6FF2] shadow-lg shadow-[#1E6FF2]/40' : ''}`}
+                  className={`flex items-center justify-center rounded-full transition-all ${active ? 'bg-[#2a499a] shadow-lg shadow-[#2a499a]/40' : ''}`}
                   style={{ width: active ? '52px' : '38px', height: active ? '52px' : '38px', transition: 'all 0.25s cubic-bezier(.34,1.56,.64,1)' }}
                 >
                   <Icon className={active ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />
                 </span>
-                <span className={`text-[10px] font-semibold mt-1 ${active ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{label}</span>
+                <span className={`text-[10px] font-semibold mt-1 ${active ? 'text-[#2a499a]' : 'text-gray-400'}`}>{label}</span>
               </Link>
             );
           })}
@@ -114,14 +114,14 @@ const BottomNav: React.FC = () => {
             style={{ transform: (moreOpen || isMoreActive) ? 'translateY(-16px)' : 'translateY(0)', transition: 'transform 0.25s cubic-bezier(.34,1.56,.64,1)' }}
           >
             <span
-              className={`flex items-center justify-center rounded-full transition-all ${(moreOpen || isMoreActive) ? 'bg-[#1E6FF2] shadow-lg shadow-[#1E6FF2]/40' : ''}`}
+              className={`flex items-center justify-center rounded-full transition-all ${(moreOpen || isMoreActive) ? 'bg-[#2a499a] shadow-lg shadow-[#2a499a]/40' : ''}`}
               style={{ width: (moreOpen || isMoreActive) ? '52px' : '38px', height: (moreOpen || isMoreActive) ? '52px' : '38px', transition: 'all 0.25s cubic-bezier(.34,1.56,.64,1)' }}
             >
               {moreOpen
                 ? <X className="w-6 h-6 text-white" strokeWidth={2.2} />
                 : <Menu className={(moreOpen || isMoreActive) ? 'w-6 h-6 text-white' : 'w-[18px] h-[18px] text-gray-400'} strokeWidth={2.2} />}
             </span>
-            <span className={`text-[10px] font-semibold mt-1 ${(moreOpen || isMoreActive) ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>Me shume</span>
+            <span className={`text-[10px] font-semibold mt-1 ${(moreOpen || isMoreActive) ? 'text-[#2a499a]' : 'text-gray-400'}`}>Me shume</span>
           </button>
         </div>
       </nav>

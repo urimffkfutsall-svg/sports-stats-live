@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { useData } from '@/context/DataContext';
 import { Match } from '@/types';
 import Header from '@/components/Header';
@@ -121,7 +121,7 @@ const KupaPage: React.FC = () => {
 
     return (
       <div
-        className={`bg-white rounded-xl border cursor-pointer transition-all hover:shadow-md ${isLive ? 'border-red-200 shadow-sm shadow-red-50' : 'border-gray-100 hover:border-[#1E6FF2]/20'}`}
+        className={`bg-white rounded-xl border cursor-pointer transition-all hover:shadow-md ${isLive ? 'border-red-200 shadow-sm shadow-red-50' : 'border-gray-100 hover:border-[#2a499a]/20'}`}
         onClick={() => setSelectedMatch(match)}
       >
         <div className={`flex items-center justify-between px-2.5 py-1 border-b ${isLive ? 'bg-red-50/50 border-red-100' : 'bg-gray-50/50 border-gray-100'}`}>
@@ -160,7 +160,7 @@ const KupaPage: React.FC = () => {
             </span>
           </div>
           <div className="mt-1 text-center">
-            <span className="text-[10px] text-[#1E6FF2] font-semibold cursor-pointer hover:underline">Shiko detajet ›</span>
+            <span className="text-[10px] text-[#2a499a] font-semibold cursor-pointer hover:underline">Shiko detajet â€º</span>
           </div>
         </div>
       </div>
@@ -202,11 +202,11 @@ const KupaPage: React.FC = () => {
                 {rounds.map(r => (
                   <div key={r.round} className="min-w-[280px]">
                     <div className="flex items-center gap-2 mb-3 justify-center">
-                      <span className="w-1 h-4 bg-[#1E6FF2] rounded-full" />
+                      <span className="w-1 h-4 bg-[#2a499a] rounded-full" />
                       <h3 className="text-sm font-bold text-gray-800 uppercase tracking-wider">
                         {roundNames[r.round] || `Raundi ${r.round}`}
                       </h3>
-                      {r.round === 3 && <span className="text-[10px] bg-[#1E6FF2]/10 text-[#1E6FF2] font-bold px-2 py-0.5 rounded-full border border-[#1E6FF2]/15">Best of 3</span>}
+                      {r.round === 3 && <span className="text-[10px] bg-[#2a499a]/10 text-[#2a499a] font-bold px-2 py-0.5 rounded-full border border-[#2a499a]/15">Best of 3</span>}
                     </div>
                     <div className="space-y-3">
                       {r.ties.map((tie, ti) => {
@@ -215,31 +215,31 @@ const KupaPage: React.FC = () => {
                         const hasManyLegs = tie.legs.length > 1;
 
                         return (
-                          <div key={ti} className="rounded-xl border border-[#1E6FF2]/15 overflow-hidden" style={Object.assign({}, { background: 'linear-gradient(145deg, #F7F8FA 0%, #EEF0F4 100%)' })}>
+                          <div key={ti} className="rounded-xl border border-[#2a499a]/15 overflow-hidden" style={Object.assign({}, { background: 'linear-gradient(145deg, #F7F8FA 0%, #EEF0F4 100%)' })}>
                             {/* Aggregate Header */}
                             {hasManyLegs && (
-                              <div className="px-3 py-2 border-b border-[#1E6FF2]/10">
+                              <div className="px-3 py-2 border-b border-[#2a499a]/10">
                                 <div className="flex items-center justify-between">
                                   <div className="flex items-center gap-2 flex-1 min-w-0">
                                     <div className="w-5 h-5 rounded-md bg-white border border-gray-200 overflow-hidden flex-shrink-0">
                                       {teamA?.logo ? <img src={teamA.logo} alt="" className="w-full h-full object-cover" /> : <span className="flex items-center justify-center w-full h-full text-[8px] text-gray-400 font-bold">{teamA?.name?.charAt(0)}</span>}
                                     </div>
                                     <div className="min-w-0">
-                                      <span className={`text-xs font-bold truncate block ${tie.winner === tie.teamA ? 'text-[#1E6FF2]' : 'text-gray-700'}`}>{teamA?.name || 'TBD'}</span>
+                                      <span className={`text-xs font-bold truncate block ${tie.winner === tie.teamA ? 'text-[#2a499a]' : 'text-gray-700'}`}>{teamA?.name || 'TBD'}</span>
                                       <span className="text-[9px] text-gray-400">{tie.winsA} fitore</span>
                                     </div>
                                   </div>
                                   <div className="flex flex-col items-center mx-3">
                                     <div className="flex items-center gap-1">
-                                      <span className={`text-base font-black tabular-nums ${tie.winner === tie.teamA ? 'text-[#1E6FF2]' : 'text-gray-800'}`}>{tie.aggA}</span>
+                                      <span className={`text-base font-black tabular-nums ${tie.winner === tie.teamA ? 'text-[#2a499a]' : 'text-gray-800'}`}>{tie.aggA}</span>
                                       <span className="text-gray-300 font-light mx-0.5">:</span>
-                                      <span className={`text-base font-black tabular-nums ${tie.winner === tie.teamB ? 'text-[#1E6FF2]' : 'text-gray-800'}`}>{tie.aggB}</span>
+                                      <span className={`text-base font-black tabular-nums ${tie.winner === tie.teamB ? 'text-[#2a499a]' : 'text-gray-800'}`}>{tie.aggB}</span>
                                     </div>
                                     <span className="text-[9px] text-gray-400 font-semibold uppercase">Rezultati Final</span>
                                   </div>
                                   <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
                                     <div className="min-w-0 text-right">
-                                      <span className={`text-xs font-bold truncate block ${tie.winner === tie.teamB ? 'text-[#1E6FF2]' : 'text-gray-700'}`}>{teamB?.name || 'TBD'}</span>
+                                      <span className={`text-xs font-bold truncate block ${tie.winner === tie.teamB ? 'text-[#2a499a]' : 'text-gray-700'}`}>{teamB?.name || 'TBD'}</span>
                                       <span className="text-[9px] text-gray-400">{tie.winsB} fitore</span>
                                     </div>
                                     <div className="w-5 h-5 rounded-md bg-white border border-gray-200 overflow-hidden flex-shrink-0">
@@ -294,7 +294,7 @@ const KupaPage: React.FC = () => {
                   const team = getTeamById(s.teamId);
                   return (
                     <div key={s.id} className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-4 py-3 items-center border-t border-gray-50 hover:bg-gray-50/80 transition-colors">
-                      <span className={`text-sm font-bold ${i < 3 ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{i + 1}</span>
+                      <span className={`text-sm font-bold ${i < 3 ? 'text-[#2a499a]' : 'text-gray-400'}`}>{i + 1}</span>
                       <div className="w-9 h-9 rounded-full bg-gray-100 overflow-hidden border border-gray-200">
                         {s.photo ? <img src={s.photo} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs font-bold">{s.firstName.charAt(0)}{s.lastName.charAt(0)}</div>}
                       </div>
@@ -303,7 +303,7 @@ const KupaPage: React.FC = () => {
                         {team?.logo && <img src={team.logo} alt="" className="w-5 h-5 rounded-full" />}
                         <span className="text-xs text-gray-500 hidden sm:inline">{team?.name || '-'}</span>
                       </div>
-                      <span className="text-right text-sm font-bold text-[#1E6FF2]">{s.goals}</span>
+                      <span className="text-right text-sm font-bold text-[#2a499a]">{s.goals}</span>
                     </div>
                   );
                 })}

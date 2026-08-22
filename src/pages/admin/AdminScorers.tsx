@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { uploadPlayerPhoto } from '@/lib/supabase-db';
 import { v4 as uuidv4 } from 'uuid';
@@ -64,15 +64,15 @@ const AdminScorers: React.FC = () => {
   return (
     <div>
       <div className="flex items-center justify-between mb-4">
-        <h2 className="text-xl font-bold text-gray-800">Golashënuesit</h2>
-        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
-          + Shto Golashënues
+        <h2 className="text-xl font-bold text-gray-800">GolashÃ«nuesit</h2>
+        <button onClick={() => { resetForm(); setShowForm(true); }} className="flex items-center gap-1 px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+          + Shto GolashÃ«nues
         </button>
       </div>
 
       <div className="flex gap-2 mb-4">
         <select value={filterComp} onChange={e => setFilterComp(e.target.value)} className="px-3 py-2 border border-gray-200 rounded-lg text-sm bg-white">
-          <option value="all">Të gjitha</option>
+          <option value="all">TÃ« gjitha</option>
           {activeComps.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
         </select>
       </div>
@@ -80,8 +80,8 @@ const AdminScorers: React.FC = () => {
       {showForm && (
         <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto Golashënues Manual'}</h3>
-            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">✕</button>
+            <h3 className="font-semibold text-gray-800">{editId ? 'Edito' : 'Shto GolashÃ«nues Manual'}</h3>
+            <button onClick={resetForm} className="text-gray-400 hover:text-gray-600">âœ•</button>
           </div>
           <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-3 gap-3">
             <div>
@@ -116,7 +116,7 @@ const AdminScorers: React.FC = () => {
               {form.photo && <img src={form.photo} alt="preview" className="w-8 h-8 mt-1 rounded-full object-cover" />}
             </div>
             <div className="flex items-end">
-              <button type="submit" className="px-4 py-2 bg-[#1E6FF2] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
+              <button type="submit" className="px-4 py-2 bg-[#2a499a] text-white rounded-lg text-sm font-medium hover:bg-[#1558CC]">
                 {editId ? 'Ruaj' : 'Shto'}
               </button>
             </div>
@@ -130,14 +130,14 @@ const AdminScorers: React.FC = () => {
           <span>#</span><span></span><span>Lojtari</span><span>Skuadra</span><span className="text-right">Gola</span>
         </div>
         {aggregated.length === 0 ? (
-          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka golashënues.</p>
+          <p className="text-gray-500 text-center py-8 text-sm">Nuk ka golashÃ«nues.</p>
         ) : (
           aggregated.map((s, i) => {
             const team = getTeamById(s.teamId);
             const manualScorer = scorers.find(sc => sc.id === s.id && sc.isManual);
             return (
               <div key={s.id} className="grid grid-cols-[40px_48px_1fr_auto_60px] gap-3 px-4 py-3 items-center border-t border-gray-50 hover:bg-gray-50 group">
-                <span className={`text-sm font-bold ${i < 3 ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{i + 1}</span>
+                <span className={`text-sm font-bold ${i < 3 ? 'text-[#2a499a]' : 'text-gray-400'}`}>{i + 1}</span>
                 <div className="w-9 h-9 rounded-full bg-gray-100 overflow-hidden">
                   {s.photo ? <img src={s.photo} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs font-bold">{s.firstName.charAt(0)}{s.lastName.charAt(0)}</div>}
                 </div>
@@ -145,8 +145,8 @@ const AdminScorers: React.FC = () => {
                   <span className="text-sm font-medium text-gray-800">{s.firstName} {s.lastName}</span>
                   {manualScorer && (
                     <div className="hidden group-hover:flex gap-1">
-                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#1E6FF2]">✎</button>
-                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500">✗</button>
+                      <button onClick={() => handleEditScorer(manualScorer)} className="text-gray-400 hover:text-[#2a499a]">âœŽ</button>
+                      <button onClick={() => { if (confirm('Fshi?')) deleteScorer(manualScorer.id); }} className="text-gray-400 hover:text-red-500">âœ—</button>
                     </div>
                   )}
                 </div>
@@ -154,7 +154,7 @@ const AdminScorers: React.FC = () => {
                   {team?.logo && <img src={team.logo} alt="" className="w-5 h-5 rounded-full" />}
                   <span className="text-xs text-gray-500 hidden sm:inline">{team?.name || '-'}</span>
                 </div>
-                <span className="text-right text-sm font-bold text-[#1E6FF2]">{s.goals}</span>
+                <span className="text-right text-sm font-bold text-[#2a499a]">{s.goals}</span>
               </div>
             );
           })

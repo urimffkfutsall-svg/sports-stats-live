@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+﻿import React, { useState, useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { useData } from '@/context/DataContext';
 import Header from '@/components/Header';
@@ -49,8 +49,8 @@ const LiveMatchPage = () => {
     const homeGoals = matchGoals.filter(g => g.teamId === match.homeTeamId);
     const awayGoals = matchGoals.filter(g => g.teamId === match.awayTeamId);
     return (
-      <div onClick={() => setSelectedMatch(match)} className="relative bg-white rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 border-2 border-[#1E6FF2]/30 shadow-lg shadow-blue-100">
-        <div className="bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6] px-5 py-2.5 flex items-center justify-between">
+      <div onClick={() => setSelectedMatch(match)} className="relative bg-white rounded-2xl overflow-hidden cursor-pointer group hover:shadow-xl transition-all duration-300 border-2 border-[#2a499a]/30 shadow-lg shadow-blue-100">
+        <div className="bg-gradient-to-r from-[#2a499a] to-[#3B82F6] px-5 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span className="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-white"></span></span>
             <span className="text-white text-xs font-black uppercase tracking-[0.15em]">Live</span>
@@ -69,9 +69,9 @@ const LiveMatchPage = () => {
           </div>
           <div className="flex flex-col items-center gap-2 px-4">
             <div className="flex items-center gap-2">
-              <span className="text-5xl font-black text-[#1E6FF2] tabular-nums">{match.homeScore ?? 0}</span>
-              <div className="flex flex-col items-center"><span className="w-1.5 h-1.5 bg-[#1E6FF2] rounded-full"></span><span className="w-0.5 h-3 bg-gray-200"></span><span className="w-1.5 h-1.5 bg-[#1E6FF2] rounded-full"></span></div>
-              <span className="text-5xl font-black text-[#1E6FF2] tabular-nums">{match.awayScore ?? 0}</span>
+              <span className="text-5xl font-black text-[#2a499a] tabular-nums">{match.homeScore ?? 0}</span>
+              <div className="flex flex-col items-center"><span className="w-1.5 h-1.5 bg-[#2a499a] rounded-full"></span><span className="w-0.5 h-3 bg-gray-200"></span><span className="w-1.5 h-1.5 bg-[#2a499a] rounded-full"></span></div>
+              <span className="text-5xl font-black text-[#2a499a] tabular-nums">{match.awayScore ?? 0}</span>
             </div>
             {match.venue && <span className="text-gray-400 text-[10px] font-medium">{match.venue}</span>}
           </div>
@@ -96,7 +96,7 @@ const LiveMatchPage = () => {
             </div>
           </div>
         )}
-        <div className="px-5 pb-4"><div className="w-full flex items-center justify-center gap-1.5 py-2 bg-[#1E6FF2]/5 hover:bg-[#1E6FF2]/10 text-[#1E6FF2] text-[11px] font-bold rounded-lg transition-colors border border-[#1E6FF2]/10">SHIKO DETAJET</div></div>
+        <div className="px-5 pb-4"><div className="w-full flex items-center justify-center gap-1.5 py-2 bg-[#2a499a]/5 hover:bg-[#2a499a]/10 text-[#2a499a] text-[11px] font-bold rounded-lg transition-colors border border-[#2a499a]/10">SHIKO DETAJET</div></div>
       </div>
     );
   };
@@ -105,7 +105,7 @@ const LiveMatchPage = () => {
     const home = getTeamById(match.homeTeamId);
     const away = getTeamById(match.awayTeamId);
     return (
-      <div onClick={() => setSelectedMatch(match)} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md hover:border-[#1E6FF2]/20 transition-all cursor-pointer">
+      <div onClick={() => setSelectedMatch(match)} className="bg-white rounded-xl border border-gray-100 overflow-hidden hover:shadow-md hover:border-[#2a499a]/20 transition-all cursor-pointer">
         <div className="px-3 py-2.5 flex items-center justify-between">
           <div className="flex items-center gap-2 flex-1 min-w-0">
             <div className="w-8 h-8 rounded-full bg-gray-50 border border-gray-100 flex items-center justify-center overflow-hidden flex-shrink-0">
@@ -117,7 +117,7 @@ const LiveMatchPage = () => {
             {type === 'finished' ? (
               <span className="text-sm font-black text-gray-900">{match.homeScore ?? 0} : {match.awayScore ?? 0}</span>
             ) : (
-              <span className="text-xs font-bold text-[#1E6FF2]">{match.time || 'VS'}</span>
+              <span className="text-xs font-bold text-[#2a499a]">{match.time || 'VS'}</span>
             )}
           </div>
           <div className="flex items-center gap-2 flex-1 min-w-0 justify-end">
@@ -139,11 +139,11 @@ const LiveMatchPage = () => {
     return (
       <div className="mb-8">
         <h2 className="text-lg font-black text-gray-900 mb-4 flex items-center gap-2">
-          <span className="w-1 h-6 bg-[#1E6FF2] rounded-full"></span>{name}
+          <span className="w-1 h-6 bg-[#2a499a] rounded-full"></span>{name}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {recent.length > 0 && (<div><h3 className="text-sm font-bold text-gray-500 mb-3 flex items-center gap-2"><span className="w-2 h-2 bg-green-500 rounded-full"></span>Rezultatet e Fundit</h3><div className="space-y-2">{recent.map(m => <SmallCard key={m.id} match={m} type="finished" />)}</div></div>)}
-          {upcoming.length > 0 && (<div><h3 className="text-sm font-bold text-gray-500 mb-3 flex items-center gap-2"><span className="w-2 h-2 bg-[#1E6FF2] rounded-full"></span>Ndeshjet e Ardhshme</h3><div className="space-y-2">{upcoming.map(m => <SmallCard key={m.id} match={m} type="planned" />)}</div></div>)}
+          {upcoming.length > 0 && (<div><h3 className="text-sm font-bold text-gray-500 mb-3 flex items-center gap-2"><span className="w-2 h-2 bg-[#2a499a] rounded-full"></span>Ndeshjet e Ardhshme</h3><div className="space-y-2">{upcoming.map(m => <SmallCard key={m.id} match={m} type="planned" />)}</div></div>)}
         </div>
       </div>
     );
@@ -160,9 +160,9 @@ const LiveMatchPage = () => {
       </div>
       <div className="max-w-5xl mx-auto px-4 py-8">
         <div className="text-center mb-8">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#1E6FF2]/10 rounded-full mb-3">
-            <span className="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#1E6FF2] opacity-50"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#1E6FF2]"></span></span>
-            <span className="text-[#1E6FF2] text-xs font-black uppercase tracking-[0.15em]">Live</span>
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#2a499a]/10 rounded-full mb-3">
+            <span className="relative flex h-2.5 w-2.5"><span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#2a499a] opacity-50"></span><span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#2a499a]"></span></span>
+            <span className="text-[#2a499a] text-xs font-black uppercase tracking-[0.15em]">Live</span>
           </div>
           <h1 className="text-3xl font-black text-gray-900">Rezultatet Live</h1>
           <p className="text-gray-400 text-sm mt-1">Ndiq ndeshjet ne kohe reale</p>
@@ -174,8 +174,8 @@ const LiveMatchPage = () => {
           </div>
         ) : (
           <div className="bg-white rounded-2xl border-2 border-dashed border-gray-200 text-center py-14 mb-10">
-            <div className="w-16 h-16 bg-[#1E6FF2]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-              <svg className="w-7 h-7 text-[#1E6FF2]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
+            <div className="w-16 h-16 bg-[#2a499a]/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
+              <svg className="w-7 h-7 text-[#2a499a]" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" /></svg>
             </div>
             <h3 className="text-lg font-bold text-gray-700 mb-1">Nuk ka ndeshje live momentalisht</h3>
             <p className="text-sm text-gray-400">Ndeshjet live do te shfaqen ketu automatikisht</p>

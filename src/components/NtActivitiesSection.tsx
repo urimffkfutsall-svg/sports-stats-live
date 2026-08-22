@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { dbNtActivities } from '@/lib/supabase-db';
 
@@ -31,7 +31,7 @@ const NtActivitiesSection: React.FC = () => {
           <span className="w-1.5 h-7 bg-[#d0a650] rounded-full"></span>
           Aktivitetet e Kombetares
         </h2>
-        <Link to="/kombetarja" className="text-sm font-bold text-[#1E6FF2] hover:underline">
+        <Link to="/kombetarja" className="text-sm font-bold text-[#2a499a] hover:underline">
           Shiko te gjitha &rarr;
         </Link>
       </div>
@@ -42,7 +42,7 @@ const NtActivitiesSection: React.FC = () => {
               <div className="aspect-[4/3] overflow-hidden relative">
                 <img src={a.photo} alt="" className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent p-3">
-                  <span className="text-[10px] font-bold text-white/80 bg-[#1E6FF2] px-2 py-0.5 rounded-full uppercase">Kombetarja</span>
+                  <span className="text-[10px] font-bold text-white/80 bg-[#2a499a] px-2 py-0.5 rounded-full uppercase">Kombetarja</span>
                 </div>
               </div>
             )}

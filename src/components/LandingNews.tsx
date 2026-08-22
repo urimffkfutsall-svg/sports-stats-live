@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+﻿import React, { useState, useEffect, useCallback } from 'react';
 import { useData } from '@/context/DataContext';
 import { useNavigate } from 'react-router-dom';
 import { News } from '@/types';
@@ -78,12 +78,12 @@ const LandingNews: React.FC = () => {
               })()}
               <div className="absolute inset-0 flex items-center justify-center z-10">
                 <div className="w-16 h-16 rounded-full bg-white/90 flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                  <svg className="w-7 h-7 text-[#1E6FF2] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                  <svg className="w-7 h-7 text-[#2a499a] ml-1" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
                 </div>
               </div>
             </>
           ) : (
-            <div className="absolute inset-0 bg-gradient-to-br from-[#2a499a] to-[#1E6FF2]" />
+            <div className="absolute inset-0 bg-gradient-to-br from-[#2a499a] to-[#2a499a]" />
           )}
           {/* Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
@@ -91,8 +91,8 @@ const LandingNews: React.FC = () => {
           {/* Content */}
           <div className="absolute bottom-0 left-0 right-0 p-6 md:p-8">
             <div className="flex items-center gap-2 mb-2">
-<span className="inline-block px-2.5 py-0.5 bg-[#1E6FF2] text-white text-[10px] font-bold rounded-md uppercase tracking-wider">Lajm</span>
-{(item as any).videoUrl && <span className="inline-block px-2.5 py-0.5 bg-red-500 text-white text-[10px] font-bold rounded-md uppercase tracking-wider">▶ Video</span>}
+<span className="inline-block px-2.5 py-0.5 bg-[#2a499a] text-white text-[10px] font-bold rounded-md uppercase tracking-wider">Lajm</span>
+{(item as any).videoUrl && <span className="inline-block px-2.5 py-0.5 bg-red-500 text-white text-[10px] font-bold rounded-md uppercase tracking-wider">â–¶ Video</span>}
 </div>
             <h3 className="text-2xl md:text-3xl font-black text-white leading-tight mb-2">{item.title}</h3>
             <p className="text-sm md:text-base text-white/70 line-clamp-2">{item.description}</p>
@@ -102,10 +102,10 @@ const LandingNews: React.FC = () => {
           {featured.length > 1 && (
             <>
               <button onClick={e => { e.stopPropagation(); prev(); }} className="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/50 transition-colors text-lg font-bold">
-                ‹
+                â€¹
               </button>
               <button onClick={e => { e.stopPropagation(); next(); }} className="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-black/30 backdrop-blur-sm text-white flex items-center justify-center hover:bg-black/50 transition-colors text-lg font-bold">
-                ›
+                â€º
               </button>
             </>
           )}

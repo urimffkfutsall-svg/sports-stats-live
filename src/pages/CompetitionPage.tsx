@@ -42,9 +42,9 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-black/60 backdrop-blur-sm cursor-pointer" onClick={onClose} />
       <div className="relative w-full max-w-sm overflow-hidden rounded-3xl shadow-2xl z-[105]" onClick={e => e.stopPropagation()}>
-        <div className="relative bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] pt-6 pb-16 px-6">
+        <div className="relative bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#2a499a] pt-6 pb-16 px-6">
           <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#1E6FF2]/20 rounded-full blur-3xl" />
+            <div className="absolute -top-20 -right-20 w-60 h-60 bg-[#2a499a]/20 rounded-full blur-3xl" />
             <div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/20 rounded-full blur-3xl" />
           </div>
           <button onClick={(e) => { e.stopPropagation(); onClose(); }} className="absolute top-4 right-4 z-[110] w-8 h-8 rounded-full bg-white/10 backdrop-blur-sm flex items-center justify-center hover:bg-white/20 transition-colors">
@@ -56,8 +56,8 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
               <span className="text-[11px] font-bold text-amber-300 uppercase tracking-wider">Golashenues</span>
             </div>
             <div className="relative mx-auto w-28 h-28 mb-4">
-              <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#1E6FF2] rounded-2xl rotate-6 opacity-50 blur-sm" />
-              <div className="absolute inset-0 bg-gradient-to-br from-[#1E6FF2] to-amber-400 rounded-2xl -rotate-3 opacity-30" />
+              <div className="absolute inset-0 bg-gradient-to-br from-amber-400 to-[#2a499a] rounded-2xl rotate-6 opacity-50 blur-sm" />
+              <div className="absolute inset-0 bg-gradient-to-br from-[#2a499a] to-amber-400 rounded-2xl -rotate-3 opacity-30" />
               <div className="relative w-full h-full rounded-2xl overflow-hidden border-2 border-white/30 shadow-2xl">
                 {scorer.photo ? <img src={scorer.photo} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full bg-white/10 flex items-center justify-center text-white/50 text-3xl font-bold">{scorer.firstName.charAt(0)}{scorer.lastName.charAt(0)}</div>}
               </div>
@@ -71,7 +71,7 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
         </div>
         <div className="relative bg-white rounded-t-3xl -mt-8 pt-6 pb-6 px-6">
           <div className="grid grid-cols-3 gap-3 mb-6">
-            <div className="bg-gradient-to-br from-[#1E6FF2]/5 to-[#1E6FF2]/10 rounded-2xl p-4 text-center border border-[#1E6FF2]/10">
+            <div className="bg-gradient-to-br from-[#2a499a]/5 to-[#2a499a]/10 rounded-2xl p-4 text-center border border-[#2a499a]/10">
               
               <span className="block text-2xl font-black text-gray-900">{scorer.goals}</span>
               <span className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider">Gola</span>
@@ -90,10 +90,10 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
           <div className="bg-gray-50 rounded-2xl p-4 mb-4">
             <div className="flex items-center justify-between mb-2">
               <span className="text-xs font-semibold text-gray-600">Progresi i Golave</span>
-              <span className="text-xs font-bold text-[#1E6FF2]">{scorer.goals} gola</span>
+              <span className="text-xs font-bold text-[#2a499a]">{scorer.goals} gola</span>
             </div>
             <div className="h-3 bg-gray-200 rounded-full overflow-hidden">
-              <div className="h-full bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6] rounded-full" style={Object.assign({}, { width: `${Math.min((scorer.goals / Math.max(scorer.goals + 5, 20)) * 100, 100)}%` })} />
+              <div className="h-full bg-gradient-to-r from-[#2a499a] to-[#3B82F6] rounded-full" style={Object.assign({}, { width: `${Math.min((scorer.goals / Math.max(scorer.goals + 5, 20)) * 100, 100)}%` })} />
             </div>
           </div>
           {team && (
@@ -119,7 +119,7 @@ const ScorerPopup: React.FC<{ scorer: ScorerData; onClose: () => void }> = ({ sc
           return (
             <div className="mt-8 px-3 sm:px-4 md:px-6 lg:px-8">
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-1 h-5 bg-[#1E6FF2] rounded-full"></span>
+                <span className="w-1 h-5 bg-[#2a499a] rounded-full"></span>
                 <h2 className="text-lg font-bold text-gray-800">Video</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -328,7 +328,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                   <>
                     <MatchSection title="LIVE" matchList={liveMatches} dot="bg-red-500 animate-pulse" ring />
                     <MatchSection title="Ndeshjet e Perfunduara" matchList={finishedMatches} dot="bg-green-500" />
-                    <MatchSection title="Ndeshjet e Ardhshme" matchList={plannedMatches} dot="bg-[#1E6FF2]" />
+                    <MatchSection title="Ndeshjet e Ardhshme" matchList={plannedMatches} dot="bg-[#2a499a]" />
                   </>
                 )}
               </>
@@ -367,15 +367,15 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                           <td className={`px-3 py-2.5 sticky left-0 z-10 ${getRowBg(i + 1)}`}>
                             <div className="flex items-center">
                               <span className="w-1 h-6 rounded-sm mr-2 flex-shrink-0" style={Object.assign({}, { backgroundColor: getRowBorder(i + 1) })} />
-                              <span className={`text-xs font-bold ${i < 3 ? 'text-[#1E6FF2]' : 'text-gray-400'}`}>{i + 1}</span>
+                              <span className={`text-xs font-bold ${i < 3 ? 'text-[#2a499a]' : 'text-gray-400'}`}>{i + 1}</span>
                             </div>
                           </td>
                           <td className={`px-3 py-2.5 sticky left-10 z-10 ${getRowBg(i + 1)}`}>
-                            <Link to={`/skuadra/${row.teamId}`} className="flex items-center gap-2 hover:text-[#1E6FF2] transition-colors group">
-                              <div className="w-7 h-7 rounded-md bg-gray-50 overflow-hidden flex-shrink-0 border border-gray-200 group-hover:border-[#1E6FF2]/30 transition-colors">
+                            <Link to={`/skuadra/${row.teamId}`} className="flex items-center gap-2 hover:text-[#2a499a] transition-colors group">
+                              <div className="w-7 h-7 rounded-md bg-gray-50 overflow-hidden flex-shrink-0 border border-gray-200 group-hover:border-[#2a499a]/30 transition-colors">
                                 {row.teamLogo ? <img src={row.teamLogo} alt="" className="w-full h-full object-cover" /> : <span className="flex items-center justify-center w-full h-full text-[9px] text-gray-400 font-bold">{row.teamName.charAt(0)}</span>}
                               </div>
-                              <span className="font-semibold text-gray-800 group-hover:text-[#1E6FF2] whitespace-nowrap text-[13px]">{row.teamName}</span>
+                              <span className="font-semibold text-gray-800 group-hover:text-[#2a499a] whitespace-nowrap text-[13px]">{row.teamName}</span>
                             </Link>
                           </td>
                           <td className="px-3 py-2.5 text-center text-gray-600 font-medium">{row.played}</td>
@@ -431,8 +431,8 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                   const team = getTeamById(s.teamId);
                   return (
                     <div onClick={() => setSelectedScorer(s)} className="cursor-pointer mb-6 group">
-                      <div className="bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative">
-                        <div className="absolute inset-0"><div className="absolute -top-20 -right-20 w-60 h-60 bg-[#1E6FF2]/20 rounded-full blur-3xl" /><div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/15 rounded-full blur-3xl" /></div>
+                      <div className="bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#2a499a] rounded-2xl p-6 shadow-xl hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 overflow-hidden relative">
+                        <div className="absolute inset-0"><div className="absolute -top-20 -right-20 w-60 h-60 bg-[#2a499a]/20 rounded-full blur-3xl" /><div className="absolute -bottom-10 -left-10 w-40 h-40 bg-[#0066CC]/15 rounded-full blur-3xl" /></div>
                         <div className="relative z-10 flex items-center gap-6">
                           <div className="relative">
                             <div className="absolute -top-2 -left-2 w-8 h-8 rounded-full bg-gradient-to-br from-amber-300 to-amber-500 flex items-center justify-center shadow-lg z-10"><span className="text-white text-sm font-black">1</span></div>
@@ -476,7 +476,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                           {s.photo ? <img src={s.photo} alt="" className="w-full h-full object-cover" /> : <div className="w-full h-full flex items-center justify-center text-gray-400 text-xs font-bold">{s.firstName.charAt(0)}{s.lastName.charAt(0)}</div>}
                         </div>
                         <div className="flex-1 min-w-0">
-                          <p className="text-sm font-semibold text-gray-800 truncate group-hover:text-[#1E6FF2] transition-colors">{s.firstName} {s.lastName}</p>
+                          <p className="text-sm font-semibold text-gray-800 truncate group-hover:text-[#2a499a] transition-colors">{s.firstName} {s.lastName}</p>
                           <div className="flex items-center gap-1.5 mt-0.5">
                             {team?.logo && <img src={team.logo} alt="" className="w-4 h-4 rounded-full" />}
                             <span className="text-[11px] text-gray-400">{team?.name || '-'}</span>
@@ -484,9 +484,9 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
                         </div>
                         <div className="flex items-center gap-2">
                           <div className="h-1.5 w-16 bg-gray-100 rounded-full overflow-hidden hidden sm:block">
-                            <div className="h-full bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6] rounded-full" style={Object.assign({}, { width: `${Math.min((s.goals / (scorers[0]?.goals || 1)) * 100, 100)}%` })} />
+                            <div className="h-full bg-gradient-to-r from-[#2a499a] to-[#3B82F6] rounded-full" style={Object.assign({}, { width: `${Math.min((s.goals / (scorers[0]?.goals || 1)) * 100, 100)}%` })} />
                           </div>
-                          <span className="text-base font-black text-[#1E6FF2] w-8 text-right">{s.goals}</span>
+                          <span className="text-base font-black text-[#2a499a] w-8 text-right">{s.goals}</span>
                         </div>
                       </div>
                     );
@@ -507,7 +507,7 @@ const CompetitionPage: React.FC<Props> = ({ type, title }) => {
           return (
             <div className="mt-8">
               <div className="flex items-center gap-2 mb-4">
-                <span className="w-1 h-5 bg-[#1E6FF2] rounded-full"></span>
+                <span className="w-1 h-5 bg-[#2a499a] rounded-full"></span>
                 <h2 className="text-lg font-bold text-gray-800">Video</h2>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">

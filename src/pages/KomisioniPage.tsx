@@ -42,7 +42,7 @@ const KomisioniPage: React.FC = () => {
             {weeks.map(week => (
               <div key={week}>
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] flex items-center justify-center shadow-md">
+                  <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2a499a] to-[#2a499a] flex items-center justify-center shadow-md">
                     <span className="text-white text-sm font-bold">{week}</span>
                   </div>
                   <div>
@@ -52,24 +52,24 @@ const KomisioniPage: React.FC = () => {
                     </p>
                   </div>
                 </div>
-                <div className="space-y-3 ml-5 border-l-2 border-[#1E6FF2]/20 pl-6">
+                <div className="space-y-3 ml-5 border-l-2 border-[#2a499a]/20 pl-6">
                   {grouped[week].map(d => (
                     <div
                       key={d.id}
                       onClick={() => setSelected(d)}
-                      className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-[#1E6FF2]/30 transition-all cursor-pointer group"
+                      className="bg-white rounded-2xl border border-gray-100 p-5 shadow-sm hover:shadow-md hover:border-[#2a499a]/30 transition-all cursor-pointer group"
                     >
                       <div className="flex items-start gap-3">
-                        <div className="w-8 h-8 rounded-lg bg-[#1E6FF2]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
-                          <span className="text-[#1E6FF2] text-xs font-bold">V</span>
+                        <div className="w-8 h-8 rounded-lg bg-[#2a499a]/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                          <span className="text-[#2a499a] text-xs font-bold">V</span>
                         </div>
                         <div className="flex-1">
-                          <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-[#1E6FF2] transition-colors">
+                          <h3 className="text-base font-bold text-gray-900 mb-1 group-hover:text-[#2a499a] transition-colors">
                             {d.title}
                           </h3>
                           <p className="text-sm text-gray-500 line-clamp-2">{d.description}</p>
                         </div>
-                        <span className="text-xs text-[#1E6FF2] font-semibold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap mt-1">
+                        <span className="text-xs text-[#2a499a] font-semibold opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap mt-1">
                           Lexo →
                         </span>
                       </div>

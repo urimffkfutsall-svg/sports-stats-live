@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 var statusColors = {
   featured: { bg: 'bg-emerald-50', text: 'text-emerald-700', border: 'border-emerald-200', dot: 'bg-emerald-500', label: 'I publikuar' },
@@ -156,7 +156,7 @@ var AdminDecisions: React.FC = function() {
             </label>
           </div>
           <div className="flex gap-3 mt-4">
-            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">✓ Ruaj Ndryshimet</button>
+            <button onClick={handleSaveEdit} className="flex items-center gap-2 px-5 py-2.5 bg-gradient-to-r from-blue-500 to-indigo-600 text-white rounded-xl text-sm font-medium hover:shadow-lg transition-all">âœ“ Ruaj Ndryshimet</button>
             <button onClick={function() { setEditingId(null); setForm({ title: '', description: '', week: '', isFeatured: false }); }} className="px-5 py-2.5 bg-gray-100 text-gray-600 rounded-xl text-sm font-medium hover:bg-gray-200 transition-all">Anulo</button>
           </div>
         </div>
@@ -182,16 +182,16 @@ var AdminDecisions: React.FC = function() {
                   <td className="px-6 py-4 text-sm font-medium text-gray-800">{d.title}</td>
                   <td className="px-6 py-4 text-sm text-gray-600 max-w-[250px] truncate">{d.description}</td>
                   <td className="px-4 py-4 text-center">
-                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#1E6FF2]/10 text-[#1E6FF2] font-bold text-sm">{d.week}</span>
+                    <span className="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-[#2a499a]/10 text-[#2a499a] font-bold text-sm">{d.week}</span>
                   </td>
                   <td className="px-4 py-4 text-center">
                     <input type="checkbox" checked={d.isFeatured} onChange={function() { toggleFeatured(d); }} className="w-4 h-4 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer" title="Shfaq ne Ballina" />
                   </td>
                   <td className="px-6 py-4 text-right">
                     <div className="flex items-center justify-end gap-2">
-                      <button onClick={function() { setSelectedId(d.id); }} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">○</button>
+                      <button onClick={function() { setSelectedId(d.id); }} className="p-1.5 text-gray-400 hover:text-blue-600 hover:bg-blue-50 rounded-lg transition-colors">â—‹</button>
                       <button onClick={function() { handleEdit(d); }} className="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-lg transition-colors"></button>
-                      <button onClick={function() { handleDelete(d.id); }} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">✗</button>
+                      <button onClick={function() { handleDelete(d.id); }} className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors">âœ—</button>
                     </div>
                   </td>
                 </tr>
@@ -211,7 +211,7 @@ var AdminDecisions: React.FC = function() {
                 </div>
                 <h3 className="text-lg font-bold text-gray-800">Detajet e Vendimit</h3>
               </div>
-              <button onClick={function() { setSelectedId(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">✕</button>
+              <button onClick={function() { setSelectedId(null); }} className="p-2 hover:bg-gray-100 rounded-xl transition-colors">âœ•</button>
             </div>
             <div className="p-6 space-y-4">
               <div>

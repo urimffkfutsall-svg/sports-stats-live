@@ -152,7 +152,7 @@ const AdminShorti: React.FC = () => {
             onClick={() => { setActiveComp(key); setGeneratedMsg(null); }}
             className={`px-4 py-2.5 rounded-xl text-sm font-medium transition-colors ${
               activeComp === key
-                ? 'bg-[#1E6FF2] text-white shadow-sm'
+                ? 'bg-[#2a499a] text-white shadow-sm'
                 : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50'
             }`}
           >
@@ -173,7 +173,7 @@ const AdminShorti: React.FC = () => {
           <h3 className="font-semibold text-gray-800">Rubrikat — {COMP_LABEL[activeComp]}</h3>
           <button
             onClick={handleAddRubrik}
-            className="px-3 py-1.5 bg-[#1E6FF2] text-white rounded-lg text-xs font-medium hover:bg-blue-600"
+            className="px-3 py-1.5 bg-[#2a499a] text-white rounded-lg text-xs font-medium hover:bg-blue-600"
           >
             + Shto Rubrikë
           </button>
@@ -185,7 +185,7 @@ const AdminShorti: React.FC = () => {
             const availableTeams = compTeams.filter(t => t.id === r.teamId || !usedTeamIds.has(t.id));
             return (
               <div key={r.id} className="border border-gray-200 rounded-xl p-3 flex items-center gap-3">
-                <div className="w-8 h-8 rounded-full bg-[#1E6FF2] text-white flex items-center justify-center text-sm font-bold shrink-0">
+                <div className="w-8 h-8 rounded-full bg-[#2a499a] text-white flex items-center justify-center text-sm font-bold shrink-0">
                   {r.number}
                 </div>
                 <div className="flex-1 min-w-0">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { Match } from '@/types';
 import { useData } from '@/context/DataContext';
 
@@ -47,29 +47,29 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
     <div className="fixed inset-0 z-50 flex items-end sm:items-center justify-center" onClick={onClose}>
       <div className="absolute inset-0 bg-black/60 backdrop-blur-md" />
       <div
-        className="relative w-full sm:max-w-lg max-h-[95vh] overflow-hidden sm:rounded-2xl rounded-t-2xl border-2 border-[#1E6FF2]/40 shadow-[0_0_60px_-10px_rgba(30,111,242,0.3)]"
+        className="relative w-full sm:max-w-lg max-h-[95vh] overflow-hidden sm:rounded-2xl rounded-t-2xl border-2 border-[#2a499a]/40 shadow-[0_0_60px_-10px_rgba(30,111,242,0.3)]"
         style={Object.assign({}, { background: 'linear-gradient(145deg, #F0F2F5 0%, #E8EBF0 50%, #F0F2F5 100%)' })}
         onClick={function(e) { e.stopPropagation(); }}
       >
         {/* === HEADER === */}
         <div className="relative overflow-hidden">
           {/* Subtle blue glow at top */}
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[2px] bg-gradient-to-r from-transparent via-[#1E6FF2] to-transparent" />
-          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-[40px] bg-[#1E6FF2]/5 blur-2xl" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[300px] h-[2px] bg-gradient-to-r from-transparent via-[#2a499a] to-transparent" />
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[200px] h-[40px] bg-[#2a499a]/5 blur-2xl" />
 
           {/* Close & Drag */}
           <div className="relative z-20 flex items-center justify-between px-5 pt-4">
             <div className="w-9" />
             <div className="w-10 h-1 rounded-full bg-gray-300" />
-            <button onClick={onClose} className="w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">×</button>
+            <button onClick={onClose} className="w-10 h-10 rounded-xl bg-white border-2 border-gray-200 flex items-center justify-center hover:bg-red-50 hover:border-red-300 transition-all text-gray-500 hover:text-red-500 text-lg font-bold shadow-md">Ã—</button>
           </div>
 
           <div className="relative z-10 px-6 pt-3 pb-6">
             {/* Competition Badge */}
             {comp && (
               <div className="flex justify-center mb-5">
-                <span className="px-4 py-1.5 bg-white/80 backdrop-blur-sm rounded-lg text-[10px] font-bold text-[#1E6FF2] uppercase tracking-[0.15em] border border-[#1E6FF2]/15 shadow-sm">
-                  {comp.name} • Java {match.week}
+                <span className="px-4 py-1.5 bg-white/80 backdrop-blur-sm rounded-lg text-[10px] font-bold text-[#2a499a] uppercase tracking-[0.15em] border border-[#2a499a]/15 shadow-sm">
+                  {comp.name} â€¢ Java {match.week}
                 </span>
               </div>
             )}
@@ -79,8 +79,8 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
               {/* Home Team */}
               <div className="flex flex-col items-center flex-1 gap-2.5">
                 <div className="relative group">
-                  <div className="absolute -inset-1 bg-gradient-to-br from-[#1E6FF2]/20 to-[#1E6FF2]/5 rounded-2xl blur-sm" />
-                  <div className="relative w-[72px] h-[72px] rounded-2xl bg-white border-2 border-[#1E6FF2]/15 flex items-center justify-center overflow-hidden shadow-lg">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#2a499a]/20 to-[#2a499a]/5 rounded-2xl blur-sm" />
+                  <div className="relative w-[72px] h-[72px] rounded-2xl bg-white border-2 border-[#2a499a]/15 flex items-center justify-center overflow-hidden shadow-lg">
                     {homeTeam?.logo ? (
                       <img src={homeTeam.logo} alt="" className="w-full h-full object-cover" />
                     ) : (
@@ -110,11 +110,11 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
                 )}
                 <div className="relative">
                   <div className="absolute -inset-3 bg-white/60 rounded-2xl blur-sm" />
-                  <div className="relative flex items-center bg-white rounded-2xl px-5 py-3 border border-[#1E6FF2]/15 shadow-lg">
+                  <div className="relative flex items-center bg-white rounded-2xl px-5 py-3 border border-[#2a499a]/15 shadow-lg">
                     <span className="text-[44px] font-black text-gray-800 tabular-nums leading-none">{isPlanned ? '-' : (match.homeScore ?? 0)}</span>
                     <div className="flex flex-col items-center gap-1 mx-3">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1E6FF2]/30" />
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#1E6FF2]/30" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#2a499a]/30" />
+                      <span className="w-1.5 h-1.5 rounded-full bg-[#2a499a]/30" />
                     </div>
                     <span className="text-[44px] font-black text-gray-800 tabular-nums leading-none">{isPlanned ? '-' : (match.awayScore ?? 0)}</span>
                   </div>
@@ -124,8 +124,8 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
               {/* Away Team */}
               <div className="flex flex-col items-center flex-1 gap-2.5">
                 <div className="relative">
-                  <div className="absolute -inset-1 bg-gradient-to-br from-[#1E6FF2]/20 to-[#1E6FF2]/5 rounded-2xl blur-sm" />
-                  <div className="relative w-[72px] h-[72px] rounded-2xl bg-white border-2 border-[#1E6FF2]/15 flex items-center justify-center overflow-hidden shadow-lg">
+                  <div className="absolute -inset-1 bg-gradient-to-br from-[#2a499a]/20 to-[#2a499a]/5 rounded-2xl blur-sm" />
+                  <div className="relative w-[72px] h-[72px] rounded-2xl bg-white border-2 border-[#2a499a]/15 flex items-center justify-center overflow-hidden shadow-lg">
                     {awayTeam?.logo ? (
                       <img src={awayTeam.logo} alt="" className="w-full h-full object-cover" />
                     ) : (
@@ -140,22 +140,22 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
         </div>
 
         {/* === INFO STRIP === */}
-        <div className="flex items-center justify-center gap-4 px-6 py-2.5 bg-white/60 border-y border-[#1E6FF2]/10">
+        <div className="flex items-center justify-center gap-4 px-6 py-2.5 bg-white/60 border-y border-[#2a499a]/10">
           {match.date && (
             <span className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500">
-              <span className="w-5 h-5 rounded-md bg-[#1E6FF2]/10 flex items-center justify-center text-[#1E6FF2] text-[8px] font-black border border-[#1E6FF2]/10">D</span>
+              <span className="w-5 h-5 rounded-md bg-[#2a499a]/10 flex items-center justify-center text-[#2a499a] text-[8px] font-black border border-[#2a499a]/10">D</span>
               {formatDate(match.date)}
             </span>
           )}
           {match.time && (
             <span className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500">
-              <span className="w-5 h-5 rounded-md bg-[#1E6FF2]/10 flex items-center justify-center text-[#1E6FF2] text-[8px] font-black border border-[#1E6FF2]/10">T</span>
+              <span className="w-5 h-5 rounded-md bg-[#2a499a]/10 flex items-center justify-center text-[#2a499a] text-[8px] font-black border border-[#2a499a]/10">T</span>
               {match.time}
             </span>
           )}
           {match.venue && (
             <span className="flex items-center gap-1.5 text-[11px] font-semibold text-gray-500">
-              <span className="w-5 h-5 rounded-md bg-[#1E6FF2]/10 flex items-center justify-center text-[#1E6FF2] text-[8px] font-black border border-[#1E6FF2]/10">S</span>
+              <span className="w-5 h-5 rounded-md bg-[#2a499a]/10 flex items-center justify-center text-[#2a499a] text-[8px] font-black border border-[#2a499a]/10">S</span>
               {match.venue}
             </span>
           )}
@@ -170,7 +170,7 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
                 onClick={() => setActiveSection(s.key)}
                 className={`flex-1 py-2 text-[11px] font-bold uppercase tracking-wider rounded-lg transition-all ${
                   activeSection === s.key
-                    ? 'bg-[#1E6FF2] text-white shadow-md shadow-[#1E6FF2]/25'
+                    ? 'bg-[#2a499a] text-white shadow-md shadow-[#2a499a]/25'
                     : 'text-gray-400 hover:text-gray-600'
                 }`}
               >
@@ -198,21 +198,21 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
                       const team = isHome ? homeTeam : awayTeam;
                       return (
                         <div key={g.id} className={`flex items-center gap-3 p-3 bg-white rounded-xl border transition-all hover:shadow-sm ${
-                          g.isOwnGoal ? 'border-red-200' : 'border-gray-150 hover:border-[#1E6FF2]/20'
+                          g.isOwnGoal ? 'border-red-200' : 'border-gray-150 hover:border-[#2a499a]/20'
                         } ${isHome ? '' : 'flex-row-reverse'}`}>
                           <div className={`flex items-center gap-3 flex-1 min-w-0 ${isHome ? '' : 'flex-row-reverse'}`}>
                             <div className={`w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 ${
                               g.isOwnGoal
                                 ? 'bg-red-50 border border-red-200'
-                                : 'bg-gradient-to-br from-[#1E6FF2]/10 to-[#1E6FF2]/5 border border-[#1E6FF2]/15'
+                                : 'bg-gradient-to-br from-[#2a499a]/10 to-[#2a499a]/5 border border-[#2a499a]/15'
                             }`}>
-                              <span className={`text-xs font-black ${g.isOwnGoal ? 'text-red-500' : 'text-[#1E6FF2]'}`}>{g.minute}'</span>
+                              <span className={`text-xs font-black ${g.isOwnGoal ? 'text-red-500' : 'text-[#2a499a]'}`}>{g.minute}'</span>
                             </div>
                             <div className={`flex-1 min-w-0 ${isHome ? '' : 'text-right'}`}>
                               <p className="text-sm font-bold text-gray-800 truncate">{getPlayerName(g.playerId)}</p>
                               <p className={`text-[10px] font-medium ${g.isOwnGoal ? 'text-red-400' : 'text-gray-400'}`}>
                                 {g.isOwnGoal ? 'Autogol' : 'Gol'}
-                                {team?.name ? ` • ${team.name}` : ''}
+                                {team?.name ? ` â€¢ ${team.name}` : ''}
                               </p>
                             </div>
                           </div>
@@ -254,9 +254,9 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
                   { key: 'referee3', label: 'Gjyqtari 3', abbr: 'G3', value: match.referee3 },
                   { key: 'delegate', label: 'Delegati', abbr: 'D', value: match.delegate },
                 ].filter(o => o.value).map(o => (
-                  <div key={o.key} className="flex items-center gap-3 p-3.5 bg-white rounded-xl border border-gray-150 hover:border-[#1E6FF2]/20 transition-all hover:shadow-sm">
-                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1E6FF2]/10 to-[#1E6FF2]/5 border border-[#1E6FF2]/15 flex items-center justify-center flex-shrink-0">
-                      <span className="text-[#1E6FF2] text-[11px] font-black">{o.abbr}</span>
+                  <div key={o.key} className="flex items-center gap-3 p-3.5 bg-white rounded-xl border border-gray-150 hover:border-[#2a499a]/20 transition-all hover:shadow-sm">
+                    <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#2a499a]/10 to-[#2a499a]/5 border border-[#2a499a]/15 flex items-center justify-center flex-shrink-0">
+                      <span className="text-[#2a499a] text-[11px] font-black">{o.abbr}</span>
                     </div>
                     <div>
                       <p className="text-[10px] text-gray-400 font-semibold uppercase tracking-wider">{o.label}</p>
@@ -270,7 +270,7 @@ const MatchDetailModal: React.FC<Props> = ({ match, onClose }) => {
         </div>
 
         {/* Bottom blue glow line */}
-        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#1E6FF2]/40 to-transparent" />
+        <div className="h-[2px] bg-gradient-to-r from-transparent via-[#2a499a]/40 to-transparent" />
       </div>
     </div>
   );
@@ -284,11 +284,11 @@ const StatBarPremium: React.FC<{ label: string; home: number; away: number; suff
   const awayWins = away > home;
 
   return (
-    <div className="bg-white rounded-xl p-4 border border-gray-150 hover:border-[#1E6FF2]/15 transition-all">
+    <div className="bg-white rounded-xl p-4 border border-gray-150 hover:border-[#2a499a]/15 transition-all">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-2">
-          <span className={`text-lg font-black tabular-nums ${homeWins ? 'text-[#1E6FF2]' : 'text-gray-600'}`}>{home}{suffix || ''}</span>
-          {homeWins && <span className="w-1.5 h-1.5 rounded-full bg-[#1E6FF2]" />}
+          <span className={`text-lg font-black tabular-nums ${homeWins ? 'text-[#2a499a]' : 'text-gray-600'}`}>{home}{suffix || ''}</span>
+          {homeWins && <span className="w-1.5 h-1.5 rounded-full bg-[#2a499a]" />}
         </div>
         <span className="text-[10px] font-bold text-gray-400 uppercase tracking-[0.15em]">{label}</span>
         <div className="flex items-center gap-2">
@@ -298,7 +298,7 @@ const StatBarPremium: React.FC<{ label: string; home: number; away: number; suff
       </div>
       <div className="flex gap-1.5 h-2.5 rounded-full overflow-hidden bg-gray-100">
         <div
-          className={`rounded-full transition-all duration-700 ${homeWins ? 'bg-gradient-to-r from-[#1E6FF2] to-[#3B82F6]' : 'bg-[#1E6FF2]/40'}`}
+          className={`rounded-full transition-all duration-700 ${homeWins ? 'bg-gradient-to-r from-[#2a499a] to-[#3B82F6]' : 'bg-[#2a499a]/40'}`}
           style={Object.assign({}, { width: `${homePercent}%` })}
         />
         <div

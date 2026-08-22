@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { useAuth } from '@/context/AuthContext';
 import { Navigate } from 'react-router-dom';
@@ -33,7 +33,7 @@ var SkuadratPage: React.FC = function() {
       <Header />
       <div className="flex-1 max-w-6xl mx-auto w-full px-4 py-8">
         <div className="flex items-center gap-3 mb-8">
-          <div className="w-12 h-12 bg-gradient-to-br from-[#2a499a] to-[#1E6FF2] rounded-xl flex items-center justify-center shadow-lg">
+          <div className="w-12 h-12 bg-gradient-to-br from-[#2a499a] to-[#2a499a] rounded-xl flex items-center justify-center shadow-lg">
             
           </div>
           <div>
@@ -43,10 +43,10 @@ var SkuadratPage: React.FC = function() {
         </div>
 
         <div className="flex gap-3 mb-6">
-          <button onClick={function() { setTab('superliga'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'superliga' ? 'bg-[#1E6FF2] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+          <button onClick={function() { setTab('superliga'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'superliga' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
             Superliga
           </button>
-          <button onClick={function() { setTab('liga_pare'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'liga_pare' ? 'bg-[#1E6FF2] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
+          <button onClick={function() { setTab('liga_pare'); }} className={'px-5 py-2.5 rounded-xl text-sm font-medium transition-all ' + (tab === 'liga_pare' ? 'bg-[#2a499a] text-white shadow-lg shadow-blue-200' : 'bg-white text-gray-600 border border-gray-200 hover:bg-gray-50')}>
             Liga e Pare
           </button>
         </div>
@@ -57,7 +57,7 @@ var SkuadratPage: React.FC = function() {
           ) : displayTeams.map(function(t) {
             var tPlayers = data.players.filter(function(p) { return p.teamId === t.id && (activeSeason ? p.seasonId === activeSeason.id : true); });
             return (
-              <div key={t.id} onClick={function() { navigate('/skuadra/' + t.id); }} className="bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-xl hover:border-[#1E6FF2]/30 transition-all cursor-pointer group">
+              <div key={t.id} onClick={function() { navigate('/skuadra/' + t.id); }} className="bg-white border border-gray-200 rounded-2xl p-6 text-center hover:shadow-xl hover:border-[#2a499a]/30 transition-all cursor-pointer group">
                 <div className="w-20 h-20 mx-auto rounded-xl bg-gray-50 flex items-center justify-center overflow-hidden p-2 mb-4 group-hover:scale-105 transition-transform">
                   {t.logo ? <img src={t.logo} alt="" className="w-full h-full object-contain" /> : null}
                 </div>

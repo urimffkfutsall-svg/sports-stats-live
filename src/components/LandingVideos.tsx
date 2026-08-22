@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { useData } from '@/context/DataContext';
 import { Video } from '@/types';
 
@@ -45,9 +45,9 @@ const LandingVideos: React.FC = () => {
                         <div className="absolute inset-0 bg-transparent" />
                       </div>
                     ) : (
-                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#1E6FF2] p-4">
+                      <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-[#2a499a] via-[#0F2D5E] to-[#2a499a] p-4">
                         <div className="w-14 h-14 rounded-full bg-white/15 flex items-center justify-center mb-3 backdrop-blur-sm border border-white/10">
-                          <span className="text-white text-2xl ml-1">▶</span>
+                          <span className="text-white text-2xl ml-1">â–¶</span>
                         </div>
                         <p className="text-white font-semibold text-sm text-center line-clamp-2">{v.title || 'Video'}</p>
                         {v.description && <p className="text-white/50 text-xs text-center mt-1 line-clamp-1">{v.description}</p>}
@@ -56,7 +56,7 @@ const LandingVideos: React.FC = () => {
                     {/* Play overlay */}
                     <div className="absolute inset-0 flex items-center justify-center bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity">
                       <div className="w-14 h-14 rounded-full bg-white/90 flex items-center justify-center shadow-lg">
-                        <span className="text-[#2a499a] text-2xl ml-1">▶</span>
+                        <span className="text-[#2a499a] text-2xl ml-1">â–¶</span>
                       </div>
                     </div>
                   </div>
@@ -77,7 +77,7 @@ const LandingVideos: React.FC = () => {
           <div className="absolute inset-0 bg-black/80 backdrop-blur-sm" />
           <div className="relative w-full max-w-4xl z-10" onClick={e => e.stopPropagation()}>
             <button onClick={() => setActiveVideo(null)} className="absolute -top-10 right-0 w-8 h-8 rounded-full bg-white/10 text-white flex items-center justify-center hover:bg-white/20 transition-colors text-lg font-bold">
-              ✕
+              âœ•
             </button>
             <div className="aspect-video rounded-xl overflow-hidden bg-black shadow-2xl">
               <iframe src={getEmbedUrl(activeVideo.url) + (getEmbedUrl(activeVideo.url).includes('youtube') ? '?autoplay=1' : '')} className="w-full h-full" allowFullScreen allow="autoplay; encrypted-media" />
