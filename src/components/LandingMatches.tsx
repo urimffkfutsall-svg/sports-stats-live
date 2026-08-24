@@ -173,7 +173,6 @@ const LandingMatches: React.FC<LandingMatchesProps> = ({ initialTab = 'upcoming'
           </div>
         </div>
 
-PLACEHOLDER_NOT_USED
       </div>
     );
   };
