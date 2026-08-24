@@ -223,22 +223,26 @@ export const dbShorti = {
   },
 };
 
-// ============ FILE "UPLOAD" (base64, ngjitur direkt te dokumenti) ============
-function fileToBase64(file: File): Promise<string> {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = (e) => resolve((e.target?.result as string) || '');
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
+// ============ FILE UPLOAD (Supabase Storage bucket media) ============
+import { supabaseClient } from './supabaseClient';
+
+async function uploadToMediaBucket(file, folder, id) {
+  const ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+  const path = folder + '/' + id + '-' + Date.now() + '.' + ext;
+  const { error } = await supabaseClient.storage
+    .from('media')
+    .upload(path, file, { cacheControl: '3600', upsert: true, contentType: file.type || undefined });
+  if (error) throw error;
+  const { data } = supabaseClient.storage.from('media').getPublicUrl(path);
+  return data.publicUrl;
 }
 
-export async function uploadTeamLogo(file: File, _teamId: string): Promise<string> {
-  return fileToBase64(file);
+export async function uploadTeamLogo(file, teamId) {
+  return uploadToMediaBucket(file, 'team-logos', teamId);
 }
 
-export async function uploadPlayerPhoto(file: File, _playerId: string): Promise<string> {
-  return fileToBase64(file);
+export async function uploadPlayerPhoto(file, playerId) {
+  return uploadToMediaBucket(file, 'player-photos', playerId);
 }
 
 // ============ POLLING-BASED "REAL-TIME" (emulon Supabase Realtime) ============
